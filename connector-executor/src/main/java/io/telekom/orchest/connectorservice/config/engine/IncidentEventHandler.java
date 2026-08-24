@@ -1,0 +1,40 @@
+package io.telekom.orchest.connectorservice.config.engine;
+
+import io.telekom.orchest.adapter.kafka.KafkaClientEventProducer;
+import io.telekom.orchest.api.core.adapters.data.dto.IncidentEventPayload;
+import io.telekom.orchest.api.core.adapters.data.model.Incident;
+import io.telekom.orchest.api.core.adapters.data.repository.IncidentRepository;
+import io.telekom.orchest.enginecore.IncidentEventHandlerAdapter;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+/**
+ * Persists incident records to MongoDB and publishes incident events to Kafka for downstream
+ * consumers (e.g. alerting, dashboards).
+ */
+@Slf4j
+@RequiredArgsConstructor
+public class IncidentEventHandler implements IncidentEventHandlerAdapter {
+
+  private final KafkaClientEventProducer eventProducer;
+  private final IncidentRepository incidentRepository;
+
+  @Override
+  public void handle(IncidentEventPayload event) {
+    incidentRepository.save(
+        Incident.builder()
+            .processInstanceId(event.getProcessInstanceId())
+            .processDefinitionId(event.getProcessDefinitionId())
+            .version(event.getVersion())
+            .activityId(event.getActivityId())
+            .activityName(event.getActivityName())
+            .stackTrace(event.getIncidentMessage())
+            .build());
+    eventProducer.sendIncidentEvent(event);
+  }
+
+  @Override
+  public void handleResolution(IncidentEventPayload event) {
+    eventProducer.sendIncidentResolutionEvent(event);
+  }
+}

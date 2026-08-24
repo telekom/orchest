@@ -1,0 +1,60 @@
+{
+  "groups": [
+    {
+      "name": "orchest.mongo",
+      "type": "io.telekom.orchest.adapter.mongo.config.OrchestMongoProperties",
+      "sourceType": "io.telekom.orchest.adapter.mongo.config.OrchestMongoProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "orchest.mongo.auth-type",
+      "type": "io.telekom.orchest.adapter.mongo.config.OrchestMongoProperties$AuthType",
+      "sourceType": "io.telekom.orchest.adapter.mongo.config.OrchestMongoProperties"
+    },
+    {
+      "name": "orchest.mongo.auto-index-creation",
+      "type": "java.lang.Boolean",
+      "sourceType": "io.telekom.orchest.adapter.mongo.config.OrchestMongoProperties"
+    },
+    {
+      "name": "orchest.mongo.aws-region",
+      "type": "java.lang.String",
+      "sourceType": "io.telekom.orchest.adapter.mongo.config.OrchestMongoProperties"
+    },
+    {
+      "name": "orchest.mongo.connect-timeout-seconds",
+      "type": "java.lang.Integer",
+      "sourceType": "io.telekom.orchest.adapter.mongo.config.OrchestMongoProperties"
+    },
+    {
+      "name": "orchest.mongo.database-name",
+      "type": "java.lang.String",
+      "sourceType": "io.telekom.orchest.adapter.mongo.config.OrchestMongoProperties"
+    },
+    {
+      "name": "orchest.mongo.iam-role-arn",
+      "type": "java.lang.String",
+      "sourceType": "io.telekom.orchest.adapter.mongo.config.OrchestMongoProperties"
+    },
+    {
+      "name": "orchest.mongo.read-timeout-seconds",
+      "type": "java.lang.Integer",
+      "sourceType": "io.telekom.orchest.adapter.mongo.config.OrchestMongoProperties"
+    },
+    {
+      "name": "orchest.mongo.secondary-preferred-for-analytics",
+      "type": "java.lang.Boolean",
+      "sourceType": "io.telekom.orchest.adapter.mongo.config.OrchestMongoProperties"
+    },
+    {
+      "name": "orchest.mongo.uri",
+      "type": "java.lang.String",
+      "sourceType": "io.telekom.orchest.adapter.mongo.config.OrchestMongoProperties"
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}

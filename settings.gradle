@@ -1,0 +1,46 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        if (System.getenv("ARTIFACTORY_URL")) {
+            maven { url = uri(System.getenv("ARTIFACTORY_URL") + "/gradle-plugins/") }
+        }
+    }
+}
+
+rootProject.name = 'orchest'
+
+// Core Modules
+include 'core'
+include 'engine-core'
+include 'telemetry'
+include 'connectors'
+include 'logging-template'
+include 'entity-caching'
+include 'task-scheduling'
+include 'orchest-ai'
+
+// Web Modules
+include 'orchest-engine'
+include 'orchest-rest-webapp'
+include 'connector-executor'
+include 'sentinel'
+
+// Maintenance Modules
+include 'housekeeping'
+
+// Adapter Modules
+include 'kafka-event-adapter'
+include 'mongo-data-adapter'
+
+// Client Modules
+include 'spring-orchest-client'
+include 'rest-orchest-client'
+include 'java-orchest-client'
+
+// Test Modules
+include 'orchest-test'
+include 'spring-client-test'
+include 'orchest-rest-test'
+//include 'java-client-test'
+
+include 'alerting'

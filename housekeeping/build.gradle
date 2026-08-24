@@ -1,0 +1,11 @@
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+buildJibImage(project, "io.telekom.orchest.HousekeepingApplication")
+
+dependencies {
+    // Depend on engine-core
+    implementation project(':mongo-data-adapter')
+    implementation project(':logging-template')
+
+}

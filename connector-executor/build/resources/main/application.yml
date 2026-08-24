@@ -1,0 +1,93 @@
+spring:
+  application:
+    name: orchest-connector-service
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:local}
+
+server:
+  port: 6300
+  shutdown: graceful
+
+management:
+  endpoint:
+    prometheus:
+      access: unrestricted
+    health:
+      probes:
+        enabled: true
+      show-details: always
+      show-components: always
+    metrics:
+      access: unrestricted
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,metrics,env,loggers,ping
+  info:
+    git:
+      mode: full
+      enabled: true
+  metrics:
+    distribution:
+      percentiles-histogram:
+        all: true
+        http:
+          server:
+            requests: true
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+
+engine:
+  engineScale: ${ENGINE_SCALE:LOCAL}
+  brokerCount: ${ENGINE_REPLICA_SIZE:1}
+
+logging:
+  format: ${LOGGING_FORMAT:PLAIN}
+
+kms:
+  clients:
+    kafka:
+      enabled: ${ENABLE_KMS:false}
+      kmsKeyARN: ${KAFKA_KMS_KEY_ARN:}
+      aws:
+        iamRoleARN: ${IAM_ROLE_ARN:}
+      dataKeyCaching:
+        capacity: 200
+        max-usage-limit: 1000
+        max-age: 60000
+    mongo-read:
+      enabled: ${ENABLE_KMS:false}
+      kmsKeyARN: ${MONGO_KMS_KEY_ARN:}
+      aws:
+        iamRoleARN: ${IAM_ROLE_ARN:}
+      dataKeyCaching:
+        capacity: ${DEK_CACHE_SIZE:100}
+        max-usage-limit: 100000000
+        max-age: 604800
+    mongo-write:
+      enabled: ${ENABLE_KMS:false}
+      kmsKeyARN: ${MONGO_KMS_KEY_ARN:}
+      aws:
+        iamRoleARN: ${IAM_ROLE_ARN:}
+      dataKeyCaching:
+        capacity: ${DEK_CACHE_SIZE:100}
+        max-usage-limit: 100000000
+        max-age: 604800
+
+telemetry:
+  enabled: true
+
+orchest:
+  mongo:
+    uri: ${ORCHEST_MONGO_URI:mongodb://localhost:27017}
+    database-name: ${ORCHEST_MONGO_DATABASE_NAME:orchest}
+    auto-index-creation: false
+  kafka:
+    config:
+      bootstrap-servers: ${ORCHEST_KAFKA_CONFIG_BOOTSTRAP_SERVERS:localhost:9092}
+    suffix: ${ORCHEST_KAFKA_SUFFIX:}
+  metrics:
+    # Lifetime metric counters are owned by the engine; the connector service only executes connectors.
+    enabled: false

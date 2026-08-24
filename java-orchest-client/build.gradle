@@ -1,0 +1,43 @@
+apply plugin: 'java-library'
+
+description = 'java-orchest-client'
+version = javaClientVersion
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
+//mavenPublish(project)
+
+dependencies {
+    // Core Orchest modules
+    api project(':core')
+
+    // Telemetry - create our own lightweight version
+    implementation 'io.micrometer:micrometer-core:1.12.2'
+    implementation 'io.micrometer:micrometer-registry-prometheus:1.12.2'
+    
+    // Vanilla Kafka clients
+    api 'org.apache.kafka:kafka-clients:3.6.1'
+
+    // Vanilla Kafka client (no Spring)
+    api 'org.apache.kafka:kafka-clients:3.6.1'
+
+    // AWS MSK IAM authentication
+    implementation 'software.amazon.msk:aws-msk-iam-auth:2.1.1'
+    implementation 'software.amazon.awssdk:sts:2.26.9'
+
+    // AWS KMS dependencies
+    implementation "com.amazonaws:aws-encryption-sdk-java:2.4.1"
+    api "software.amazon.awssdk:kms:2.24.0"
+    implementation "software.amazon.awssdk:sts:2.24.0"
+
+//    // Logging
+    implementation 'org.slf4j:slf4j-api:2.0.13'
+    implementation 'ch.qos.logback:logback-classic:1.5.13'
+}
+
+tasks.named('compileJava') {
+    inputs.files(tasks.named('processResources'))
+}

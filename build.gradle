@@ -1,0 +1,338 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+    id 'idea'
+    // Framework plugins - apply false to make available to subprojects
+    id 'org.springframework.boot' version "${springBootVersion}" apply false
+    id 'io.spring.dependency-management' version "${springDependencyManagementVersion}" apply false
+    id 'com.google.cloud.tools.jib' version "${jibVersion}" apply false
+    id 'org.openapi.generator' version '7.6.0' apply false
+    id "org.sonarqube" version "5.1.0.4882"
+    id 'org.cyclonedx.bom' version '1.8.2'
+    id 'com.diffplug.spotless' version '7.0.2' apply false
+}
+
+allprojects {
+    group = 'io.telekom.orchest'
+    version = project.findProperty('version') ?: '1.0.0-SNAPSHOT'
+
+    apply {
+        from("$rootDir/gradle/scripts/repositories.gradle")
+    }
+}
+
+jacoco {
+    toolVersion = findProperty('jacocoVersion') ?: '0.8.12'
+}
+
+/**
+ * Reads JaCoCo XML and prints INSTRUCTION + BRANCH totals (root {@code <report>} counters).
+ */
+void printJacocoXmlSummary(String label, File xmlFile) {
+    if (xmlFile == null || !xmlFile.exists()) {
+        return
+    }
+    try {
+        // JaCoCo XML declares a DOCTYPE; strip it so XmlSlurper accepts the file (secure parsers disallow DTD).
+        def text = xmlFile.getText('UTF-8').replaceAll(/(?is)<!DOCTYPE[^>]*>/, '')
+        def report = new groovy.xml.XmlSlurper().parseText(text)
+        def rootCounters = report.children().findAll { it.name() == 'counter' }
+        def instr = rootCounters.find { it.@type == 'INSTRUCTION' }
+        def branch = rootCounters.find { it.@type == 'BRANCH' }
+        if (instr == null) {
+            return
+        }
+        int iMiss = instr.@missed.toString().toInteger()
+        int iCov = instr.@covered.toString().toInteger()
+        int iTot = iMiss + iCov
+        double iPct = iTot > 0 ? (100.0 * iCov / iTot) : 0
+        String branchLine = ''
+        if (branch != null) {
+            int bMiss = branch.@missed.toString().toInteger()
+            int bCov = branch.@covered.toString().toInteger()
+            int bTot = bMiss + bCov
+            double bPct = bTot > 0 ? (100.0 * bCov / bTot) : 0
+            branchLine = " | BRANCH ${bCov}/${bTot} (${String.format('%.2f', bPct)}%)"
+        }
+        println "[JaCoCo] ${label} INSTRUCTION ${iCov}/${iTot} (${String.format('%.2f', iPct)}%)${branchLine}"
+    } catch (Exception e) {
+        println "[JaCoCo] ${label} could not parse ${xmlFile}: ${e.message}"
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'com.diffplug.spotless'
+
+    spotless {
+        java {
+            target 'src/**/*.java'
+            googleJavaFormat('1.25.2')
+            removeUnusedImports()
+            trimTrailingWhitespace()
+            endWithNewline()
+        }
+    }
+
+    // Java 21 configuration using toolchain
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(javaVersion as int)
+        }
+    }
+
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = 'UTF-8'
+        options.compilerArgs.add('-parameters')
+    }
+
+    tasks.withType(Test).configureEach {
+        useJUnitPlatform()
+    }
+
+    compileJava {
+        options.encoding = "UTF-8"
+        options.annotationProcessorPath = configurations.annotationProcessor
+    }
+
+    javadoc {
+        options.encoding = "UTF-8"
+        // Disable doclint warnings for Lombok-generated code
+        // Lombok adds @Generated annotation when lombok.addLombokGeneratedAnnotation=true
+        options.addStringOption('Xdoclint:none', '-quiet')
+    }
+
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+    }
+    sonarqube {
+        properties {
+            property "sonar.projectKey", System.getenv('ORG_GRADLE_PROJECT_SONAR_GROUP_KEY') ?: 'default-key'
+            property "sonar.host.url", System.getenv('SONAR_HOST_URL') ?: 'http://localhost:9000'
+            property "sonar.token", System.getenv('SONAR_AUTH_TOKEN') ?: ''
+            property "sonar.login", System.getenv('SONAR_AUTH_TOKEN') ?: ''
+        }
+    }
+
+    // Configure JavaDoc to suppress warnings for generated code
+    tasks.withType(Javadoc).configureEach {
+        // Suppress all doclint warnings (including missing JavaDoc on Lombok-generated methods)
+        options.addStringOption('Xdoclint:none', '-quiet')
+    }
+
+
+    // Common dependencies for all projects
+    dependencies {
+        // Lombok - available to all modules
+        compileOnly "org.projectlombok:lombok:${lombokVersion}"
+        annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+        annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+
+        testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
+        testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+        // Apache Commons utilities - available to all modules
+        implementation "org.apache.commons:commons-lang3:${commonsLang3Version}"
+        implementation "org.apache.commons:commons-collections4:${commonsCollections4Version}"
+        implementation "commons-io:commons-io:${commonsIoVersion}"
+
+        // Testing dependencies - available to all modules
+        testImplementation "org.junit.jupiter:junit-jupiter:${junitJupiterVersion}"
+        testImplementation "org.mockito:mockito-core:${mockitoVersion}"
+        testImplementation "org.mockito:mockito-junit-jupiter:${mockitoJunitJupiterVersion}"
+        testRuntimeOnly "org.junit.platform:junit-platform-launcher:${junitPlatformLauncherVersion}"
+    }
+}
+
+/**
+ * Executable Spring Boot modules (bootJar): optional exclusions when JaCoCo is not desired for that app.
+ */
+def jacocoExcludedModules = ['sentinel', 'spring-client-test'] as Set
+
+configure(subprojects.findAll { !jacocoExcludedModules.contains(it.name) }) { sub ->
+    sub.apply plugin: 'jacoco'
+
+    sub.jacoco {
+        toolVersion = findProperty('jacocoVersion') ?: '0.8.12'
+    }
+
+    sub.tasks.named('jacocoTestReport', JacocoReport).configure { report ->
+        report.dependsOn sub.tasks.named('test')
+        report.reports {
+            xml.required = true
+            html.required = true
+        }
+        report.doLast {
+            def xmlOut = report.reports.xml.outputLocation.get().asFile
+            printJacocoXmlSummary(":${sub.name}", xmlOut)
+        }
+    }
+
+    // Generate HTML/XML coverage whenever tests run (not only via `check`)
+    sub.tasks.named('test').configure { testTask ->
+        testTask.finalizedBy sub.tasks.named('jacocoTestReport')
+    }
+
+    sub.tasks.named('check').configure { checkTask ->
+        checkTask.dependsOn sub.tasks.named('jacocoTestReport')
+    }
+}
+
+/**
+ * Modules to skip only in the aggregate report. Required when two modules contain the same FQCN — JaCoCo cannot merge those class files.
+ * Default excludes {@code java-orchest-client}, which overlaps model classes with {@code kafka-event-adapter}.
+ */
+def jacocoAggregateExcludedModules = ['java-orchest-client'] as Set
+
+tasks.register('jacocoAggregateReport', JacocoReport) {
+    group = 'verification'
+    description = 'Merges JaCoCo data from all modules into build/reports/jacoco/aggregate (HTML + XML).'
+
+    def jacocoProjects = subprojects.findAll { p ->
+        !jacocoExcludedModules.contains(p.name) && !jacocoAggregateExcludedModules.contains(p.name)
+    }
+
+    jacocoProjects.each { p ->
+        dependsOn p.tasks.named('jacocoTestReport')
+    }
+
+    executionData.setFrom(files(jacocoProjects.collect { p ->
+        p.file("${p.buildDir}/jacoco/test.exec")
+    }.findAll { it.exists() }))
+
+    jacocoProjects.each { p ->
+        classDirectories.from(p.files(p.sourceSets.main.output.classesDirs))
+        sourceDirectories.from(p.sourceSets.main.java.srcDirs)
+    }
+
+    reports {
+        xml.required = true
+        html.required = true
+        html.outputLocation = layout.buildDirectory.dir('reports/jacoco/aggregate')
+    }
+
+    doLast {
+        def xmlOut = reports.xml.outputLocation.get().asFile
+        printJacocoXmlSummary('aggregate (all modules)', xmlOut)
+    }
+}
+
+// Per-module reports: <module>/build/reports/jacoco/test/html/index.html
+// Combined report: ./gradlew jacocoAggregateReport  ->  build/reports/jacoco/aggregate/html/index.html
+// If duplicate FQCN across modules breaks the aggregate, add those modules to jacocoAggregateExcludedModules above.
+// Run: ./gradlew test or ./gradlew jacocoTestReport or ./gradlew check
+
+// Helper method to configure maven-publish for library modules
+// Usage: mavenPublish(project) in any library module's configuration
+def mavenPublish(project) {
+    project.apply plugin: 'maven-publish'
+
+    def artifactoryPublishRepoURL = (System.getenv("ARTIFACTORY_URL") ?: '') + "/oneapp-gradle-local/"
+    def usernameArtifactory = System.getenv("ARTIFACTORY_USERNAME") ?: ''
+    def passwordArtifactory = System.getenv("ARTIFACTORY_PASSWORD") ?: ''
+
+    project.publishing {
+        publications {
+            maven(MavenPublication) {
+                from project.components.java
+
+                groupId = project.group
+                artifactId = project.name
+                version = project.version
+
+                pom {
+                    name = project.name
+                    description = "Library module: ${project.name}"
+                    url = "https://github.com/telekom/orchest"
+
+                    licenses {
+                        license {
+                            name = "The Apache License, Version 2.0"
+                            url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id = "OrchesT"
+                            name = "Orchest Team"
+                            organization = "Deutsche Telekom AG"
+                            organizationUrl = "https://www.telekom.de"
+                        }
+                    }
+                }
+            }
+        }
+
+        repositories {
+            maven {
+                url = artifactoryPublishRepoURL
+                credentials {
+                    username = usernameArtifactory
+                    password = passwordArtifactory
+                }
+            }
+            mavenLocal()
+        }
+    }
+}
+
+// Jib Images Config
+def buildJibImage(project, mainClassName) {
+    project.apply plugin: "com.google.cloud.tools.jib"
+    def imageVersion = System.getenv("IMAGE_VERSION") ?: project.version
+    def imageExpiresAfter = System.getenv("IMAGE_EXPIRES") ?: "never"
+    def registryUrl = System.getenv("CONTAINER_REGISTRY_URL") ?: "ghcr.io/telekom"
+    def registryUsername = System.getenv("CONTAINER_REGISTRY_USERNAME") ?: null
+    def registryPassword = System.getenv("CONTAINER_REGISTRY_PASSWORD") ?: null
+    def imageName = (System.getenv("PUBLIC_IMAGE_URL") ?: registryUrl + "/orchest/") + project.name
+
+    project.jib {
+        from {
+            image = "eclipse-temurin:21-jre"
+
+            platforms {
+                platform {
+                    architecture = "amd64"
+                    os = "linux"
+                }
+                platform {
+                    architecture = "arm64"
+                    os = "linux"
+                }
+            }
+        }
+        to {
+            image = imageName
+            tags = [imageVersion,"latest"]
+            if (registryUsername) {
+                auth {
+                    username = registryUsername
+                    password = registryPassword
+                }
+            }
+
+        }
+        container {
+            environment = [
+                    APP_NAME       : project.name,
+                    APP_VERSION    : imageVersion,
+                    JAVA_MAIN_CLASS: mainClassName,
+            ]
+            jvmFlags = [
+                    '-XX:InitialRAMPercentage=75.0',
+                    '-XX:MaxRAMPercentage=75.0',
+                    '-XX:+UseStringDeduplication',
+                    '-XX:+UseG1GC',
+                    '-Dfile.encoding=UTF-8',
+                    '-Djava.net.preferIPv4Stack=true'
+            ]
+            ports = ['8080']
+            labels = ["quay.expires-after": imageExpiresAfter]
+            creationTime = 'USE_CURRENT_TIMESTAMP'
+        }
+    }
+}
+

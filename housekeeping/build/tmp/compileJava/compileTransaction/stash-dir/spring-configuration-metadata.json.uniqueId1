@@ -1,0 +1,28 @@
+{
+  "groups": [
+    {
+      "name": "housekeeping",
+      "type": "io.telekom.orchest.config.HouseKeepingProperties",
+      "sourceType": "io.telekom.orchest.config.HouseKeepingProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "housekeeping.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether the housekeeping job is enabled.",
+      "sourceType": "io.telekom.orchest.config.HouseKeepingProperties",
+      "defaultValue": false
+    },
+    {
+      "name": "housekeeping.interval",
+      "type": "java.time.Duration",
+      "description": "The retention period for data. Records older than this interval will be purged.",
+      "sourceType": "io.telekom.orchest.config.HouseKeepingProperties"
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}

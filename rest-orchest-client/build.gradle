@@ -1,0 +1,62 @@
+apply plugin: 'java-library'
+apply plugin: 'org.openapi.generator'
+
+description = 'rest-orchest-client'
+version = restClientVersion
+
+// Exclude Spring from this module - pure Java client
+configurations.annotationProcessor.exclude group: 'org.springframework.boot', module: 'spring-boot-configuration-processor'
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
+//mavenPublish(project)
+
+dependencies {
+    // Native HttpClient + Jackson (generated client) — no Spring/Feign
+    api "jakarta.annotation:jakarta.annotation-api:2.1.1"
+    api "com.fasterxml.jackson.core:jackson-databind:2.15.3"
+    api "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.3"
+}
+
+tasks.named('compileJava') {
+    inputs.files(tasks.named('processResources'))
+}
+
+openApiGenerate {
+    generatorName = "java"
+    inputSpec = "$projectDir/src/main/resources/orchest-api.yml"
+    outputDir = "$buildDir/generated"
+    apiPackage = "io.telekom.orchest.client.api"
+    modelPackage = "io.telekom.orchest.client.model"
+    invokerPackage = "io.telekom.orchest.client.invoker"
+    // Avoid duplicate "Api" in class names (e.g. ProcessInstanceApi instead of ProcessInstanceApiApi)
+    additionalProperties = [
+            apiNameSuffix       : "",
+    ]
+    configOptions = [
+            dateLibrary           : "java8",
+            // java.net.http.HttpClient + Jackson (OpenAPI "native" library)
+            library               : "native",
+            useJakartaEe          : "true",
+            serializableModel     : "true",
+            openApiNullable       : "false",
+            useBeanValidation     : "false",
+    ]
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ["$buildDir/generated/src/main/java", "src/main/java"]
+        }
+    }
+}
+
+compileJava.dependsOn tasks.openApiGenerate
+
+tasks.named('sourcesJar') {
+    dependsOn tasks.openApiGenerate
+}

@@ -1,0 +1,39 @@
+{
+  "groups": [
+    {
+      "name": "engine",
+      "type": "io.telekom.orchest.config.engine.EngineProperties",
+      "sourceType": "io.telekom.orchest.config.engine.EngineProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "engine.broker-count",
+      "type": "java.lang.Integer",
+      "sourceType": "io.telekom.orchest.config.engine.EngineProperties",
+      "defaultValue": 1
+    },
+    {
+      "name": "engine.engine-scale",
+      "type": "io.telekom.orchest.api.core.properties.EngineScale",
+      "description": "Defines the scale of the engine deployment (e.g., LOCAL, SMALL, LARGE). This affects Kafka topic partitions and replication factors.",
+      "sourceType": "io.telekom.orchest.config.engine.EngineProperties",
+      "defaultValue": "local"
+    },
+    {
+      "name": "engine.topic-data-retention",
+      "type": "java.time.Duration",
+      "sourceType": "io.telekom.orchest.config.engine.EngineProperties"
+    },
+    {
+      "name": "engine.topic-data-retention-bytes",
+      "type": "java.lang.Long",
+      "sourceType": "io.telekom.orchest.config.engine.EngineProperties",
+      "defaultValue": 5368709120
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}

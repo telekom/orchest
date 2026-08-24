@@ -1,0 +1,54 @@
+{
+  "groups": [
+    {
+      "name": "orchest.metrics",
+      "type": "io.telekom.orchest.telemetry.metrics.MetricsProperties",
+      "sourceType": "io.telekom.orchest.telemetry.metrics.MetricsProperties"
+    },
+    {
+      "name": "telemetry",
+      "type": "io.telekom.orchest.telemetry.ModuleProperties",
+      "sourceType": "io.telekom.orchest.telemetry.ModuleProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "orchest.metrics.bucket-retention-days",
+      "type": "java.lang.Integer",
+      "description": "Time-bucket retention in days (TTL on metric_time_buckets). Default 90 days.",
+      "sourceType": "io.telekom.orchest.telemetry.metrics.MetricsProperties",
+      "defaultValue": 90
+    },
+    {
+      "name": "orchest.metrics.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enable \/ disable the persistent metrics pipeline. Defaults to true.",
+      "sourceType": "io.telekom.orchest.telemetry.metrics.MetricsProperties",
+      "defaultValue": true
+    },
+    {
+      "name": "orchest.metrics.flush-interval-ms",
+      "type": "java.lang.Long",
+      "description": "Flush interval in milliseconds. Default 30s.",
+      "sourceType": "io.telekom.orchest.telemetry.metrics.MetricsProperties",
+      "defaultValue": 30000
+    },
+    {
+      "name": "orchest.metrics.pod-id",
+      "type": "java.lang.String",
+      "description": "Pod identity used to tag flushed increments. Defaults to {@code HOSTNAME} (set automatically by Kubernetes), falling back to \"unknown\" if absent. Override for local dev or non-K8s deployments.",
+      "sourceType": "io.telekom.orchest.telemetry.metrics.MetricsProperties"
+    },
+    {
+      "name": "telemetry.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether telemetry is enabled globally.",
+      "sourceType": "io.telekom.orchest.telemetry.ModuleProperties",
+      "defaultValue": false
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}

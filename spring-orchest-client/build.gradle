@@ -1,0 +1,52 @@
+// Configure as a library project
+apply plugin: 'java-library'
+apply plugin: 'io.spring.dependency-management'
+
+description = 'spring-orchest-client'
+version = springClientVersion
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
+    }
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
+//mavenPublish(project)
+
+dependencies {
+    api project(':core')
+    api project(':kafka-event-adapter')
+    api project(':rest-orchest-client')
+    implementation project(':telemetry')
+
+    api 'io.github.openfeign:feign-core:12.5'
+    api 'io.github.openfeign:feign-okhttp:12.5'
+    api 'io.github.openfeign:feign-jackson:12.5'
+    api 'io.github.openfeign:feign-slf4j:12.5'
+    api 'io.github.openfeign:feign-micrometer:12.5'
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.kafka:spring-kafka'
+    implementation 'net.logstash.logback:logstash-logback-encoder:8.1'
+
+    api "de.telekom.solutions:kms-client:1.0.1"
+}
+
+tasks.named('compileJava') {
+    inputs.files(tasks.named('processResources'))
+}
+
+// Spring Boot BOM manages junit-platform-engine to 6.0.1 but the root build.gradle pins
+// junit-platform-launcher to 1.11.0. Force all JUnit platform artifacts to 6.0.1 to align.
+configurations.testRuntimeClasspath {
+    resolutionStrategy.eachDependency { details ->
+        if (details.requested.group == 'org.junit.platform') {
+            details.useVersion '6.0.1'
+            details.because 'align junit-platform-launcher with junit-platform-engine from Spring Boot BOM'
+        }
+    }
+}

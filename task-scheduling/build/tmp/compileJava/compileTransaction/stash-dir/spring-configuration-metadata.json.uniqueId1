@@ -1,0 +1,78 @@
+{
+  "groups": [
+    {
+      "name": "orchest.scheduler",
+      "type": "io.telekom.orchest.scheduling.config.SchedulerProperties",
+      "sourceType": "io.telekom.orchest.scheduling.config.SchedulerProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "orchest.scheduler.backoff-base",
+      "type": "java.time.Duration",
+      "description": "Initial back-off delay after a failed attempt.",
+      "sourceType": "io.telekom.orchest.scheduling.config.SchedulerProperties",
+      "defaultValue": "5s"
+    },
+    {
+      "name": "orchest.scheduler.backoff-max",
+      "type": "java.time.Duration",
+      "description": "Upper bound on back-off (capped after enough exponential growth).",
+      "sourceType": "io.telekom.orchest.scheduling.config.SchedulerProperties",
+      "defaultValue": "15m"
+    },
+    {
+      "name": "orchest.scheduler.batch-size",
+      "type": "java.lang.Integer",
+      "description": "Max tasks claimed per poll.",
+      "sourceType": "io.telekom.orchest.scheduling.config.SchedulerProperties",
+      "defaultValue": 50
+    },
+    {
+      "name": "orchest.scheduler.default-max-attempts",
+      "type": "java.lang.Integer",
+      "description": "Default {@code maxAttempts} when a producer leaves it unset.",
+      "sourceType": "io.telekom.orchest.scheduling.config.SchedulerProperties",
+      "defaultValue": 5
+    },
+    {
+      "name": "orchest.scheduler.dispatcher-enabled",
+      "type": "java.lang.Boolean",
+      "description": "When {@code true}, the JVM also runs a {@link io.telekom.orchest.scheduling.runtime.TaskDispatcher}. Producer-only services (e.g. {@code orchest-engine}) should keep this {@code false}.",
+      "sourceType": "io.telekom.orchest.scheduling.config.SchedulerProperties",
+      "defaultValue": false
+    },
+    {
+      "name": "orchest.scheduler.dispatcher-threads",
+      "type": "java.lang.Integer",
+      "description": "Worker thread pool size for handler invocations.",
+      "sourceType": "io.telekom.orchest.scheduling.config.SchedulerProperties",
+      "defaultValue": 4
+    },
+    {
+      "name": "orchest.scheduler.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Master switch. When {@code false} the auto-configuration backs off entirely.",
+      "sourceType": "io.telekom.orchest.scheduling.config.SchedulerProperties",
+      "defaultValue": true
+    },
+    {
+      "name": "orchest.scheduler.lease-duration",
+      "type": "java.time.Duration",
+      "description": "Lease duration. Should comfortably exceed the longest expected handler runtime; if a worker doesn't ack within this window, another dispatcher will steal the lease.",
+      "sourceType": "io.telekom.orchest.scheduling.config.SchedulerProperties",
+      "defaultValue": "60s"
+    },
+    {
+      "name": "orchest.scheduler.poll-interval",
+      "type": "java.time.Duration",
+      "description": "How often the dispatcher polls the store. Default 1s.",
+      "sourceType": "io.telekom.orchest.scheduling.config.SchedulerProperties",
+      "defaultValue": "1s"
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}

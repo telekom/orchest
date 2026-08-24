@@ -1,0 +1,49 @@
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
+
+plugins {
+    id 'java-library'
+    id 'io.spring.dependency-management'
+}
+
+description = 'orchest-test'
+version = version
+
+dependencyManagement {
+    imports {
+        mavenBom SpringBootPlugin.BOM_COORDINATES
+    }
+}
+
+dependencies {
+    // Core Orchest client library (provides @JobWorker, ActivatedJob, TaskResponse, etc.)
+    api project(':spring-orchest-client')
+
+    // Spring Boot Test — compileOnly so the consuming module provides its own version
+    // and avoids JUnit version conflicts with the root build.gradle
+    compileOnly 'org.springframework.boot:spring-boot-starter-test'
+
+    // Spring context for auto-configuration
+    implementation 'org.springframework.boot:spring-boot-autoconfigure'
+    implementation 'org.springframework:spring-context'
+
+    // Self-tests: sample workers + @OrchestSpringTest demos (mirrors consumer usage)
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+// Spring Boot BOM may pull a different junit-platform-engine than the root launcher pin; align for tests.
+configurations.testRuntimeClasspath {
+    resolutionStrategy.eachDependency { details ->
+        if (details.requested.group == 'org.junit.platform') {
+            details.useVersion '6.0.1'
+            details.because 'align junit-platform artifacts with Spring Boot BOM (see spring-client-test)'
+        }
+    }
+}
+
+// Generate sources and javadoc JARs
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
+//mavenPublish(project)

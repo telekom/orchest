@@ -1,0 +1,5621 @@
+openapi: 3.1.0
+info:
+  contact:
+    email: teamtyrell@telekom-digital.com
+    name: DOT Team Tyrell
+  description: REST interface for interacting with Orchest Engine
+  license:
+    name: Proprietary license
+  title: OrchesT
+  version: 1.0.0
+  x-api-category: other
+servers:
+- url: http://localhost:6200/orchest/
+- url: https://api-orchest.your-domain.example.com/orchest/
+- url: https://api-orchest.your-domain.example.com/orchest/
+tags:
+- description: Message and signal events
+  name: Eventing
+- description: "Manage BPMN User Task lifecycle (claim, complete, reassign)"
+  name: User Tasks
+paths:
+  /rateLimit:
+    put:
+      operationId: upsertRateLimit
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RateLimit"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/RateLimit"
+          description: OK
+      tags:
+      - rate-limit-api
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+  /processStates:
+    get:
+      operationId: getProcessStates
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: "#/components/schemas/ProcessState"
+                type: array
+          description: OK
+      tags:
+      - process-state-api
+      x-accepts:
+      - '*/*'
+    post:
+      operationId: addProcessState
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProcessState"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ProcessState"
+          description: OK
+      tags:
+      - process-state-api
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+    put:
+      operationId: upsertProcessState
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProcessState"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ProcessState"
+          description: OK
+      tags:
+      - process-state-api
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+  /variables:
+    post:
+      operationId: modifyVariables
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VariablesRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOVariablesResponse"
+          description: OK
+      tags:
+      - variables-api
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+  /userTasks/{taskId}/unclaim:
+    post:
+      operationId: unclaimTask
+      parameters:
+      - explode: false
+        in: path
+        name: taskId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOUserTaskDTO"
+          description: OK
+      summary: Unclaim a user task
+      tags:
+      - User Tasks
+      x-accepts:
+      - '*/*'
+  /userTasks/{taskId}/complete:
+    post:
+      operationId: completeTask
+      parameters:
+      - explode: false
+        in: path
+        name: taskId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CompleteUserTaskRequest"
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOUserTaskDTO"
+          description: OK
+      summary: Complete a user task
+      tags:
+      - User Tasks
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+  /userTasks/{taskId}/claim:
+    post:
+      operationId: claimTask
+      parameters:
+      - explode: false
+        in: path
+        name: taskId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOUserTaskDTO"
+          description: OK
+      summary: Claim a user task
+      tags:
+      - User Tasks
+      x-accepts:
+      - '*/*'
+  /processInstances/retry:
+    post:
+      operationId: retryInstance
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RetryProcessEvent"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: OK
+      tags:
+      - process-instance-api
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+  /processInstances/retryBatch:
+    post:
+      operationId: retryInstancesBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchInstanceRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: OK
+      tags:
+      - process-instance-api
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+  /processInstances/resolveIncident:
+    post:
+      operationId: resolveIncident
+      parameters:
+      - explode: true
+        in: query
+        name: batchInstanceRequest
+        required: true
+        schema:
+          $ref: "#/components/schemas/BatchInstanceRequest"
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: OK
+      tags:
+      - process-instance-api
+      x-accepts:
+      - '*/*'
+  /processInstances/create:
+    post:
+      operationId: createProcessInstance
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProcessInvocationRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOProcessInvocationResponse"
+          description: OK
+      tags:
+      - process-instance-api
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+  /processInstances/cancelBatch:
+    post:
+      operationId: cancelInstancesBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchInstanceRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: OK
+      tags:
+      - process-instance-api
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+  /processDefinitionsSensitiveVariables:
+    delete:
+      operationId: deleteProcessSensitiveVariables
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProcessSensitiveVariables"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOString"
+          description: OK
+      tags:
+      - process-definition-sensitive-variables
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+    get:
+      operationId: getAll
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 0
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          default: 10
+          format: int32
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PageProcessSensitiveVariables"
+          description: OK
+      tags:
+      - process-definition-sensitive-variables
+      x-accepts:
+      - '*/*'
+    patch:
+      operationId: updateProcessSensitiveVariables
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProcessSensitiveVariables"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOProcessSensitiveVariables"
+          description: OK
+      tags:
+      - process-definition-sensitive-variables
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+    post:
+      operationId: addProcessSensitiveVariables
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProcessSensitiveVariables"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOProcessSensitiveVariables"
+          description: OK
+      tags:
+      - process-definition-sensitive-variables
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+  /processDefinitionsEnvs:
+    delete:
+      operationId: deleteProcessEnvVariable
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProcessEnvVariables"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOProcessEnvVariables"
+          description: OK
+      tags:
+      - process-definition-environment-api
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+    get:
+      operationId: getProcessDefinitions
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 0
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          default: 10
+          format: int32
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PageProcessEnvVariables"
+          description: OK
+      tags:
+      - process-definition-environment-api
+      x-accepts:
+      - '*/*'
+    patch:
+      operationId: updateProcessEnvVariable
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProcessEnvVariables"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOProcessEnvVariables"
+          description: OK
+      tags:
+      - process-definition-environment-api
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+    post:
+      operationId: addProcessEnvVariable
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProcessEnvVariables"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOProcessEnvVariables"
+          description: OK
+      tags:
+      - process-definition-environment-api
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+  /processDefinitions/upload:
+    post:
+      operationId: deployResource
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResourceDeploymentRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOResourceDeploymentResponse"
+          description: OK
+      tags:
+      - process-definition-api
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+  /incidents/resolve:
+    post:
+      operationId: resolveIncidentsBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchInstanceRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: OK
+      tags:
+      - incident-management-api
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+  /incidents/resolve/{processInstanceId}:
+    post:
+      operationId: resolveIncident_1
+      parameters:
+      - explode: false
+        in: path
+        name: processInstanceId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: OK
+      tags:
+      - incident-management-api
+      x-accepts:
+      - '*/*'
+  /feelPlayground/validate:
+    post:
+      operationId: validate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FeelValidateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOFeelValidationDTO"
+          description: OK
+      tags:
+      - feel-playground-api
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+  /feelPlayground/evaluate:
+    post:
+      operationId: evaluate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FeelEvaluateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOFeelEvaluationDTO"
+          description: OK
+      tags:
+      - feel-playground-api
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+  /eventing/sendSignal:
+    post:
+      operationId: publishSignal
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SendSignalEventRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOSignalEventResponse"
+          description: OK
+      tags:
+      - Eventing
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+  /eventing/sendMessage:
+    post:
+      operationId: publishMessage
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SendMessageEventRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOMessageEventResponse"
+          description: OK
+      tags:
+      - Eventing
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+  /dyanmicProcessInstances/create:
+    post:
+      operationId: createProcessInstance_1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DynamicProcessInvocationRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTODynamicProcessInvocationResponse"
+          description: OK
+      tags:
+      - dynamic-process-instance-api
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+  /deploymentApprovals/submitApproval:
+    post:
+      operationId: submitApproval
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeploymentActionRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTODeploymentApproval"
+          description: OK
+      tags:
+      - deployment-approvals
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+  /deploymentApprovals/requestApproval:
+    post:
+      operationId: requestApproval
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeploymentApprovalRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTODeploymentApproval"
+          description: OK
+      tags:
+      - deployment-approvals
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+  /deploymentApprovals/addApprovers:
+    post:
+      operationId: addApprover
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Approver"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOApprover"
+          description: OK
+      tags:
+      - deployment-approvals
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+  /decisionDefinitions/upload:
+    post:
+      operationId: deployResource_1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResourceDeploymentRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOResourceDeploymentResponse"
+          description: OK
+      tags:
+      - decision-definition-api
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+  /decisionDefinitions/evaluate:
+    post:
+      operationId: evaluateDecision
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EvaluateDecisionRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTODecisionEvaluationResponseDTO"
+          description: OK
+      tags:
+      - decision-definition-api
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+  /connectors/upload:
+    post:
+      operationId: uploadConnector
+      parameters:
+      - explode: true
+        in: query
+        name: connectorsData
+        required: true
+        schema:
+          items:
+            additionalProperties: {}
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOListConnector"
+          description: OK
+      tags:
+      - connectors-api
+      x-accepts:
+      - '*/*'
+  /chats/analyse:
+    post:
+      operationId: analyse
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChatRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOString"
+          description: OK
+      tags:
+      - orchest-chat-api
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+  /apiTokens:
+    delete:
+      operationId: revokeAllTokens
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOString"
+          description: OK
+      tags:
+      - user-api-token-api
+      x-accepts:
+      - '*/*'
+    get:
+      operationId: listTokens
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOListApiTokenResponse"
+          description: OK
+      tags:
+      - user-api-token-api
+      x-accepts:
+      - '*/*'
+    post:
+      operationId: createToken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateApiTokenRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOCreateApiTokenResponse"
+          description: OK
+      tags:
+      - user-api-token-api
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+  /userTasks/{taskId}/assign:
+    patch:
+      operationId: reassignTask
+      parameters:
+      - explode: false
+        in: path
+        name: taskId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AssignUserTaskRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOUserTaskDTO"
+          description: OK
+      summary: Reassign a user task
+      tags:
+      - User Tasks
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+  /processInstances/modifyInstance:
+    patch:
+      operationId: modifyInstance
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateInstanceRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: OK
+      tags:
+      - process-instance-api
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+  /processInstances/cancelInstances:
+    patch:
+      operationId: cancelInstances
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CancelInstanceRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: OK
+      tags:
+      - process-instance-api
+      x-content-type: application/json
+      x-accepts:
+      - '*/*'
+  /variables/{processInstanceId}:
+    get:
+      operationId: getVariables
+      parameters:
+      - explode: false
+        in: path
+        name: processInstanceId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOVariablesResponse"
+          description: OK
+      tags:
+      - variables-api
+      x-accepts:
+      - '*/*'
+  /userTasks:
+    get:
+      operationId: getMyTasks
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 0
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          default: 10
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          default: -createdAt
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PageUserTaskDTO"
+          description: OK
+      summary: List available user tasks
+      tags:
+      - User Tasks
+      x-accepts:
+      - '*/*'
+  /userTasks/{taskId}:
+    get:
+      operationId: getTask
+      parameters:
+      - explode: false
+        in: path
+        name: taskId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOUserTaskDTO"
+          description: OK
+      summary: Get user task details
+      tags:
+      - User Tasks
+      x-accepts:
+      - '*/*'
+  /userTasks/process/{processInstanceId}:
+    get:
+      operationId: getTasksForProcessInstance
+      parameters:
+      - explode: false
+        in: path
+        name: processInstanceId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 0
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          default: 10
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          default: -createdAt
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PageUserTaskDTO"
+          description: OK
+      summary: List tasks for process instance
+      tags:
+      - User Tasks
+      x-accepts:
+      - '*/*'
+  /stats:
+    get:
+      operationId: stats
+      parameters:
+      - explode: true
+        in: query
+        name: hardReload
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      - description: Inclusive lower bound on createdAt/executedAt (ISO-8601 instant)
+        explode: true
+        in: query
+        name: from
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - description: Exclusive upper bound on createdAt/executedAt (ISO-8601 instant)
+        explode: true
+        in: query
+        name: to
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - description: IANA zone id used to render lastUpdatedAt; defaults to UTC
+        explode: true
+        in: query
+        name: tz
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOStatsDTO"
+          description: OK
+      tags:
+      - statistics-api
+      x-accepts:
+      - '*/*'
+  /rateLimits:
+    get:
+      operationId: getRateLimits
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: "#/components/schemas/RateLimit"
+                type: array
+          description: OK
+      tags:
+      - rate-limit-api
+      x-accepts:
+      - '*/*'
+  /rateLimit/{processDefinitionId}:
+    get:
+      operationId: getRateLimitForProcessId
+      parameters:
+      - explode: false
+        in: path
+        name: processDefinitionId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/RateLimit"
+          description: OK
+      tags:
+      - rate-limit-api
+      x-accepts:
+      - '*/*'
+  /processStates/{processDefinitionId}:
+    delete:
+      operationId: removeProcessState
+      parameters:
+      - explode: false
+        in: path
+        name: processDefinitionId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ProcessState"
+          description: OK
+      tags:
+      - process-state-api
+      x-accepts:
+      - '*/*'
+    get:
+      operationId: getProcessStateForProcessId
+      parameters:
+      - explode: false
+        in: path
+        name: processDefinitionId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ProcessState"
+          description: OK
+      tags:
+      - process-state-api
+      x-accepts:
+      - '*/*'
+  /processInstances/scroll:
+    get:
+      operationId: scrollProcessInstances
+      parameters:
+      - explode: true
+        in: query
+        name: processDefinitionId
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: version
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: state
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: searchText
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Inclusive lower bound on createdAt (ISO-8601 offset date-time)
+        explode: true
+        in: query
+        name: createdFrom
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - description: Exclusive upper bound on createdAt (ISO-8601 offset date-time)
+        explode: true
+        in: query
+        name: createdTo
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - description: Inclusive 0-based offset
+        explode: true
+        in: query
+        name: from
+        required: false
+        schema:
+          default: 0
+          format: int32
+          type: integer
+        style: form
+      - description: Exclusive end offset
+        explode: true
+        in: query
+        name: to
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          default: -createdAt
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ProcessInstanceScrollDTO"
+          description: OK
+      tags:
+      - process-instance-api
+      x-accepts:
+      - '*/*'
+  /processInstances/pageData:
+    get:
+      operationId: getPageData
+      parameters:
+      - explode: true
+        in: query
+        name: processDefinitionId
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: version
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: state
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: searchText
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Inclusive lower bound on createdAt (ISO-8601 offset date-time)
+        explode: true
+        in: query
+        name: createdFrom
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - description: Exclusive upper bound on createdAt (ISO-8601 offset date-time)
+        explode: true
+        in: query
+        name: createdTo
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 0
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          default: 10
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          default: -createdAt
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PageString"
+          description: OK
+      tags:
+      - process-instance-api
+      x-accepts:
+      - '*/*'
+  /processInstances/id/{processInstanceId}:
+    get:
+      operationId: getProcessInstance
+      parameters:
+      - explode: false
+        in: path
+        name: processInstanceId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOProcessInstanceDTO"
+          description: OK
+      tags:
+      - process-instance-api
+      x-accepts:
+      - '*/*'
+  /processDefinitions:
+    get:
+      operationId: getProcessDefinitions_1
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 0
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          default: 10
+          format: int32
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PageResourceDefinitionDTO"
+          description: OK
+      tags:
+      - process-definition-api
+      x-accepts:
+      - '*/*'
+  /processDefinitionsSensitiveVariables/{processDefinitionId}:
+    get:
+      operationId: getProcessSensitiveVariables
+      parameters:
+      - explode: false
+        in: path
+        name: processDefinitionId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOListProcessSensitiveVariables"
+          description: OK
+      tags:
+      - process-definition-sensitive-variables
+      x-accepts:
+      - '*/*'
+  /processDefinitionsEnvs/{processDefinitionId}:
+    get:
+      operationId: getProcessDefinition
+      parameters:
+      - explode: false
+        in: path
+        name: processDefinitionId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOListProcessEnvVariables"
+          description: OK
+      tags:
+      - process-definition-environment-api
+      x-accepts:
+      - '*/*'
+  /processDefinitions/{processDefinitionId}/{version}:
+    delete:
+      operationId: deleteProcessDefinition
+      parameters:
+      - explode: false
+        in: path
+        name: processDefinitionId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: version
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOVoid"
+          description: OK
+      tags:
+      - process-definition-api
+      x-accepts:
+      - '*/*'
+    get:
+      operationId: getProcessDefinition_1
+      parameters:
+      - explode: false
+        in: path
+        name: processDefinitionId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: version
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOResourceDefinitionDTO"
+          description: OK
+      tags:
+      - process-definition-api
+      x-accepts:
+      - '*/*'
+  /processDefinitions/ids:
+    get:
+      operationId: listProcessDefinitionsIds
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOListResourceDefinitionDTO"
+          description: OK
+      tags:
+      - process-definition-api
+      x-accepts:
+      - '*/*'
+  /kafka/worker-info:
+    get:
+      operationId: getWorkerInfo
+      parameters:
+      - explode: true
+        in: query
+        name: processDefinitionId
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOWorkerInfo"
+          description: OK
+      tags:
+      - kafka-inspection-api
+      x-accepts:
+      - '*/*'
+  /kafka/process-health:
+    get:
+      operationId: getProcessHealth
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOListProcessHealth"
+          description: OK
+      tags:
+      - kafka-inspection-api
+      x-accepts:
+      - '*/*'
+  /kafka/cluster-info:
+    get:
+      operationId: getClusterInfo
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOClusterInfo"
+          description: OK
+      tags:
+      - kafka-inspection-api
+      x-accepts:
+      - '*/*'
+  /incidents:
+    get:
+      operationId: getIncidents
+      parameters:
+      - explode: true
+        in: query
+        name: processDefinitionId
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: version
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: searchText
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: from
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: to
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 0
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          default: 10
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          default: -createdAt
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PageIncidentDTO"
+          description: OK
+      tags:
+      - incident-management-api
+      x-accepts:
+      - '*/*'
+  /incidents/{processInstanceId}:
+    get:
+      operationId: getIncident
+      parameters:
+      - explode: false
+        in: path
+        name: processInstanceId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOIncidentDTO"
+          description: OK
+      tags:
+      - incident-management-api
+      x-accepts:
+      - '*/*'
+  /deploymentApprovals:
+    get:
+      operationId: getApprovals
+      parameters:
+      - explode: true
+        in: query
+        name: approvedState
+        required: true
+        schema:
+          enum:
+          - REQUESTED
+          - ACCEPTED
+          - REJECTED
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 0
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          default: 10
+          format: int32
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PageDeploymentApproval"
+          description: OK
+      tags:
+      - deployment-approvals
+      x-accepts:
+      - '*/*'
+  /deploymentApprovals/reviews:
+    get:
+      operationId: getApprovalsByReviewer
+      parameters:
+      - explode: true
+        in: query
+        name: stateCSV
+        required: false
+        schema:
+          default: REQUESTED
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOListDeploymentApproval"
+          description: OK
+      tags:
+      - deployment-approvals
+      x-accepts:
+      - '*/*'
+  /deploymentApprovals/getDefinitions:
+    get:
+      operationId: getDefinitionsForUser
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOListApprover"
+          description: OK
+      tags:
+      - deployment-approvals
+      x-accepts:
+      - '*/*'
+  /deploymentApprovals/getApprovers:
+    get:
+      operationId: getApprover
+      parameters:
+      - explode: true
+        in: query
+        name: processId
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOApprover"
+          description: OK
+      tags:
+      - deployment-approvals
+      x-accepts:
+      - '*/*'
+  /decisionInstances/{decisionInstanceId}:
+    get:
+      operationId: getDecisionInstance
+      parameters:
+      - explode: false
+        in: path
+        name: decisionInstanceId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTODecisionInstanceDTO"
+          description: OK
+      tags:
+      - decision-instance-api
+      x-accepts:
+      - '*/*'
+  /decisionInstances/scroll:
+    get:
+      operationId: scrollDecisionInstances
+      parameters:
+      - explode: true
+        in: query
+        name: decisionId
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: version
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: searchText
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: executedFrom
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: executedTo
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - description: Inclusive 0-based offset
+        explode: true
+        in: query
+        name: from
+        required: false
+        schema:
+          default: 0
+          format: int32
+          type: integer
+        style: form
+      - description: Exclusive end offset
+        explode: true
+        in: query
+        name: to
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          default: -executedAt
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/DecisionInstanceScrollDTO"
+          description: OK
+      tags:
+      - decision-instance-api
+      x-accepts:
+      - '*/*'
+  /decisionInstances/pageData:
+    get:
+      operationId: getDecisionInstances
+      parameters:
+      - explode: true
+        in: query
+        name: decisionId
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: from
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: to
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: version
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: searchText
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 0
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          default: 10
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          default: -executedAt
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PageDecisionInstanceDTO"
+          description: OK
+      tags:
+      - decision-instance-api
+      x-accepts:
+      - '*/*'
+  /decisionDefinitions:
+    get:
+      operationId: getDecisionDefinitions
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 0
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          default: 10
+          format: int32
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PageResourceDefinitionDTO"
+          description: OK
+      tags:
+      - decision-definition-api
+      x-accepts:
+      - '*/*'
+  /decisionDefinitions/{decisionDefinitionId}/{version}:
+    delete:
+      operationId: deleteDecisionDefinition
+      parameters:
+      - explode: false
+        in: path
+        name: decisionDefinitionId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: version
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOVoid"
+          description: OK
+      tags:
+      - decision-definition-api
+      x-accepts:
+      - '*/*'
+    get:
+      operationId: getDecisionDefinition
+      parameters:
+      - explode: false
+        in: path
+        name: decisionDefinitionId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: version
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOResourceDefinitionDTO"
+          description: OK
+      tags:
+      - decision-definition-api
+      x-accepts:
+      - '*/*'
+  /decisionDefinitions/ids:
+    get:
+      operationId: listDecisionDefinitions
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOListResourceDefinitionDTO"
+          description: OK
+      tags:
+      - decision-definition-api
+      x-accepts:
+      - '*/*'
+  /connectors:
+    get:
+      operationId: getConnectors
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 0
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          default: 10
+          format: int32
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PageConnector"
+          description: OK
+      tags:
+      - connectors-api
+      x-accepts:
+      - '*/*'
+  /connectors/{name}:
+    get:
+      operationId: getConnector
+      parameters:
+      - explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOConnector"
+          description: OK
+      tags:
+      - connectors-api
+      x-accepts:
+      - '*/*'
+  /auditTrails/user:
+    get:
+      operationId: getByUser
+      parameters:
+      - explode: true
+        in: query
+        name: email
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 50
+          format: int32
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: "#/components/schemas/AuditTrailEntry"
+                type: array
+          description: OK
+      tags:
+      - audit-trail-api
+      x-accepts:
+      - '*/*'
+  /auditTrails/time:
+    get:
+      operationId: getByTimeRange
+      parameters:
+      - explode: true
+        in: query
+        name: from
+        required: true
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: to
+        required: true
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          format: int32
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: "#/components/schemas/AuditTrailEntry"
+                type: array
+          description: OK
+      tags:
+      - audit-trail-api
+      x-accepts:
+      - '*/*'
+  /auditTrails/path:
+    get:
+      operationId: getByPath
+      parameters:
+      - explode: true
+        in: query
+        name: path
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: from
+        required: true
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: to
+        required: true
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          format: int32
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: "#/components/schemas/AuditTrailEntry"
+                type: array
+          description: OK
+      tags:
+      - audit-trail-api
+      x-accepts:
+      - '*/*'
+  /apiTokens/{tokenId}:
+    delete:
+      operationId: revokeToken
+      parameters:
+      - explode: false
+        in: path
+        name: tokenId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOString"
+          description: OK
+      tags:
+      - user-api-token-api
+      x-accepts:
+      - '*/*'
+    get:
+      operationId: getToken
+      parameters:
+      - explode: false
+        in: path
+        name: tokenId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOApiTokenResponse"
+          description: OK
+      tags:
+      - user-api-token-api
+      x-accepts:
+      - '*/*'
+  /deploymentApprovals/removeApprover:
+    delete:
+      operationId: deleteApprover
+      parameters:
+      - explode: true
+        in: query
+        name: approverId
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: approverEmail
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseDTOApprover"
+          description: OK
+      tags:
+      - deployment-approvals
+      x-accepts:
+      - '*/*'
+components:
+  schemas:
+    RateLimit:
+      example:
+        windowDuration: 0
+        processId: processId
+        allowedSize: 6
+        switchToNewCamunda: true
+        id: id
+        enabled: true
+      properties:
+        id:
+          type: string
+        enabled:
+          type: boolean
+        processId:
+          type: string
+        windowDuration:
+          format: int32
+          type: integer
+        allowedSize:
+          format: int32
+          type: integer
+        switchToNewCamunda:
+          type: boolean
+    ProcessState:
+      example:
+        processId: processId
+        id: id
+        status: true
+      properties:
+        id:
+          type: string
+        processId:
+          type: string
+        status:
+          type: boolean
+    VariablesRequest:
+      example:
+        processInstanceId: processInstanceId
+        variables:
+          key: ""
+        action: ADD
+      properties:
+        action:
+          enum:
+          - ADD
+          - UPDATE
+          - DELETE
+          type: string
+        processInstanceId:
+          type: string
+        variables:
+          additionalProperties: {}
+    Meta:
+      example:
+        code: 0
+        message: message
+      properties:
+        code:
+          format: int32
+          type: integer
+        message:
+          type: string
+    ResponseDTOVariablesResponse:
+      example:
+        data:
+          variables:
+            key: ""
+        meta:
+          code: 0
+          message: message
+      properties:
+        meta:
+          $ref: "#/components/schemas/Meta"
+        data:
+          $ref: "#/components/schemas/VariablesResponse"
+    VariablesResponse:
+      example:
+        variables:
+          key: ""
+      properties:
+        variables:
+          additionalProperties: {}
+    ResponseDTOUserTaskDTO:
+      example:
+        data:
+          claimedAt: claimedAt
+          processInstanceId: processInstanceId
+          processDefinitionId: processDefinitionId
+          variables:
+            key: ""
+          completedAt: completedAt
+          formKey: formKey
+          dueDate: dueDate
+          followUpDate: followUpDate
+          activityId: activityId
+          createdAt: createdAt
+          candidateUsers:
+          - candidateUsers
+          - candidateUsers
+          candidateGroups:
+          - candidateGroups
+          - candidateGroups
+          taskName: taskName
+          state: state
+          assignee: assignee
+          claimedBy: claimedBy
+          taskId: taskId
+        meta:
+          code: 0
+          message: message
+      properties:
+        meta:
+          $ref: "#/components/schemas/Meta"
+        data:
+          $ref: "#/components/schemas/UserTaskDTO"
+    UserTaskDTO:
+      example:
+        claimedAt: claimedAt
+        processInstanceId: processInstanceId
+        processDefinitionId: processDefinitionId
+        variables:
+          key: ""
+        completedAt: completedAt
+        formKey: formKey
+        dueDate: dueDate
+        followUpDate: followUpDate
+        activityId: activityId
+        createdAt: createdAt
+        candidateUsers:
+        - candidateUsers
+        - candidateUsers
+        candidateGroups:
+        - candidateGroups
+        - candidateGroups
+        taskName: taskName
+        state: state
+        assignee: assignee
+        claimedBy: claimedBy
+        taskId: taskId
+      properties:
+        taskId:
+          type: string
+        processInstanceId:
+          type: string
+        processDefinitionId:
+          type: string
+        activityId:
+          type: string
+        taskName:
+          type: string
+        state:
+          type: string
+        assignee:
+          type: string
+        candidateUsers:
+          items:
+            type: string
+          type: array
+        candidateGroups:
+          items:
+            type: string
+          type: array
+        claimedBy:
+          type: string
+        dueDate:
+          type: string
+        followUpDate:
+          type: string
+        formKey:
+          type: string
+        variables:
+          additionalProperties: {}
+        createdAt:
+          type: string
+        claimedAt:
+          type: string
+        completedAt:
+          type: string
+    CompleteUserTaskRequest:
+      example:
+        variables:
+          key: ""
+      properties:
+        variables:
+          additionalProperties: {}
+    RetryProcessEvent:
+      example:
+        processInstanceId: processInstanceId
+        activityId: activityId
+        previousActivityId: previousActivityId
+      properties:
+        processInstanceId:
+          type: string
+        activityId:
+          type: string
+        previousActivityId:
+          type: string
+    BatchInstanceRequest:
+      example:
+        processInstanceIds:
+        - processInstanceIds
+        - processInstanceIds
+      properties:
+        processInstanceIds:
+          items:
+            type: string
+          type: array
+    ActivityNode:
+      allOf:
+      - $ref: "#/components/schemas/BaseNode"
+      - properties:
+          boundaryEventIds:
+            items:
+              type: string
+            type: array
+          multiInstanceLoopCharacteristics:
+            $ref: "#/components/schemas/MultiInstanceLoopCharacteristics"
+      example:
+        scopeId: scopeId
+        boundaryEventIds:
+        - boundaryEventIds
+        - boundaryEventIds
+        '@class': '@class'
+        incomingSequenceFlowIds:
+          key: incomingSequenceFlowIds
+        inputMappings:
+        - name: name
+          value: value
+        - name: name
+          value: value
+        type: START_EVENT
+        scopeType: PROCESS
+        name: name
+        outgoingSequenceFlowIds:
+          key: outgoingSequenceFlowIds
+        id: id
+        outputMappings:
+        - name: name
+          value: value
+        - name: name
+          value: value
+        multiInstanceLoopCharacteristics:
+          completionCondition: completionCondition
+          outputElement: outputElement
+          sequential: true
+          elementVariable: elementVariable
+          collection: collection
+          outputCollection: outputCollection
+        properties:
+          key: ""
+    BaseNode:
+      discriminator:
+        propertyName: '@class'
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          enum:
+          - START_EVENT
+          - END_EVENT
+          - TASK
+          - USER_TASK
+          - SERVICE_TASK
+          - RECEIVE_TASK
+          - SEND_TASK
+          - BUSINESS_RULE_TASK
+          - SCRIPT_TASK
+          - MANUAL_TASK
+          - SUB_PROCESS
+          - CALL_ACTIVITY
+          - EXCLUSIVE_GATEWAY
+          - PARALLEL_GATEWAY
+          - INCLUSIVE_GATEWAY
+          - EVENT_BASED_GATEWAY
+          - BOUNDARY_EVENT
+          - INTERMEDIATE_CATCH_EVENT
+          - INTERMEDIATE_THROW_EVENT
+          type: string
+        scopeId:
+          type: string
+        scopeType:
+          enum:
+          - PROCESS
+          - SUBPROCESS
+          - EVENT_SUBPROCESS
+          type: string
+        outgoingSequenceFlowIds:
+          additionalProperties:
+            type: string
+        incomingSequenceFlowIds:
+          additionalProperties:
+            type: string
+        inputMappings:
+          items:
+            $ref: "#/components/schemas/DataMapping"
+          type: array
+        outputMappings:
+          items:
+            $ref: "#/components/schemas/DataMapping"
+          type: array
+        properties:
+          additionalProperties: {}
+        '@class':
+          type: string
+      required:
+      - '@class'
+    BusinessRuleTaskNode:
+      allOf:
+      - $ref: "#/components/schemas/BaseNode"
+      - properties:
+          boundaryEventIds:
+            items:
+              type: string
+            type: array
+          multiInstanceLoopCharacteristics:
+            $ref: "#/components/schemas/MultiInstanceLoopCharacteristics"
+          decisionId:
+            type: string
+          resultVariable:
+            type: string
+    CallActivityNode:
+      allOf:
+      - $ref: "#/components/schemas/BaseNode"
+      - properties:
+          boundaryEventIds:
+            items:
+              type: string
+            type: array
+          multiInstanceLoopCharacteristics:
+            $ref: "#/components/schemas/MultiInstanceLoopCharacteristics"
+          calledProcessId:
+            type: string
+          propagateAllParentVariables:
+            type: boolean
+          propagateAllChildVariables:
+            type: boolean
+    DataMapping:
+      example:
+        name: name
+        value: value
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+    EventNode:
+      allOf:
+      - $ref: "#/components/schemas/BaseNode"
+      - properties:
+          eventType:
+            enum:
+            - NONE
+            - TIMER
+            - MESSAGE
+            - SIGNAL
+            - ERROR
+            - ESCALATION
+            - CONDITIONAL
+            - COMPENSATION
+            - LINK
+            - TERMINATE
+            - MULTIPLE
+            - PARALLEL_MULTIPLE
+            - CANCEL
+            type: string
+          attachedToId:
+            type: string
+          messageName:
+            type: string
+          messageCorrelationKey:
+            type: string
+          signalRef:
+            type: string
+          timerDuration:
+            type: string
+          timerDate:
+            type: string
+          timerCycle:
+            type: string
+          errorRef:
+            type: string
+          errorCode:
+            type: string
+          escalationRef:
+            type: string
+          escalationCode:
+            type: string
+          condition:
+            type: string
+          linkName:
+            type: string
+          zeebeCorrelationKey:
+            type: string
+          cancelActivity:
+            type: boolean
+    GatewayNode:
+      allOf:
+      - $ref: "#/components/schemas/BaseNode"
+      - properties:
+          conditionExpressions:
+            additionalProperties:
+              type: string
+          defaultNode:
+            type: string
+          conditions:
+            additionalProperties:
+              type: string
+    ManualTaskNode:
+      allOf:
+      - $ref: "#/components/schemas/BaseNode"
+      - properties:
+          boundaryEventIds:
+            items:
+              type: string
+            type: array
+          multiInstanceLoopCharacteristics:
+            $ref: "#/components/schemas/MultiInstanceLoopCharacteristics"
+      example:
+        scopeId: scopeId
+        boundaryEventIds:
+        - boundaryEventIds
+        - boundaryEventIds
+        '@class': '@class'
+        incomingSequenceFlowIds:
+          key: incomingSequenceFlowIds
+        inputMappings:
+        - name: name
+          value: value
+        - name: name
+          value: value
+        type: START_EVENT
+        scopeType: PROCESS
+        name: name
+        outgoingSequenceFlowIds:
+          key: outgoingSequenceFlowIds
+        id: id
+        outputMappings:
+        - name: name
+          value: value
+        - name: name
+          value: value
+        multiInstanceLoopCharacteristics:
+          completionCondition: completionCondition
+          outputElement: outputElement
+          sequential: true
+          elementVariable: elementVariable
+          collection: collection
+          outputCollection: outputCollection
+        properties:
+          key: ""
+    MultiInstanceLoopCharacteristics:
+      example:
+        completionCondition: completionCondition
+        outputElement: outputElement
+        sequential: true
+        elementVariable: elementVariable
+        collection: collection
+        outputCollection: outputCollection
+      properties:
+        collection:
+          type: string
+        elementVariable:
+          type: string
+        completionCondition:
+          type: string
+        outputCollection:
+          type: string
+        outputElement:
+          type: string
+        sequential:
+          type: boolean
+    ProcessInvocationRequest:
+      example:
+        processDefinitionId: processDefinitionId
+        processInstanceId: processInstanceId
+        variables:
+          key: ""
+        parentProcessInstanceId: parentProcessInstanceId
+        nodeInformation:
+          scopeId: scopeId
+          boundaryEventIds:
+          - boundaryEventIds
+          - boundaryEventIds
+          '@class': '@class'
+          incomingSequenceFlowIds:
+            key: incomingSequenceFlowIds
+          inputMappings:
+          - name: name
+            value: value
+          - name: name
+            value: value
+          type: START_EVENT
+          scopeType: PROCESS
+          name: name
+          outgoingSequenceFlowIds:
+            key: outgoingSequenceFlowIds
+          id: id
+          outputMappings:
+          - name: name
+            value: value
+          - name: name
+            value: value
+          multiInstanceLoopCharacteristics:
+            completionCondition: completionCondition
+            outputElement: outputElement
+            sequential: true
+            elementVariable: elementVariable
+            collection: collection
+            outputCollection: outputCollection
+          properties:
+            key: ""
+        version: 0
+      properties:
+        processDefinitionId:
+          type: string
+        processInstanceId:
+          type: string
+        version:
+          format: int32
+          type: integer
+        variables:
+          additionalProperties: {}
+        parentProcessInstanceId:
+          type: string
+        nodeInformation:
+          $ref: "#/components/schemas/ProcessInvocationRequest_nodeInformation"
+    ReceiveTaskNode:
+      allOf:
+      - $ref: "#/components/schemas/BaseNode"
+      - properties:
+          boundaryEventIds:
+            items:
+              type: string
+            type: array
+          multiInstanceLoopCharacteristics:
+            $ref: "#/components/schemas/MultiInstanceLoopCharacteristics"
+          messageRef:
+            type: string
+    ScriptTaskNode:
+      allOf:
+      - $ref: "#/components/schemas/BaseNode"
+      - properties:
+          boundaryEventIds:
+            items:
+              type: string
+            type: array
+          multiInstanceLoopCharacteristics:
+            $ref: "#/components/schemas/MultiInstanceLoopCharacteristics"
+          scriptFormat:
+            type: string
+          script:
+            type: string
+          resultVariable:
+            type: string
+    SendTaskNode:
+      allOf:
+      - $ref: "#/components/schemas/BaseNode"
+      - properties:
+          boundaryEventIds:
+            items:
+              type: string
+            type: array
+          multiInstanceLoopCharacteristics:
+            $ref: "#/components/schemas/MultiInstanceLoopCharacteristics"
+          messageRef:
+            type: string
+    ServiceTaskNode:
+      allOf:
+      - $ref: "#/components/schemas/BaseNode"
+      - properties:
+          boundaryEventIds:
+            items:
+              type: string
+            type: array
+          multiInstanceLoopCharacteristics:
+            $ref: "#/components/schemas/MultiInstanceLoopCharacteristics"
+          workerType:
+            type: string
+          retries:
+            format: int32
+            type: integer
+    SubProcessNode:
+      allOf:
+      - $ref: "#/components/schemas/BaseNode"
+      - properties:
+          boundaryEventIds:
+            items:
+              type: string
+            type: array
+          multiInstanceLoopCharacteristics:
+            $ref: "#/components/schemas/MultiInstanceLoopCharacteristics"
+          childNodeIds:
+            items:
+              type: string
+            type: array
+          startNodeId:
+            type: string
+          triggeredByEvent:
+            type: boolean
+    TaskNode:
+      allOf:
+      - $ref: "#/components/schemas/BaseNode"
+    UserTaskNode:
+      allOf:
+      - $ref: "#/components/schemas/BaseNode"
+      - properties:
+          boundaryEventIds:
+            items:
+              type: string
+            type: array
+          multiInstanceLoopCharacteristics:
+            $ref: "#/components/schemas/MultiInstanceLoopCharacteristics"
+          assignee:
+            type: string
+          candidateUsers:
+            items:
+              type: string
+            type: array
+          candidateGroups:
+            items:
+              type: string
+            type: array
+          dueDate:
+            type: string
+          followUpDate:
+            type: string
+          formKey:
+            type: string
+    ProcessInvocationResponse:
+      example:
+        processInstanceId: processInstanceId
+        processId: processId
+        version: 0
+      properties:
+        processInstanceId:
+          type: string
+        processId:
+          type: string
+        version:
+          format: int32
+          type: integer
+    ResponseDTOProcessInvocationResponse:
+      example:
+        data:
+          processInstanceId: processInstanceId
+          processId: processId
+          version: 0
+        meta:
+          code: 0
+          message: message
+      properties:
+        meta:
+          $ref: "#/components/schemas/Meta"
+        data:
+          $ref: "#/components/schemas/ProcessInvocationResponse"
+    ProcessSensitiveVariables:
+      example:
+        processDefinitionId: processDefinitionId
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        variables:
+        - name: name
+          type: HIDE
+          value: value
+        - name: name
+          type: HIDE
+          value: value
+        id: id
+        enabled: true
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+        processDefinitionId:
+          type: string
+        variables:
+          items:
+            $ref: "#/components/schemas/SensitiveVariables"
+          type: array
+        enabled:
+          type: boolean
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+    SensitiveVariables:
+      example:
+        name: name
+        type: HIDE
+        value: value
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+        type:
+          enum:
+          - HIDE
+          - SHOW
+          type: string
+    ResponseDTOProcessSensitiveVariables:
+      example:
+        data:
+          processDefinitionId: processDefinitionId
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          variables:
+          - name: name
+            type: HIDE
+            value: value
+          - name: name
+            type: HIDE
+            value: value
+          id: id
+          enabled: true
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        meta:
+          code: 0
+          message: message
+      properties:
+        meta:
+          $ref: "#/components/schemas/Meta"
+        data:
+          $ref: "#/components/schemas/ProcessSensitiveVariables"
+    ProcessEnvVariables:
+      example:
+        processDefinitionId: processDefinitionId
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        name: name
+        id: id
+        type: SECRET
+        value: value
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+        processDefinitionId:
+          type: string
+        name:
+          type: string
+        value:
+          type: string
+        type:
+          enum:
+          - SECRET
+          - PLAIN_TEXT
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+    ResponseDTOProcessEnvVariables:
+      example:
+        data:
+          processDefinitionId: processDefinitionId
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          name: name
+          id: id
+          type: SECRET
+          value: value
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        meta:
+          code: 0
+          message: message
+      properties:
+        meta:
+          $ref: "#/components/schemas/Meta"
+        data:
+          $ref: "#/components/schemas/ProcessEnvVariables"
+    ResourceDeploymentRequest:
+      example:
+        partitionCount: 0
+        resourceUTF8XML: resourceUTF8XML
+        approvers:
+        - approvers
+        - approvers
+        bypassWorkerValidation: true
+      properties:
+        partitionCount:
+          format: int32
+          type: integer
+        resourceUTF8XML:
+          type: string
+        bypassWorkerValidation:
+          type: boolean
+        approvers:
+          items:
+            type: string
+          type: array
+    ResourceDeploymentResponse:
+      example:
+        processId: processId
+        version: 0
+        status: status
+      properties:
+        processId:
+          type: string
+        version:
+          format: int32
+          type: integer
+        status:
+          type: string
+    ResponseDTOResourceDeploymentResponse:
+      example:
+        data:
+          processId: processId
+          version: 0
+          status: status
+        meta:
+          code: 0
+          message: message
+      properties:
+        meta:
+          $ref: "#/components/schemas/Meta"
+        data:
+          $ref: "#/components/schemas/ResourceDeploymentResponse"
+    FeelValidateRequest:
+      example:
+        expression: expression
+      properties:
+        expression:
+          minLength: 1
+          type: string
+      required:
+      - expression
+    FeelValidationDTO:
+      example:
+        valid: true
+        error: error
+      properties:
+        valid:
+          type: boolean
+        error:
+          type: string
+    ResponseDTOFeelValidationDTO:
+      example:
+        data:
+          valid: true
+          error: error
+        meta:
+          code: 0
+          message: message
+      properties:
+        meta:
+          $ref: "#/components/schemas/Meta"
+        data:
+          $ref: "#/components/schemas/FeelValidationDTO"
+    FeelEvaluateRequest:
+      example:
+        variables:
+          key: ""
+        expression: expression
+      properties:
+        expression:
+          minLength: 1
+          type: string
+        variables:
+          additionalProperties: {}
+      required:
+      - expression
+    FeelEvaluationDTO:
+      example:
+        result: ""
+        success: true
+        error: error
+      properties:
+        success:
+          type: boolean
+        result: {}
+        error:
+          type: string
+    ResponseDTOFeelEvaluationDTO:
+      example:
+        data:
+          result: ""
+          success: true
+          error: error
+        meta:
+          code: 0
+          message: message
+      properties:
+        meta:
+          $ref: "#/components/schemas/Meta"
+        data:
+          $ref: "#/components/schemas/FeelEvaluationDTO"
+    SendSignalEventRequest:
+      example:
+        signalName: signalName
+        variables:
+          key: ""
+      properties:
+        signalName:
+          minLength: 1
+          type: string
+        variables:
+          additionalProperties: {}
+      required:
+      - signalName
+    ResponseDTOSignalEventResponse:
+      example:
+        data:
+          signalName: signalName
+          id: id
+        meta:
+          code: 0
+          message: message
+      properties:
+        meta:
+          $ref: "#/components/schemas/Meta"
+        data:
+          $ref: "#/components/schemas/SignalEventResponse"
+    SignalEventResponse:
+      example:
+        signalName: signalName
+        id: id
+      properties:
+        id:
+          type: string
+        signalName:
+          type: string
+    SendMessageEventRequest:
+      example:
+        messageName: messageName
+        variables:
+          key: ""
+        correlationKey: correlationKey
+      properties:
+        messageName:
+          minLength: 1
+          type: string
+        correlationKey:
+          type: string
+        variables:
+          additionalProperties: {}
+      required:
+      - messageName
+    MessageEventResponse:
+      example:
+        messageName: messageName
+        id: id
+        correlationKey: correlationKey
+      properties:
+        id:
+          type: string
+        messageName:
+          type: string
+        correlationKey:
+          type: string
+    ResponseDTOMessageEventResponse:
+      example:
+        data:
+          messageName: messageName
+          id: id
+          correlationKey: correlationKey
+        meta:
+          code: 0
+          message: message
+      properties:
+        meta:
+          $ref: "#/components/schemas/Meta"
+        data:
+          $ref: "#/components/schemas/MessageEventResponse"
+    DynamicProcessInvocationRequest:
+      example:
+        processInstanceId: processInstanceId
+        variables:
+          key: ""
+        utf8BpmnXML: utf8BpmnXML
+      properties:
+        utf8BpmnXML:
+          type: string
+        processInstanceId:
+          type: string
+        variables:
+          additionalProperties: {}
+    DynamicProcessInvocationResponse:
+      example:
+        processInstanceId: processInstanceId
+      properties:
+        processInstanceId:
+          type: string
+    ResponseDTODynamicProcessInvocationResponse:
+      example:
+        data:
+          processInstanceId: processInstanceId
+        meta:
+          code: 0
+          message: message
+      properties:
+        meta:
+          $ref: "#/components/schemas/Meta"
+        data:
+          $ref: "#/components/schemas/DynamicProcessInvocationResponse"
+    DeploymentActionRequest:
+      example:
+        approver: approver
+        state: REQUESTED
+        deploymentRequestId: deploymentRequestId
+      properties:
+        deploymentRequestId:
+          type: string
+        approver:
+          type: string
+        state:
+          enum:
+          - REQUESTED
+          - ACCEPTED
+          - REJECTED
+          type: string
+    DeploymentApproval:
+      example:
+        requestedBy: requestedBy
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        auditLog:
+          approver: approver
+          createTime: 2000-01-23T04:56:07.000+00:00
+          approvalState: REQUESTED
+        approvalTime: 2000-01-23T04:56:07.000+00:00
+        id: id
+        state: REQUESTED
+        reviewers:
+        - reviewers
+        - reviewers
+        nextVersion: nextVersion
+        resourceDeploymentRequest:
+          partitionCount: 0
+          resourceUTF8XML: resourceUTF8XML
+          approvers:
+          - approvers
+          - approvers
+          bypassWorkerValidation: true
+        resourceType: resourceType
+        definitionId: definitionId
+      properties:
+        id:
+          type: string
+        reviewers:
+          items:
+            type: string
+          type: array
+        requestedBy:
+          type: string
+        state:
+          enum:
+          - REQUESTED
+          - ACCEPTED
+          - REJECTED
+          type: string
+        resourceType:
+          type: string
+        resourceDeploymentRequest:
+          $ref: "#/components/schemas/ResourceDeploymentRequest"
+        definitionId:
+          type: string
+        nextVersion:
+          type: string
+        auditLog:
+          $ref: "#/components/schemas/DeploymentAuditLog"
+        createdAt:
+          format: date-time
+          type: string
+        approvalTime:
+          format: date-time
+          type: string
+    DeploymentAuditLog:
+      example:
+        approver: approver
+        createTime: 2000-01-23T04:56:07.000+00:00
+        approvalState: REQUESTED
+      properties:
+        approvalState:
+          enum:
+          - REQUESTED
+          - ACCEPTED
+          - REJECTED
+          type: string
+        approver:
+          type: string
+        createTime:
+          format: date-time
+          type: string
+    ResponseDTODeploymentApproval:
+      example:
+        data:
+          requestedBy: requestedBy
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          auditLog:
+            approver: approver
+            createTime: 2000-01-23T04:56:07.000+00:00
+            approvalState: REQUESTED
+          approvalTime: 2000-01-23T04:56:07.000+00:00
+          id: id
+          state: REQUESTED
+          reviewers:
+          - reviewers
+          - reviewers
+          nextVersion: nextVersion
+          resourceDeploymentRequest:
+            partitionCount: 0
+            resourceUTF8XML: resourceUTF8XML
+            approvers:
+            - approvers
+            - approvers
+            bypassWorkerValidation: true
+          resourceType: resourceType
+          definitionId: definitionId
+        meta:
+          code: 0
+          message: message
+      properties:
+        meta:
+          $ref: "#/components/schemas/Meta"
+        data:
+          $ref: "#/components/schemas/DeploymentApproval"
+    DeploymentApprovalRequest:
+      example:
+        requestedBy: requestedBy
+        deploymentRequest:
+          partitionCount: 0
+          resourceUTF8XML: resourceUTF8XML
+          approvers:
+          - approvers
+          - approvers
+          bypassWorkerValidation: true
+        type: type
+      properties:
+        deploymentRequest:
+          $ref: "#/components/schemas/ResourceDeploymentRequest"
+        type:
+          type: string
+        requestedBy:
+          type: string
+    Approver:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        lastModifiedAt: 2000-01-23T04:56:07.000+00:00
+        processId: processId
+        approvers:
+        - approvers
+        - approvers
+        id: id
+      properties:
+        id:
+          type: string
+        processId:
+          type: string
+        approvers:
+          items:
+            type: string
+          type: array
+        createdAt:
+          format: date-time
+          type: string
+        lastModifiedAt:
+          format: date-time
+          type: string
+    ResponseDTOApprover:
+      example:
+        data:
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          lastModifiedAt: 2000-01-23T04:56:07.000+00:00
+          processId: processId
+          approvers:
+          - approvers
+          - approvers
+          id: id
+        meta:
+          code: 0
+          message: message
+      properties:
+        meta:
+          $ref: "#/components/schemas/Meta"
+        data:
+          $ref: "#/components/schemas/Approver"
+    EvaluateDecisionRequest:
+      example:
+        decisionId: decisionId
+        inputVariables:
+          key: ""
+        version: 0
+      properties:
+        decisionId:
+          type: string
+        version:
+          format: int32
+          type: integer
+        inputVariables:
+          additionalProperties: {}
+    DecisionEvaluationResponseDTO:
+      example:
+        matchedRules:
+        - outputEntries:
+          - outputEntries
+          - outputEntries
+          ruleNumber: 0
+          description: description
+          id: id
+          inputEntries:
+          - inputEntries
+          - inputEntries
+        - outputEntries:
+          - outputEntries
+          - outputEntries
+          ruleNumber: 0
+          description: description
+          id: id
+          inputEntries:
+          - inputEntries
+          - inputEntries
+        outputVariables:
+          key: ""
+        inputVariables:
+          key: ""
+      properties:
+        matchedRules:
+          items:
+            $ref: "#/components/schemas/Rule"
+          type: array
+        inputVariables:
+          additionalProperties: {}
+        outputVariables:
+          additionalProperties: {}
+    ResponseDTODecisionEvaluationResponseDTO:
+      example:
+        data:
+          matchedRules:
+          - outputEntries:
+            - outputEntries
+            - outputEntries
+            ruleNumber: 0
+            description: description
+            id: id
+            inputEntries:
+            - inputEntries
+            - inputEntries
+          - outputEntries:
+            - outputEntries
+            - outputEntries
+            ruleNumber: 0
+            description: description
+            id: id
+            inputEntries:
+            - inputEntries
+            - inputEntries
+          outputVariables:
+            key: ""
+          inputVariables:
+            key: ""
+        meta:
+          code: 0
+          message: message
+      properties:
+        meta:
+          $ref: "#/components/schemas/Meta"
+        data:
+          $ref: "#/components/schemas/DecisionEvaluationResponseDTO"
+    Rule:
+      example:
+        outputEntries:
+        - outputEntries
+        - outputEntries
+        ruleNumber: 0
+        description: description
+        id: id
+        inputEntries:
+        - inputEntries
+        - inputEntries
+      properties:
+        id:
+          type: string
+        inputEntries:
+          items:
+            type: string
+          type: array
+        outputEntries:
+          items:
+            type: string
+          type: array
+        description:
+          type: string
+        ruleNumber:
+          format: int32
+          type: integer
+    Connector:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        connectorName: connectorName
+        connectorData:
+          key: ""
+        id: id
+      properties:
+        id:
+          type: string
+        connectorName:
+          type: string
+        connectorData:
+          additionalProperties: {}
+        createdAt:
+          format: date-time
+          type: string
+    ResponseDTOListConnector:
+      example:
+        data:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          connectorName: connectorName
+          connectorData:
+            key: ""
+          id: id
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          connectorName: connectorName
+          connectorData:
+            key: ""
+          id: id
+        meta:
+          code: 0
+          message: message
+      properties:
+        meta:
+          $ref: "#/components/schemas/Meta"
+        data:
+          items:
+            $ref: "#/components/schemas/Connector"
+          type: array
+    ChatRequest:
+      example:
+        userMessage: userMessage
+      properties:
+        userMessage:
+          type: string
+    ResponseDTOString:
+      example:
+        data: data
+        meta:
+          code: 0
+          message: message
+      properties:
+        meta:
+          $ref: "#/components/schemas/Meta"
+        data:
+          type: string
+    CreateApiTokenRequest:
+      example:
+        ttlInDays: 0
+        name: name
+      properties:
+        name:
+          maxLength: 100
+          minLength: 0
+          type: string
+        ttlInDays:
+          format: int32
+          type: integer
+      required:
+      - name
+    CreateApiTokenResponse:
+      example:
+        createdAt: createdAt
+        tokenId: tokenId
+        roles:
+        - roles
+        - roles
+        name: name
+        expiresAt: expiresAt
+        token: token
+      properties:
+        tokenId:
+          type: string
+        name:
+          type: string
+        token:
+          type: string
+        roles:
+          items:
+            type: string
+          type: array
+        createdAt:
+          type: string
+        expiresAt:
+          type: string
+    ResponseDTOCreateApiTokenResponse:
+      example:
+        data:
+          createdAt: createdAt
+          tokenId: tokenId
+          roles:
+          - roles
+          - roles
+          name: name
+          expiresAt: expiresAt
+          token: token
+        meta:
+          code: 0
+          message: message
+      properties:
+        meta:
+          $ref: "#/components/schemas/Meta"
+        data:
+          $ref: "#/components/schemas/CreateApiTokenResponse"
+    AssignUserTaskRequest:
+      example:
+        assignee: assignee
+      properties:
+        assignee:
+          minLength: 1
+          type: string
+      required:
+      - assignee
+    UpdateInstanceRequest:
+      example:
+        processInstanceId: processInstanceId
+        toNodeId: toNodeId
+        fromNodeId: fromNodeId
+      properties:
+        processInstanceId:
+          type: string
+        fromNodeId:
+          type: string
+        toNodeId:
+          type: string
+    CancelInstanceRequest:
+      example:
+        instances:
+        - processDefinitionId: processDefinitionId
+          instanceId: instanceId
+        - processDefinitionId: processDefinitionId
+          instanceId: instanceId
+      properties:
+        instances:
+          items:
+            $ref: "#/components/schemas/Request"
+          type: array
+    Request:
+      example:
+        processDefinitionId: processDefinitionId
+        instanceId: instanceId
+      properties:
+        instanceId:
+          type: string
+        processDefinitionId:
+          type: string
+    PageUserTaskDTO:
+      example:
+        number: 5
+        last: true
+        numberOfElements: 1
+        size: 5
+        totalPages: 0
+        pageable:
+          paged: true
+          pageNumber: 1
+          offset: 5
+          pageSize: 5
+          unpaged: true
+          sort:
+            unsorted: true
+            sorted: true
+            empty: true
+        sort:
+          unsorted: true
+          sorted: true
+          empty: true
+        first: true
+        content:
+        - claimedAt: claimedAt
+          processInstanceId: processInstanceId
+          processDefinitionId: processDefinitionId
+          variables:
+            key: ""
+          completedAt: completedAt
+          formKey: formKey
+          dueDate: dueDate
+          followUpDate: followUpDate
+          activityId: activityId
+          createdAt: createdAt
+          candidateUsers:
+          - candidateUsers
+          - candidateUsers
+          candidateGroups:
+          - candidateGroups
+          - candidateGroups
+          taskName: taskName
+          state: state
+          assignee: assignee
+          claimedBy: claimedBy
+          taskId: taskId
+        - claimedAt: claimedAt
+          processInstanceId: processInstanceId
+          processDefinitionId: processDefinitionId
+          variables:
+            key: ""
+          completedAt: completedAt
+          formKey: formKey
+          dueDate: dueDate
+          followUpDate: followUpDate
+          activityId: activityId
+          createdAt: createdAt
+          candidateUsers:
+          - candidateUsers
+          - candidateUsers
+          candidateGroups:
+          - candidateGroups
+          - candidateGroups
+          taskName: taskName
+          state: state
+          assignee: assignee
+          claimedBy: claimedBy
+          taskId: taskId
+        totalElements: 6
+        empty: true
+      properties:
+        totalPages:
+          format: int32
+          type: integer
+        totalElements:
+          format: int64
+          type: integer
+        pageable:
+          $ref: "#/components/schemas/PageableObject"
+        first:
+          type: boolean
+        last:
+          type: boolean
+        numberOfElements:
+          format: int32
+          type: integer
+        size:
+          format: int32
+          type: integer
+        content:
+          items:
+            $ref: "#/components/schemas/UserTaskDTO"
+          type: array
+        number:
+          format: int32
+          type: integer
+        sort:
+          $ref: "#/components/schemas/SortObject"
+        empty:
+          type: boolean
+    PageableObject:
+      example:
+        paged: true
+        pageNumber: 1
+        offset: 5
+        pageSize: 5
+        unpaged: true
+        sort:
+          unsorted: true
+          sorted: true
+          empty: true
+      properties:
+        paged:
+          type: boolean
+        pageNumber:
+          format: int32
+          type: integer
+        pageSize:
+          format: int32
+          type: integer
+        unpaged:
+          type: boolean
+        offset:
+          format: int64
+          type: integer
+        sort:
+          $ref: "#/components/schemas/SortObject"
+    SortObject:
+      example:
+        unsorted: true
+        sorted: true
+        empty: true
+      properties:
+        sorted:
+          type: boolean
+        unsorted:
+          type: boolean
+        empty:
+          type: boolean
+    ResponseDTOStatsDTO:
+      example:
+        data:
+          totalProcessStats:
+          - count: 0
+            state: state
+          - count: 0
+            state: state
+          totalDecisionStats:
+          - count: 0
+            state: state
+          - count: 0
+            state: state
+          lastUpdatedAt: 2000-01-23T04:56:07.000+00:00
+          processStats:
+            key:
+              key:
+              - count: 0
+                state: state
+              - count: 0
+                state: state
+          decisionStats:
+            key:
+              key:
+              - count: 0
+                state: state
+              - count: 0
+                state: state
+        meta:
+          code: 0
+          message: message
+      properties:
+        meta:
+          $ref: "#/components/schemas/Meta"
+        data:
+          $ref: "#/components/schemas/StatsDTO"
+    Stats:
+      example:
+        count: 0
+        state: state
+      properties:
+        state:
+          type: string
+        count:
+          format: int32
+          type: integer
+    StatsDTO:
+      example:
+        totalProcessStats:
+        - count: 0
+          state: state
+        - count: 0
+          state: state
+        totalDecisionStats:
+        - count: 0
+          state: state
+        - count: 0
+          state: state
+        lastUpdatedAt: 2000-01-23T04:56:07.000+00:00
+        processStats:
+          key:
+            key:
+            - count: 0
+              state: state
+            - count: 0
+              state: state
+        decisionStats:
+          key:
+            key:
+            - count: 0
+              state: state
+            - count: 0
+              state: state
+      properties:
+        totalProcessStats:
+          items:
+            $ref: "#/components/schemas/Stats"
+          type: array
+        totalDecisionStats:
+          items:
+            $ref: "#/components/schemas/Stats"
+          type: array
+        processStats:
+          additionalProperties:
+            additionalProperties:
+              items:
+                $ref: "#/components/schemas/Stats"
+        decisionStats:
+          additionalProperties:
+            additionalProperties:
+              items:
+                $ref: "#/components/schemas/Stats"
+        lastUpdatedAt:
+          format: date-time
+          type: string
+    ExecutionLogEntry:
+      example:
+        nodeName: nodeName
+        metaData:
+          key: ""
+        sourceNodeId: sourceNodeId
+        sequenceFlowIds:
+        - sequenceFlowIds
+        - sequenceFlowIds
+        state: TRIGGERED
+        nodeType: START_EVENT
+        nodeId: nodeId
+        stateChanges:
+        - state: TRIGGERED
+          timestamp: 2000-01-23T04:56:07.000+00:00
+        - state: TRIGGERED
+          timestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        nodeId:
+          type: string
+        nodeName:
+          type: string
+        nodeType:
+          enum:
+          - START_EVENT
+          - END_EVENT
+          - TASK
+          - USER_TASK
+          - SERVICE_TASK
+          - RECEIVE_TASK
+          - SEND_TASK
+          - BUSINESS_RULE_TASK
+          - SCRIPT_TASK
+          - MANUAL_TASK
+          - SUB_PROCESS
+          - CALL_ACTIVITY
+          - EXCLUSIVE_GATEWAY
+          - PARALLEL_GATEWAY
+          - INCLUSIVE_GATEWAY
+          - EVENT_BASED_GATEWAY
+          - BOUNDARY_EVENT
+          - INTERMEDIATE_CATCH_EVENT
+          - INTERMEDIATE_THROW_EVENT
+          type: string
+        sourceNodeId:
+          type: string
+        sequenceFlowIds:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        stateChanges:
+          items:
+            $ref: "#/components/schemas/StateChange"
+          type: array
+        metaData:
+          additionalProperties: {}
+        state:
+          enum:
+          - TRIGGERED
+          - REGISTERED
+          - STARTED
+          - PENDING
+          - INCIDENT
+          - FAILED
+          - COMPLETED
+          - CANCELLED
+          type: string
+    ProcessInstanceDTO:
+      example:
+        processDefinitionId: processDefinitionId
+        processInstanceId: processInstanceId
+        variables:
+          key: ""
+        completedAt: completedAt
+        incidentMessage: incidentMessage
+        lastActivityAt: lastActivityAt
+        activeElements:
+        - activeElements
+        - activeElements
+        version: 0
+        sequenceExecutions:
+          key:
+            nodeName: nodeName
+            metaData:
+              key: ""
+            sourceNodeId: sourceNodeId
+            sequenceFlowIds:
+            - sequenceFlowIds
+            - sequenceFlowIds
+            state: TRIGGERED
+            nodeType: START_EVENT
+            nodeId: nodeId
+            stateChanges:
+            - state: TRIGGERED
+              timestamp: 2000-01-23T04:56:07.000+00:00
+            - state: TRIGGERED
+              timestamp: 2000-01-23T04:56:07.000+00:00
+        createdAt: createdAt
+        state: state
+        parentProcessInstanceId: parentProcessInstanceId
+        bpmnXML: bpmnXML
+      properties:
+        processDefinitionId:
+          type: string
+        processInstanceId:
+          type: string
+        parentProcessInstanceId:
+          type: string
+        variables:
+          additionalProperties: {}
+        bpmnXML:
+          type: string
+        version:
+          format: int32
+          type: integer
+        incidentMessage:
+          type: string
+        activeElements:
+          items:
+            type: string
+          type: array
+        state:
+          type: string
+        sequenceExecutions:
+          additionalProperties:
+            $ref: "#/components/schemas/ExecutionLogEntry"
+        createdAt:
+          type: string
+        completedAt:
+          type: string
+        lastActivityAt:
+          type: string
+    ProcessInstanceScrollDTO:
+      example:
+        from: 6
+        hasNext: true
+        to: 1
+        content:
+        - processDefinitionId: processDefinitionId
+          processInstanceId: processInstanceId
+          variables:
+            key: ""
+          completedAt: completedAt
+          incidentMessage: incidentMessage
+          lastActivityAt: lastActivityAt
+          activeElements:
+          - activeElements
+          - activeElements
+          version: 0
+          sequenceExecutions:
+            key:
+              nodeName: nodeName
+              metaData:
+                key: ""
+              sourceNodeId: sourceNodeId
+              sequenceFlowIds:
+              - sequenceFlowIds
+              - sequenceFlowIds
+              state: TRIGGERED
+              nodeType: START_EVENT
+              nodeId: nodeId
+              stateChanges:
+              - state: TRIGGERED
+                timestamp: 2000-01-23T04:56:07.000+00:00
+              - state: TRIGGERED
+                timestamp: 2000-01-23T04:56:07.000+00:00
+          createdAt: createdAt
+          state: state
+          parentProcessInstanceId: parentProcessInstanceId
+          bpmnXML: bpmnXML
+        - processDefinitionId: processDefinitionId
+          processInstanceId: processInstanceId
+          variables:
+            key: ""
+          completedAt: completedAt
+          incidentMessage: incidentMessage
+          lastActivityAt: lastActivityAt
+          activeElements:
+          - activeElements
+          - activeElements
+          version: 0
+          sequenceExecutions:
+            key:
+              nodeName: nodeName
+              metaData:
+                key: ""
+              sourceNodeId: sourceNodeId
+              sequenceFlowIds:
+              - sequenceFlowIds
+              - sequenceFlowIds
+              state: TRIGGERED
+              nodeType: START_EVENT
+              nodeId: nodeId
+              stateChanges:
+              - state: TRIGGERED
+                timestamp: 2000-01-23T04:56:07.000+00:00
+              - state: TRIGGERED
+                timestamp: 2000-01-23T04:56:07.000+00:00
+          createdAt: createdAt
+          state: state
+          parentProcessInstanceId: parentProcessInstanceId
+          bpmnXML: bpmnXML
+      properties:
+        content:
+          items:
+            $ref: "#/components/schemas/ProcessInstanceDTO"
+          type: array
+        from:
+          format: int32
+          type: integer
+        to:
+          format: int32
+          type: integer
+        hasNext:
+          type: boolean
+    StateChange:
+      example:
+        state: TRIGGERED
+        timestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        state:
+          enum:
+          - TRIGGERED
+          - REGISTERED
+          - STARTED
+          - PENDING
+          - INCIDENT
+          - FAILED
+          - COMPLETED
+          - CANCELLED
+          type: string
+        timestamp:
+          format: date-time
+          type: string
+    PageString:
+      example:
+        number: 5
+        last: true
+        numberOfElements: 1
+        size: 5
+        totalPages: 0
+        pageable:
+          paged: true
+          pageNumber: 1
+          offset: 5
+          pageSize: 5
+          unpaged: true
+          sort:
+            unsorted: true
+            sorted: true
+            empty: true
+        sort:
+          unsorted: true
+          sorted: true
+          empty: true
+        first: true
+        content:
+        - content
+        - content
+        totalElements: 6
+        empty: true
+      properties:
+        totalPages:
+          format: int32
+          type: integer
+        totalElements:
+          format: int64
+          type: integer
+        pageable:
+          $ref: "#/components/schemas/PageableObject"
+        first:
+          type: boolean
+        last:
+          type: boolean
+        numberOfElements:
+          format: int32
+          type: integer
+        size:
+          format: int32
+          type: integer
+        content:
+          items:
+            type: string
+          type: array
+        number:
+          format: int32
+          type: integer
+        sort:
+          $ref: "#/components/schemas/SortObject"
+        empty:
+          type: boolean
+    ResponseDTOProcessInstanceDTO:
+      example:
+        data:
+          processDefinitionId: processDefinitionId
+          processInstanceId: processInstanceId
+          variables:
+            key: ""
+          completedAt: completedAt
+          incidentMessage: incidentMessage
+          lastActivityAt: lastActivityAt
+          activeElements:
+          - activeElements
+          - activeElements
+          version: 0
+          sequenceExecutions:
+            key:
+              nodeName: nodeName
+              metaData:
+                key: ""
+              sourceNodeId: sourceNodeId
+              sequenceFlowIds:
+              - sequenceFlowIds
+              - sequenceFlowIds
+              state: TRIGGERED
+              nodeType: START_EVENT
+              nodeId: nodeId
+              stateChanges:
+              - state: TRIGGERED
+                timestamp: 2000-01-23T04:56:07.000+00:00
+              - state: TRIGGERED
+                timestamp: 2000-01-23T04:56:07.000+00:00
+          createdAt: createdAt
+          state: state
+          parentProcessInstanceId: parentProcessInstanceId
+          bpmnXML: bpmnXML
+        meta:
+          code: 0
+          message: message
+      properties:
+        meta:
+          $ref: "#/components/schemas/Meta"
+        data:
+          $ref: "#/components/schemas/ProcessInstanceDTO"
+    PageResourceDefinitionDTO:
+      example:
+        number: 2
+        last: true
+        numberOfElements: 1
+        size: 5
+        totalPages: 0
+        pageable:
+          paged: true
+          pageNumber: 1
+          offset: 5
+          pageSize: 5
+          unpaged: true
+          sort:
+            unsorted: true
+            sorted: true
+            empty: true
+        sort:
+          unsorted: true
+          sorted: true
+          empty: true
+        first: true
+        content:
+        - resourceMetadata:
+            key: ""
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          resourceXML: resourceXML
+          version: 5
+          definitionId: definitionId
+        - resourceMetadata:
+            key: ""
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          resourceXML: resourceXML
+          version: 5
+          definitionId: definitionId
+        totalElements: 6
+        empty: true
+      properties:
+        totalPages:
+          format: int32
+          type: integer
+        totalElements:
+          format: int64
+          type: integer
+        pageable:
+          $ref: "#/components/schemas/PageableObject"
+        first:
+          type: boolean
+        last:
+          type: boolean
+        numberOfElements:
+          format: int32
+          type: integer
+        size:
+          format: int32
+          type: integer
+        content:
+          items:
+            $ref: "#/components/schemas/ResourceDefinitionDTO"
+          type: array
+        number:
+          format: int32
+          type: integer
+        sort:
+          $ref: "#/components/schemas/SortObject"
+        empty:
+          type: boolean
+    ResourceDefinitionDTO:
+      example:
+        resourceMetadata:
+          key: ""
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        resourceXML: resourceXML
+        version: 5
+        definitionId: definitionId
+      properties:
+        definitionId:
+          type: string
+        resourceXML:
+          type: string
+        version:
+          format: int32
+          type: integer
+        createdAt:
+          format: date-time
+          type: string
+        resourceMetadata:
+          additionalProperties: {}
+    PageProcessSensitiveVariables:
+      example:
+        number: 9
+        last: true
+        numberOfElements: 2
+        size: 7
+        totalPages: 0
+        pageable:
+          paged: true
+          pageNumber: 1
+          offset: 5
+          pageSize: 5
+          unpaged: true
+          sort:
+            unsorted: true
+            sorted: true
+            empty: true
+        sort:
+          unsorted: true
+          sorted: true
+          empty: true
+        first: true
+        content:
+        - processDefinitionId: processDefinitionId
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          variables:
+          - name: name
+            type: HIDE
+            value: value
+          - name: name
+            type: HIDE
+            value: value
+          id: id
+          enabled: true
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - processDefinitionId: processDefinitionId
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          variables:
+          - name: name
+            type: HIDE
+            value: value
+          - name: name
+            type: HIDE
+            value: value
+          id: id
+          enabled: true
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        totalElements: 6
+        empty: true
+      properties:
+        totalPages:
+          format: int32
+          type: integer
+        totalElements:
+          format: int64
+          type: integer
+        pageable:
+          $ref: "#/components/schemas/PageableObject"
+        first:
+          type: boolean
+        last:
+          type: boolean
+        numberOfElements:
+          format: int32
+          type: integer
+        size:
+          format: int32
+          type: integer
+        content:
+          items:
+            $ref: "#/components/schemas/ProcessSensitiveVariables"
+          type: array
+        number:
+          format: int32
+          type: integer
+        sort:
+          $ref: "#/components/schemas/SortObject"
+        empty:
+          type: boolean
+    ResponseDTOListProcessSensitiveVariables:
+      example:
+        data:
+        - processDefinitionId: processDefinitionId
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          variables:
+          - name: name
+            type: HIDE
+            value: value
+          - name: name
+            type: HIDE
+            value: value
+          id: id
+          enabled: true
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - processDefinitionId: processDefinitionId
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          variables:
+          - name: name
+            type: HIDE
+            value: value
+          - name: name
+            type: HIDE
+            value: value
+          id: id
+          enabled: true
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        meta:
+          code: 0
+          message: message
+      properties:
+        meta:
+          $ref: "#/components/schemas/Meta"
+        data:
+          items:
+            $ref: "#/components/schemas/ProcessSensitiveVariables"
+          type: array
+    PageProcessEnvVariables:
+      example:
+        number: 5
+        last: true
+        numberOfElements: 1
+        size: 5
+        totalPages: 0
+        pageable:
+          paged: true
+          pageNumber: 1
+          offset: 5
+          pageSize: 5
+          unpaged: true
+          sort:
+            unsorted: true
+            sorted: true
+            empty: true
+        sort:
+          unsorted: true
+          sorted: true
+          empty: true
+        first: true
+        content:
+        - processDefinitionId: processDefinitionId
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          name: name
+          id: id
+          type: SECRET
+          value: value
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - processDefinitionId: processDefinitionId
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          name: name
+          id: id
+          type: SECRET
+          value: value
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        totalElements: 6
+        empty: true
+      properties:
+        totalPages:
+          format: int32
+          type: integer
+        totalElements:
+          format: int64
+          type: integer
+        pageable:
+          $ref: "#/components/schemas/PageableObject"
+        first:
+          type: boolean
+        last:
+          type: boolean
+        numberOfElements:
+          format: int32
+          type: integer
+        size:
+          format: int32
+          type: integer
+        content:
+          items:
+            $ref: "#/components/schemas/ProcessEnvVariables"
+          type: array
+        number:
+          format: int32
+          type: integer
+        sort:
+          $ref: "#/components/schemas/SortObject"
+        empty:
+          type: boolean
+    ResponseDTOListProcessEnvVariables:
+      example:
+        data:
+        - processDefinitionId: processDefinitionId
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          name: name
+          id: id
+          type: SECRET
+          value: value
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - processDefinitionId: processDefinitionId
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          name: name
+          id: id
+          type: SECRET
+          value: value
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        meta:
+          code: 0
+          message: message
+      properties:
+        meta:
+          $ref: "#/components/schemas/Meta"
+        data:
+          items:
+            $ref: "#/components/schemas/ProcessEnvVariables"
+          type: array
+    ResponseDTOResourceDefinitionDTO:
+      example:
+        data:
+          resourceMetadata:
+            key: ""
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          resourceXML: resourceXML
+          version: 5
+          definitionId: definitionId
+        meta:
+          code: 0
+          message: message
+      properties:
+        meta:
+          $ref: "#/components/schemas/Meta"
+        data:
+          $ref: "#/components/schemas/ResourceDefinitionDTO"
+    ResponseDTOListResourceDefinitionDTO:
+      example:
+        data:
+        - resourceMetadata:
+            key: ""
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          resourceXML: resourceXML
+          version: 5
+          definitionId: definitionId
+        - resourceMetadata:
+            key: ""
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          resourceXML: resourceXML
+          version: 5
+          definitionId: definitionId
+        meta:
+          code: 0
+          message: message
+      properties:
+        meta:
+          $ref: "#/components/schemas/Meta"
+        data:
+          items:
+            $ref: "#/components/schemas/ResourceDefinitionDTO"
+          type: array
+    ResponseDTOWorkerInfo:
+      example:
+        data:
+          processDefinitionId: processDefinitionId
+          clientConsumerStatus: clientConsumerStatus
+          serverWorkerEvent:
+            topicExists: true
+            topic: topic
+            consumerGroupExists: true
+            consumerGroup: consumerGroup
+          clientConsumerGroups:
+          - clientConsumerGroups
+          - clientConsumerGroups
+          clientWorkerEvent:
+            topicExists: true
+            topic: topic
+            consumerGroupExists: true
+            consumerGroup: consumerGroup
+        meta:
+          code: 0
+          message: message
+      properties:
+        meta:
+          $ref: "#/components/schemas/Meta"
+        data:
+          $ref: "#/components/schemas/WorkerInfo"
+    TopicInfo:
+      example:
+        topicExists: true
+        topic: topic
+        consumerGroupExists: true
+        consumerGroup: consumerGroup
+      properties:
+        topic:
+          type: string
+        consumerGroup:
+          type: string
+        topicExists:
+          type: boolean
+        consumerGroupExists:
+          type: boolean
+    WorkerInfo:
+      example:
+        processDefinitionId: processDefinitionId
+        clientConsumerStatus: clientConsumerStatus
+        serverWorkerEvent:
+          topicExists: true
+          topic: topic
+          consumerGroupExists: true
+          consumerGroup: consumerGroup
+        clientConsumerGroups:
+        - clientConsumerGroups
+        - clientConsumerGroups
+        clientWorkerEvent:
+          topicExists: true
+          topic: topic
+          consumerGroupExists: true
+          consumerGroup: consumerGroup
+      properties:
+        processDefinitionId:
+          type: string
+        clientWorkerEvent:
+          $ref: "#/components/schemas/TopicInfo"
+        clientConsumerGroups:
+          items:
+            type: string
+          type: array
+        clientConsumerStatus:
+          type: string
+        serverWorkerEvent:
+          $ref: "#/components/schemas/TopicInfo"
+    ProcessHealth:
+      example:
+        processDefinitionId: processDefinitionId
+        serverWorkerEventTopic:
+          name: name
+          exists: true
+        clientWorkerEventTopic:
+          name: name
+          exists: true
+        healthy: true
+        clientConsumerGroups:
+        - clientConsumerGroups
+        - clientConsumerGroups
+        serverWorkerEventConsumerGroup:
+          name: name
+          exists: true
+      properties:
+        processDefinitionId:
+          type: string
+        clientWorkerEventTopic:
+          $ref: "#/components/schemas/ResourceStatus"
+        clientConsumerGroups:
+          items:
+            type: string
+          type: array
+        serverWorkerEventTopic:
+          $ref: "#/components/schemas/ResourceStatus"
+        serverWorkerEventConsumerGroup:
+          $ref: "#/components/schemas/ResourceStatus"
+        healthy:
+          type: boolean
+    ResourceStatus:
+      example:
+        name: name
+        exists: true
+      properties:
+        name:
+          type: string
+        exists:
+          type: boolean
+    ResponseDTOListProcessHealth:
+      example:
+        data:
+        - processDefinitionId: processDefinitionId
+          serverWorkerEventTopic:
+            name: name
+            exists: true
+          clientWorkerEventTopic:
+            name: name
+            exists: true
+          healthy: true
+          clientConsumerGroups:
+          - clientConsumerGroups
+          - clientConsumerGroups
+          serverWorkerEventConsumerGroup:
+            name: name
+            exists: true
+        - processDefinitionId: processDefinitionId
+          serverWorkerEventTopic:
+            name: name
+            exists: true
+          clientWorkerEventTopic:
+            name: name
+            exists: true
+          healthy: true
+          clientConsumerGroups:
+          - clientConsumerGroups
+          - clientConsumerGroups
+          serverWorkerEventConsumerGroup:
+            name: name
+            exists: true
+        meta:
+          code: 0
+          message: message
+      properties:
+        meta:
+          $ref: "#/components/schemas/Meta"
+        data:
+          items:
+            $ref: "#/components/schemas/ProcessHealth"
+          type: array
+    ClusterInfo:
+      example:
+        consumerGroups:
+        - consumerGroups
+        - consumerGroups
+        topics:
+        - topics
+        - topics
+      properties:
+        topics:
+          items:
+            type: string
+          type: array
+        consumerGroups:
+          items:
+            type: string
+          type: array
+    ResponseDTOClusterInfo:
+      example:
+        data:
+          consumerGroups:
+          - consumerGroups
+          - consumerGroups
+          topics:
+          - topics
+          - topics
+        meta:
+          code: 0
+          message: message
+      properties:
+        meta:
+          $ref: "#/components/schemas/Meta"
+        data:
+          $ref: "#/components/schemas/ClusterInfo"
+    IncidentDTO:
+      example:
+        processInstanceId: processInstanceId
+        processDefinitionId: processDefinitionId
+        createdAt: createdAt
+        completedAt: completedAt
+        incidentMessage: incidentMessage
+        incidentSourceInstanceId: incidentSourceInstanceId
+        activeElements:
+        - activeElements
+        - activeElements
+        state: state
+        version: 5
+      properties:
+        processInstanceId:
+          type: string
+        processDefinitionId:
+          type: string
+        incidentMessage:
+          type: string
+        incidentSourceInstanceId:
+          type: string
+        activeElements:
+          items:
+            type: string
+          type: array
+        state:
+          type: string
+        version:
+          format: int32
+          type: integer
+        createdAt:
+          type: string
+        completedAt:
+          type: string
+    PageIncidentDTO:
+      example:
+        number: 2
+        last: true
+        numberOfElements: 1
+        size: 5
+        totalPages: 0
+        pageable:
+          paged: true
+          pageNumber: 1
+          offset: 5
+          pageSize: 5
+          unpaged: true
+          sort:
+            unsorted: true
+            sorted: true
+            empty: true
+        sort:
+          unsorted: true
+          sorted: true
+          empty: true
+        first: true
+        content:
+        - processInstanceId: processInstanceId
+          processDefinitionId: processDefinitionId
+          createdAt: createdAt
+          completedAt: completedAt
+          incidentMessage: incidentMessage
+          incidentSourceInstanceId: incidentSourceInstanceId
+          activeElements:
+          - activeElements
+          - activeElements
+          state: state
+          version: 5
+        - processInstanceId: processInstanceId
+          processDefinitionId: processDefinitionId
+          createdAt: createdAt
+          completedAt: completedAt
+          incidentMessage: incidentMessage
+          incidentSourceInstanceId: incidentSourceInstanceId
+          activeElements:
+          - activeElements
+          - activeElements
+          state: state
+          version: 5
+        totalElements: 6
+        empty: true
+      properties:
+        totalPages:
+          format: int32
+          type: integer
+        totalElements:
+          format: int64
+          type: integer
+        pageable:
+          $ref: "#/components/schemas/PageableObject"
+        first:
+          type: boolean
+        last:
+          type: boolean
+        numberOfElements:
+          format: int32
+          type: integer
+        size:
+          format: int32
+          type: integer
+        content:
+          items:
+            $ref: "#/components/schemas/IncidentDTO"
+          type: array
+        number:
+          format: int32
+          type: integer
+        sort:
+          $ref: "#/components/schemas/SortObject"
+        empty:
+          type: boolean
+    ResponseDTOIncidentDTO:
+      example:
+        data:
+          processInstanceId: processInstanceId
+          processDefinitionId: processDefinitionId
+          createdAt: createdAt
+          completedAt: completedAt
+          incidentMessage: incidentMessage
+          incidentSourceInstanceId: incidentSourceInstanceId
+          activeElements:
+          - activeElements
+          - activeElements
+          state: state
+          version: 5
+        meta:
+          code: 0
+          message: message
+      properties:
+        meta:
+          $ref: "#/components/schemas/Meta"
+        data:
+          $ref: "#/components/schemas/IncidentDTO"
+    PageDeploymentApproval:
+      example:
+        number: 5
+        last: true
+        numberOfElements: 1
+        size: 5
+        totalPages: 0
+        pageable:
+          paged: true
+          pageNumber: 1
+          offset: 5
+          pageSize: 5
+          unpaged: true
+          sort:
+            unsorted: true
+            sorted: true
+            empty: true
+        sort:
+          unsorted: true
+          sorted: true
+          empty: true
+        first: true
+        content:
+        - requestedBy: requestedBy
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          auditLog:
+            approver: approver
+            createTime: 2000-01-23T04:56:07.000+00:00
+            approvalState: REQUESTED
+          approvalTime: 2000-01-23T04:56:07.000+00:00
+          id: id
+          state: REQUESTED
+          reviewers:
+          - reviewers
+          - reviewers
+          nextVersion: nextVersion
+          resourceDeploymentRequest:
+            partitionCount: 0
+            resourceUTF8XML: resourceUTF8XML
+            approvers:
+            - approvers
+            - approvers
+            bypassWorkerValidation: true
+          resourceType: resourceType
+          definitionId: definitionId
+        - requestedBy: requestedBy
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          auditLog:
+            approver: approver
+            createTime: 2000-01-23T04:56:07.000+00:00
+            approvalState: REQUESTED
+          approvalTime: 2000-01-23T04:56:07.000+00:00
+          id: id
+          state: REQUESTED
+          reviewers:
+          - reviewers
+          - reviewers
+          nextVersion: nextVersion
+          resourceDeploymentRequest:
+            partitionCount: 0
+            resourceUTF8XML: resourceUTF8XML
+            approvers:
+            - approvers
+            - approvers
+            bypassWorkerValidation: true
+          resourceType: resourceType
+          definitionId: definitionId
+        totalElements: 6
+        empty: true
+      properties:
+        totalPages:
+          format: int32
+          type: integer
+        totalElements:
+          format: int64
+          type: integer
+        pageable:
+          $ref: "#/components/schemas/PageableObject"
+        first:
+          type: boolean
+        last:
+          type: boolean
+        numberOfElements:
+          format: int32
+          type: integer
+        size:
+          format: int32
+          type: integer
+        content:
+          items:
+            $ref: "#/components/schemas/DeploymentApproval"
+          type: array
+        number:
+          format: int32
+          type: integer
+        sort:
+          $ref: "#/components/schemas/SortObject"
+        empty:
+          type: boolean
+    ResponseDTOListDeploymentApproval:
+      example:
+        data:
+        - requestedBy: requestedBy
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          auditLog:
+            approver: approver
+            createTime: 2000-01-23T04:56:07.000+00:00
+            approvalState: REQUESTED
+          approvalTime: 2000-01-23T04:56:07.000+00:00
+          id: id
+          state: REQUESTED
+          reviewers:
+          - reviewers
+          - reviewers
+          nextVersion: nextVersion
+          resourceDeploymentRequest:
+            partitionCount: 0
+            resourceUTF8XML: resourceUTF8XML
+            approvers:
+            - approvers
+            - approvers
+            bypassWorkerValidation: true
+          resourceType: resourceType
+          definitionId: definitionId
+        - requestedBy: requestedBy
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          auditLog:
+            approver: approver
+            createTime: 2000-01-23T04:56:07.000+00:00
+            approvalState: REQUESTED
+          approvalTime: 2000-01-23T04:56:07.000+00:00
+          id: id
+          state: REQUESTED
+          reviewers:
+          - reviewers
+          - reviewers
+          nextVersion: nextVersion
+          resourceDeploymentRequest:
+            partitionCount: 0
+            resourceUTF8XML: resourceUTF8XML
+            approvers:
+            - approvers
+            - approvers
+            bypassWorkerValidation: true
+          resourceType: resourceType
+          definitionId: definitionId
+        meta:
+          code: 0
+          message: message
+      properties:
+        meta:
+          $ref: "#/components/schemas/Meta"
+        data:
+          items:
+            $ref: "#/components/schemas/DeploymentApproval"
+          type: array
+    ResponseDTOListApprover:
+      example:
+        data:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          lastModifiedAt: 2000-01-23T04:56:07.000+00:00
+          processId: processId
+          approvers:
+          - approvers
+          - approvers
+          id: id
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          lastModifiedAt: 2000-01-23T04:56:07.000+00:00
+          processId: processId
+          approvers:
+          - approvers
+          - approvers
+          id: id
+        meta:
+          code: 0
+          message: message
+      properties:
+        meta:
+          $ref: "#/components/schemas/Meta"
+        data:
+          items:
+            $ref: "#/components/schemas/Approver"
+          type: array
+    DecisionInstanceDTO:
+      example:
+        processInstanceId: processInstanceId
+        decisionInstanceId: decisionInstanceId
+        executedAt: executedAt
+        resourceUTF8XML: resourceUTF8XML
+        outputVariables:
+          key: ""
+        executedRuleId: executedRuleId
+        state: state
+        decisionId: decisionId
+        inputVariables:
+          key: ""
+        version: 0
+        matchedRuleIds:
+        - matchedRuleIds
+        - matchedRuleIds
+      properties:
+        decisionId:
+          type: string
+        decisionInstanceId:
+          type: string
+        processInstanceId:
+          type: string
+        inputVariables:
+          additionalProperties: {}
+        outputVariables:
+          additionalProperties: {}
+        resourceUTF8XML:
+          type: string
+        matchedRuleIds:
+          items:
+            type: string
+          type: array
+        version:
+          format: int32
+          type: integer
+        state:
+          type: string
+        executedRuleId:
+          type: string
+        executedAt:
+          type: string
+    ResponseDTODecisionInstanceDTO:
+      example:
+        data:
+          processInstanceId: processInstanceId
+          decisionInstanceId: decisionInstanceId
+          executedAt: executedAt
+          resourceUTF8XML: resourceUTF8XML
+          outputVariables:
+            key: ""
+          executedRuleId: executedRuleId
+          state: state
+          decisionId: decisionId
+          inputVariables:
+            key: ""
+          version: 0
+          matchedRuleIds:
+          - matchedRuleIds
+          - matchedRuleIds
+        meta:
+          code: 0
+          message: message
+      properties:
+        meta:
+          $ref: "#/components/schemas/Meta"
+        data:
+          $ref: "#/components/schemas/DecisionInstanceDTO"
+    DecisionInstanceScrollDTO:
+      example:
+        from: 0
+        hasNext: true
+        to: 6
+        content:
+        - processInstanceId: processInstanceId
+          decisionInstanceId: decisionInstanceId
+          executedAt: executedAt
+          resourceUTF8XML: resourceUTF8XML
+          outputVariables:
+            key: ""
+          executedRuleId: executedRuleId
+          state: state
+          decisionId: decisionId
+          inputVariables:
+            key: ""
+          version: 0
+          matchedRuleIds:
+          - matchedRuleIds
+          - matchedRuleIds
+        - processInstanceId: processInstanceId
+          decisionInstanceId: decisionInstanceId
+          executedAt: executedAt
+          resourceUTF8XML: resourceUTF8XML
+          outputVariables:
+            key: ""
+          executedRuleId: executedRuleId
+          state: state
+          decisionId: decisionId
+          inputVariables:
+            key: ""
+          version: 0
+          matchedRuleIds:
+          - matchedRuleIds
+          - matchedRuleIds
+      properties:
+        content:
+          items:
+            $ref: "#/components/schemas/DecisionInstanceDTO"
+          type: array
+        from:
+          format: int32
+          type: integer
+        to:
+          format: int32
+          type: integer
+        hasNext:
+          type: boolean
+    PageDecisionInstanceDTO:
+      example:
+        number: 5
+        last: true
+        numberOfElements: 1
+        size: 5
+        totalPages: 0
+        pageable:
+          paged: true
+          pageNumber: 1
+          offset: 5
+          pageSize: 5
+          unpaged: true
+          sort:
+            unsorted: true
+            sorted: true
+            empty: true
+        sort:
+          unsorted: true
+          sorted: true
+          empty: true
+        first: true
+        content:
+        - processInstanceId: processInstanceId
+          decisionInstanceId: decisionInstanceId
+          executedAt: executedAt
+          resourceUTF8XML: resourceUTF8XML
+          outputVariables:
+            key: ""
+          executedRuleId: executedRuleId
+          state: state
+          decisionId: decisionId
+          inputVariables:
+            key: ""
+          version: 0
+          matchedRuleIds:
+          - matchedRuleIds
+          - matchedRuleIds
+        - processInstanceId: processInstanceId
+          decisionInstanceId: decisionInstanceId
+          executedAt: executedAt
+          resourceUTF8XML: resourceUTF8XML
+          outputVariables:
+            key: ""
+          executedRuleId: executedRuleId
+          state: state
+          decisionId: decisionId
+          inputVariables:
+            key: ""
+          version: 0
+          matchedRuleIds:
+          - matchedRuleIds
+          - matchedRuleIds
+        totalElements: 6
+        empty: true
+      properties:
+        totalPages:
+          format: int32
+          type: integer
+        totalElements:
+          format: int64
+          type: integer
+        pageable:
+          $ref: "#/components/schemas/PageableObject"
+        first:
+          type: boolean
+        last:
+          type: boolean
+        numberOfElements:
+          format: int32
+          type: integer
+        size:
+          format: int32
+          type: integer
+        content:
+          items:
+            $ref: "#/components/schemas/DecisionInstanceDTO"
+          type: array
+        number:
+          format: int32
+          type: integer
+        sort:
+          $ref: "#/components/schemas/SortObject"
+        empty:
+          type: boolean
+    PageConnector:
+      example:
+        number: 5
+        last: true
+        numberOfElements: 1
+        size: 5
+        totalPages: 0
+        pageable:
+          paged: true
+          pageNumber: 1
+          offset: 5
+          pageSize: 5
+          unpaged: true
+          sort:
+            unsorted: true
+            sorted: true
+            empty: true
+        sort:
+          unsorted: true
+          sorted: true
+          empty: true
+        first: true
+        content:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          connectorName: connectorName
+          connectorData:
+            key: ""
+          id: id
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          connectorName: connectorName
+          connectorData:
+            key: ""
+          id: id
+        totalElements: 6
+        empty: true
+      properties:
+        totalPages:
+          format: int32
+          type: integer
+        totalElements:
+          format: int64
+          type: integer
+        pageable:
+          $ref: "#/components/schemas/PageableObject"
+        first:
+          type: boolean
+        last:
+          type: boolean
+        numberOfElements:
+          format: int32
+          type: integer
+        size:
+          format: int32
+          type: integer
+        content:
+          items:
+            $ref: "#/components/schemas/Connector"
+          type: array
+        number:
+          format: int32
+          type: integer
+        sort:
+          $ref: "#/components/schemas/SortObject"
+        empty:
+          type: boolean
+    ResponseDTOConnector:
+      example:
+        data:
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          connectorName: connectorName
+          connectorData:
+            key: ""
+          id: id
+        meta:
+          code: 0
+          message: message
+      properties:
+        meta:
+          $ref: "#/components/schemas/Meta"
+        data:
+          $ref: "#/components/schemas/Connector"
+    AuditTrailEntry:
+      example:
+        path: path
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        roles:
+        - roles
+        - roles
+        admin: true
+        userEmail: userEmail
+        correlationId: correlationId
+        id: id
+        httpMethod: httpMethod
+        responseStatus: 0
+      properties:
+        id:
+          type: string
+        userEmail:
+          type: string
+        roles:
+          items:
+            type: string
+          type: array
+        admin:
+          type: boolean
+        httpMethod:
+          type: string
+        path:
+          type: string
+        responseStatus:
+          format: int32
+          type: integer
+        correlationId:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+    ApiTokenResponse:
+      example:
+        createdAt: createdAt
+        tokenId: tokenId
+        lastUsedAt: lastUsedAt
+        roles:
+        - roles
+        - roles
+        name: name
+        tokenPrefix: tokenPrefix
+        revoked: true
+        expiresAt: expiresAt
+      properties:
+        tokenId:
+          type: string
+        name:
+          type: string
+        tokenPrefix:
+          type: string
+        roles:
+          items:
+            type: string
+          type: array
+        createdAt:
+          type: string
+        expiresAt:
+          type: string
+        lastUsedAt:
+          type: string
+        revoked:
+          type: boolean
+    ResponseDTOListApiTokenResponse:
+      example:
+        data:
+        - createdAt: createdAt
+          tokenId: tokenId
+          lastUsedAt: lastUsedAt
+          roles:
+          - roles
+          - roles
+          name: name
+          tokenPrefix: tokenPrefix
+          revoked: true
+          expiresAt: expiresAt
+        - createdAt: createdAt
+          tokenId: tokenId
+          lastUsedAt: lastUsedAt
+          roles:
+          - roles
+          - roles
+          name: name
+          tokenPrefix: tokenPrefix
+          revoked: true
+          expiresAt: expiresAt
+        meta:
+          code: 0
+          message: message
+      properties:
+        meta:
+          $ref: "#/components/schemas/Meta"
+        data:
+          items:
+            $ref: "#/components/schemas/ApiTokenResponse"
+          type: array
+    ResponseDTOApiTokenResponse:
+      example:
+        data:
+          createdAt: createdAt
+          tokenId: tokenId
+          lastUsedAt: lastUsedAt
+          roles:
+          - roles
+          - roles
+          name: name
+          tokenPrefix: tokenPrefix
+          revoked: true
+          expiresAt: expiresAt
+        meta:
+          code: 0
+          message: message
+      properties:
+        meta:
+          $ref: "#/components/schemas/Meta"
+        data:
+          $ref: "#/components/schemas/ApiTokenResponse"
+    ResponseDTOVoid:
+      example:
+        data: ""
+        meta:
+          code: 0
+          message: message
+      properties:
+        meta:
+          $ref: "#/components/schemas/Meta"
+        data: {}
+    ProcessInvocationRequest_nodeInformation:
+      oneOf:
+      - $ref: "#/components/schemas/ActivityNode"
+      - $ref: "#/components/schemas/BusinessRuleTaskNode"
+      - $ref: "#/components/schemas/CallActivityNode"
+      - $ref: "#/components/schemas/EventNode"
+      - $ref: "#/components/schemas/GatewayNode"
+      - $ref: "#/components/schemas/ManualTaskNode"
+      - $ref: "#/components/schemas/ReceiveTaskNode"
+      - $ref: "#/components/schemas/ScriptTaskNode"
+      - $ref: "#/components/schemas/SendTaskNode"
+      - $ref: "#/components/schemas/ServiceTaskNode"
+      - $ref: "#/components/schemas/SubProcessNode"
+      - $ref: "#/components/schemas/TaskNode"
+      - $ref: "#/components/schemas/UserTaskNode"
+

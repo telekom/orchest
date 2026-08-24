@@ -1,0 +1,45 @@
+{
+  "groups": [
+    {
+      "name": "orchest.metrics",
+      "type": "io.telekom.orchest.telemetry.metrics.MetricsProperties",
+      "sourceType": "io.telekom.orchest.telemetry.metrics.MetricsProperties"
+    },
+    {
+      "name": "telemetry",
+      "type": "io.telekom.orchest.telemetry.ModuleProperties",
+      "sourceType": "io.telekom.orchest.telemetry.ModuleProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "orchest.metrics.bucket-retention-days",
+      "type": "java.lang.Integer",
+      "sourceType": "io.telekom.orchest.telemetry.metrics.MetricsProperties"
+    },
+    {
+      "name": "orchest.metrics.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "io.telekom.orchest.telemetry.metrics.MetricsProperties"
+    },
+    {
+      "name": "orchest.metrics.flush-interval-ms",
+      "type": "java.lang.Long",
+      "sourceType": "io.telekom.orchest.telemetry.metrics.MetricsProperties"
+    },
+    {
+      "name": "orchest.metrics.pod-id",
+      "type": "java.lang.String",
+      "sourceType": "io.telekom.orchest.telemetry.metrics.MetricsProperties"
+    },
+    {
+      "name": "telemetry.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "io.telekom.orchest.telemetry.ModuleProperties"
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}

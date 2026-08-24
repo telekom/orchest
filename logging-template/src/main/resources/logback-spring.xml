@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <!-- Property to control JSON vs Plain logging -->
+    <springProperty scope="context" name="loggingFormat" source="logging.format" defaultValue="PLAIN"/>
+
+    <!-- JSON Console Appender without Pretty Print -->
+    <appender name="CONSOLE_JSON" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <timestamp>
+                    <timeZone>UTC</timeZone>
+                </timestamp>
+                <version/>
+                <logLevel/>
+                <message/>
+                <loggerName>
+                    <fieldName>logger</fieldName>
+                </loggerName>
+                <pattern>
+                    <pattern>
+                        {
+                        "thread": "%thread"
+                        }
+                    </pattern>
+                </pattern>
+                <stackTrace/>
+                <!--                <stackTrace>-->
+                <!--                    <throwableConverter class="net.logstash.logback.stacktrace.ShortenedThrowableConverter">-->
+                <!--                        <maxDepthPerThrowable>30</maxDepthPerThrowable>-->
+                <!--                        <maxLength>2048</maxLength>-->
+                <!--                        <shortenedClassNameLength>20</shortenedClassNameLength>-->
+                <!--                        <rootCauseFirst>true</rootCauseFirst>-->
+                <!--                    </throwableConverter>-->
+                <!--                </stackTrace>-->
+                <!--                <nestedField>-->
+                <!--                    <fieldName>mdc</fieldName>-->
+                <!--                    <providers>-->
+                <!--                <mdc/>-->
+                <!--                    </providers>-->
+                <!--                </nestedField>-->
+                <arguments/>
+                <mdc/>
+                <context/>
+            </providers>
+            <prettyPrint>false</prettyPrint>
+        </encoder>
+    </appender>
+
+    <!-- Plain Text Console Appender -->
+    <appender name="CONSOLE_PLAIN" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){yellow} %clr([%thread]){blue} %highlight(%-5level){ERROR=red,
+                WARN=yellow, INFO=green, DEBUG=cyan, TRACE=magenta} %clr(%logger{36}){cyan} - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <!-- Conditional appender selection: JSON vs Plain, and Pretty vs Compact -->
+    <if condition='property("loggingFormat").equals("JSON")'>
+        <then>
+            <root level="INFO">
+                <appender-ref ref="CONSOLE_JSON"/>
+            </root>
+        </then>
+        <else>
+            <root level="INFO">
+                <appender-ref ref="CONSOLE_PLAIN"/>
+            </root>
+        </else>
+    </if>
+</configuration>

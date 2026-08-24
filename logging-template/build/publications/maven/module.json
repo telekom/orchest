@@ -1,0 +1,154 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.telekom.orchest",
+    "module": "logging-template",
+    "version": "2.50.2",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.14"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 21,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "org.springframework.boot",
+          "module": "spring-boot-starter"
+        }
+      ],
+      "files": [
+        {
+          "name": "logging-template-2.50.2.jar",
+          "url": "logging-template-2.50.2.jar",
+          "size": 3260,
+          "sha512": "977e349e0bed9c304c610bfdd39eea88e5d931918ab1a790c49236369c8c21175da50e7b0982d719fa39ad4d6316609f428598d5bc28d3691f7a4c1901ed3814",
+          "sha256": "84ab0671617f7a549216836190f7fe0035db6f80c59259a892e66137f7cf68f6",
+          "sha1": "68c7a030f98f4a74163883ec03a1973b528f5116",
+          "md5": "e26c658727d8740e4a6ae7f03e9c7155"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 21,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "org.apache.commons",
+          "module": "commons-lang3",
+          "version": {
+            "requires": "3.14.0"
+          }
+        },
+        {
+          "group": "org.apache.commons",
+          "module": "commons-collections4",
+          "version": {
+            "requires": "4.4"
+          }
+        },
+        {
+          "group": "commons-io",
+          "module": "commons-io",
+          "version": {
+            "requires": "2.15.1"
+          }
+        },
+        {
+          "group": "org.codehaus.janino",
+          "module": "janino",
+          "version": {
+            "requires": "3.1.12"
+          }
+        },
+        {
+          "group": "net.logstash.logback",
+          "module": "logstash-logback-encoder",
+          "version": {
+            "requires": "9.0"
+          }
+        },
+        {
+          "group": "org.fusesource.jansi",
+          "module": "jansi",
+          "version": {
+            "requires": "2.4.2"
+          }
+        },
+        {
+          "group": "org.springframework.boot",
+          "module": "spring-boot-starter"
+        }
+      ],
+      "files": [
+        {
+          "name": "logging-template-2.50.2.jar",
+          "url": "logging-template-2.50.2.jar",
+          "size": 3260,
+          "sha512": "977e349e0bed9c304c610bfdd39eea88e5d931918ab1a790c49236369c8c21175da50e7b0982d719fa39ad4d6316609f428598d5bc28d3691f7a4c1901ed3814",
+          "sha256": "84ab0671617f7a549216836190f7fe0035db6f80c59259a892e66137f7cf68f6",
+          "sha1": "68c7a030f98f4a74163883ec03a1973b528f5116",
+          "md5": "e26c658727d8740e4a6ae7f03e9c7155"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "logging-template-2.50.2-sources.jar",
+          "url": "logging-template-2.50.2-sources.jar",
+          "size": 2125,
+          "sha512": "381df716b3a1004b89c845ed1d8f8809fa5755298bb700a5b6084cf43a7421d48d084db1aac9f577cba13e07941701d7ca4c305f7377402cf1943f0319cf92cb",
+          "sha256": "bbb5902a9b94ea6f550f916e2379fef33d19036642ac3e40a8497e6664f80717",
+          "sha1": "f4e77c7155cefaf9f4b7f6457fe5345a2469a38a",
+          "md5": "fa8b6da77c889374b179b36de86195b0"
+        }
+      ]
+    },
+    {
+      "name": "javadocElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "logging-template-2.50.2-javadoc.jar",
+          "url": "logging-template-2.50.2-javadoc.jar",
+          "size": 92108,
+          "sha512": "d42e954fe036671cd5b5b2e1dfdbf605fc79550eb6d078e96f40ac9d461fff8a320030bf33a6c438842582814936cc792b3bc2fc80cee9e322cfed43a314fe64",
+          "sha256": "6f18c47080166246e45b18fe295036644a8af7f515543e6d4779fa49e5264e8b",
+          "sha1": "e6324830d2e092d4b6a02ed0ddb250fc155c882e",
+          "md5": "91d965212e9ae8bfa3ce623071f93151"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,141 @@
+name: orchest-stack
+services:
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    container_name: kafka
+    ports:
+      - "9092:9092"
+      - "9093:9093"
+    environment:
+      CLUSTER_ID: "OrchesT-Local-Kafka-Cluster"
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: 'broker,controller'
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@kafka:9093'
+
+      KAFKA_LISTENERS: 'PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093,PLAINTEXT_INTERNAL://0.0.0.0:29092'
+      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://localhost:9092,PLAINTEXT_INTERNAL://kafka:29092'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_INTERNAL:PLAINTEXT'
+      KAFKA_INTER_BROKER_LISTENER_NAME: 'PLAINTEXT_INTERNAL'
+
+      KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
+
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_LOG_DIRS: '/var/lib/kafka/data/kraft-combined-logs'
+    volumes:
+      - ./kafkaData/kraft-combined-logs:/var/lib/kafka/data/kraft-combined-logs
+    healthcheck:
+      test: ["CMD-SHELL", "kafka-broker-api-versions --bootstrap-server localhost:9092 > /dev/null 2>&1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  kafka-ui:
+    image: kafbat/kafka-ui:latest
+    container_name: kafka-ui
+    depends_on:
+      kafka:
+        condition: service_healthy
+    ports:
+      - "7777:8080"
+    environment:
+      DYNAMIC_CONFIG_ENABLED: "true"
+      KAFKA_CLUSTERS_0_NAME: local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:29092
+      KAFKA_CLUSTERS_0_PROPERTIES_SECURITY_PROTOCOL: PLAINTEXT
+      LOGGING_LEVEL_ROOT: INFO
+    restart: unless-stopped
+
+  mongodb:
+    image: mongo:8
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    command: >
+      bash -c "
+        mongod --noauth --replSet rs0 --bind_ip_all &
+        MPID=$$! &&
+        until mongosh --eval 'db.runCommand({ping:1})' 2>/dev/null; do sleep 1; done &&
+        mongosh --eval '
+          try {
+            rs.status()
+          } catch (e) {
+            rs.initiate({
+              _id: \"rs0\",
+              members: [{ _id: 0, host: \"mongodb:27017\" }]
+            })
+          }
+        ' &&
+        wait $$MPID
+      "
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "try { rs.status().ok } catch(e) { 0 }", "--quiet"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+
+  orchest-engine:
+    image: mtr.devops.telekom.de/orchest/orchest-engine:latest
+    container_name: orchest-engine
+    pull_policy: always
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    environment:
+      MONGO_URI: mongodb://mongodb:27017
+      KAFKA_BOOTSTRAP_SERVER: kafka:29092
+
+  sentinel:
+    image: mtr.devops.telekom.de/orchest/sentinel:latest
+    container_name: sentinel
+    pull_policy: always
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+      orchest-engine:
+        condition: service_started
+    environment:
+      MONGO_URI: mongodb://mongodb:27017
+      KAFKA_BOOTSTRAP_SERVER: kafka:29092
+
+  orchest-rest:
+    image: mtr.devops.telekom.de/orchest/orchest-rest:latest
+    container_name: orchest-rest
+    pull_policy: always
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    ports:
+      - "6200:6200"
+    environment:
+      MONGO_URI: mongodb://mongodb:27017
+      KAFKA_BOOTSTRAP_SERVER: kafka:29092
+
+  orchest-ui:
+    image: mtr.devops.telekom.de/orchest/orchest-ui:2.15.0
+    container_name: orchest-ui
+    pull_policy: always
+    depends_on:
+      orchest-rest:
+        condition: service_started
+    environment:
+      VITE_BASEPATH: "http://localhost:6200"
+      VITE_BYPASS_LOGIN: false
+    ports:
+      - "7074:8080"
+    tmpfs:
+      - /runtime-config
+volumes:
+  kafkaData:
+  mongo_data:

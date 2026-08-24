@@ -1,0 +1,5 @@
+io.telekom.orchest.adapter.kafka
+io.telekom.orchest.adapter.kafka.builder
+io.telekom.orchest.adapter.kafka.client
+io.telekom.orchest.adapter.kafka.config
+io.telekom.orchest.adapter.kafka.model

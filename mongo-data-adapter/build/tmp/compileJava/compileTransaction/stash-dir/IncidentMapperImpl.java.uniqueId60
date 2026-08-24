@@ -1,0 +1,54 @@
+package io.telekom.orchest.adapter.mongo.mapper;
+
+import io.telekom.orchest.adapter.mongo.model.Incident;
+import javax.annotation.processing.Generated;
+import org.springframework.stereotype.Component;
+
+@Generated(
+    value = "org.mapstruct.ap.MappingProcessor",
+    date = "2026-08-24T17:08:50+0530",
+    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.14.jar, environment: Java 21.0.4 (Azul Systems, Inc.)"
+)
+@Component
+public class IncidentMapperImpl implements IncidentMapper {
+
+    @Override
+    public Incident toDocument(io.telekom.orchest.api.core.adapters.data.model.Incident domain) {
+        if ( domain == null ) {
+            return null;
+        }
+
+        Incident.IncidentBuilder incident = Incident.builder();
+
+        incident.id( domain.getId() );
+        incident.processInstanceId( domain.getProcessInstanceId() );
+        incident.processDefinitionId( domain.getProcessDefinitionId() );
+        incident.version( domain.getVersion() );
+        incident.activityId( domain.getActivityId() );
+        incident.activityName( domain.getActivityName() );
+        incident.stackTrace( domain.getStackTrace() );
+        incident.createdAt( domain.getCreatedAt() );
+
+        return incident.build();
+    }
+
+    @Override
+    public io.telekom.orchest.api.core.adapters.data.model.Incident toDomain(Incident document) {
+        if ( document == null ) {
+            return null;
+        }
+
+        io.telekom.orchest.api.core.adapters.data.model.Incident.IncidentBuilder incident = io.telekom.orchest.api.core.adapters.data.model.Incident.builder();
+
+        incident.id( document.getId() );
+        incident.processInstanceId( document.getProcessInstanceId() );
+        incident.processDefinitionId( document.getProcessDefinitionId() );
+        incident.version( document.getVersion() );
+        incident.activityId( document.getActivityId() );
+        incident.activityName( document.getActivityName() );
+        incident.stackTrace( document.getStackTrace() );
+        incident.createdAt( document.getCreatedAt() );
+
+        return incident.build();
+    }
+}

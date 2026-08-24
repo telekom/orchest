@@ -1,0 +1,21 @@
+apply plugin: 'java-library'
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
+mavenPublish(project)
+
+dependencies {
+
+    api project(":core")
+
+    /* BPMN model parsing libs */
+    api 'io.camunda:zeebe-bpmn-model:8.6.0'
+    implementation "org.scala-lang:scala-library:2.13.12"
+    /* Expression parsing and evaluating libs */
+    api "org.camunda.bpm.extension.dmn.scala:dmn-engine:1.7.3"
+    api "org.camunda.feel:feel-engine:1.18.0"
+}
+

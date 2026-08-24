@@ -1,0 +1,22 @@
+{
+  "groups": [
+    {
+      "name": "engine",
+      "type": "io.telekom.orchest.configuration.engine.EngineProperties",
+      "sourceType": "io.telekom.orchest.configuration.engine.EngineProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "engine.engine-scale",
+      "type": "io.telekom.orchest.configuration.engine.EngineScale",
+      "description": "The cluster sizing profile controlling Kafka concurrency settings.",
+      "sourceType": "io.telekom.orchest.configuration.engine.EngineProperties",
+      "defaultValue": "local"
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}

@@ -1,0 +1,175 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.telekom.orchest",
+    "module": "alerting",
+    "version": "2.50.2",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.14"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 21,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.telekom.orchest",
+          "module": "core",
+          "version": {
+            "requires": "2.50.2"
+          }
+        },
+        {
+          "group": "org.springframework.boot",
+          "module": "spring-boot-starter-mail",
+          "version": {
+            "requires": "4.0.1"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "alerting-2.50.2.jar",
+          "url": "alerting-2.50.2.jar",
+          "size": 75933,
+          "sha512": "77efd3e23cab3272953e0093035672ca2cddf197ba72b524449d4a3f6709b075bbb5ee7b7746152017d88113fcbc70d67730f0afeee800cd423080e8ae1cac88",
+          "sha256": "1fcbe85527483b12d90b0d08e31c1d1e59fe6390e65315baa300937019cc5893",
+          "sha1": "0a62a95f7c5cf727156e06866936c886b8e6a6f7",
+          "md5": "1a4a765df9b2269cf8c4c5e2d55246ea"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 21,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "org.apache.commons",
+          "module": "commons-lang3",
+          "version": {
+            "requires": "3.14.0"
+          }
+        },
+        {
+          "group": "org.apache.commons",
+          "module": "commons-collections4",
+          "version": {
+            "requires": "4.4"
+          }
+        },
+        {
+          "group": "commons-io",
+          "module": "commons-io",
+          "version": {
+            "requires": "2.15.1"
+          }
+        },
+        {
+          "group": "org.springframework.boot",
+          "module": "spring-boot-starter"
+        },
+        {
+          "group": "org.springframework.boot",
+          "module": "spring-boot-starter-webflux"
+        },
+        {
+          "group": "com.squareup.okhttp3",
+          "module": "okhttp",
+          "version": {
+            "requires": "4.12.0"
+          }
+        },
+        {
+          "group": "org.springdoc",
+          "module": "springdoc-openapi-starter-webflux-ui",
+          "version": {
+            "requires": "3.0.0"
+          }
+        },
+        {
+          "group": "io.telekom.orchest",
+          "module": "core",
+          "version": {
+            "requires": "2.50.2"
+          }
+        },
+        {
+          "group": "org.springframework.boot",
+          "module": "spring-boot-starter-mail",
+          "version": {
+            "requires": "4.0.1"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "alerting-2.50.2.jar",
+          "url": "alerting-2.50.2.jar",
+          "size": 75933,
+          "sha512": "77efd3e23cab3272953e0093035672ca2cddf197ba72b524449d4a3f6709b075bbb5ee7b7746152017d88113fcbc70d67730f0afeee800cd423080e8ae1cac88",
+          "sha256": "1fcbe85527483b12d90b0d08e31c1d1e59fe6390e65315baa300937019cc5893",
+          "sha1": "0a62a95f7c5cf727156e06866936c886b8e6a6f7",
+          "md5": "1a4a765df9b2269cf8c4c5e2d55246ea"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "alerting-2.50.2-sources.jar",
+          "url": "alerting-2.50.2-sources.jar",
+          "size": 34139,
+          "sha512": "ea56e17b0ba9d7b6743019df7e338215e12a5e63fe6265c64a157b5aab82c5c0817934fd01f7b9cffd2381fbeb3d1d8d75e54674459db23b29668d9231b0af7e",
+          "sha256": "ff26f23c75207872cb07abf372420dbe6b8ff5da8b55ea582dc459d1532946d8",
+          "sha1": "10275104cb8842a7775c97323c1cf0d2f53ae338",
+          "md5": "e600fd8fda8255c6c26703f3d348f515"
+        }
+      ]
+    },
+    {
+      "name": "javadocElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "alerting-2.50.2-javadoc.jar",
+          "url": "alerting-2.50.2-javadoc.jar",
+          "size": 188342,
+          "sha512": "9f93a9428a51532f7d6e3905236c299ed3917801ebbbb63ac8d65718f02a7dc401fd434924d0aa46fbbfd599c7c5888cfc3dd138be28dfbba49f74be5a1ea779",
+          "sha256": "5ca6a1d681fdf63002ff905b7e23a9df2dccaaddc0bed86a34d70d5e19ebef0e",
+          "sha1": "7e0f0d100af9d983f954913efad5378a1aee2478",
+          "md5": "8a5787c3edca5a93e561964ee89ee639"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+io.telekom.orchest.api.core.adapters.cipher
+io.telekom.orchest.api.core.adapters.connector
+io.telekom.orchest.api.core.adapters.data.dto
+io.telekom.orchest.api.core.adapters.data.model
+io.telekom.orchest.api.core.adapters.data.repository
+io.telekom.orchest.api.core.adapters.event
+io.telekom.orchest.api.core.logging
+io.telekom.orchest.api.core.model.bpmn
+io.telekom.orchest.api.core.model.bpmn.extensions
+io.telekom.orchest.api.core.model.bpmn.node
+io.telekom.orchest.api.core.model.bpmn.state
+io.telekom.orchest.api.core.model.dmn
+io.telekom.orchest.api.core.properties
+io.telekom.orchest.api.core.request
+io.telekom.orchest.api.core.response
+io.telekom.orchest.api.core.utils

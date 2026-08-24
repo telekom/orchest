@@ -1,0 +1,54 @@
+package io.telekom.orchest.adapter.mongo.mapper;
+
+import io.telekom.orchest.adapter.mongo.model.ActivityState;
+import javax.annotation.processing.Generated;
+import org.springframework.stereotype.Component;
+
+@Generated(
+    value = "org.mapstruct.ap.MappingProcessor",
+    date = "2026-08-24T17:18:18+0530",
+    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.14.jar, environment: Java 21.0.4 (Azul Systems, Inc.)"
+)
+@Component
+public class ActivityStateMapperImpl implements ActivityStateMapper {
+
+    @Override
+    public ActivityState toDocument(io.telekom.orchest.api.core.adapters.data.model.ActivityState domain) {
+        if ( domain == null ) {
+            return null;
+        }
+
+        ActivityState.ActivityStateBuilder activityState = ActivityState.builder();
+
+        activityState.id( domain.getId() );
+        activityState.processDefinitionId( domain.getProcessDefinitionId() );
+        activityState.version( domain.getVersion() );
+        activityState.activityId( domain.getActivityId() );
+        activityState.description( domain.getDescription() );
+        activityState.enabled( domain.isEnabled() );
+        activityState.createdAt( domain.getCreatedAt() );
+        activityState.updatedAt( domain.getUpdatedAt() );
+
+        return activityState.build();
+    }
+
+    @Override
+    public io.telekom.orchest.api.core.adapters.data.model.ActivityState toDomain(ActivityState document) {
+        if ( document == null ) {
+            return null;
+        }
+
+        io.telekom.orchest.api.core.adapters.data.model.ActivityState.ActivityStateBuilder activityState = io.telekom.orchest.api.core.adapters.data.model.ActivityState.builder();
+
+        activityState.id( document.getId() );
+        activityState.processDefinitionId( document.getProcessDefinitionId() );
+        activityState.version( document.getVersion() );
+        activityState.activityId( document.getActivityId() );
+        activityState.description( document.getDescription() );
+        activityState.enabled( document.isEnabled() );
+        activityState.createdAt( document.getCreatedAt() );
+        activityState.updatedAt( document.getUpdatedAt() );
+
+        return activityState.build();
+    }
+}

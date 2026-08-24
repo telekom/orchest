@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: housekeeping
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:local}
+
+housekeeping:
+  enabled: ${HOUSEKEEPING_ENABLED:true}
+  interval: ${HOUSEKEEPING_INTERVAL:P20D}
+
+orchest:
+  mongo:
+    uri: ${ORCHEST_MONGO_URI:mongodb://localhost:27017}
+    database-name: ${ORCHEST_MONGO_DATABASE_NAME:orchest}
+    auto-index-creation: false
+  metrics:
+    enabled: false
+
+logging:
+  format: ${LOGGING_FORMAT:PLAIN}

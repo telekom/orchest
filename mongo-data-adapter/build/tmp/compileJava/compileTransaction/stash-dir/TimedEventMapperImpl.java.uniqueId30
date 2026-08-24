@@ -1,0 +1,119 @@
+package io.telekom.orchest.adapter.mongo.mapper;
+
+import io.telekom.orchest.adapter.mongo.model.TimedEvent;
+import io.telekom.orchest.api.core.request.StateChange;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.processing.Generated;
+import org.springframework.stereotype.Component;
+
+@Generated(
+    value = "org.mapstruct.ap.MappingProcessor",
+    date = "2026-08-24T17:08:50+0530",
+    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.14.jar, environment: Java 21.0.4 (Azul Systems, Inc.)"
+)
+@Component
+public class TimedEventMapperImpl implements TimedEventMapper {
+
+    @Override
+    public TimedEvent toDocument(io.telekom.orchest.api.core.adapters.data.model.TimedEvent domain) {
+        if ( domain == null ) {
+            return null;
+        }
+
+        TimedEvent.TimedEventBuilder timedEvent = TimedEvent.builder();
+
+        timedEvent.id( domain.getId() );
+        timedEvent.timedEventRegistryId( domain.getTimedEventRegistryId() );
+        timedEvent.state( domain.getState() );
+        timedEvent.type( typeToType( domain.getType() ) );
+        timedEvent.value( domain.getValue() );
+        timedEvent.processDefinitionId( domain.getProcessDefinitionId() );
+        timedEvent.version( domain.getVersion() );
+        timedEvent.processInstanceId( domain.getProcessInstanceId() );
+        timedEvent.nodeInformation( domain.getNodeInformation() );
+        timedEvent.eventRequest( domain.getEventRequest() );
+        List<StateChange> list = domain.getStateChanges();
+        if ( list != null ) {
+            timedEvent.stateChanges( new ArrayList<StateChange>( list ) );
+        }
+        timedEvent.isStartEvent( domain.getIsStartEvent() );
+        if ( domain.getIsLinkedEvent() != null ) {
+            timedEvent.isLinkedEvent( domain.getIsLinkedEvent() );
+        }
+        timedEvent.linkedEventId( domain.getLinkedEventId() );
+        timedEvent.triggerAt( domain.getTriggerAt() );
+
+        return timedEvent.build();
+    }
+
+    @Override
+    public io.telekom.orchest.api.core.adapters.data.model.TimedEvent toDomain(TimedEvent document) {
+        if ( document == null ) {
+            return null;
+        }
+
+        io.telekom.orchest.api.core.adapters.data.model.TimedEvent.TimedEventBuilder timedEvent = io.telekom.orchest.api.core.adapters.data.model.TimedEvent.builder();
+
+        timedEvent.isLinkedEvent( document.isLinkedEvent() );
+        timedEvent.id( document.getId() );
+        timedEvent.timedEventRegistryId( document.getTimedEventRegistryId() );
+        timedEvent.state( document.getState() );
+        timedEvent.type( typeToType1( document.getType() ) );
+        timedEvent.value( document.getValue() );
+        timedEvent.processDefinitionId( document.getProcessDefinitionId() );
+        timedEvent.version( document.getVersion() );
+        timedEvent.processInstanceId( document.getProcessInstanceId() );
+        timedEvent.nodeInformation( document.getNodeInformation() );
+        timedEvent.eventRequest( document.getEventRequest() );
+        List<StateChange> list = document.getStateChanges();
+        if ( list != null ) {
+            timedEvent.stateChanges( new ArrayList<StateChange>( list ) );
+        }
+        timedEvent.isStartEvent( document.getIsStartEvent() );
+        timedEvent.linkedEventId( document.getLinkedEventId() );
+        timedEvent.triggerAt( document.getTriggerAt() );
+
+        return timedEvent.build();
+    }
+
+    protected TimedEvent.Type typeToType(io.telekom.orchest.api.core.adapters.data.model.TimedEvent.Type type) {
+        if ( type == null ) {
+            return null;
+        }
+
+        TimedEvent.Type type1;
+
+        switch ( type ) {
+            case TIMER: type1 = TimedEvent.Type.TIMER;
+            break;
+            case START_EVENT_TIMER: type1 = TimedEvent.Type.START_EVENT_TIMER;
+            break;
+            case TASK_RETRY: type1 = TimedEvent.Type.TASK_RETRY;
+            break;
+            default: throw new IllegalArgumentException( "Unexpected enum constant: " + type );
+        }
+
+        return type1;
+    }
+
+    protected io.telekom.orchest.api.core.adapters.data.model.TimedEvent.Type typeToType1(TimedEvent.Type type) {
+        if ( type == null ) {
+            return null;
+        }
+
+        io.telekom.orchest.api.core.adapters.data.model.TimedEvent.Type type1;
+
+        switch ( type ) {
+            case TIMER: type1 = io.telekom.orchest.api.core.adapters.data.model.TimedEvent.Type.TIMER;
+            break;
+            case START_EVENT_TIMER: type1 = io.telekom.orchest.api.core.adapters.data.model.TimedEvent.Type.START_EVENT_TIMER;
+            break;
+            case TASK_RETRY: type1 = io.telekom.orchest.api.core.adapters.data.model.TimedEvent.Type.TASK_RETRY;
+            break;
+            default: throw new IllegalArgumentException( "Unexpected enum constant: " + type );
+        }
+
+        return type1;
+    }
+}

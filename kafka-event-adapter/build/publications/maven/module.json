@@ -1,0 +1,191 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.telekom.orchest",
+    "module": "kafka-event-adapter",
+    "version": "2.50.2",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.14"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 21,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.telekom.orchest",
+          "module": "engine-core",
+          "version": {
+            "requires": "2.50.2"
+          }
+        },
+        {
+          "group": "org.springframework.kafka",
+          "module": "spring-kafka"
+        },
+        {
+          "group": "org.springframework.boot",
+          "module": "spring-boot-starter-kafka"
+        },
+        {
+          "group": "de.telekom.solutions",
+          "module": "kms-client",
+          "version": {
+            "requires": "1.0.0-RC"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "kafka-event-adapter-2.50.2.jar",
+          "url": "kafka-event-adapter-2.50.2.jar",
+          "size": 49321,
+          "sha512": "7d9a328b09ffe56279671c8d4c41f0be5062aaf7784d32c2e978b68d63a1921ae11d8a90acb4aa96d00187c8d0ac2ad7f09cd28d4012793f232212857faf0e2a",
+          "sha256": "57e9ffed80aac6a9d64a2f004ec4c861af883cc2b66b5b595b7058aa9a9bce88",
+          "sha1": "c723a0ca559a5e4c16ae24a615bc900c84449e81",
+          "md5": "c304241721d103ef76ad5c951eb3fb04"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 21,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "org.apache.commons",
+          "module": "commons-lang3",
+          "version": {
+            "requires": "3.14.0"
+          }
+        },
+        {
+          "group": "org.apache.commons",
+          "module": "commons-collections4",
+          "version": {
+            "requires": "4.4"
+          }
+        },
+        {
+          "group": "commons-io",
+          "module": "commons-io",
+          "version": {
+            "requires": "2.15.1"
+          }
+        },
+        {
+          "group": "org.springframework.boot",
+          "module": "spring-boot-starter"
+        },
+        {
+          "group": "io.micrometer",
+          "module": "micrometer-registry-prometheus"
+        },
+        {
+          "group": "software.amazon.msk",
+          "module": "aws-msk-iam-auth",
+          "version": {
+            "requires": "2.1.1"
+          }
+        },
+        {
+          "group": "software.amazon.awssdk",
+          "module": "sts",
+          "version": {
+            "requires": "2.26.9"
+          }
+        },
+        {
+          "group": "io.telekom.orchest",
+          "module": "engine-core",
+          "version": {
+            "requires": "2.50.2"
+          }
+        },
+        {
+          "group": "org.springframework.kafka",
+          "module": "spring-kafka"
+        },
+        {
+          "group": "org.springframework.boot",
+          "module": "spring-boot-starter-kafka"
+        },
+        {
+          "group": "de.telekom.solutions",
+          "module": "kms-client",
+          "version": {
+            "requires": "1.0.0-RC"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "kafka-event-adapter-2.50.2.jar",
+          "url": "kafka-event-adapter-2.50.2.jar",
+          "size": 49321,
+          "sha512": "7d9a328b09ffe56279671c8d4c41f0be5062aaf7784d32c2e978b68d63a1921ae11d8a90acb4aa96d00187c8d0ac2ad7f09cd28d4012793f232212857faf0e2a",
+          "sha256": "57e9ffed80aac6a9d64a2f004ec4c861af883cc2b66b5b595b7058aa9a9bce88",
+          "sha1": "c723a0ca559a5e4c16ae24a615bc900c84449e81",
+          "md5": "c304241721d103ef76ad5c951eb3fb04"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "kafka-event-adapter-2.50.2-sources.jar",
+          "url": "kafka-event-adapter-2.50.2-sources.jar",
+          "size": 25591,
+          "sha512": "1ccb76b7ed05adc3171b9ca5255e0f16cc12a561da12a3c21070d41ffbfe5428b4d273502588c5fbd99198e901d06781de0a49a337dd3ad4774f162a5e73bc6c",
+          "sha256": "a79591e862ca3b2a3668f466f481661858b90be6032edd17e33a5a54bd7ab467",
+          "sha1": "c127284f39b0f45c3c20af219b4a34d172997ed5",
+          "md5": "cc4bc590c1a4b6577107eae358c113dd"
+        }
+      ]
+    },
+    {
+      "name": "javadocElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "kafka-event-adapter-2.50.2-javadoc.jar",
+          "url": "kafka-event-adapter-2.50.2-javadoc.jar",
+          "size": 196550,
+          "sha512": "8b348b964b0932739caca29a9209d412a6740a60f26116b10a77b36b9be450405329b8ddfc9d2e5c287dbb139216dc0c0051db0c4fa4bce396af85c17b2dbaef",
+          "sha256": "d6002f3a70528b9b6a4cec9dfb6daa668ff58479f215ce7a1f92b43c27add8d3",
+          "sha1": "fd820a61bd15f1d2f7e06410a0b68a3857ced971",
+          "md5": "d122ff3dd3a194e0954bee896962eaeb"
+        }
+      ]
+    }
+  ]
+}

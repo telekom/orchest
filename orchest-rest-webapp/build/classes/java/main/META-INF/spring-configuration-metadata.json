@@ -1,0 +1,55 @@
+{
+  "groups": [
+    {
+      "name": "jwt",
+      "type": "io.telekom.orchest.orchestrest.configurations.security.JwtSecurityProperties",
+      "sourceType": "io.telekom.orchest.orchestrest.configurations.security.JwtSecurityProperties"
+    },
+    {
+      "name": "orchest.api-tokens",
+      "type": "io.telekom.orchest.orchestrest.configurations.security.ApiTokenProperties",
+      "sourceType": "io.telekom.orchest.orchestrest.configurations.security.ApiTokenProperties"
+    },
+    {
+      "name": "orchest.page-visits",
+      "type": "io.telekom.orchest.orchestrest.extensions.pagevisit.PageVisitProperties",
+      "sourceType": "io.telekom.orchest.orchestrest.extensions.pagevisit.PageVisitProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "jwt.all-audiences",
+      "type": "java.util.List<io.telekom.orchest.orchestrest.configurations.security.JwtSecurityProperties$AudienceConfig>",
+      "sourceType": "io.telekom.orchest.orchestrest.configurations.security.JwtSecurityProperties"
+    },
+    {
+      "name": "jwt.issuers",
+      "type": "java.util.List<io.telekom.orchest.orchestrest.configurations.security.JwtSecurityProperties$IssuerConfig>",
+      "sourceType": "io.telekom.orchest.orchestrest.configurations.security.JwtSecurityProperties"
+    },
+    {
+      "name": "orchest.api-tokens.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "io.telekom.orchest.orchestrest.configurations.security.ApiTokenProperties"
+    },
+    {
+      "name": "orchest.api-tokens.max-ttl-days",
+      "type": "java.lang.Integer",
+      "sourceType": "io.telekom.orchest.orchestrest.configurations.security.ApiTokenProperties"
+    },
+    {
+      "name": "orchest.api-tokens.token-byte-length",
+      "type": "java.lang.Integer",
+      "sourceType": "io.telekom.orchest.orchestrest.configurations.security.ApiTokenProperties"
+    },
+    {
+      "name": "orchest.page-visits.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "io.telekom.orchest.orchestrest.extensions.pagevisit.PageVisitProperties"
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}

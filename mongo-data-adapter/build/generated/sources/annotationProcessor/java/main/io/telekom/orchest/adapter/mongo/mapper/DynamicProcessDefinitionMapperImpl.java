@@ -1,0 +1,86 @@
+package io.telekom.orchest.adapter.mongo.mapper;
+
+import io.telekom.orchest.adapter.mongo.model.DynamicProcessDefinition;
+import io.telekom.orchest.api.core.model.bpmn.SequenceFlow;
+import io.telekom.orchest.api.core.model.bpmn.node.BaseNode;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import javax.annotation.processing.Generated;
+import org.springframework.stereotype.Component;
+
+@Generated(
+    value = "org.mapstruct.ap.MappingProcessor",
+    date = "2026-08-24T17:18:19+0530",
+    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.14.jar, environment: Java 21.0.4 (Azul Systems, Inc.)"
+)
+@Component
+public class DynamicProcessDefinitionMapperImpl implements DynamicProcessDefinitionMapper {
+
+    @Override
+    public DynamicProcessDefinition toDocument(io.telekom.orchest.api.core.adapters.data.model.DynamicProcessDefinition domain) {
+        if ( domain == null ) {
+            return null;
+        }
+
+        DynamicProcessDefinition.DynamicProcessDefinitionBuilder<?, ?> dynamicProcessDefinition = DynamicProcessDefinition.builder();
+
+        dynamicProcessDefinition.id( domain.getId() );
+        dynamicProcessDefinition.definitionId( domain.getDefinitionId() );
+        dynamicProcessDefinition.version( domain.getVersion() );
+        dynamicProcessDefinition.name( domain.getName() );
+        Map<String, BaseNode> map = domain.getNodes();
+        if ( map != null ) {
+            dynamicProcessDefinition.nodes( new LinkedHashMap<String, BaseNode>( map ) );
+        }
+        Map<String, SequenceFlow> map1 = domain.getSequenceFlows();
+        if ( map1 != null ) {
+            dynamicProcessDefinition.sequenceFlows( new LinkedHashMap<String, SequenceFlow>( map1 ) );
+        }
+        dynamicProcessDefinition.definitionXML( domain.getDefinitionXML() );
+        dynamicProcessDefinition.startNodeId( domain.getStartNodeId() );
+        dynamicProcessDefinition.isExecutable( domain.getIsExecutable() );
+        dynamicProcessDefinition.createdAt( domain.getCreatedAt() );
+        dynamicProcessDefinition.processInstanceId( domain.getProcessInstanceId() );
+        List<String> list = domain.getAgentChats();
+        if ( list != null ) {
+            dynamicProcessDefinition.agentChats( new ArrayList<String>( list ) );
+        }
+
+        return dynamicProcessDefinition.build();
+    }
+
+    @Override
+    public io.telekom.orchest.api.core.adapters.data.model.DynamicProcessDefinition toDomain(DynamicProcessDefinition document) {
+        if ( document == null ) {
+            return null;
+        }
+
+        io.telekom.orchest.api.core.adapters.data.model.DynamicProcessDefinition.DynamicProcessDefinitionBuilder<?, ?> dynamicProcessDefinition = io.telekom.orchest.api.core.adapters.data.model.DynamicProcessDefinition.builder();
+
+        dynamicProcessDefinition.id( document.getId() );
+        dynamicProcessDefinition.definitionId( document.getDefinitionId() );
+        dynamicProcessDefinition.version( document.getVersion() );
+        dynamicProcessDefinition.name( document.getName() );
+        Map<String, BaseNode> map = document.getNodes();
+        if ( map != null ) {
+            dynamicProcessDefinition.nodes( new LinkedHashMap<String, BaseNode>( map ) );
+        }
+        Map<String, SequenceFlow> map1 = document.getSequenceFlows();
+        if ( map1 != null ) {
+            dynamicProcessDefinition.sequenceFlows( new LinkedHashMap<String, SequenceFlow>( map1 ) );
+        }
+        dynamicProcessDefinition.definitionXML( document.getDefinitionXML() );
+        dynamicProcessDefinition.startNodeId( document.getStartNodeId() );
+        dynamicProcessDefinition.isExecutable( document.getIsExecutable() );
+        dynamicProcessDefinition.createdAt( document.getCreatedAt() );
+        dynamicProcessDefinition.processInstanceId( document.getProcessInstanceId() );
+        List<String> list = document.getAgentChats();
+        if ( list != null ) {
+            dynamicProcessDefinition.agentChats( new ArrayList<String>( list ) );
+        }
+
+        return dynamicProcessDefinition.build();
+    }
+}

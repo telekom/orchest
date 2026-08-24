@@ -1,0 +1,40 @@
+apply plugin: 'java-library'
+apply plugin: 'io.spring.dependency-management'
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
+    }
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
+mavenPublish(project)
+
+dependencies {
+
+    // Spring Boot Starter (for Spring projects - optional, only needed if using Spring features)
+    api 'org.springframework.boot:spring-boot-starter'
+
+    // Janino for conditional processing in logback-spring.xml
+    implementation 'org.codehaus.janino:janino:3.1.12'
+
+    // Logstash Logback Encoder for JSON logging (latest version 9.0 - requires Java 17+)
+    implementation 'net.logstash.logback:logstash-logback-encoder:9.0'
+
+    // Jansi for colored console output in PLAIN format
+    implementation 'org.fusesource.jansi:jansi:2.4.2'
+}
+
+configurations.testRuntimeClasspath {
+    resolutionStrategy.eachDependency { details ->
+        if (details.requested.group == 'org.junit.platform') {
+            details.useVersion '6.0.1'
+            details.because 'align junit-platform-launcher with junit-platform-engine from Spring Boot BOM'
+        }
+    }
+}
+

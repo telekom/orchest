@@ -1,0 +1,60 @@
+{
+  "groups": [
+    {
+      "name": "orchest.scheduler",
+      "type": "io.telekom.orchest.scheduling.config.SchedulerProperties",
+      "sourceType": "io.telekom.orchest.scheduling.config.SchedulerProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "orchest.scheduler.backoff-base",
+      "type": "java.time.Duration",
+      "sourceType": "io.telekom.orchest.scheduling.config.SchedulerProperties"
+    },
+    {
+      "name": "orchest.scheduler.backoff-max",
+      "type": "java.time.Duration",
+      "sourceType": "io.telekom.orchest.scheduling.config.SchedulerProperties"
+    },
+    {
+      "name": "orchest.scheduler.batch-size",
+      "type": "java.lang.Integer",
+      "sourceType": "io.telekom.orchest.scheduling.config.SchedulerProperties"
+    },
+    {
+      "name": "orchest.scheduler.default-max-attempts",
+      "type": "java.lang.Integer",
+      "sourceType": "io.telekom.orchest.scheduling.config.SchedulerProperties"
+    },
+    {
+      "name": "orchest.scheduler.dispatcher-enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "io.telekom.orchest.scheduling.config.SchedulerProperties"
+    },
+    {
+      "name": "orchest.scheduler.dispatcher-threads",
+      "type": "java.lang.Integer",
+      "sourceType": "io.telekom.orchest.scheduling.config.SchedulerProperties"
+    },
+    {
+      "name": "orchest.scheduler.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "io.telekom.orchest.scheduling.config.SchedulerProperties"
+    },
+    {
+      "name": "orchest.scheduler.lease-duration",
+      "type": "java.time.Duration",
+      "sourceType": "io.telekom.orchest.scheduling.config.SchedulerProperties"
+    },
+    {
+      "name": "orchest.scheduler.poll-interval",
+      "type": "java.time.Duration",
+      "sourceType": "io.telekom.orchest.scheduling.config.SchedulerProperties"
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}

@@ -1,0 +1,203 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.telekom.orchest",
+    "module": "mongo-data-adapter",
+    "version": "2.50.2",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.14"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 21,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.telekom.orchest",
+          "module": "engine-core",
+          "version": {
+            "requires": "2.50.2"
+          }
+        },
+        {
+          "group": "io.telekom.orchest",
+          "module": "entity-caching",
+          "version": {
+            "requires": "2.50.2"
+          }
+        },
+        {
+          "group": "io.telekom.orchest",
+          "module": "task-scheduling",
+          "version": {
+            "requires": "2.50.2"
+          }
+        },
+        {
+          "group": "org.springframework.boot",
+          "module": "spring-boot-starter-data-mongodb"
+        },
+        {
+          "group": "commons-codec",
+          "module": "commons-codec",
+          "version": {
+            "requires": "1.16.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "mongo-data-adapter-2.50.2.jar",
+          "url": "mongo-data-adapter-2.50.2.jar",
+          "size": 259281,
+          "sha512": "1495a53395856c52aaf9061031fa3a6c3e192370e41df2f8dff1e64e01c34fa3e252ada7fca39342bdbc17f1b7af9e8bac988232d2a4e4592b8bcade28b4dfa6",
+          "sha256": "563d9384523d423058277e476589fd197c551605210ccb97789fed87a4560af2",
+          "sha1": "6feb7b2076b6605a81c4be9129b84a6aab206297",
+          "md5": "b6f3a2e31f9d16d5e4e84d753a10fb23"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 21,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "org.apache.commons",
+          "module": "commons-lang3",
+          "version": {
+            "requires": "3.14.0"
+          }
+        },
+        {
+          "group": "org.apache.commons",
+          "module": "commons-collections4",
+          "version": {
+            "requires": "4.4"
+          }
+        },
+        {
+          "group": "commons-io",
+          "module": "commons-io",
+          "version": {
+            "requires": "2.15.1"
+          }
+        },
+        {
+          "group": "software.amazon.awssdk",
+          "module": "sts",
+          "version": {
+            "requires": "2.26.9"
+          }
+        },
+        {
+          "group": "org.mapstruct",
+          "module": "mapstruct",
+          "version": {
+            "requires": "1.5.5.Final"
+          }
+        },
+        {
+          "group": "io.telekom.orchest",
+          "module": "engine-core",
+          "version": {
+            "requires": "2.50.2"
+          }
+        },
+        {
+          "group": "io.telekom.orchest",
+          "module": "entity-caching",
+          "version": {
+            "requires": "2.50.2"
+          }
+        },
+        {
+          "group": "io.telekom.orchest",
+          "module": "task-scheduling",
+          "version": {
+            "requires": "2.50.2"
+          }
+        },
+        {
+          "group": "org.springframework.boot",
+          "module": "spring-boot-starter-data-mongodb"
+        },
+        {
+          "group": "commons-codec",
+          "module": "commons-codec",
+          "version": {
+            "requires": "1.16.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "mongo-data-adapter-2.50.2.jar",
+          "url": "mongo-data-adapter-2.50.2.jar",
+          "size": 259281,
+          "sha512": "1495a53395856c52aaf9061031fa3a6c3e192370e41df2f8dff1e64e01c34fa3e252ada7fca39342bdbc17f1b7af9e8bac988232d2a4e4592b8bcade28b4dfa6",
+          "sha256": "563d9384523d423058277e476589fd197c551605210ccb97789fed87a4560af2",
+          "sha1": "6feb7b2076b6605a81c4be9129b84a6aab206297",
+          "md5": "b6f3a2e31f9d16d5e4e84d753a10fb23"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "mongo-data-adapter-2.50.2-sources.jar",
+          "url": "mongo-data-adapter-2.50.2-sources.jar",
+          "size": 77333,
+          "sha512": "ef11068e366403ca20be3ec38a04622f02dbb7be39f26a4181019fd4438cf93c31985c2b78671bca4bed66af28e66359559333bf1d5d379d613318fa69672964",
+          "sha256": "ec79bb87f7ebf29d5e90f480f2c142c790a4f23ce9beb89045c15af3c9bcfd19",
+          "sha1": "11c5bc464c82b6dfaed5957440b68e61a30ffda9",
+          "md5": "f6525b95916481b6067820319e4e2466"
+        }
+      ]
+    },
+    {
+      "name": "javadocElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "mongo-data-adapter-2.50.2-javadoc.jar",
+          "url": "mongo-data-adapter-2.50.2-javadoc.jar",
+          "size": 425370,
+          "sha512": "b5f586805095a49631dec1f97b30001a713356402f10e9feb576f21e88ab81c5763e3939939a8549a4c50de11ff79cb71736f949af0eb1ba97d2a3984da27126",
+          "sha256": "eb6f2d94b460f0b923f1fc9994def1b3e0cf5869f7d5255c9ae4579bca5921bf",
+          "sha1": "6da227017cbca150dd0b6b51df5f1c3e260b1a00",
+          "md5": "d5cc9dca650546e58f07221c273e076e"
+        }
+      ]
+    }
+  ]
+}

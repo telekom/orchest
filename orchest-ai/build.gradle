@@ -1,0 +1,29 @@
+apply plugin: 'java-library'
+apply plugin: 'io.spring.dependency-management'
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
+        mavenBom "org.springframework.ai:spring-ai-bom:2.0.0-M8"
+    }
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
+mavenPublish(project)
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-autoconfigure'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+    api 'org.springframework.ai:spring-ai-openai:2.0.0-M8'
+    api 'org.springframework.ai:spring-ai-client-chat:2.0.0-M8'
+    api 'org.springframework.ai:spring-ai-mcp:2.0.0-M8'
+    api 'org.springframework.ai:mcp-spring-webflux:2.0.0-M8'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}

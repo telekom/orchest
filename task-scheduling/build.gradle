@@ -1,0 +1,49 @@
+// Library module — DB-agnostic distributed task scheduler.
+//
+// Layout:
+//   api/      → public types (TaskScheduler, ScheduledTask, TaskHandler ...)
+//   spi/      → ScheduledTaskStore — implemented by adapters (Mongo, Postgres, ...)
+//   runtime/  → default scheduler + dispatcher (lease-based work stealing)
+//   config/   → Spring Boot auto-configuration
+//
+// The module depends only on Spring Boot and the project's `core` module
+// (for shared utilities). It pointedly does not depend on any database
+// driver — the store is plugged in by the host application.
+apply plugin: 'java-library'
+apply plugin: 'io.spring.dependency-management'
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
+    }
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
+mavenPublish(project)
+
+dependencies {
+    api 'org.springframework.boot:spring-boot-starter'
+    api 'org.springframework.boot:spring-boot-autoconfigure'
+    api 'com.fasterxml.jackson.core:jackson-databind'
+    api 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.awaitility:awaitility'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+// Spring Boot BOM manages junit-platform-engine to 6.0.1 but the root build.gradle pins
+// junit-platform-launcher to 1.11.0. Force all JUnit platform artifacts to 6.0.1 to align.
+configurations.testRuntimeClasspath {
+    resolutionStrategy.eachDependency { details ->
+        if (details.requested.group == 'org.junit.platform') {
+            details.useVersion '6.0.1'
+            details.because 'align junit-platform-launcher with junit-platform-engine from Spring Boot BOM'
+        }
+    }
+}

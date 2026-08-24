@@ -1,0 +1,47 @@
+apply plugin: 'java-library'
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
+mavenPublish(project)
+
+// :telemetry declares micrometer-registry-prometheus without a version (BOM-managed in modules that
+// apply Spring dependency management). Pin the version here so test/runtime classpaths resolve
+// without importing the full Spring Boot BOM (which would override Jackson and break scala module tests).
+configurations.configureEach {
+    resolutionStrategy.eachDependency { details ->
+        if (details.requested.group == 'io.micrometer' && details.requested.name == 'micrometer-registry-prometheus') {
+            details.useVersion '1.16.1'
+        }
+        if (details.requested.group == 'org.springframework.boot' && !details.requested.version) {
+            details.useVersion "${springBootVersion}"
+        }
+    }
+}
+
+dependencies {
+
+    api project(":core")
+    /* connectors module */
+    api project(":connectors")
+    api project(":telemetry")
+    api project(":entity-caching")
+
+    /* BPMN model parsing libs */
+    api 'io.camunda:zeebe-bpmn-model:8.6.0'
+    implementation "org.scala-lang:scala-library:2.13.12"
+    /* Expression parsing and evaluating libs */
+    api "org.camunda.bpm.extension.dmn.scala:dmn-engine:1.7.3"
+    api "org.camunda.feel:feel-engine:1.18.0"
+
+    /* for xml comparison */
+    implementation 'org.apache.santuario:xmlsec:3.0.3'
+
+    api 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+    api "com.fasterxml.jackson.datatype:jackson-datatype-jsr310"
+    api "com.fasterxml.jackson.module:jackson-module-scala_2.13"
+
+}
+

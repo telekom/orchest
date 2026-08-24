@@ -1,0 +1,135 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.telekom.orchest",
+    "module": "entity-caching",
+    "version": "2.50.2",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.14"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 21,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "entity-caching-2.50.2.jar",
+          "url": "entity-caching-2.50.2.jar",
+          "size": 23013,
+          "sha512": "a37f35df996b31c9f713f084813eb4691bd19aa17f34c8eeee08c9425cc2ab3dc8aad94e0d8c71014d6204faa520d355ae31c112a2fbcd4eef8ad8e4867d5cf8",
+          "sha256": "7d29e103405d7dbbd371305caefb37428002019e0a33bd5f0b6cda4ba31ba551",
+          "sha1": "43dd7e17775cc255448ce0e76df57bb1576f8239",
+          "md5": "b0c76ab3bd846c4debf49cd2b7816901"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 21,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "org.apache.commons",
+          "module": "commons-lang3",
+          "version": {
+            "requires": "3.14.0"
+          }
+        },
+        {
+          "group": "org.apache.commons",
+          "module": "commons-collections4",
+          "version": {
+            "requires": "4.4"
+          }
+        },
+        {
+          "group": "commons-io",
+          "module": "commons-io",
+          "version": {
+            "requires": "2.15.1"
+          }
+        },
+        {
+          "group": "org.springframework.boot",
+          "module": "spring-boot-starter"
+        },
+        {
+          "group": "org.springframework.boot",
+          "module": "spring-boot-autoconfigure"
+        },
+        {
+          "group": "org.springframework.boot",
+          "module": "spring-boot-starter-data-mongodb"
+        }
+      ],
+      "files": [
+        {
+          "name": "entity-caching-2.50.2.jar",
+          "url": "entity-caching-2.50.2.jar",
+          "size": 23013,
+          "sha512": "a37f35df996b31c9f713f084813eb4691bd19aa17f34c8eeee08c9425cc2ab3dc8aad94e0d8c71014d6204faa520d355ae31c112a2fbcd4eef8ad8e4867d5cf8",
+          "sha256": "7d29e103405d7dbbd371305caefb37428002019e0a33bd5f0b6cda4ba31ba551",
+          "sha1": "43dd7e17775cc255448ce0e76df57bb1576f8239",
+          "md5": "b0c76ab3bd846c4debf49cd2b7816901"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "entity-caching-2.50.2-sources.jar",
+          "url": "entity-caching-2.50.2-sources.jar",
+          "size": 14753,
+          "sha512": "16e4c9e367c0ff5ee558bb9957acf55512a655cd7b899e78e24722b9ff94fe2726d07c09451169eb23a9a9f8c4cef613e8688b5823a1f49b8b9da67a6ce65f99",
+          "sha256": "3bf95286615f25c7fd30b81b881e18c1fb5eb1ddda8e01770fe92e999eeea862",
+          "sha1": "fe559d6cbf32330715890cb68e9ce176458a4e79",
+          "md5": "2dbbdd8cdb980d1a5f6fa03433286ac9"
+        }
+      ]
+    },
+    {
+      "name": "javadocElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "entity-caching-2.50.2-javadoc.jar",
+          "url": "entity-caching-2.50.2-javadoc.jar",
+          "size": 149412,
+          "sha512": "315eab292baacbec74cb36888fc4a480e55d33c2cace9f19d1392c4841d3808125facd8018c762a20e29076054048beaf33745f2aa5c365a33f7b321cdc49eba",
+          "sha256": "04e74b5be926b6f684487b9fd6b9da387f15c208efd85b71424ab91c546b005e",
+          "sha1": "8fe77560fa55ea30daf0e1777643d1c1f2af9c84",
+          "md5": "2d2c5bb1a7852a0d5897cb17f9ccc46b"
+        }
+      ]
+    }
+  ]
+}
