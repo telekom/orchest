@@ -1,5 +1,7 @@
 # OrchesT Platform
 
+[REUSE status](https://api.reuse.software/badge/github.com/telekom/orchest)](https://api.reuse.software/badge/github.com/telekom/orchest)
+
 OrchesT is a scalable, distributed workflow orchestration platform for executing BPMN 2.0 and DMN 1.3 definitions. It provides a Kafka-driven engine with Spring Boot client integration, MongoDB persistence, and a full REST API for managing process lifecycles.
 
 ## Architecture Overview
