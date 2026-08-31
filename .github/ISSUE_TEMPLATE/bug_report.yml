@@ -20,7 +20,10 @@ body:
       label: Component
       description: Which component is affected?
       options:
-        - 
+        - orchest-engine
+        - orchest-web
+        - sentinel
+        - housekeeping
         - Documentation
         - Other
     validations:
