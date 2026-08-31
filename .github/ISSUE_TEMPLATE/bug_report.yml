@@ -65,9 +65,7 @@ body:
       description: |
         Relevant error messages, stack traces, or logs
       placeholder: |
-        ```
         error logs here
-        ```
       render: shell
 
   - type: textarea
