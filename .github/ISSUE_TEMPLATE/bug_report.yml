@@ -94,7 +94,7 @@ body:
       label: OrchesT Version
       description: What version are you running?
       options: 
-        - 
+        - 1.0.0
         - main (development)
     validations:
       required: true
