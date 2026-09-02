@@ -1,0 +1,50 @@
+# SPDX-FileCopyrightText: 2026 Deutsche Telekom AG, 2026 Daniel Eder, 2026 Stefan Bachhofner
+# SPDX-License-Identifier: CC0-1.0
+
+name: Open Source Review Toolkit (ORT) scanning
+
+
+on:
+  workflow_dispatch:
+
+  push:
+    branches: [ main ]
+
+  pull_request:
+    branches: [ main ]
+
+
+permissions:
+  contents: read
+
+
+jobs:
+  ort:
+    name: ORT scan
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          submodules: 'recursive'
+
+      - name: Run GitHub Action for ORT
+        uses: oss-review-toolkit/ort-ci-github-action@086d928d24ef1653dc0777296b312fda5faaaf52 # v1.2.0
+        with:
+          image: 'ghcr.io/oss-review-toolkit/ort:89.2.0@sha256:e5ac80500e8f8e996f7e2163a1f7dcce133141bef581d24dc1f610254705d6e7'
+          ort-config-repository: 'https://github.com/telekom/ort-config.git'
+          log-level: info
+          docker-cli-args: >-
+            -e ORT_ARTIFACTORY_TOKEN=${{ secrets.OSPO_ORT_ARTIFACTORY_CACHE_REPO_KEY }}
+            -e ORT_ARTIFACTORY_URL=${{ secrets.OSPO_ORT_ARTIFACTORY_CACHE_REPO_URL }}
+          run: >
+            cache-dependencies,
+            cache-scan-results,
+            labels,
+            analyzer,
+            scanner,
+            advisor,
+            evaluator,
+            reporter,
+            upload-results
