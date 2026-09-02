@@ -14,14 +14,16 @@ on:
     branches: [ main ]
 
 
-permissions:
-  contents: read
+permissions: {}
 
 
 jobs:
   ort:
     name: ORT scan
     runs-on: ubuntu-24.04
+
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout repository
