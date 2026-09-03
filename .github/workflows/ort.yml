@@ -42,8 +42,8 @@ jobs:
           cd ${ORT_CONFIG_DIR}
           git init -q
           git remote add origin https://github.com/telekom/ort-config.git
-          git fetch -q --depth 1 origin 14dd57152cf9e25dacfcbfdd9b9c611674dc206e
-          git checkout -q 14dd57152cf9e25dacfcbfdd9b9c611674dc206e
+          git fetch -q --depth 1 origin 3863658b75b5ae90f0a7b5182f6fdacd04ecb0ec
+          git checkout -q 3863658b75b5ae90f0a7b5182f6fdacd04ecb0ec
           
           yq -i ". *= load(\"${GITHUB_WORKSPACE}/.github/ort/config.yml\")" config.yml
 
