@@ -1,0 +1,27 @@
+# Copyright 2026 Deutsche Telekom AG
+#
+# SPDX-License-Identifier: Apache-2.0
+
+ort:
+  # Force overwriting of existing reports
+  forceOverwrite: true
+
+  scanner:
+    storages:
+      # Read and write results to actions cache
+      local:
+        backend:
+          localFileStorage:
+            directory: /home/ort/.ort/scanner/results
+            compression: false
+      
+      # Read and write results to OSPO ORT cache in artifactory
+      artifactory:
+        backend:
+          httpFileStorage:
+            url: "${ORT_ARTIFACTORY_URL}"
+            headers:
+              Authorization: "Bearer ${ORT_ARTIFACTORY_TOKEN}"
+
+    storageReaders: ["local", "artifactory"]
+    storageWriters: ["local", "artifactory"]
