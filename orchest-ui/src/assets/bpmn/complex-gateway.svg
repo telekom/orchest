@@ -1,0 +1,7 @@
+<svg viewBox="0 0 60 60" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+<path fill="#fff" stroke="#333" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 25 25 5l20 20-20 20z" />
+<text x="1" y="55" fill="#333" font-family="Arial, Helvetica, sans-serif" font-size="12">
+<tspan dy="4">Complex</tspan>
+</text>
+<path d="M23 13v7.117l-5.018-5.018L14.88 18.2l5.018 5.018H12.78v4.38h7.117l-5.018 5.018 3.102 3.102L23 30.701v7.117h4.38V30.7l5.018 5.018 3.102-3.102-5.018-5.018h7.117v-4.38h-7.117l5.018-5.018-3.102-3.102-5.018 5.018V13z" transform="matrix(.75 0 0 .75 5.625 5.625)"/>
+</svg>

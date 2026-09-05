@@ -1,0 +1,72 @@
+.logoIcon,
+.logoFull {
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+/* Background */
+.bg {
+  fill: hsl(var(--background));
+  stroke: hsl(var(--border));
+  stroke-width: 2;
+}
+
+:global(.dark) .bg {
+  fill: hsl(var(--foreground));
+}
+
+/* Flow path */
+.flowPath {
+  fill: none;
+  stroke: var(--color-magenta);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 10;
+  animation: dash 2s linear infinite;
+}
+
+/* Nodes */
+.nodeRect {
+  fill: hsl(var(--background));
+  stroke: var(--color-magenta);
+  stroke-width: 2.5;
+}
+
+:global(.dark) .nodeRect {
+  fill: hsl(var(--foreground));
+}
+
+/* Animated dot */
+.flowDot {
+  fill: var(--color-magenta);
+}
+
+/* Text */
+.textGlow {
+  animation: textPulse 3s ease-in-out infinite;
+}
+
+.brandText {
+  fill: hsl(var(--foreground));
+  font-family: var(--font-display), 'Syne', sans-serif;
+}
+
+.subtitleText {
+  fill: hsl(var(--foreground) / 0.6);
+}
+
+:global(.dark) .subtitleText {
+  fill: hsl(var(--foreground) / 0.55);
+}
+
+/* Animations */
+@keyframes dash {
+  from { stroke-dashoffset: 20; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes textPulse {
+  0%, 100% { opacity: 0.92; }
+  50% { opacity: 1; }
+}

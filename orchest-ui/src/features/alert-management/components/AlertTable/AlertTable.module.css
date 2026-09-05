@@ -1,0 +1,48 @@
+.muted {
+  color: var(--color-gray-500);
+}
+
+.subject {
+  min-width: 14rem;
+  color: var(--color-gray-900);
+  font-weight: var(--font-weight-medium);
+}
+
+:global(.dark) .subject {
+  color: var(--color-gray-50);
+}
+
+.process,
+.version {
+  min-width: 8rem;
+  color: var(--color-gray-600);
+}
+
+:global(.dark) .process,
+:global(.dark) .version,
+:global(.dark) .muted {
+  color: var(--color-gray-400);
+}
+
+.date {
+  min-width: 10.5rem;
+  color: var(--color-gray-600);
+  white-space: nowrap;
+}
+
+:global(.dark) .date {
+  color: var(--color-gray-400);
+}
+
+.error {
+  padding: var(--spacing-4);
+  border: 1px solid color-mix(in srgb, var(--color-red-500) 30%, transparent);
+  border-radius: var(--border-radius-md);
+  background: color-mix(in srgb, var(--color-red-500) 8%, transparent);
+  color: var(--color-red-700);
+  font-size: var(--font-size-body-sm);
+}
+
+:global(.dark) .error {
+  color: var(--color-red-300);
+}

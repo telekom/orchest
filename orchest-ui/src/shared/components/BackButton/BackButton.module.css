@@ -1,0 +1,23 @@
+/* BackButton component styles - matches FilterSidebar toggleButton styling */
+
+.backButton {
+  color: var(--color-gray-700);
+  border-radius: var(--border-radius-xl);
+  transition: background-color var(--transition-fast) var(--transition-ease),
+    box-shadow var(--transition-fast) var(--transition-ease),
+    color var(--transition-fast) var(--transition-ease);
+}
+
+.backButton:hover {
+  background: var(--glass-bg-hover);
+  box-shadow: var(--neon-glow-sm);
+  color: var(--color-magenta);
+}
+
+:global(.dark) .backButton {
+  color: var(--color-gray-300);
+}
+
+:global(.dark) .backButton:hover {
+  color: var(--color-magenta);
+}

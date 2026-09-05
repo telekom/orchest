@@ -1,0 +1,35 @@
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  overflow: hidden;
+}
+
+.filterBar {
+  flex-shrink: 0;
+  padding: 0.5rem 0;
+}
+
+.tableSection {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+
+.headerAction {
+  display: inline-flex;
+  align-items: center;
+}
+
+:global(.dark) .headerAction .addButton {
+  color: var(--color-gray-300);
+}
+
+:global(.dark) .headerAction .addButton:hover {
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  color: var(--color-magenta);
+  box-shadow: var(--neon-glow-sm);
+}

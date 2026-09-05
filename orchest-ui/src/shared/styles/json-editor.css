@@ -1,0 +1,131 @@
+/* ============================================================================
+ * VANILLA JSON EDITOR - LAYOUT & SCROLLING
+ * Establishes proper flex hierarchy for internal scrolling with CSS variable
+ * theming. Structure: wrapper → container → svelte root → jse-main (scrollable)
+ * ========================================================================== */
+
+/* Define scrollbar dimensions */
+:root {
+  --scrollbar-size: 0.625rem;
+  --scrollbar-track-light: var(--color-gray-100);
+  --scrollbar-track-dark: var(--color-gray-800);
+  --scrollbar-thumb-light: var(--color-gray-300);
+  --scrollbar-thumb-hover-light: var(--color-gray-400);
+  --scrollbar-thumb-dark: var(--color-gray-600);
+  --scrollbar-thumb-hover-dark: var(--color-gray-500);
+}
+
+/* Outer wrapper - propagates flex constraints from parent */
+.json-editor-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Container - vanilla-jsoneditor mount point */
+.json-editor-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  overflow: hidden;
+  border: var(--border-width-1) solid var(--color-border-default);
+  border-radius: var(--border-radius-lg);
+}
+
+/* Vanilla-jsoneditor Svelte root element */
+.json-editor-container > div {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Main editor area - this is where scrolling happens */
+.json-editor-container .jse-main {
+  flex: 1 !important;
+  min-height: 0 !important;
+  max-height: 100% !important;
+  overflow: auto !important;
+  scrollbar-gutter: stable;
+}
+
+/* Tree mode - flex container for tree view */
+.json-editor-container .jse-tree-mode {
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 !important;
+  min-height: 0 !important;
+}
+
+/* Tree mode contents - inherits scroll from .jse-main */
+.json-editor-container .jse-tree-mode .jse-contents {
+  flex: 1 !important;
+  min-height: 0 !important;
+}
+
+/* Text mode - flex container for CodeMirror */
+.json-editor-container .jse-text-mode {
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 !important;
+  min-height: 0 !important;
+}
+
+/* CodeMirror editor - inherits scroll from .jse-main */
+.json-editor-container .jse-text-mode .cm-editor {
+  flex: 1 !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+/* CodeMirror scroller - actual text scrolling area */
+.json-editor-container .jse-text-mode .cm-scroller {
+  overflow: auto !important;
+}
+
+/* ============================================================================
+ * CUSTOM SCROLLBARS
+ * WebKit scrollbar styling with CSS variable theming
+ * ========================================================================== */
+
+/* Scrollbar dimensions */
+.json-editor-container .jse-main::-webkit-scrollbar {
+  width: var(--scrollbar-size);
+  height: var(--scrollbar-size);
+}
+
+/* Light mode scrollbar */
+.json-editor-container .jse-main::-webkit-scrollbar-track {
+  background: var(--scrollbar-track-light);
+  border-radius: var(--border-radius-sm);
+}
+
+.json-editor-container .jse-main::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb-light);
+  border-radius: var(--border-radius-sm);
+  border: var(--border-width-2) solid var(--scrollbar-track-light);
+}
+
+.json-editor-container .jse-main::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover-light);
+}
+
+/* Dark mode scrollbar */
+:global(.dark) .json-editor-container .jse-main::-webkit-scrollbar-track {
+  background: var(--scrollbar-track-dark);
+}
+
+:global(.dark) .json-editor-container .jse-main::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb-dark);
+  border-color: var(--scrollbar-track-dark);
+}
+
+:global(.dark) .json-editor-container .jse-main::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover-dark);
+}

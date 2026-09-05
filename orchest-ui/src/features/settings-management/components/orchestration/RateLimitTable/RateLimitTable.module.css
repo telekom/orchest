@@ -1,0 +1,23 @@
+/* Match ProcessList table content font size */
+.cellText {
+  font-size: var(--font-size-body);
+  line-height: 1.4;
+}
+
+/* Action Button Container */
+.actionContainer {
+  display: flex;
+  gap: var(--spacing-2);
+  justify-content: flex-end;
+  border-radius: var(--border-radius-xl);
+}
+
+/* Column Styles */
+.actionsColumn {
+  white-space: nowrap;
+}
+
+.actionsHeaderColumn {
+  padding: 0 var(--spacing-1);
+  text-align: right;
+}

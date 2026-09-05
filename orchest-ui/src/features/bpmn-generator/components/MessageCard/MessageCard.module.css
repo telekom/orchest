@@ -1,0 +1,66 @@
+/* MessageCard Component Styles */
+
+.messageContainer {
+  display: flex;
+  margin-bottom: var(--spacing-4);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity var(--transition-base) var(--transition-ease),
+              transform var(--transition-base) var(--transition-ease);
+}
+
+.messageContainer.fadeEnterFrom {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.messageContainer.fadeEnterTo {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.messageUser {
+  justify-content: flex-end;
+}
+
+.messageAssistant {
+  justify-content: flex-start;
+}
+
+.messageBubble {
+  max-width: 80%;
+  padding: var(--spacing-3);
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.messageUser .messageBubble {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+
+.messageAssistant .messageBubble {
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  color: var(--color-gray-800);
+}
+
+:global(.dark) .messageAssistant .messageBubble {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  color: var(--color-gray-100);
+}
+
+.messageRole {
+  margin-bottom: var(--spacing-2);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.messageContent {
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  word-wrap: break-word;
+}

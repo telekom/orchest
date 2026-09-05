@@ -1,0 +1,7 @@
+<svg viewBox="0 0 110 90" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+<path fill="none" stroke="#333" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M30.709 0c20.013 0 31.292 3.05 31.292 5.729v48.244c0 3.148-16.42 6.2-31.388 6.2S0 57.218 0 53.875V5.825C0 3.503 10.697 0 30.709 0m31.292 15.028c0 1.986-3.62 6.551-31.267 6.551S0 16.893 0 15.125m0-4.65c0 1.769 3.088 6.455 30.734 6.455s31.267-4.565 31.267-6.551M0 5.825c0 2.35 3.088 6.455 30.734 6.455s31.267-3.912 31.267-6.552m0 .001v4.844M.024 5.729v4.844m61.977-.194v4.844M.024 10.379v4.844" transform="translate(5 5)"/>
+<text x="35" y="45" fill="#333" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle">
+<tspan dy="-3.195">Data</tspan>
+<tspan x="35" dy="14.4">Store</tspan>
+</text>
+</svg>

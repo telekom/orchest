@@ -1,0 +1,9 @@
+<svg viewBox="0 0 60 60" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+<path fill="#fff" stroke="#333" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 25 25 5l20 20-20 20z" />
+<text x="11" y="55" fill="#333" font-family="Arial, Helvetica, sans-serif" font-size="12">
+<tspan dy="4">Event</tspan>
+</text>
+<circle cx="25" cy="25" r="12.121" fill="none" stroke="#333" />
+<circle cx="25" cy="25" r="10.121" fill="none" stroke="#333" />
+<path fill="none" stroke="#333" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M24.828 26.845h-9.069l-2.801-8.625 7.337-5.33 7.335 5.33z" transform="translate(5 5)"/>
+</svg>

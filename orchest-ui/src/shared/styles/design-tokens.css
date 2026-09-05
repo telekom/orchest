@@ -1,0 +1,602 @@
+/* ============================================================================
+ * DESIGN TOKENS
+ * OrchesT UI Design System Variables
+ * ============================================================================
+ * These tokens replace Tailwind utilities with semantic CSS variables.
+ * All values are derived from the original tailwind.config.ts
+ * ========================================================================== */
+
+:root {
+  /* ==========================================================================
+   * SPACING SCALE
+   * Based on Tailwind's default spacing scale (0.25rem = 4px base)
+   * ======================================================================== */
+  --spacing-0: 0;
+  --spacing-px: 1px;
+  --spacing-0-5: 0.125rem;   /* 2px */
+  --spacing-1: 0.25rem;      /* 4px */
+  --spacing-1-5: 0.375rem;   /* 6px */
+  --spacing-2: 0.5rem;       /* 8px */
+  --spacing-2-5: 0.625rem;   /* 10px */
+  --spacing-3: 0.75rem;      /* 12px */
+  --spacing-3-5: 0.875rem;   /* 14px */
+  --spacing-4: 1rem;         /* 16px */
+  --spacing-5: 1.25rem;      /* 20px */
+  --spacing-6: 1.5rem;       /* 24px */
+  --spacing-7: 1.75rem;      /* 28px */
+  --spacing-8: 2rem;         /* 32px */
+  --spacing-9: 2.25rem;      /* 36px */
+  --spacing-10: 2.5rem;      /* 40px */
+  --spacing-11: 2.75rem;     /* 44px */
+  --spacing-12: 3rem;        /* 48px */
+  --spacing-14: 3.5rem;      /* 56px */
+  --spacing-16: 4rem;        /* 64px */
+  --spacing-20: 5rem;        /* 80px */
+  --spacing-24: 6rem;        /* 96px */
+  --spacing-28: 7rem;        /* 112px */
+  --spacing-32: 8rem;        /* 128px */
+  --spacing-36: 9rem;        /* 144px */
+  --spacing-40: 10rem;       /* 160px */
+  --spacing-44: 11rem;       /* 176px */
+  --spacing-48: 12rem;       /* 192px */
+  --spacing-52: 13rem;       /* 208px */
+  --spacing-56: 14rem;       /* 224px */
+  --spacing-60: 15rem;       /* 240px */
+  --spacing-64: 16rem;       /* 256px */
+  --spacing-72: 18rem;       /* 288px */
+  --spacing-80: 20rem;       /* 320px */
+  --spacing-96: 24rem;       /* 384px */
+
+  /* ==========================================================================
+   * TYPOGRAPHY SYSTEM
+   * Unified font system with semantic naming and comprehensive coverage
+   * ======================================================================== */
+
+  /* Font Families */
+  --font-display: 'Syne', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --font-mono: 'SF Mono', Monaco, Inconsolata, 'Fira Code', 'Fira Mono', 'Roboto Mono', Consolas, monospace;
+
+  /* Font Sizes */
+  --font-size-display: 3rem;        /* 48px - Large display text */
+  --font-size-h1: 1.75rem;          /* 28px - Page titles */
+  --font-size-h2: 1.5rem;           /* 24px - Section headers */
+  --font-size-h3: 1.25rem;          /* 20px - Subsection headers */
+  --font-size-h4: 1.125rem;         /* 18px - Card titles */
+  --font-size-body-lg: 1rem;        /* 16px - Large body text */
+  --font-size-body: 0.875rem;       /* 14px - Default body text */
+  --font-size-body-sm: 0.75rem;     /* 12px - Small text, badges, labels (WCAG 2.1 AA minimum) */
+
+  /* Deprecated - use --font-size-body-sm instead (WCAG compliance) */
+  --font-size-caption: 0.75rem;     /* 12px - Updated to meet WCAG minimum */
+  --font-size-tiny: 0.75rem;        /* 12px - Updated to meet WCAG minimum */
+
+  /* Semantic Font Size Aliases (for backward compatibility and clarity) */
+  --text-display: var(--font-size-display);
+  --text-h1: var(--font-size-h1);
+  --text-h2: var(--font-size-h2);
+  --text-h3: var(--font-size-h3);
+  --text-h4: var(--font-size-h4);
+  --text-body-lg: var(--font-size-body-lg);
+  --text-body: var(--font-size-body);
+  --text-body-sm: var(--font-size-body-sm);
+  --text-caption: var(--font-size-caption);
+  --text-tiny: var(--font-size-tiny);
+  --text-size-base: var(--font-size-body);
+  --text-size-small: var(--font-size-body-sm);
+
+  /* Line Heights - Semantic naming */
+  --line-height-display: 1.2;      /* Tight for large display text */
+  --line-height-heading: 1.3;      /* Headings (h1-h4) */
+  --line-height-h1: 1.3;
+  --line-height-h2: 1.3;
+  --line-height-h3: 1.3;
+  --line-height-h4: 1.4;
+  --line-height-body: 1.5;         /* Body text (optimal readability) */
+  --line-height-body-lg: 1.5;
+  --line-height-body-sm: 1.43;     /* ~1.5 adjusted for small text */
+  --line-height-compact: 1.4;      /* UI elements */
+  --line-height-relaxed: 1.625;    /* Long-form content */
+  --line-height-loose: 2;          /* Spaced content */
+
+  /* Semantic Line Height Aliases (for backward compatibility) */
+  --text-display-lh: var(--line-height-display);
+  --text-h1-lh: var(--line-height-h1);
+  --text-h2-lh: var(--line-height-h2);
+  --text-h3-lh: var(--line-height-h3);
+  --text-h4-lh: var(--line-height-h4);
+  --text-body-lg-lh: var(--line-height-body-lg);
+  --text-body-lh: var(--line-height-body);
+  --text-body-sm-lh: var(--line-height-body-sm);
+  --text-caption-lh: var(--line-height-compact);
+  --text-tiny-lh: var(--line-height-compact);
+  --text-line-height: var(--line-height-body);
+
+  /* Font Weights */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Semantic Font Weight Aliases (for backward compatibility) */
+  --text-display-weight: var(--font-weight-bold);
+  --text-h1-weight: var(--font-weight-bold);
+  --text-h2-weight: var(--font-weight-semibold);
+  --text-h3-weight: var(--font-weight-semibold);
+  --text-h4-weight: var(--font-weight-semibold);
+  --text-body-lg-weight: var(--font-weight-regular);
+  --text-body-weight: var(--font-weight-regular);
+  --text-body-sm-weight: var(--font-weight-regular);
+  --text-caption-weight: var(--font-weight-regular);
+  --text-tiny-weight: var(--font-weight-medium);
+  --change-menu-header-font-weight: var(--font-weight-semibold);
+
+  /* Letter Spacing */
+  --letter-spacing-tighter-plus: -0.02em;
+  --letter-spacing-tighter: -0.01em;
+  --letter-spacing-tight: -0.005em;
+  --letter-spacing-normal: 0em;
+  --letter-spacing-wide: 0.01em;
+  --letter-spacing-wider: 0.05em;
+
+  /* Semantic Letter Spacing Aliases (for backward compatibility) */
+  --text-display-ls: var(--letter-spacing-tighter-plus);
+  --text-h1-ls: var(--letter-spacing-tighter);
+  --text-h2-ls: var(--letter-spacing-tighter);
+  --text-h3-ls: var(--letter-spacing-tighter);
+  --text-h4-ls: var(--letter-spacing-normal);
+  --text-body-lg-ls: var(--letter-spacing-normal);
+  --text-body-ls: var(--letter-spacing-normal);
+  --text-body-sm-ls: var(--letter-spacing-normal);
+  --text-caption-ls: var(--letter-spacing-normal);
+  --text-tiny-ls: var(--letter-spacing-normal);
+
+  /* ==========================================================================
+   * COLORS - Grayscale
+   * Standard gray palette for UI elements
+   * ======================================================================== */
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+
+  /* ==========================================================================
+   * COLORS - Green
+   * Green palette for success states and actions
+   * ======================================================================== */
+  --color-green-50: #f0fdf4;
+  --color-green-100: #dcfce7;
+  --color-green-200: #bbf7d0;
+  --color-green-300: #86efac;
+  --color-green-400: #4ade80;
+  --color-green-500: #22c55e;
+  --color-green-600: #16a34a;
+  --color-green-700: #15803d;
+  --color-green-800: #166534;
+  --color-green-900: #14532d;
+
+  /* ==========================================================================
+   * COLORS - Red
+   * Red palette for error and destructive states
+   * ======================================================================== */
+  --color-red-50: #fef2f2;
+  --color-red-100: #fee2e2;
+  --color-red-200: #fecaca;
+  --color-red-300: #fca5a5;
+  --color-red-400: #f87171;
+  --color-red-500: #ef4444;
+  --color-red-600: #dc2626;
+  --color-red-700: #b91c1c;
+  --color-red-800: #991b1b;
+  --color-red-900: #7f1d1d;
+
+  /* ==========================================================================
+   * COLORS - Yellow
+   * Yellow palette for warning states
+   * ======================================================================== */
+  --color-yellow-50: #fefce8;
+  --color-yellow-100: #fef9c3;
+  --color-yellow-200: #fef08a;
+  --color-yellow-300: #fde047;
+  --color-yellow-400: #facc15;
+  --color-yellow-500: #eab308;
+  --color-yellow-600: #ca8a04;
+  --color-yellow-700: #a16207;
+  --color-yellow-800: #854d0e;
+  --color-yellow-900: #713f12;
+
+  /* ==========================================================================
+   * COLORS - Orange
+   * Orange palette for incident states
+   * ======================================================================== */
+  --color-orange-50: #fff7ed;
+  --color-orange-100: #ffedd5;
+  --color-orange-200: #fed7aa;
+  --color-orange-300: #fdba74;
+  --color-orange-400: #fb923c;
+  --color-orange-500: #f97316;
+  --color-orange-600: #ea580c;
+  --color-orange-700: #c2410c;
+  --color-orange-800: #9a3412;
+  --color-orange-900: #7c2d12;
+
+  /* ==========================================================================
+   * COLORS - Blue
+   * Blue palette for info states
+   * ======================================================================== */
+  --color-blue-50: #eff6ff;
+  --color-blue-100: #dbeafe;
+  --color-blue-200: #bfdbfe;
+  --color-blue-300: #93c5fd;
+  --color-blue-400: #60a5fa;
+  --color-blue-500: #3b82f6;
+  --color-blue-600: #2563eb;
+  --color-blue-700: #1d4ed8;
+  --color-blue-800: #1e40af;
+  --color-blue-900: #1e3a8a;
+
+  /* ==========================================================================
+   * BORDERS & RADIUS
+   * Border widths and radius values
+   * ======================================================================== */
+  --border-width-0: 0;
+  --border-width-1: 1px;
+  --border-width-2: 2px;
+  --border-width-4: 4px;
+  --border-width-8: 8px;
+
+  --border-radius-none: 0;
+  --border-radius-sm: calc(var(--radius) - 4px);
+  --border-radius-md: calc(var(--radius) - 2px);
+  --border-radius-lg: var(--radius);
+  --border-radius-xl: 0.75rem;
+  --border-radius-2xl: 1rem;
+  --border-radius-3xl: 1.5rem;
+  --border-radius-full: 9999px;
+
+  /* ==========================================================================
+   * SHADOWS
+   * Box shadow utilities for depth and elevation
+   * ======================================================================== */
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  --shadow-inner: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+  --shadow-none: 0 0 #0000;
+
+  /* ==========================================================================
+   * Z-INDEX LAYERS
+   * Consistent layering system for overlays
+   * ======================================================================== */
+  --z-index-base: 0;
+  --z-index-dropdown: 1000;
+  --z-index-sticky: 1020;
+  --z-index-fixed: 1030;
+  --z-index-modal-backdrop: 1040;
+  --z-index-modal: 1050;
+  --z-index-popover: 1060;
+  --z-index-tooltip: 1070;
+  /* Above modals, popovers, and ad-hoc overlays (e.g. tooltips at 99999) */
+  --z-index-toast: 100000;
+
+  /* ==========================================================================
+   * TRANSITIONS
+   * Animation timing and easing functions
+   * ======================================================================== */
+  --transition-fastest: 75ms;
+  --transition-fast: 150ms;
+  --transition-base: 300ms;
+  --transition-slow: 500ms;
+  --transition-slowest: 700ms;
+
+  --transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --transition-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --transition-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ==========================================================================
+   * BREAKPOINTS (for reference in media queries)
+   * These match the Tailwind config breakpoints
+   * ======================================================================== */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1400px;
+
+  /* ==========================================================================
+   * CONTAINER
+   * Max widths for content containers
+   * ======================================================================== */
+  --container-padding: 2rem;
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+  --container-2xl: 1400px;
+
+  /* ==========================================================================
+   * LAYOUT DIMENSIONS
+   * Common layout measurements
+   * ======================================================================== */
+  --sidebar-width: 16rem;
+  --sidebar-collapsed-width: 3rem;
+  --navbar-height: 3rem;
+  --header-height: 3rem;
+  --footer-height: 4rem;
+
+  /* ==========================================================================
+   * COMPONENT SIZES
+   * Standard sizes for interactive elements
+   * ======================================================================== */
+  --input-height-sm: 2rem;
+  --input-height-md: 2.5rem;
+  --input-height-lg: 3rem;
+
+  --button-height-sm: 2rem;
+  --button-height-md: 2.5rem;
+  --button-height-lg: 3rem;
+
+  --icon-size-xs: 0.75rem;
+  --icon-size-sm: 1rem;
+  --icon-size-md: 1.25rem;
+  --icon-size-lg: 1.5rem;
+  --icon-size-xl: 2rem;
+
+  /* ==========================================================================
+   * OPACITY SCALE
+   * Transparency values for hover states, disabled, etc.
+   * ======================================================================== */
+  --opacity-0: 0;
+  --opacity-5: 0.05;
+  --opacity-10: 0.1;
+  --opacity-20: 0.2;
+  --opacity-25: 0.25;
+  --opacity-30: 0.3;
+  --opacity-40: 0.4;
+  --opacity-50: 0.5;
+  --opacity-60: 0.6;
+  --opacity-70: 0.7;
+  --opacity-75: 0.75;
+  --opacity-80: 0.8;
+  --opacity-90: 0.9;
+  --opacity-95: 0.95;
+  --opacity-100: 1;
+
+  /* ==========================================================================
+   * TELEKOM BRAND COLORS
+   * Official Telekom brand colors
+   * ======================================================================== */
+  --color-magenta: #FF0080;         /* Telekom neon magenta */
+  --color-magenta-hover: #E6006E;   /* Slightly darker for hover */
+  --color-magenta-light: #FF3399;   /* Lighter neon for highlights */
+
+  /* ==========================================================================
+   * FILTER ICON COLORS
+   * Icon colors for filter sidebar actions
+   * ======================================================================== */
+  --filter-icon-export: var(--color-magenta);    /* Telekom magenta */
+  --filter-icon-delete: #dc2626;    /* Red for clear/delete actions */
+
+  /* ==========================================================================
+   * BLUR SCALE
+   * Backdrop blur effects
+   * ======================================================================== */
+  --blur-none: 0;
+  --blur-sm: 4px;
+  --blur-md: 8px;
+  --blur-lg: 12px;
+  --blur-xl: 16px;
+  --blur-2xl: 24px;
+  --blur-3xl: 40px;
+
+  /* ==========================================================================
+   * SEMANTIC COLOR VARIABLES WITH ALPHA
+   * For consistent use across components
+   * ======================================================================== */
+  --border-color: #e5e7eb;
+  --color-gray-500-alpha-75: rgba(107, 114, 128, 0.75);
+  --color-gray-900-alpha-80: rgba(17, 24, 39, 0.8);
+
+  /* Semantic surfaces and interactive states */
+  --color-surface-subtle: var(--color-gray-50);
+  --color-border-default: var(--color-gray-100);
+  --color-text-muted: var(--color-gray-500);
+  --color-interactive-hover-light: var(--color-gray-100);
+
+  /* ==========================================================================
+   * GLASS SURFACE TOKENS (light mode)
+   * ======================================================================== */
+  --glass-blur-sm: 8px;
+  --glass-blur: 16px;
+  --glass-blur-lg: 24px;
+  --glass-saturate: 1.4;
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  --glass-bg-subtle: rgba(255, 255, 255, 0.55);
+  --glass-bg-strong: rgba(255, 255, 255, 0.88);
+  --glass-bg-hover: rgba(255, 255, 255, 0.82);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --glass-border-subtle: rgba(0, 0, 0, 0.06);
+  --glass-border-bright: color-mix(in srgb, var(--color-magenta) 12%, rgba(0, 0, 0, 0.08));
+  --glass-shadow: 0 4px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  --glass-shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.04);
+  --glass-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  --glass-shadow-hover: 0 8px 32px rgba(255, 0, 128, 0.08), 0 4px 16px rgba(0, 0, 0, 0.08);
+
+  /* Ambient background (light) */
+  --ambient-base: #eef0f4;
+  --ambient-orb-1: rgba(255, 0, 128, 0.12);
+  --ambient-orb-2: rgba(99, 102, 241, 0.1);
+  --ambient-orb-3: rgba(20, 184, 166, 0.08);
+
+  /* Neon glow */
+  --neon-glow-sm: 0 0 8px color-mix(in srgb, var(--color-magenta) 30%, transparent);
+  --neon-glow-md: 0 0 16px color-mix(in srgb, var(--color-magenta) 40%, transparent);
+  --neon-glow-lg: 0 0 24px color-mix(in srgb, var(--color-magenta) 50%, transparent);
+}
+
+/* ============================================================================
+ * DARK MODE OVERRIDES
+ * Adjustments for dark theme
+ * ============================================================================ */
+.dark {
+  /* Shadows are more pronounced in dark mode */
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.3);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.4);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.6), 0 4px 6px -4px rgb(0 0 0 / 0.5);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.7), 0 8px 10px -6px rgb(0 0 0 / 0.6);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.8);
+
+  /* Telekom brand colors - neon in dark mode */
+  --color-magenta: #FF0080;         /* Neon magenta for dark mode */
+  --color-magenta-hover: #FF3399;   /* Brighter hover for dark mode */
+  --color-magenta-light: #FF66B2;   /* Even lighter for dark mode highlights */
+
+  /* Filter icon colors - lighter shades for dark mode */
+  --filter-icon-delete: #ef4444;    /* Lighter red for better contrast */
+
+  /* Deeper grays for darker dark mode */
+  --color-gray-900: #09090b;
+  --color-gray-800: #18181b;
+  --color-gray-700: #27272a;
+
+  /* Semantic colors - dark mode */
+  --border-color: #27272a;
+  --color-gray-500-alpha-75: rgba(31, 41, 55, 0.75);
+  --color-gray-900-alpha-80: rgba(107, 114, 128, 0.8);
+
+  /* Semantic surfaces and interactive states - dark mode */
+  --color-surface-subtle: var(--color-gray-800-alpha-50);
+  --color-border-default: var(--color-gray-600);
+  --color-text-muted: var(--color-gray-400);
+  --color-interactive-hover-light: var(--color-gray-800);
+
+  /* Glass surface tokens (dark mode) */
+  --glass-bg: rgba(18, 18, 24, 0.65);
+  --glass-bg-subtle: rgba(18, 18, 24, 0.45);
+  --glass-bg-strong: rgba(24, 24, 32, 0.82);
+  --glass-bg-hover: rgba(28, 28, 38, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-subtle: rgba(255, 255, 255, 0.05);
+  --glass-border-bright: color-mix(in srgb, var(--color-magenta) 25%, rgba(255, 255, 255, 0.12));
+  --glass-shadow: 0 4px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  --glass-shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.3);
+  --glass-shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  --glass-shadow-hover: 0 8px 32px rgba(255, 0, 128, 0.15), 0 4px 16px rgba(0, 0, 0, 0.4);
+
+  /* Ambient background (dark) */
+  --ambient-base: #09090f;
+  --ambient-orb-1: rgba(255, 0, 128, 0.18);
+  --ambient-orb-2: rgba(56, 189, 248, 0.12);
+  --ambient-orb-3: rgba(139, 92, 246, 0.1);
+}
+
+/* ============================================================================
+ * UTILITY CLASSES
+ * Common patterns as reusable classes
+ * ============================================================================ */
+
+/* Screen reader only (accessibility) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.sr-only:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: inherit;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* Truncate text with ellipsis */
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Line clamp utilities */
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Container for centering content */
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: var(--container-sm);
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: var(--container-md);
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: var(--container-lg);
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: var(--container-xl);
+  }
+}
+
+@media (min-width: 1400px) {
+  .container {
+    max-width: var(--container-2xl);
+  }
+}

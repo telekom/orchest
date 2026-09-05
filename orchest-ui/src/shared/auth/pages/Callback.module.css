@@ -1,0 +1,77 @@
+.container {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-4);
+  background: transparent;
+}
+
+.card {
+  width: 100%;
+  max-width: 28rem;
+  border-radius: var(--border-radius-xl);
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  padding: var(--spacing-8);
+  box-shadow: var(--glass-shadow-lg);
+  text-align: center;
+}
+
+.errorContainer {
+  margin-bottom: var(--spacing-4);
+  color: var(--color-red-500);
+}
+
+:global(.dark) .errorContainer {
+  color: var(--color-red-400);
+}
+
+.errorIcon {
+  margin: 0 auto;
+  height: var(--spacing-12);
+  width: var(--spacing-12);
+  margin-bottom: var(--spacing-2);
+}
+
+.errorTitle {
+  font-family: var(--font-display);
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--spacing-2);
+}
+
+.errorMessage {
+  font-size: var(--font-size-body-sm);
+  color: hsl(var(--muted-foreground));
+}
+
+.redirectMessage {
+  font-size: var(--font-size-body-sm);
+  color: hsl(var(--muted-foreground));
+}
+
+.successTitle {
+  margin-top: var(--spacing-4);
+  font-family: var(--font-display);
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-semibold);
+  color: hsl(var(--foreground));
+}
+
+.successMessage {
+  margin-top: var(--spacing-2);
+  font-size: var(--font-size-body-sm);
+  color: hsl(var(--muted-foreground));
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .card {
+    background: hsl(var(--card));
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}

@@ -1,0 +1,133 @@
+.triggerWrapper {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  width: 100%;
+  height: 2.25rem;
+  padding: 0 var(--spacing-2);
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  color: hsl(var(--sidebar-foreground));
+  font-size: var(--text-body-sm);
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition:
+    background var(--transition-fast) var(--transition-ease),
+    border-color var(--transition-fast) var(--transition-ease),
+    box-shadow var(--transition-fast) var(--transition-ease);
+}
+
+.trigger:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+}
+
+.triggerIcon {
+  flex-shrink: 0;
+  color: hsl(var(--muted-foreground));
+}
+
+.triggerName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.badgePosition {
+  position: absolute;
+  top: -0.25rem;
+  right: -0.25rem;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.pendingBadge {
+  height: 1rem;
+  background-color: var(--color-magenta);
+  box-shadow: var(--neon-glow-sm);
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-inline: 0.25rem;
+  min-width: 1rem;
+}
+
+.badgeText {
+  color: hsl(var(--primary-foreground));
+  font-size: 0.625rem;
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+}
+
+.dropdownContent {
+  width: 14rem;
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border-bright);
+  box-shadow: var(--glass-shadow-lg);
+  color: hsl(var(--popover-foreground));
+  z-index: var(--z-index-dropdown);
+}
+
+.menuItem {
+  cursor: pointer;
+  color: hsl(var(--muted-foreground));
+  transition:
+    background var(--transition-fast) var(--transition-ease),
+    color var(--transition-fast) var(--transition-ease),
+    border-color var(--transition-fast) var(--transition-ease),
+    box-shadow var(--transition-fast) var(--transition-ease);
+}
+
+.menuItem:hover,
+.menuItem:focus {
+  background: var(--glass-bg-hover);
+  color: hsl(var(--foreground));
+}
+
+.menuItemActive {
+  color: var(--color-magenta);
+  background: color-mix(in srgb, var(--color-magenta) 10%, var(--glass-bg));
+  font-weight: var(--font-weight-medium);
+  box-shadow: inset 2px 0 0 var(--color-magenta);
+}
+
+.menuItemActive:hover {
+  color: var(--color-magenta);
+  background: color-mix(in srgb, var(--color-magenta) 14%, var(--glass-bg-hover));
+}
+
+.menuItemActive .menuItemIcon {
+  color: var(--color-magenta);
+  filter: drop-shadow(0 0 4px color-mix(in srgb, var(--color-magenta) 45%, transparent));
+}
+
+.menuItemIcon {
+  margin-right: var(--spacing-2);
+  height: var(--icon-size-sm);
+  width: var(--icon-size-sm);
+  color: currentColor;
+}
+
+.menuItemBadge {
+  margin-left: auto;
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .dropdownContent {
+    background: hsl(var(--popover));
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}

@@ -1,0 +1,58 @@
+.container {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--border-radius-lg);
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.panelGroup {
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  min-height: 0;
+}
+
+.diagramPanel {
+  position: relative;
+}
+
+.diagramContent {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.resizeHandle {
+  margin-top: var(--spacing-2);
+  margin-bottom: var(--spacing-2);
+  height: var(--spacing-2);
+  background-color: var(--color-gray-200);
+  transition: background-color var(--transition-fast) var(--transition-ease);
+}
+
+.resizeHandle:hover {
+  background-color: var(--color-blue-500);
+}
+
+:global(.dark) .resizeHandle {
+  background-color: var(--color-gray-700);
+}
+
+:global(.dark) .resizeHandle:hover {
+  background-color: var(--color-blue-600);
+}
+
+.contentPanel {
+  position: relative;
+}
+
+.contentPanelContent {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}

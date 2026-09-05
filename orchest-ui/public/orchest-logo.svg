@@ -1,0 +1,53 @@
+<svg width="500" height="140" viewBox="0 0 500 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="orchGradFull" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E20074" />
+      <stop offset="100%" stop-color="#8B0052" />
+    </linearGradient>
+    <style>
+      @keyframes dash {
+        from { stroke-dashoffset: 20; }
+        to { stroke-dashoffset: 0; }
+      }
+    </style>
+  </defs>
+
+  <!-- Step-flow icon -->
+  <g transform="translate(20, 22)">
+    <rect width="96" height="96" rx="22" fill="#ffffff" stroke="#e5e5e5" stroke-width="2" />
+    <path
+      d="M26 24 H46 V38 H66 V24 H82 V52 H66 V72 H46 V58 H26 V74"
+      fill="none"
+      stroke="#E20074"
+      stroke-width="3"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-dasharray="10"
+      style="animation: dash 2s linear infinite"
+    />
+    <rect x="18" y="16" width="16" height="16" rx="4" fill="#ffffff" stroke="#E20074" stroke-width="2.5" />
+    <rect x="58" y="16" width="16" height="16" rx="4" fill="#ffffff" stroke="#E20074" stroke-width="2.5" />
+    <rect x="58" y="64" width="16" height="16" rx="4" fill="#ffffff" stroke="#E20074" stroke-width="2.5" />
+    <rect x="18" y="66" width="16" height="16" rx="4" fill="#ffffff" stroke="#E20074" stroke-width="2.5" />
+    <rect fill="#E20074" width="6" height="6" rx="1">
+      <animateMotion
+        dur="2s"
+        repeatCount="indefinite"
+        path="M26 24 H46 V38 H66 V24 H82 V52 H66 V72 H46 V58 H26 V74"
+      />
+    </rect>
+  </g>
+
+  <!-- Text: Orches + Telekom Magenta T -->
+  <text x="145" y="80" font-family="Syne, Inter, Arial, sans-serif" font-size="60" font-weight="700" letter-spacing="0.5" fill="#0a0a0a">Orches</text>
+  <g transform="translate(388, 36) scale(0.48)">
+    <g transform="matrix(.2857 0 0 .2857 71.408 28.262)" fill="#E20074">
+      <path d="m-33.599 218.73v-22.192h-15.256c-26.315 0-38.393-15.643-38.393-38.665v-232.6h4.5246c49.283 0 80.582 32.707 80.582 80.797v4.3092h18.745v-107.3h-264.58v107.3h18.745v-4.3092c0-48.09 31.298-80.797 80.582-80.797h4.5246v232.6c0 23.022-12.078 38.665-38.393 38.665h-15.256v22.192z"/>
+      <path d="m16.603 111.43h-62.914v-63.129h62.914z"/>
+      <path d="m-185.07 111.43h-62.914v-63.129h62.914z"/>
+    </g>
+  </g>
+
+  <!-- Subtitle -->
+  <text x="148" y="112" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="500" letter-spacing="2" fill="#666666">ORCHESTRATION PLATFORM</text>
+</svg>

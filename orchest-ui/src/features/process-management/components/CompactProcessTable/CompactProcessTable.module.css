@@ -1,0 +1,134 @@
+/* Instance ID cell with inline status indicator */
+.idCell {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.emptyText {
+  font-size: var(--font-size-body);
+  line-height: 1.4;
+  color: var(--color-gray-400);
+}
+
+:global(.dark) .emptyText {
+  color: var(--color-gray-500);
+}
+
+.versionText {
+  font-size: var(--font-size-body);
+  line-height: 1.4;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--spacing-1);
+}
+
+.actions button {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  border-radius: var(--border-radius-md);
+  padding: 0;
+}
+
+/* Column text colors */
+.columnTextPrimary {
+  color: var(--color-gray-900); /* gray-900 */
+}
+
+:global(.dark) .columnTextPrimary {
+  color: var(--color-gray-100); /* gray-100 */
+}
+
+.columnTextMuted {
+  color: var(--color-gray-500); /* gray-600 */
+}
+
+:global(.dark) .columnTextMuted {
+  color: var(--color-gray-300); /* gray-300 */
+}
+
+.columnTextSecondary {
+  color: var(--color-gray-700); /* gray-700 */
+}
+
+:global(.dark) .columnTextSecondary {
+  color: var(--color-gray-300); /* gray-300 */
+}
+
+/* Compact padding for version column */
+.compactPadding {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
+/* Responsive hiding classes */
+.hiddenMd {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .hiddenMd {
+    display: table-cell;
+  }
+}
+
+.hiddenLg {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .hiddenLg {
+    display: table-cell;
+  }
+}
+
+.hiddenXl {
+  display: none;
+}
+
+@media (min-width: 1280px) {
+  .hiddenXl {
+    display: table-cell;
+  }
+}
+
+/* Text body small utility - Updated to match standard table cell size (14px) */
+.textBodySm {
+  font-size: var(--font-size-body);
+  line-height: 1.4;
+}
+
+/* Batch actions header */
+.batchActionsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--spacing-1);
+}
+
+.batchActionsHeader button {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  border-radius: var(--border-radius-md);
+  padding: 0;
+}
+
+.selectedCount {
+  font-size: var(--font-size-body);
+  font-weight: 500;
+  color: var(--color-gray-700);
+  padding: 0;
+  text-align: center;
+}
+
+:global(.dark) .selectedCount {
+  color: var(--color-gray-300);
+}

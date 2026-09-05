@@ -1,0 +1,247 @@
+/* ============================================================================
+ * DIAGRAM DIFF MODAL STYLES
+ * CSS Module for DiagramDiffModal component
+ * ============================================================================ */
+
+/* Main container */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  padding-left: var(--spacing-px);
+  padding-right: var(--spacing-px);
+}
+
+/* ============================================================================
+ * ALERT BANNERS
+ * Error, info, and loading states
+ * ============================================================================ */
+
+/* Base alert styling */
+.alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-3);
+  padding: var(--spacing-4);
+  border-radius: var(--border-radius-lg);
+  border-width: var(--border-width-1);
+}
+
+/* Error alert (red theme) */
+.errorAlert {
+  background-color: var(--color-red-100); /* red-100 */
+  border-color: var(--color-red-200); /* red-200 */
+}
+
+:global(.dark) .errorAlert {
+  background-color: var(--color-red-900-alpha-30); /* red-900/30 */
+  border-color: var(--color-red-800); /* red-800 */
+}
+
+.errorIcon {
+  flex-shrink: 0;
+  margin-top: var(--spacing-0-5);
+  width: var(--spacing-5);
+  height: var(--spacing-5);
+  color: var(--color-red-800); /* red-800 */
+}
+
+:global(.dark) .errorIcon {
+  color: var(--color-red-300); /* red-300 */
+}
+
+.errorTitle {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-red-900); /* red-900 */
+  margin-bottom: var(--spacing-1);
+}
+
+:global(.dark) .errorTitle {
+  color: var(--color-red-100); /* red-100 */
+}
+
+.errorText {
+  font-size: var(--font-size-body);
+  color: var(--color-red-700); /* red-700 */
+}
+
+:global(.dark) .errorText {
+  color: var(--color-red-300); /* red-300 */
+}
+
+/* Info alert (blue theme) */
+.infoAlert {
+  background-color: var(--color-blue-50); /* blue-50 */
+  border-color: var(--color-blue-200); /* blue-200 */
+}
+
+:global(.dark) .infoAlert {
+  background-color: var(--color-blue-900-alpha-30); /* blue-900/20 */
+  border-color: var(--color-blue-900); /* blue-800 */
+}
+
+.infoIcon {
+  flex-shrink: 0;
+  margin-top: var(--spacing-0-5);
+  width: var(--spacing-5);
+  height: var(--spacing-5);
+  color: var(--color-blue-600); /* blue-600 */
+}
+
+:global(.dark) .infoIcon {
+  color: var(--color-blue-400); /* blue-400 */
+}
+
+.infoTitle {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-blue-900); /* blue-900 */
+  margin-bottom: var(--spacing-1);
+}
+
+:global(.dark) .infoTitle {
+  color: var(--color-blue-100); /* blue-100 */
+}
+
+.infoText {
+  font-size: var(--font-size-body);
+  color: var(--color-blue-700); /* blue-700 */
+}
+
+:global(.dark) .infoText {
+  color: var(--color-blue-300); /* blue-300 */
+}
+
+/* Alert content wrapper */
+.alertContent {
+  flex: 1;
+}
+
+/* ============================================================================
+ * LOADING STATE
+ * Centered loading indicator with spinner
+ * ============================================================================ */
+
+.loadingContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-8);
+}
+
+.loadingContent {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.spinner {
+  width: var(--spacing-5);
+  height: var(--spacing-5);
+  border-width: 2px;
+  border-style: solid;
+  border-color: transparent;
+  border-bottom-color: hsl(var(--primary));
+  border-radius: var(--border-radius-full);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loadingText {
+  font-size: var(--font-size-body);
+  color: var(--color-gray-600);
+}
+
+:global(.dark) .loadingText {
+  color: var(--color-gray-400);
+}
+
+/* ============================================================================
+ * DMN PLACEHOLDER
+ * Info card for DMN deployment
+ * ============================================================================ */
+
+.dmnCard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-4);
+  background-color: var(--color-gray-50);
+  border-radius: var(--border-radius-lg);
+  border-width: var(--border-width-1);
+  border-color: var(--color-gray-100);
+}
+
+:global(.dark) .dmnCard {
+  background-color: var(--color-gray-800-alpha-50); /* gray-800/50 */
+  border-color: var(--color-gray-600);
+}
+
+.dmnContent {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+.dmnIconWrapper {
+  padding: var(--spacing-3);
+  border-radius: var(--border-radius-lg);
+  background-color: var(--color-blue-100); /* blue-100 */
+}
+
+:global(.dark) .dmnIconWrapper {
+  background-color: var(--color-blue-900-alpha-30); /* blue-900/30 */
+}
+
+.dmnIcon {
+  width: var(--spacing-8);
+  height: var(--spacing-8);
+  color: var(--color-blue-600); /* blue-600 */
+}
+
+:global(.dark) .dmnIcon {
+  color: var(--color-blue-400); /* blue-400 */
+}
+
+.dmnTextContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.dmnTitle {
+  font-size: var(--font-size-h4);
+  color: var(--color-gray-900);
+  margin-bottom: var(--spacing-1);
+}
+
+:global(.dark) .dmnTitle {
+  color: var(--color-gray-100);
+}
+
+.dmnDescription {
+  font-size: var(--font-size-body);
+  color: var(--color-gray-600);
+}
+
+:global(.dark) .dmnDescription {
+  color: var(--color-gray-400);
+}
+
+/* ============================================================================
+ * BPMN DIFF VIEWER WRAPPER
+ * Container for the actual diff viewer component
+ * Note: The diff viewer itself handles its own height via prop
+ * ============================================================================ */
+
+.diffViewerWrapper {
+  /* No additional styling needed - BpmnDiffViewer handles its own layout */
+}

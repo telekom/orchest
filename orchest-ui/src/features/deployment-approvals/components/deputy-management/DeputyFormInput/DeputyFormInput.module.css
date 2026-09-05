@@ -1,0 +1,49 @@
+.container {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-2);
+}
+
+.inputWrapper {
+  flex: 1;
+  min-width: 0;
+}
+
+.addButton {
+  flex-shrink: 0;
+  height: var(--input-height-sm);
+  min-width: 4.5rem;
+  padding: 0 var(--spacing-3);
+  gap: var(--spacing-1);
+  background-color: var(--color-magenta) !important;
+  border-color: var(--color-magenta) !important;
+  color: var(--color-white) !important;
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--color-magenta) 30%, transparent);
+}
+
+.addButton:hover:not(:disabled) {
+  background-color: var(--color-magenta-hover) !important;
+  border-color: var(--color-magenta-hover) !important;
+  color: var(--color-white) !important;
+}
+
+.addButton:disabled {
+  opacity: 0.55;
+  /* Keep magenta readable when waiting for a valid email */
+  background-color: color-mix(in srgb, var(--color-magenta) 55%, var(--color-gray-400)) !important;
+  border-color: transparent !important;
+  color: var(--color-white) !important;
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

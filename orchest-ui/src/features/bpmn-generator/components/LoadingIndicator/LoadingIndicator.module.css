@@ -1,0 +1,67 @@
+/* LoadingIndicator Component Styles */
+
+.messageContainer {
+  display: flex;
+  margin-bottom: var(--spacing-4);
+  justify-content: flex-start;
+}
+
+.messageBubble {
+  max-width: 80%;
+  color: var(--color-gray-800);
+}
+
+:global(.dark) .messageBubble {
+  color: var(--color-gray-100);
+}
+
+.flexContainer {
+  display: flex;
+  align-items: center;
+}
+
+.thinkingText {
+  margin-right: var(--spacing-2);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+}
+
+.dots {
+  display: flex;
+  gap: var(--spacing-1);
+}
+
+.dot {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.timeoutMessage {
+  margin-top: var(--spacing-1);
+  font-size: var(--font-size-body-sm);
+  color: var(--color-gray-600);
+}
+
+:global(.dark) .timeoutMessage {
+  color: var(--color-gray-400);
+}

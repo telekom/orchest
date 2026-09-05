@@ -1,0 +1,181 @@
+.bellButton {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 9999px;
+  background: transparent;
+  color: hsl(var(--muted-foreground));
+  cursor: pointer;
+  transition:
+    background-color var(--transition-fast) var(--transition-ease),
+    border-color var(--transition-fast) var(--transition-ease),
+    color var(--transition-fast) var(--transition-ease),
+    box-shadow var(--transition-fast) var(--transition-ease);
+}
+
+.bellButton:hover,
+.bellButton[data-state='open'] {
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border);
+  color: var(--color-magenta);
+}
+
+.bellButtonActive {
+  color: var(--color-magenta);
+}
+
+.bellIcon {
+  flex-shrink: 0;
+}
+
+.badge {
+  position: absolute;
+  top: -0.1rem;
+  right: -0.1rem;
+  min-width: 1rem;
+  height: 1rem;
+  padding-inline: 0.25rem;
+  border-radius: 9999px;
+  background-color: var(--color-magenta);
+  box-shadow: var(--neon-glow-sm);
+  color: hsl(var(--primary-foreground));
+  font-size: 0.625rem;
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropdownContent {
+  width: min(22rem, calc(100vw - 2rem));
+  max-height: min(24rem, 70vh);
+  overflow-y: auto;
+  padding: var(--spacing-1);
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border-bright);
+  box-shadow: var(--glass-shadow-lg);
+  color: hsl(var(--popover-foreground));
+  z-index: var(--z-index-dropdown);
+}
+
+.dropdownHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-2) var(--spacing-1);
+}
+
+.dropdownTitle {
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-semibold);
+  color: hsl(var(--foreground));
+}
+
+.dropdownCount {
+  min-width: 1.25rem;
+  height: 1.25rem;
+  padding-inline: 0.35rem;
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--color-magenta) 16%, transparent);
+  color: var(--color-magenta);
+  font-size: 0.6875rem;
+  font-weight: var(--font-weight-bold);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.emptyState {
+  padding: var(--spacing-4) var(--spacing-2);
+  text-align: center;
+  font-size: var(--font-size-body-sm);
+  color: hsl(var(--muted-foreground));
+}
+
+.menuItem {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2);
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+}
+
+.menuItem:hover {
+  background: var(--glass-bg-hover);
+  color: var(--color-magenta);
+}
+
+.itemIcon {
+  margin-top: 0.15rem;
+  flex-shrink: 0;
+  color: currentColor;
+  opacity: 0.8;
+}
+
+.itemBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.itemTitle {
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-medium);
+  color: hsl(var(--foreground));
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.menuItem:hover .itemTitle {
+  color: var(--color-magenta);
+}
+
+.itemSubtitle,
+.itemMeta {
+  font-size: 0.6875rem;
+  color: hsl(var(--muted-foreground));
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.separator {
+  margin: var(--spacing-1) 0;
+  background: var(--glass-border);
+}
+
+.viewAllItem {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2);
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  color: var(--color-magenta);
+}
+
+.viewAllItem:hover {
+  background: color-mix(in srgb, var(--color-magenta) 10%, transparent);
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .dropdownContent {
+    background: hsl(var(--popover));
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}

@@ -1,0 +1,61 @@
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  height: var(--input-height-sm);
+  padding: 0 var(--spacing-3);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-lg);
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  color: hsl(var(--foreground));
+  font-size: var(--text-body);
+  font-family: var(--font-sans);
+  outline: none;
+  transition:
+    border-color var(--transition-fast) var(--transition-ease),
+    box-shadow var(--transition-fast) var(--transition-ease);
+}
+
+.input::placeholder {
+  color: hsl(var(--muted-foreground));
+}
+
+.input:focus {
+  border-color: color-mix(in srgb, var(--color-magenta) 40%, var(--glass-border));
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-magenta) 30%, transparent);
+  outline: none;
+}
+
+.input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.error {
+  border-color: hsl(var(--destructive));
+}
+
+.error:focus {
+  border-color: hsl(var(--destructive));
+  box-shadow: 0 0 0 2px hsl(var(--destructive) / 0.2);
+}
+
+.errorMessage {
+  font-size: var(--text-body-sm);
+  color: hsl(var(--destructive));
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .input {
+    background: hsl(var(--background));
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}

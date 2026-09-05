@@ -1,0 +1,231 @@
+.timelineItem {
+  display: flex;
+  column-gap: var(--spacing-3);
+  position: relative;
+  opacity: 0;
+  animation: fadeInTimeline 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeInTimeline {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.timelineDot {
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: var(--border-radius-full);
+  margin-top: var(--spacing-1);
+  flex-shrink: 0;
+}
+
+.dotCompleted {
+  background-color: var(--color-green-500);
+}
+
+.dotIncident {
+  background-color: var(--color-red-500);
+}
+
+.dotHold {
+  background-color: var(--color-yellow-500);
+}
+
+.dotDefault {
+  background-color: var(--color-blue-500);
+}
+
+:global(.dark) .dotCompleted {
+  background-color: var(--color-green-400);
+}
+
+:global(.dark) .dotIncident {
+  background-color: var(--color-red-400);
+}
+
+:global(.dark) .dotHold {
+  background-color: var(--color-yellow-400);
+}
+
+:global(.dark) .dotDefault {
+  background-color: var(--color-blue-400);
+}
+
+.content {
+  flex: 1;
+}
+
+.taskName {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-heading);
+  color: var(--color-gray-900);
+  margin-bottom: var(--spacing-1-5);
+}
+
+.nodeTypeIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+:global(.dark) .taskName {
+  color: var(--color-gray-100);
+}
+
+.timestamps {
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  color: var(--color-gray-600);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+:global(.dark) .timestamps {
+  color: var(--color-gray-300);
+}
+
+.timestampRow {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1-5);
+}
+
+.timestampText {
+  color: var(--color-gray-500);
+}
+
+:global(.dark) .timestampText {
+  color: var(--color-gray-400);
+}
+
+.loadingContainer {
+  padding: var(--spacing-2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.loadingItem {
+  display: flex;
+  column-gap: var(--spacing-3);
+}
+
+.loadingDot {
+  width: 0.625rem;
+  height: 0.625rem;
+  background-color: var(--color-gray-300);
+  border-radius: var(--border-radius-full);
+  margin-top: var(--spacing-1);
+}
+
+:global(.dark) .loadingDot {
+  background-color: var(--color-gray-600);
+}
+
+.loadingContent {
+  flex: 1;
+}
+
+.loadingTitle {
+  height: 0.875rem;
+  background-color: var(--color-gray-300);
+  border-radius: var(--border-radius-sm);
+  width: 33%;
+  margin-bottom: var(--spacing-2);
+}
+
+:global(.dark) .loadingTitle {
+  background-color: var(--color-gray-600);
+}
+
+.loadingLine {
+  height: 0.75rem;
+  background-color: var(--color-gray-200);
+  border-radius: var(--border-radius-sm);
+  margin-bottom: var(--spacing-1);
+}
+
+:global(.dark) .loadingLine {
+  background-color: var(--color-gray-700);
+}
+
+.loadingLineShort {
+  width: 25%;
+}
+
+.loadingLineLong {
+  width: 50%;
+}
+
+.emptyContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-2);
+  height: calc(100% - 4px);
+}
+
+.emptyText {
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  color: var(--color-gray-500);
+}
+
+:global(.dark) .emptyText {
+  color: var(--color-gray-400);
+}
+
+.timelineContainer {
+  padding: var(--spacing-2);
+  display: flex;
+  flex-direction: column;
+}
+
+.timelineWrapper {
+  position: relative;
+}
+
+.verticalLine {
+  position: absolute;
+  inset-block: 0;
+  width: 0.125rem;
+  background-color: var(--color-gray-200);
+  left: var(--spacing-1);
+}
+
+:global(.dark) .verticalLine {
+  background-color: var(--color-gray-700);
+}
+
+.timelineList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  position: relative;
+  padding-block: var(--spacing-1-5);
+}
+
+.scrollArea {
+  height: 100%;
+  width: 100%;
+}

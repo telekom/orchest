@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  gap: var(--spacing-4);
+  padding: var(--spacing-2);
+  overflow: hidden;
+  background: var(--glass-bg-subtle);
+  border: 1px solid var(--glass-border-subtle);
+  border-radius: var(--border-radius-xl);
+}

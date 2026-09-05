@@ -1,0 +1,38 @@
+/* Skeleton Component Styles */
+
+.skeleton {
+  border-radius: var(--border-radius-md);
+  background: linear-gradient(
+    90deg,
+    var(--glass-bg-subtle) 0%,
+    color-mix(in srgb, var(--color-magenta) 12%, var(--glass-bg-subtle)) 50%,
+    var(--glass-bg-subtle) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.8s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .skeleton {
+    background: hsl(var(--muted));
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}

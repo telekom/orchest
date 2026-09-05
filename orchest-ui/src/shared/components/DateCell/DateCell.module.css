@@ -1,0 +1,41 @@
+.fallback {
+  color: var(--color-gray-400);
+}
+
+:global(.dark) .fallback {
+  color: var(--color-gray-500);
+}
+
+.dateText {
+  transition: color var(--transition-fast) var(--transition-ease);
+  white-space: nowrap;
+  font-size: var(--font-size-body-sm);
+  color: var(--color-gray-700);
+}
+
+:global(.dark) .dateText {
+  color: var(--color-gray-300);
+}
+
+.dateTextWithTooltip {
+  color: inherit;
+  cursor: help;
+}
+
+.dateTextWithTooltip:hover {
+  color: var(--color-gray-900);
+}
+
+:global(.dark) .dateTextWithTooltip:hover {
+  color: var(--color-gray-100);
+}
+
+.tooltipLabel {
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--spacing-1);
+}
+
+.tooltipDate {
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+}

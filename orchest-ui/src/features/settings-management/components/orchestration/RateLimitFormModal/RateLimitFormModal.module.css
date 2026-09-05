@@ -1,0 +1,185 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: var(--glass-bg-strong);
+  border: 1px solid var(--glass-border-bright);
+  border-radius: var(--border-radius-lg);
+  padding: 24px;
+  width: 100%;
+  max-width: 520px;
+  box-shadow: var(--glass-shadow-lg);
+  backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+}
+
+.modalTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0 0 20px;
+  color: hsl(var(--foreground));
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* Status Banner Section */
+.statusBanner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: var(--spacing-4);
+  padding: var(--spacing-4);
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  border-radius: var(--border-radius-lg);
+  border: var(--border-width-1) solid var(--glass-border-subtle);
+}
+
+:global(.dark) .statusBanner {
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  border-color: var(--glass-border-subtle);
+}
+
+.statusContent {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.statusIcon {
+  padding: var(--spacing-2);
+  border-radius: var(--border-radius-lg);
+}
+
+.statusIconEnabled {
+  background-color: var(--color-green-100);
+  color: var(--color-green-600);
+}
+
+:global(.dark) .statusIconEnabled {
+  background-color: var(--color-green-900-alpha-30);
+  color: var(--color-green-400);
+}
+
+.statusIconDisabled {
+  background-color: var(--color-red-100);
+  color: var(--color-red-800);
+}
+
+:global(.dark) .statusIconDisabled {
+  background-color: var(--color-red-900-alpha-30);
+  color: var(--color-red-300);
+}
+
+.statusIconSvg {
+  width: var(--spacing-5);
+  height: var(--spacing-5);
+}
+
+.statusTextContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.statusLabel {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-gray-900);
+  cursor: pointer;
+}
+
+:global(.dark) .statusLabel {
+  color: var(--color-gray-100);
+}
+
+.statusDescription {
+  font-size: var(--font-size-body-sm);
+  color: var(--color-gray-500);
+  margin-top: var(--spacing-0-5);
+}
+
+:global(.dark) .statusDescription {
+  color: var(--color-gray-400);
+}
+
+/* Form Fields Section */
+.fieldsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-5);
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.fieldLabelContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.fieldLabel {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-gray-900);
+}
+
+:global(.dark) .fieldLabel {
+  color: var(--color-gray-100);
+}
+
+.requiredIndicator {
+  color: var(--color-red-500);
+}
+
+/* Input Error States */
+.inputError {
+  border-color: var(--color-red-500);
+}
+
+.errorMessage {
+  font-size: var(--font-size-body-sm);
+  color: var(--color-red-500);
+}
+
+:global(.dark) .errorMessage {
+  color: var(--color-red-400);
+}
+
+/* Two Column Grid for Numeric Fields */
+.twoColumnGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-5);
+}
+
+@media (min-width: 768px) {
+  .twoColumnGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

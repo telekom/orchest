@@ -1,0 +1,42 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-4);
+  flex: 1;
+  min-height: 0;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.title {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-gray-700);
+  margin-bottom: var(--spacing-2);
+}
+
+:global(.dark) .title {
+  color: var(--color-gray-300);
+}
+
+.diagramContainer {
+  flex: 1;
+  min-height: 0;
+  border: var(--border-width-1) solid var(--color-gray-100);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+}
+
+:global(.dark) .diagramContainer {
+  border-color: var(--color-gray-600);
+}

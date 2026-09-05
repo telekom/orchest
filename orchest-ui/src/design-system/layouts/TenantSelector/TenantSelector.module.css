@@ -1,0 +1,127 @@
+.container {
+  position: relative;
+}
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 1.75rem;
+  padding: 0 var(--spacing-2) 0 var(--spacing-2);
+  border: 1px solid var(--glass-border);
+  border-radius: 9999px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  box-shadow: var(--glass-shadow-sm);
+  color: hsl(var(--foreground));
+  font-size: var(--text-body-sm);
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition:
+    border-color var(--transition-fast) var(--transition-ease),
+    background var(--transition-fast) var(--transition-ease),
+    box-shadow var(--transition-fast) var(--transition-ease);
+  white-space: nowrap;
+}
+
+.trigger:hover {
+  border-color: var(--glass-border-bright);
+  background: var(--glass-bg-hover);
+  box-shadow: var(--glass-shadow-hover);
+}
+
+.triggerIcon {
+  color: var(--color-magenta);
+  flex-shrink: 0;
+}
+
+.triggerLabel {
+  letter-spacing: 0.01em;
+}
+
+.chevron {
+  font-size: 0.6rem;
+  color: hsl(var(--muted-foreground));
+  margin-left: 2px;
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-index-fixed);
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: var(--z-index-popover);
+  min-width: 10rem;
+  padding: var(--spacing-1);
+  border: 1px solid var(--glass-border-bright);
+  border-radius: 6px;
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  box-shadow: var(--glass-shadow-lg);
+  animation: slideDown 150ms ease;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-2);
+  width: 100%;
+  padding: var(--spacing-2) var(--spacing-3);
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  color: hsl(var(--foreground));
+  font-size: var(--text-body-sm);
+  font-family: var(--font-sans);
+  cursor: pointer;
+  text-align: left;
+  transition:
+    background var(--transition-fast) var(--transition-ease),
+    border-color var(--transition-fast) var(--transition-ease),
+    color var(--transition-fast) var(--transition-ease);
+}
+
+.option:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border);
+}
+
+.optionActive {
+  color: var(--color-magenta);
+  background: color-mix(in srgb, var(--color-magenta) 8%, var(--glass-bg));
+  border-color: color-mix(in srgb, var(--color-magenta) 20%, var(--glass-border));
+  font-weight: var(--font-weight-medium);
+}
+
+.optionLabel {
+  flex: 1;
+}
+
+.checkIcon {
+  color: var(--color-magenta);
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 4px color-mix(in srgb, var(--color-magenta) 40%, transparent));
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .trigger,
+  .dropdown {
+    background: hsl(var(--card));
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}

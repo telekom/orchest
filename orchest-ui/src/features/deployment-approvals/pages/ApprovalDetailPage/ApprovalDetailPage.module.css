@@ -1,0 +1,7 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: var(--spacing-4);
+  overflow: hidden;
+}

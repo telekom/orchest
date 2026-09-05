@@ -1,0 +1,49 @@
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  border: 1px solid var(--glass-border);
+  border-radius: 9999px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  box-shadow: var(--glass-shadow-sm);
+  color: hsl(var(--foreground));
+  cursor: pointer;
+  transition:
+    border-color var(--transition-fast) var(--transition-ease),
+    background var(--transition-fast) var(--transition-ease),
+    box-shadow var(--transition-fast) var(--transition-ease);
+}
+
+.toggle:hover {
+  border-color: var(--glass-border-bright);
+  background: var(--glass-bg-hover);
+  box-shadow: var(--glass-shadow-hover);
+}
+
+.toggle:focus-visible {
+  outline: 2px solid var(--color-magenta);
+  outline-offset: 2px;
+}
+
+.iconMoon {
+  flex-shrink: 0;
+  color: var(--color-gray-500);
+}
+
+.iconSun {
+  flex-shrink: 0;
+  color: var(--color-yellow-500);
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .toggle {
+    background: hsl(var(--card));
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}

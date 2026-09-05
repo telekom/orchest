@@ -1,0 +1,40 @@
+/* NotFound.module.css */
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+}
+
+.content {
+  text-align: center;
+}
+
+.title {
+  font-family: var(--font-display);
+
+  font-size: var(--font-size-display);
+  line-height: var(--line-height-display);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 1rem;
+  color: var(--color-gray-900);
+}
+
+:global(.dark) .title {
+  color: var(--color-gray-100);
+}
+
+.message {
+  font-size: var(--font-size-body-lg);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-gray-600);
+  margin-bottom: 1rem;
+}
+
+:global(.dark) .message {
+  color: var(--color-gray-400);
+}

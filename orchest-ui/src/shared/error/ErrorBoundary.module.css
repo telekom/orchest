@@ -1,0 +1,151 @@
+/* ErrorBoundary.module.css */
+
+/* App Level Error */
+.appContainer {
+  min-height: 100vh;
+  background-color: hsl(var(--background));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-4);
+}
+
+.appCard {
+  width: 100%;
+  max-width: 28rem;
+}
+
+.appIconContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--spacing-4);
+}
+
+.appIcon {
+  height: var(--spacing-12);
+  width: var(--spacing-12);
+}
+
+.appActions {
+  display: flex;
+  gap: var(--spacing-2);
+}
+
+.appButton {
+  flex: 1;
+}
+
+/* Page Level Error */
+.pageContainer {
+  max-width: var(--container-lg);
+  margin: 0 auto;
+  padding: var(--spacing-8) var(--spacing-4);
+}
+
+.pageCard {
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+.pageIconContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--spacing-4);
+}
+
+.pageIcon {
+  height: var(--spacing-10);
+  width: var(--spacing-10);
+}
+
+.pageActions {
+  display: flex;
+  gap: var(--spacing-2);
+  justify-content: flex-end;
+}
+
+.pageButton {
+  flex: 1;
+}
+
+/* Component Level Error */
+.componentCard {
+  width: 100%;
+}
+
+.componentIconContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.componentIcon {
+  height: var(--spacing-5);
+  width: var(--spacing-5);
+}
+
+.componentDetails {
+  padding: var(--spacing-2);
+  margin-bottom: var(--spacing-4);
+}
+
+/* Shared Styles */
+.contentSpace {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+/* Error Details Container */
+.errorDetails {
+  background-color: hsl(var(--muted));
+  color: hsl(var(--muted-foreground));
+  padding: var(--spacing-3);
+  border-radius: var(--border-radius-md);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-body);
+}
+
+.errorDetailsCompact {
+  padding: var(--spacing-2);
+  margin-bottom: var(--spacing-4);
+}
+
+.errorDetailsTitle {
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--spacing-1);
+}
+
+.errorDetailsMessage {
+  margin: 0;
+}
+
+.errorDetailsId {
+  margin-top: var(--spacing-2);
+  font-size: var(--font-size-body-sm);
+}
+
+.errorDetailsIdCompact {
+  margin-top: var(--spacing-1);
+}
+
+/* Alert Icon Sizing */
+.iconLarge {
+  height: var(--spacing-12);
+  width: var(--spacing-12);
+}
+
+.iconMedium {
+  height: var(--spacing-10);
+  width: var(--spacing-10);
+}
+
+.iconSmall {
+  height: var(--spacing-5);
+  width: var(--spacing-5);
+}
+
+/* Alert Icon Color */
+.alertIcon {
+  color: hsl(var(--destructive));
+}

@@ -1,0 +1,21 @@
+.codeBlock {
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-body);
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border-subtle);
+  padding: var(--spacing-2);
+  border-radius: var(--border-radius-xl);
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  box-shadow: var(--glass-shadow-sm);
+}
+
+.codeBlockInvalid {
+  border-left: var(--border-width-4) solid var(--color-red-500);
+}
+
+.inlineText {
+  font-family: var(--font-mono);
+}

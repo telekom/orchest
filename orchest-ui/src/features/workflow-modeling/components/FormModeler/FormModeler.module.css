@@ -1,0 +1,83 @@
+/* FormModeler.module.css */
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  border-radius: var(--border-radius-xl);
+  border: var(--border-width-1) solid var(--glass-border-subtle);
+}
+
+:global(.dark) .container {
+  border-color: var(--glass-border-subtle);
+}
+
+.modelerContainer {
+  flex: 1;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+}
+
+.propertiesPanel {
+  transition: width var(--transition-base) var(--transition-ease),
+              min-width var(--transition-base) var(--transition-ease),
+              opacity var(--transition-base) var(--transition-ease);
+  overflow: hidden;
+  opacity: 1;
+}
+
+.propertiesPanel.hidden {
+  /* Override form-js default width for flex layout */ width: 0 !important;
+  min-width: 0 !important;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.emptyState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-height: 400px;
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+}
+
+.emptyStateContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  max-width: 400px;
+  text-align: center;
+  padding: 2rem;
+}
+
+.emptyStateIcon {
+  width: 64px;
+  height: 64px;
+  color: var(--color-gray-400);
+  margin-bottom: 0.5rem;
+}
+
+:global(.dark) .emptyStateIcon {
+  color: var(--color-gray-500);
+}
+
+.emptyStateTitle {
+  font-family: var(--font-display);
+
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.emptyStateDescription {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}

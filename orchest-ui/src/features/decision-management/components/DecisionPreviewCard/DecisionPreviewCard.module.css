@@ -1,0 +1,196 @@
+.card {
+  width: 400px;
+  max-height: 380px;
+  overflow-y: auto;
+  background-color: hsl(var(--popover));
+  color: hsl(var(--popover-foreground));
+  border: 1px solid hsl(var(--border));
+  border-radius: 6px;
+  box-shadow: var(--shadow-xl);
+  z-index: var(--z-index-popover);
+  animation: fadeIn 150ms ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  padding: var(--spacing-3) var(--spacing-4);
+  border-bottom: 1px solid hsl(var(--border));
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.headerMain {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex-wrap: wrap;
+}
+
+.decisionName {
+  font-size: var(--text-body);
+  font-weight: var(--font-weight-semibold);
+  color: hsl(var(--foreground));
+}
+
+.version {
+  font-size: var(--text-body-sm);
+  color: hsl(var(--muted-foreground));
+  padding: 1px 4px;
+  border-radius: 2px;
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+}
+
+.stateBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--text-body-sm);
+  font-weight: var(--font-weight-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-left: auto;
+}
+
+.stateDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.headerMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.metaItem {
+  font-size: var(--text-body-sm);
+  color: hsl(var(--muted-foreground));
+}
+
+/* Variables */
+.variablesSection {
+  padding: var(--spacing-2) var(--spacing-4);
+  border-bottom: 1px solid hsl(var(--border));
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1-5);
+}
+
+.variablesSection:last-child {
+  border-bottom: none;
+}
+
+.variablesTitle {
+  font-size: var(--text-body-sm);
+  font-weight: var(--font-weight-medium);
+  color: hsl(var(--muted-foreground));
+}
+
+.variablesList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-0-5);
+}
+
+.variableRow {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-2);
+  font-size: var(--text-body-sm);
+  line-height: 1.4;
+}
+
+.variableKey {
+  color: hsl(var(--foreground));
+  font-weight: var(--font-weight-medium);
+  flex-shrink: 0;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.variableKey::after {
+  content: ":";
+}
+
+.variableValue {
+  color: hsl(var(--muted-foreground));
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+}
+
+.variablesMore {
+  font-size: var(--text-body-sm);
+  color: hsl(var(--primary));
+  margin-top: var(--spacing-0-5);
+}
+
+/* Rules */
+.rulesSection {
+  padding: var(--spacing-2) var(--spacing-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1-5);
+}
+
+.rulesList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-1);
+}
+
+.ruleBadge {
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  padding: 1px 6px;
+  border-radius: 2px;
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  color: hsl(var(--foreground));
+}
+
+/* Loading State */
+.loadingState {
+  padding: var(--spacing-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.skelLine {
+  height: 12px;
+  border-radius: 2px;
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  animation: pulse 1.5s infinite;
+}
+
+/* Error State */
+.errorState {
+  padding: var(--spacing-4);
+  text-align: center;
+  font-size: var(--text-body-sm);
+  color: hsl(var(--destructive));
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateX(4px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}

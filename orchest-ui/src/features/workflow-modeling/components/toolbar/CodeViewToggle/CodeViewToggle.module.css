@@ -1,0 +1,22 @@
+.button {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin-left: var(--spacing-2);
+}
+
+.subtleWhite {
+  color: var(--color-gray-700);
+  background-color: transparent;
+}
+
+.subtleWhite:hover {
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+}
+
+:global(.dark) .subtleWhite {
+  color: var(--color-gray-200);
+}
+

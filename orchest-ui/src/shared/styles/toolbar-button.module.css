@@ -1,0 +1,59 @@
+/* Shared toolbar button styles for workflow-modeling toolbar components */
+
+/* Base toolbar button sizing and typography */
+.toolbarButton {
+  height: var(--spacing-8);
+  min-height: var(--spacing-8);
+  font-size: var(--font-size-body-sm);
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-compact);
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--glass-border-subtle);
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  transition:
+    background var(--transition-normal) var(--transition-ease),
+    border-color var(--transition-normal) var(--transition-ease),
+    box-shadow var(--transition-normal) var(--transition-ease),
+    color var(--transition-normal) var(--transition-ease);
+}
+
+.toolbarButton:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border);
+  box-shadow: var(--glass-shadow-sm);
+}
+
+/* ODS subtle white variant — glass pill */
+.odsSubtleWhite {
+  --colours-basic-background-subtle: var(--glass-bg-subtle);
+  background: var(--glass-bg-subtle);
+  border: 1px solid var(--glass-border-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+}
+
+:global(.dark) .odsSubtleWhite {
+  --colours-basic-background-subtle: var(--glass-bg-subtle);
+}
+
+/* Neon active tool state */
+.toolbarButtonActive,
+.odsSubtleWhite:global(.active),
+.odsSubtleWhite:global([data-state="active"]),
+.odsSubtleWhite:global([aria-pressed="true"]) {
+  background: color-mix(in srgb, var(--color-magenta) 12%, var(--glass-bg)) !important;
+  border-color: color-mix(in srgb, var(--color-magenta) 35%, var(--glass-border)) !important;
+  --colours-basic-background-subtle: color-mix(in srgb, var(--color-magenta) 12%, var(--glass-bg));
+  color: var(--color-magenta) !important;
+  box-shadow: var(--neon-glow-sm);
+}
+
+.toolbarButtonActive:hover,
+.odsSubtleWhite:global(.active):hover,
+.odsSubtleWhite:global([data-state="active"]):hover {
+  background: color-mix(in srgb, var(--color-magenta) 18%, var(--glass-bg)) !important;
+  box-shadow: var(--neon-glow-md);
+}

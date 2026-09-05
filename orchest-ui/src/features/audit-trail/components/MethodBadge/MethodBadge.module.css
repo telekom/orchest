@@ -1,0 +1,52 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.125rem 0.5rem;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  border-radius: 3px;
+  line-height: 1.4;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+.get {
+  background: hsl(142 71% 45% / 0.15);
+  color: hsl(142 71% 35%);
+  border: 1px solid hsl(142 71% 45% / 0.3);
+}
+
+.post {
+  background: hsl(217 91% 60% / 0.15);
+  color: hsl(217 91% 45%);
+  border: 1px solid hsl(217 91% 60% / 0.3);
+}
+
+.put {
+  background: hsl(38 92% 50% / 0.15);
+  color: hsl(38 80% 40%);
+  border: 1px solid hsl(38 92% 50% / 0.3);
+}
+
+.patch {
+  background: hsl(270 60% 60% / 0.15);
+  color: hsl(270 60% 45%);
+  border: 1px solid hsl(270 60% 60% / 0.3);
+}
+
+.delete {
+  background: hsl(0 72% 51% / 0.15);
+  color: hsl(0 72% 42%);
+  border: 1px solid hsl(0 72% 51% / 0.3);
+}
+
+.default {
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  color: hsl(var(--muted-foreground));
+  border: 1px solid hsl(var(--border));
+}

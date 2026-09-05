@@ -1,0 +1,14 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: var(--spacing-3);
+  flex-shrink: 0;
+  border-radius: var(--border-radius-xl);
+}
+
+/* StaggerList wraps each card — stretch wrappers so all cells stay equal */
+.grid > * {
+  display: flex;
+  min-width: 0;
+  min-height: var(--spacing-10);
+}

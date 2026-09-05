@@ -1,0 +1,109 @@
+.container {
+  min-height: 100vh;
+  background-color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-4);
+}
+
+:global(.dark) .container {
+  background-color: var(--color-gray-900);
+}
+
+.card {
+  width: 100%;
+  max-width: 28rem;
+}
+
+.cardHeader {
+  text-align: center;
+}
+
+.iconContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--spacing-4);
+}
+
+.icon {
+  width: var(--icon-size-xl);
+  height: var(--icon-size-xl);
+  color: var(--color-red-500);
+}
+
+:global(.dark) .icon {
+  color: var(--color-red-400);
+}
+
+.cardTitle {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-heading);
+  color: var(--color-gray-900);
+  margin-top: 0;
+}
+
+:global(.dark) .cardTitle {
+  color: var(--color-gray-100);
+}
+
+.cardDescription {
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.errorDetails {
+  background-color: var(--color-gray-100);
+  padding: var(--spacing-3);
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  color: var(--color-gray-700);
+  font-family: var(--font-mono);
+}
+
+:global(.dark) .errorDetails {
+  background-color: rgba(0, 0, 0, 0.3);
+  color: var(--color-gray-400);
+}
+
+.errorDetailsTitle {
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--spacing-1);
+}
+
+.errorMessage {
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--spacing-1);
+  word-break: break-word;
+}
+
+.errorDetailsStack {
+  margin-top: var(--spacing-2);
+}
+
+.errorDetailsStackSummary {
+  cursor: pointer;
+  font-size: var(--font-size-body-sm);
+}
+
+.errorDetailsStackPre {
+  margin-top: var(--spacing-2);
+  white-space: pre-wrap;
+  overflow: auto;
+  max-height: 10rem;
+  font-size: var(--font-size-body-sm);
+}
+
+.actionButtons {
+  display: flex;
+  gap: var(--spacing-3);
+  justify-content: flex-end;
+}

@@ -1,0 +1,43 @@
+.loadingContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-2);
+}
+
+.emptyContainer {
+  position: absolute;
+  top: 28px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  z-index: 0;
+}
+
+.loadingContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.loadingText {
+  font-size: 0.8rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.emptyText {
+  text-align: center;
+  color: var(--color-gray-500);
+  font-size: var(--font-size-body);
+}
+
+:global(.dark) .emptyText {
+  color: var(--color-gray-400);
+}

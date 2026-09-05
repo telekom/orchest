@@ -1,0 +1,173 @@
+.bar {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: var(--bar-height, 12px);
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  border-radius: var(--border-radius-full);
+  overflow: hidden;
+  isolation: isolate;
+  gap: 2px;
+  padding: 0;
+}
+
+.barLarge {
+  --bar-height: 24px;
+  gap: 3px;
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  border-radius: var(--border-radius-full);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--color-gray-900) 4%, transparent);
+}
+
+:global(.dark) .barLarge {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--color-gray-50) 4%, transparent);
+}
+
+.segment {
+  position: relative;
+  height: 100%;
+  background: var(--seg-color, var(--color-gray-300));
+  transition:
+    width 700ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 220ms ease,
+    transform 220ms ease;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+}
+
+/* Round outer corners only */
+.segment:first-child {
+  border-top-left-radius: var(--border-radius-full);
+  border-bottom-left-radius: var(--border-radius-full);
+}
+
+.segment:last-child {
+  border-top-right-radius: var(--border-radius-full);
+  border-bottom-right-radius: var(--border-radius-full);
+}
+
+.segment:only-child {
+  border-radius: var(--border-radius-full);
+}
+
+/* Subtle highlight overlay using soft gradient */
+.segment::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.14) 0%,
+    rgba(255, 255, 255, 0) 50%,
+    rgba(0, 0, 0, 0.06) 100%
+  );
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.segment:hover {
+  filter: brightness(1.05) saturate(1.04);
+}
+
+.segment:focus-visible {
+  outline: 2px solid var(--color-magenta);
+  outline-offset: 2px;
+}
+
+.segmentLabel {
+  position: relative;
+  z-index: 1;
+  font-size: 11px;
+  font-weight: var(--font-weight-bold);
+  color: rgba(255, 255, 255, 0.96);
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 1px 1.5px rgba(0, 0, 0, 0.22);
+  pointer-events: none;
+  white-space: nowrap;
+  padding: 0 var(--spacing-2);
+}
+
+.empty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-body-sm);
+  color: var(--color-gray-500);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ---------- LEGEND ---------- */
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2-5) var(--spacing-4);
+  margin-top: var(--spacing-3);
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: var(--font-size-body-sm);
+  color: var(--color-gray-700);
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  padding: 4px 10px 4px 8px;
+  border-radius: var(--border-radius-full);
+  transition: background 160ms ease, transform 160ms ease;
+  font-variant-numeric: tabular-nums;
+}
+
+:global(.dark) .legendItem {
+  color: var(--color-gray-200);
+}
+
+.legendItem:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--seg-color, var(--color-gray-400)) 12%, transparent);
+}
+
+.legendItem:disabled {
+  cursor: default;
+}
+
+.legendDot {
+  width: 9px;
+  height: 9px;
+  border-radius: var(--border-radius-full);
+  background: var(--seg-color, var(--color-gray-400));
+  flex-shrink: 0;
+}
+
+.legendCount {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-gray-900);
+}
+
+:global(.dark) .legendCount {
+  color: var(--color-gray-50);
+}
+
+.legendShare {
+  color: var(--color-gray-500);
+  font-size: 11px;
+}

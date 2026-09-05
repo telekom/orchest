@@ -1,0 +1,29 @@
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: var(--spacing-2) var(--spacing-4);
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  color: var(--color-gray-900, #111827);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  border-bottom: 1px solid var(--glass-border-subtle);
+  transition: background-color var(--transition-base) var(--transition-ease),
+    color var(--transition-base) var(--transition-ease),
+    border-color var(--transition-base) var(--transition-ease);
+}
+
+:global(.dark) .banner {
+  color: var(--color-gray-100, #f3f4f6);
+}
+
+.message {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  text-align: center;
+}

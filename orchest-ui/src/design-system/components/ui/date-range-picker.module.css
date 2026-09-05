@@ -1,0 +1,428 @@
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  height: var(--input-height-sm);
+  padding: 0 var(--spacing-2);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-lg);
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  color: hsl(var(--foreground));
+  font-size: var(--text-body-sm);
+  font-family: var(--font-sans);
+  cursor: pointer;
+  outline: none;
+  transition:
+    border-color var(--transition-fast) var(--transition-ease),
+    box-shadow var(--transition-fast) var(--transition-ease);
+  white-space: nowrap;
+}
+
+.trigger:hover {
+  border-color: var(--glass-border-bright);
+}
+
+.trigger:focus-visible {
+  border-color: color-mix(in srgb, var(--color-magenta) 40%, var(--glass-border));
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-magenta) 30%, transparent);
+  outline: none;
+}
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.calendarIcon {
+  flex-shrink: 0;
+  color: hsl(var(--muted-foreground));
+}
+
+.value {
+  flex: 1;
+}
+
+.placeholder {
+  color: hsl(var(--muted-foreground));
+}
+
+.clearButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 2px;
+  color: hsl(var(--muted-foreground));
+  cursor: pointer;
+}
+
+.clearButton:hover {
+  color: hsl(var(--foreground));
+}
+
+.content {
+  z-index: var(--z-index-popover);
+  border: 1px solid var(--glass-border-bright);
+  border-radius: var(--border-radius-xl);
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  color: hsl(var(--popover-foreground));
+  box-shadow: var(--glass-shadow-lg);
+  padding: var(--spacing-3);
+  color-scheme: light dark;
+  animation: fadeIn var(--transition-fast) var(--transition-ease);
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Quick-select row */
+.quickSelect {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.quickSelectLabel {
+  font-size: var(--text-body-sm);
+  color: hsl(var(--muted-foreground));
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+}
+
+.quickSelectDropdown {
+  height: 1.75rem;
+  padding: 0 var(--spacing-2);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-sm);
+  background: var(--glass-bg-subtle);
+  color: hsl(var(--foreground));
+  font-size: var(--text-body-sm);
+  font-family: var(--font-sans);
+  outline: none;
+  cursor: pointer;
+  color-scheme: light dark;
+}
+
+.quickSelectDropdown:focus {
+  border-color: color-mix(in srgb, var(--color-magenta) 40%, var(--glass-border));
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-magenta) 30%, transparent);
+}
+
+.quickSelectApply {
+  height: 1.75rem;
+  padding: 0 var(--spacing-2);
+  border: 1px solid var(--color-magenta);
+  border-radius: var(--border-radius-sm);
+  background: transparent;
+  color: var(--color-magenta);
+  font-size: var(--text-body-sm);
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-fast) var(--transition-ease);
+}
+
+.quickSelectApply:hover {
+  background: color-mix(in srgb, var(--color-magenta) 10%, transparent);
+}
+
+/* Calendar section */
+.calendarSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.calendar {
+  font-family: var(--font-sans);
+  font-size: var(--text-body-sm);
+  color: hsl(var(--foreground));
+}
+
+.months {
+  display: flex;
+  gap: var(--spacing-4);
+}
+
+.month {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.caption {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--text-body);
+  padding: var(--spacing-1) 0;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+.navButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: none;
+  border-radius: var(--border-radius-sm);
+  background: transparent;
+  color: hsl(var(--muted-foreground));
+  cursor: pointer;
+}
+
+.navButton:hover {
+  background: color-mix(in srgb, var(--color-magenta) 8%, var(--glass-bg-hover));
+  color: var(--color-magenta);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.headRow {
+  display: flex;
+}
+
+.headCell {
+  width: 2rem;
+  font-size: var(--text-body-sm);
+  font-weight: var(--font-weight-medium);
+  color: hsl(var(--muted-foreground));
+  text-align: center;
+}
+
+.row {
+  display: flex;
+  width: 100%;
+  margin-top: var(--spacing-0-5);
+}
+
+.cell {
+  text-align: center;
+  padding: 0;
+}
+
+.day {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: hsl(var(--foreground));
+  font-size: var(--text-body-sm);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.day:hover {
+  background: color-mix(in srgb, var(--color-magenta) 12%, transparent);
+}
+
+.daySelected {
+  background: var(--color-magenta) !important;
+  color: hsl(var(--primary-foreground)) !important;
+}
+
+.rangeStart {
+  background: var(--color-magenta) !important;
+  color: hsl(var(--primary-foreground)) !important;
+  border-radius: 50% !important;
+}
+
+.rangeEnd {
+  background: var(--color-magenta) !important;
+  color: hsl(var(--primary-foreground)) !important;
+  border-radius: 50% !important;
+}
+
+.rangeMiddle {
+  background: color-mix(in srgb, var(--color-magenta) 12%, transparent) !important;
+  color: hsl(var(--foreground)) !important;
+  border-radius: 0 !important;
+}
+
+/* Smooth range fill on the cell (td) so background spans full width */
+.cell:has(.rangeMiddle) {
+  background: color-mix(in srgb, var(--color-magenta) 10%, transparent);
+}
+
+.cell:has(.rangeStart) {
+  background: linear-gradient(to right, transparent 50%, color-mix(in srgb, var(--color-magenta) 10%, transparent) 50%);
+  border-radius: 0;
+}
+
+.cell:has(.rangeEnd) {
+  background: linear-gradient(to left, transparent 50%, color-mix(in srgb, var(--color-magenta) 10%, transparent) 50%);
+  border-radius: 0;
+}
+
+.dayToday {
+  font-weight: var(--font-weight-bold);
+  box-shadow: inset 0 0 0 1px var(--color-magenta);
+}
+
+.dayOutside {
+  color: hsl(var(--muted-foreground));
+  opacity: 0.4;
+}
+
+.dayDisabled {
+  color: hsl(var(--muted-foreground));
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+/* Time row */
+.timeRow {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding-top: var(--spacing-2);
+  border-top: 1px solid var(--glass-border-subtle);
+}
+
+.timeGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+.timeLabel {
+  font-size: var(--text-body-sm);
+  color: hsl(var(--muted-foreground));
+  font-weight: var(--font-weight-medium);
+}
+
+.timeInput {
+  height: 1.75rem;
+  padding: 0 var(--spacing-2);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-sm);
+  background: var(--glass-bg-subtle);
+  color: hsl(var(--foreground));
+  font-size: var(--text-body-sm);
+  font-family: var(--font-sans);
+  outline: none;
+  color-scheme: light dark;
+}
+
+.timeInput:focus {
+  border-color: color-mix(in srgb, var(--color-magenta) 40%, var(--glass-border));
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-magenta) 30%, transparent);
+}
+
+.tzSelect {
+  height: 1.75rem;
+  padding: 0 var(--spacing-2);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-sm);
+  background: var(--glass-bg-subtle);
+  color: hsl(var(--foreground));
+  font-size: var(--text-body-sm);
+  font-family: var(--font-sans);
+  outline: none;
+  cursor: pointer;
+  margin-left: auto;
+  color-scheme: light dark;
+}
+
+.tzSelect:focus {
+  border-color: color-mix(in srgb, var(--color-magenta) 40%, var(--glass-border));
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-magenta) 30%, transparent);
+}
+
+/* Footer */
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--spacing-2);
+  border-top: 1px solid var(--glass-border-subtle);
+  margin-top: var(--spacing-2);
+}
+
+.applyBtn {
+  height: 1.75rem;
+  padding: 0 var(--spacing-3);
+  border: none;
+  border-radius: var(--border-radius-sm);
+  background: var(--color-magenta);
+  color: hsl(var(--primary-foreground));
+  font-size: var(--text-body-sm);
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: opacity var(--transition-fast) var(--transition-ease);
+}
+
+.applyBtn:hover {
+  opacity: 0.9;
+}
+
+.applyBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Dark mode — .dark class on html */
+:global(.dark) .content,
+:global(.dark) .timeInput,
+:global(.dark) .tzSelect,
+:global(.dark) .trigger,
+:global(.dark) .quickSelectDropdown {
+  color-scheme: dark;
+}
+
+/* Fallback for system-level dark preference */
+@media (prefers-color-scheme: dark) {
+  .content,
+  .timeInput,
+  .tzSelect,
+  .trigger,
+  .quickSelectDropdown {
+    color-scheme: dark;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .trigger,
+  .timeInput,
+  .tzSelect {
+    background: hsl(var(--background));
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .content {
+    background: hsl(var(--card));
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}

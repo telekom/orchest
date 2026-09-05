@@ -1,0 +1,59 @@
+/* ModelPicker Component - ODS DropdownSelect wrapper */
+
+.container {
+  position: relative;
+  width: 140px;
+  height: var(--spacing-8);
+}
+
+/* ODS dropdown component styling */
+.container :global(.ODSDropdownSelect) {
+  height: var(--spacing-8);
+  --colours-background-input: var(--glass-bg);
+  --colours-border-input: var(--color-gray-200);
+}
+
+.dark .container :global(.ODSDropdownSelect) {
+  --colours-background-input: var(--color-gray-700);
+  --colours-border-input: var(--color-gray-600);
+}
+
+/* Input field styling - use !important for third-party ODS overrides */
+.container :global(.ODSDropdownSelect-InputField) {
+  height: var(--spacing-8) !important;
+  min-height: var(--spacing-8) !important;
+  padding: 0 var(--spacing-3) !important;
+  font-size: var(--font-size-body-sm) !important;
+  font-family: var(--font-sans) !important;
+  font-weight: var(--font-weight-regular) !important;
+  line-height: var(--line-height-compact) !important;
+  color: var(--color-gray-900) !important;
+  background: var(--glass-bg)!important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: var(--border-radius-md) !important;
+}
+
+.dark .container :global(.ODSDropdownSelect-InputField) {
+  color: var(--color-gray-100) !important;
+  background: var(--glass-bg-strong)!important;
+  border-color: var(--glass-border-subtle) !important;
+}
+
+.container :global(.ODSDropdownSelect-InputField:hover) {
+  background: var(--glass-bg-subtle)!important;
+  border-color: var(--glass-border) !important;
+}
+
+.dark .container :global(.ODSDropdownSelect-InputField:hover) {
+  background: var(--glass-bg-strong)!important;
+  border-color: var(--color-gray-500) !important;
+}
+
+/* Dropdown icon styling */
+.container :global(.ODSDropdownSelect-ExpandAndCollapseIcon) {
+  color: var(--color-gray-600) !important;
+}
+
+.dark .container :global(.ODSDropdownSelect-ExpandAndCollapseIcon) {
+  color: var(--color-gray-400) !important;
+}

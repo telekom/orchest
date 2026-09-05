@@ -1,0 +1,138 @@
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  pointer-events: none;
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  pointer-events: auto;
+}
+
+.popover {
+  position: fixed;
+  z-index: 100001;
+  pointer-events: auto;
+  width: 320px;
+  border-radius: var(--border-radius-lg, 12px);
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg-strong, hsl(220 20% 14%));
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  box-shadow: 0 20px 60px var(--glass-shadow-lg);
+  padding: var(--spacing-4, 16px);
+  color: hsl(var(--foreground, 0 0% 95%));
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-2, 8px);
+}
+
+.title {
+  font-size: var(--font-size-lg, 1rem);
+  font-weight: 600;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  color: hsl(var(--muted-foreground, 0 0% 60%));
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: var(--border-radius-sm, 4px);
+  line-height: 1;
+}
+
+.closeBtn:hover {
+  color: hsl(var(--foreground, 0 0% 95%));
+  background: var(--glass-bg-subtle);
+}
+
+.description {
+  font-size: var(--font-size-body, 0.875rem);
+  color: hsl(var(--muted-foreground, 0 0% 70%));
+  margin: 0 0 var(--spacing-4, 16px);
+  line-height: 1.5;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dots {
+  display: flex;
+  gap: 6px;
+}
+
+.dot,
+.dotActive {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--glass-bg);
+  transition: background 0.2s;
+}
+
+.dotActive {
+  background: var(--color-magenta);
+}
+
+.actions {
+  display: flex;
+  gap: var(--spacing-2, 8px);
+}
+
+.btnPrimary,
+.btnSecondary {
+  border: none;
+  border-radius: var(--border-radius-md, 8px);
+  padding: 6px 14px;
+  font-size: var(--font-size-body, 0.875rem);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btnPrimary {
+  background: var(--color-magenta);
+  color: hsl(var(--primary-foreground));
+}
+
+.btnPrimary:hover {
+  filter: brightness(1.1);
+}
+
+.btnSecondary {
+  background: var(--glass-bg-subtle);
+  color: hsl(var(--foreground, 0 0% 95%));
+}
+
+.btnSecondary:hover {
+  background: var(--glass-bg-subtle);
+}
+
+.btnSkip {
+  background: none;
+  border: none;
+  padding: 6px 10px;
+  font-size: var(--font-size-body, 0.875rem);
+  font-weight: 500;
+  color: hsl(var(--muted-foreground, 0 0% 60%));
+  cursor: pointer;
+  border-radius: var(--border-radius-md, 8px);
+  transition: color 0.15s, background 0.15s;
+}
+
+.btnSkip:hover {
+  color: hsl(var(--foreground, 0 0% 95%));
+  background: var(--glass-bg-subtle);
+}

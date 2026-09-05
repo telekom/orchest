@@ -1,0 +1,7 @@
+<svg viewBox="0 0 60 60" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+<path fill="none" stroke="#333" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5h40l10 10v50H5zm40 0v10h10" />
+<text x="30" y="35" fill="#333" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle">
+<tspan dy="-3.195">Data</tspan>
+<tspan x="30" dy="14.4">Object</tspan>
+</text>
+</svg>

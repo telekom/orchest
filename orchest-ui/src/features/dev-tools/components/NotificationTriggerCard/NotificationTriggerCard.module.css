@@ -1,0 +1,199 @@
+/* NotificationTriggerCard.module.css */
+
+.card {
+  box-shadow: var(--shadow-sm);
+  border: var(--border-width-1) solid var(--glass-border-subtle);
+  overflow: hidden;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  height: 100%;
+}
+
+:global(.dark) .card {
+  border-color: var(--glass-border-subtle);
+  background-color: var(--color-gray-950);
+}
+
+.cardContent {
+  padding: var(--spacing-3);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.title {
+  font-family: var(--font-display);
+
+  font-size: var(--font-size-h4);
+  margin-bottom: var(--spacing-2);
+  color: var(--color-gray-900);
+  border-bottom: var(--border-width-1) solid var(--color-gray-100);
+  padding-bottom: var(--spacing-1);
+}
+
+:global(.dark) .title {
+  color: var(--color-gray-100);
+  border-color: var(--glass-border-subtle);
+}
+
+.sectionsContainer {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+  gap: var(--spacing-2);
+}
+
+.section {
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  padding: var(--spacing-2);
+  border-radius: var(--border-radius-xl);
+  flex: 1;
+}
+
+.sectionGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-3);
+}
+
+.sectionRow {
+  display: flex;
+  gap: var(--spacing-2);
+  align-items: flex-start;
+}
+
+.fieldLabel {
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-gray-600);
+  margin-bottom: var(--spacing-1);
+}
+
+:global(.dark) .fieldLabel {
+  color: var(--color-gray-300);
+}
+
+.input {
+  height: 1.75rem;
+  font-size: var(--font-size-body-sm);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: var(--border-width-1) solid var(--glass-border-subtle);
+  color: var(--color-gray-800);
+}
+
+:global(.dark) .input {
+  background-color: var(--color-gray-950);
+  border-color: var(--glass-border-subtle);
+  color: var(--color-gray-200);
+}
+
+.input::placeholder {
+  color: var(--color-gray-500);
+}
+
+:global(.dark) .input::placeholder {
+  color: var(--color-gray-400);
+}
+
+.inputWrapper {
+  flex-grow: 1;
+}
+
+.buttonWrapper {
+  margin-top: 1.1875rem;
+}
+
+.triggerButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.75rem;
+  width: 1.75rem;
+  padding: 0;
+  border: none;
+  border-radius: var(--border-radius-xl);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  color: var(--color-gray-400);
+}
+
+:global(.dark) .triggerButton {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  color: var(--color-gray-500);
+}
+
+.triggerButton:disabled {
+  cursor: not-allowed;
+}
+
+.triggerButtonEnabled {
+  background-color: hsl(var(--primary));
+  color: var(--color-white);
+}
+
+.triggerButtonEnabled:hover:not(:disabled) {
+  background-color: hsl(var(--primary) / 0.9);
+}
+
+.icon {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+.examplesContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-1-5);
+}
+
+.examplesLabel {
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-gray-600);
+  margin-bottom: var(--spacing-1-5);
+}
+
+:global(.dark) .examplesLabel {
+  color: var(--color-gray-300);
+}
+
+.exampleButton {
+  height: 1.5rem;
+  font-size: var(--font-size-tiny);
+  padding: 0 var(--spacing-2);
+  border: var(--border-width-1) solid var(--glass-border-subtle);
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  color: var(--color-gray-700);
+}
+
+.exampleButton:hover {
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+}
+
+:global(.dark) .exampleButton {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  color: var(--color-gray-300);
+  border-color: var(--glass-border-subtle);
+}
+
+/* ODS Select */
+.odsSelect {
+  width: 100%;
+}

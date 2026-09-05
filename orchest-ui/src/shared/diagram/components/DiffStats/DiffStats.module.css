@@ -1,0 +1,147 @@
+.container {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.badge {
+  font-weight: 500;
+}
+
+.dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  margin-right: 0.5rem;
+}
+
+/* No changes badge */
+.noChangesBadge {
+  background-color: var(--color-gray-50);
+  color: var(--color-gray-600);
+  border-color: var(--color-gray-300);
+  font-weight: 500;
+}
+
+:global(.dark) .noChangesBadge {
+  background-color: var(--color-gray-800);
+  color: var(--color-gray-300);
+  border-color: var(--color-gray-600);
+}
+
+/* Added stats */
+.addedBadge {
+  background-color: var(--color-green-50);
+  color: var(--color-green-700);
+  border-color: var(--color-green-500);
+}
+
+:global(.dark) .addedBadge {
+  background-color: var(--color-green-800-alpha-30);
+  color: var(--color-green-300);
+  border-color: var(--color-green-600);
+}
+
+.addedBadge:hover {
+  background-color: var(--color-green-50);
+}
+
+:global(.dark) .addedBadge:hover {
+  background-color: var(--color-green-800-alpha-40);
+}
+
+.addedDot {
+  background-color: var(--color-green-500);
+}
+
+:global(.dark) .addedDot {
+  background-color: var(--color-green-400);
+}
+
+/* Removed stats */
+.removedBadge {
+  background-color: var(--color-red-50);
+  color: var(--color-red-700);
+  border-color: var(--color-red-500);
+}
+
+:global(.dark) .removedBadge {
+  background-color: var(--color-red-900-alpha-30);
+  color: var(--color-red-300);
+  border-color: var(--color-red-600);
+}
+
+.removedBadge:hover {
+  background-color: var(--color-red-50);
+}
+
+:global(.dark) .removedBadge:hover {
+  background-color: var(--color-red-900-alpha-40);
+}
+
+.removedDot {
+  background-color: var(--color-red-500);
+}
+
+:global(.dark) .removedDot {
+  background-color: var(--color-red-400);
+}
+
+/* Changed stats */
+.changedBadge {
+  background-color: var(--color-orange-50);
+  color: var(--color-orange-700);
+  border-color: var(--color-orange-500);
+}
+
+:global(.dark) .changedBadge {
+  background-color: var(--color-orange-900-alpha-30);
+  color: var(--color-orange-300);
+  border-color: var(--color-orange-600);
+}
+
+.changedBadge:hover {
+  background-color: var(--color-orange-50);
+}
+
+:global(.dark) .changedBadge:hover {
+  background-color: var(--color-orange-900-alpha-40);
+}
+
+.changedDot {
+  background-color: var(--color-orange-500);
+}
+
+:global(.dark) .changedDot {
+  background-color: var(--color-orange-400);
+}
+
+/* Layout changed stats */
+.layoutBadge {
+  background-color: var(--color-blue-50);
+  color: var(--color-blue-700);
+  border-color: var(--color-blue-500);
+}
+
+:global(.dark) .layoutBadge {
+  background-color: var(--color-blue-900-alpha-30);
+  color: var(--color-blue-300);
+  border-color: var(--color-blue-600);
+}
+
+.layoutBadge:hover {
+  background-color: var(--color-blue-50);
+}
+
+:global(.dark) .layoutBadge:hover {
+  background-color: var(--color-blue-900-alpha-40);
+}
+
+.layoutDot {
+  background-color: var(--color-blue-500);
+}
+
+:global(.dark) .layoutDot {
+  background-color: var(--color-blue-400);
+}

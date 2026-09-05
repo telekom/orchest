@@ -1,0 +1,49 @@
+/* ErrorBanner component styles */
+
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: var(--spacing-2);
+}
+
+.errorBanner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-4);
+  background: color-mix(in srgb, var(--color-red-500) 8%, var(--glass-bg));
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  border: var(--border-width-1) solid color-mix(in srgb, var(--color-red-500) 25%, var(--glass-border));
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--glass-shadow-sm);
+}
+
+:global(.dark) .errorBanner {
+  background: color-mix(in srgb, var(--color-red-500) 12%, var(--glass-bg));
+  border-color: color-mix(in srgb, var(--color-red-500) 30%, var(--glass-border));
+}
+
+.errorIcon {
+  width: var(--spacing-5);
+  height: var(--spacing-5);
+  color: var(--color-red-600);
+  margin-right: var(--spacing-2);
+  flex-shrink: 0;
+}
+
+:global(.dark) .errorIcon {
+  color: var(--color-red-400);
+}
+
+.errorText {
+  font-size: var(--font-size-body);
+  line-height: 1.25rem;
+  color: var(--color-red-800);
+  margin-right: var(--spacing-4);
+}
+
+:global(.dark) .errorText {
+  color: var(--color-red-200);
+}

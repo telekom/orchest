@@ -1,0 +1,55 @@
+/* Diagram Theme CSS Variables */
+/* These are set dynamically by the diagram theme system */
+
+:root {
+  --diagram-container-bg: #ffffff;
+  --diagram-canvas-bg: #ffffff;
+  --diagram-text: #333333;
+  --diagram-grid-color: color-mix(in srgb, var(--color-magenta) 4%, transparent);
+  --diagram-grid-size: 24px;
+  --diagram-selection-color: var(--color-magenta);
+  --diagram-selection-secondary: var(--color-magenta-light);
+  --diagram-selection-highlight: color-mix(in srgb, var(--color-magenta) 15%, transparent);
+}
+
+.dark {
+  --diagram-container-bg: #ffffff;
+  --diagram-canvas-bg: #ffffff;
+  --diagram-text: #333333;
+  --diagram-grid-color: color-mix(in srgb, var(--color-magenta) 4%, transparent);
+  --diagram-selection-secondary: #ff66b2;
+}
+
+/* Utility classes for diagram containers */
+.diagram-container {
+  background-color: var(--diagram-container-bg);
+}
+
+.djs-container,
+.diagram-canvas {
+  color: var(--diagram-text);
+}
+
+/* diagram-js selection & interaction — magenta neon (not element SVG fills) */
+.djs-parent {
+  --canvas-fill-color: var(--diagram-canvas-bg);
+  --element-selected-outline-stroke-color: var(--diagram-selection-color);
+  --element-selected-outline-secondary-stroke-color: var(--diagram-selection-secondary);
+  --element-hover-outline-fill-color: var(--diagram-selection-color);
+  --element-dragger-color: var(--diagram-selection-color);
+  --lasso-fill-color: var(--diagram-selection-highlight);
+  --lasso-stroke-color: var(--diagram-selection-color);
+  --palette-entry-hover-color: var(--diagram-selection-color);
+  --palette-entry-selected-color: var(--diagram-selection-color);
+  --popup-header-entry-selected-color: var(--diagram-selection-color);
+  --popup-search-focus-border-color: var(--diagram-selection-color);
+  --popup-search-focus-background-color: color-mix(in srgb, var(--color-magenta) 8%, var(--glass-bg-strong, #fff));
+  --bendpoint-fill-color: var(--diagram-selection-color);
+  --resizer-fill-color: var(--diagram-selection-color);
+  --shape-attach-allowed-stroke-color: var(--diagram-selection-color);
+  --shape-resize-preview-stroke-color: var(--diagram-selection-color);
+  --snap-line-stroke-color: color-mix(in srgb, var(--color-magenta) 30%, transparent);
+  --search-input-focus-border-color: var(--diagram-selection-color);
+  --search-input-focus-background-color: color-mix(in srgb, var(--color-magenta) 8%, var(--glass-bg-strong, #fff));
+  --search-preselected-background-color: var(--diagram-selection-highlight);
+}

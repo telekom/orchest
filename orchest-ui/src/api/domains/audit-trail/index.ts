@@ -1,0 +1,1 @@
+export { auditTrailService, AuditTrailService } from './auditTrailService';

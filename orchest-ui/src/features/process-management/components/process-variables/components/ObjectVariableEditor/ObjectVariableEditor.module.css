@@ -1,0 +1,120 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  gap: var(--spacing-4);
+  overflow: hidden;
+}
+
+.collapsibleContainer {
+  flex-shrink: 0;
+}
+
+.collapsibleHeader {
+  border: var(--border-width-1) solid var(--color-border-default);
+  border-radius: var(--border-radius-lg);
+  background-color: var(--color-surface-subtle);
+}
+
+.triggerButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-3);
+  border-radius: var(--border-radius-lg);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--color-gray-900);
+  font: inherit;
+}
+
+:global(.dark) .triggerButton {
+  color: var(--color-gray-100);
+}
+
+.triggerButton:hover {
+  background-color: var(--color-interactive-hover-light);
+}
+
+.chevronIcon {
+  height: var(--spacing-4);
+  width: var(--spacing-4);
+  color: var(--color-text-muted);
+}
+
+:global(.dark) .chevronIcon {
+  color: var(--color-gray-400);
+}
+
+.collapsibleContent {
+  border-top: var(--border-width-1) solid var(--color-border-default);
+  padding: var(--spacing-4);
+}
+
+.fieldsGrid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--spacing-3);
+}
+
+.fieldCol6 {
+  grid-column: span 6;
+}
+
+.valueContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  gap: var(--spacing-2);
+}
+
+/* Editor border wrapper - establishes the scroll boundary
+ * CRITICAL: Must use overflow: hidden to constrain the editor
+ * The vanilla-jsoneditor's .jse-main element handles the actual scrolling
+ */
+.editorBorder {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  border: var(--border-width-1) solid var(--color-border-default);
+  border-radius: var(--border-radius-lg);
+}
+
+/* Propagate flex constraints to editor wrapper
+ * CRITICAL: json-editor-wrapper must be display:flex with flex:1 + min-height:0
+ * This passes the constraint down to vanilla-jsoneditor's internal elements
+ */
+.editorBorder :global(.json-editor-wrapper) {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+/* JSON editor container - remove border since editorBorder provides it */
+.editorBorder :global(.json-editor-container) {
+  border: none;
+  border-radius: 0;
+}
+
+.editorFallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--spacing-24);
+  height: 100%;
+}
+
+/* Font size overrides for consistency */
+.editorBorder :global(.jse-contents),
+.editorBorder :global(.jse-text-mode),
+.editorBorder :global(.jse-tree-mode) {
+  font-size: var(--font-size-body-sm);
+  line-height: 1.4;
+}

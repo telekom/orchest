@@ -1,0 +1,19 @@
+/* Separator Component Styles */
+
+/* Base separator styles */
+.root {
+  flex-shrink: 0;
+  background: var(--glass-border-subtle);
+}
+
+/* Horizontal separator */
+.horizontal {
+  height: 1px;
+  width: 100%;
+}
+
+/* Vertical separator */
+.vertical {
+  height: 100%;
+  width: 1px;
+}

@@ -1,0 +1,43 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+.npmrc
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Environment files
+.env
+.env.*
+/src/env/*
+/src/config/*.env
+/src/config/*.local
+/src/config/*.development
+/src/config/*.production
+/src/config/*.staging
+/.claude/*
+# Scripts & Reports
+/scripts/
+/build/
+/push-docker.sh
+
+# Brainstorm visual companion session artifacts
+.superpowers/

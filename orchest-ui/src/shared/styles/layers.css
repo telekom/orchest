@@ -1,0 +1,12 @@
+/* Z-index layer constants for ambient/glass UI stack */
+:root {
+  --layer-ambient: -1;
+  --layer-grain: 0;
+  --layer-content: 1;
+  --layer-sidebar: 100;
+  --layer-topbar: 110;
+  --layer-dropdown: 200;
+  --layer-modal: 300;
+  /* Keep aligned with --z-index-toast so ambient stack docs match runtime */
+  --layer-toast: 100000;
+}

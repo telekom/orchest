@@ -1,0 +1,7 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-3);
+  flex-shrink: 0;
+  border-radius: var(--border-radius-xl);
+}

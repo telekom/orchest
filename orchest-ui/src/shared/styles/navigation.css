@@ -1,0 +1,60 @@
+/* Navigation items - glass surfaces & neon active states */
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  column-gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+  transition:
+    color var(--transition-base) var(--transition-ease),
+    background var(--transition-base) var(--transition-ease),
+    border-color var(--transition-base) var(--transition-ease),
+    box-shadow var(--transition-base) var(--transition-ease);
+  color: hsl(var(--muted-foreground));
+}
+
+.nav-item:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  color: hsl(var(--foreground));
+}
+
+.nav-item.active {
+  color: var(--color-magenta);
+  background: color-mix(in srgb, var(--color-magenta) 10%, var(--glass-bg));
+  border-color: color-mix(in srgb, var(--color-magenta) 25%, var(--glass-border));
+  box-shadow: var(--neon-glow-sm);
+}
+
+.nav-item.active:hover {
+  background: color-mix(in srgb, var(--color-magenta) 14%, var(--glass-bg-hover));
+  border-color: color-mix(in srgb, var(--color-magenta) 35%, var(--glass-border-bright));
+}
+
+.nav-item .icon {
+  transition:
+    transform var(--transition-base) var(--transition-ease),
+    color var(--transition-base) var(--transition-ease),
+    filter var(--transition-base) var(--transition-ease);
+}
+
+.nav-item:hover .icon {
+  transform: scale(1.05);
+}
+
+.nav-item.active .icon {
+  color: var(--color-magenta);
+  filter: drop-shadow(0 0 4px color-mix(in srgb, var(--color-magenta) 45%, transparent));
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .nav-item:hover {
+    background: hsl(var(--accent));
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}

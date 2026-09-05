@@ -1,0 +1,92 @@
+/* DeputyListItem Component Styles */
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-2) var(--spacing-3);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: var(--border-width-1) solid var(--glass-border-subtle);
+  border-radius: var(--border-radius-xl);
+}
+
+:global(.dark) .container {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  border-color: var(--glass-border-subtle);
+}
+
+.contentWrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  min-width: 0;
+  flex: 1;
+  pointer-events: none;
+}
+
+.iconContainer {
+  width: var(--spacing-6);
+  height: var(--spacing-6);
+  background-color: color-mix(in srgb, var(--color-magenta) 10%, transparent);
+  border-radius: var(--border-radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.icon {
+  width: var(--spacing-3-5);
+  height: var(--spacing-3-5);
+  color: var(--color-magenta);
+}
+
+.email {
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-body-sm);
+  color: var(--color-gray-900);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+:global(.dark) .email {
+  color: var(--color-gray-100);
+}
+
+.loaderContainer {
+  height: var(--spacing-6);
+  width: var(--spacing-6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader {
+  width: var(--spacing-4);
+  height: var(--spacing-4);
+  color: var(--color-gray-500);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Delete button - compact sizing */
+.deleteButton {
+  flex-shrink: 0;
+}
+
+:global(.dark) .container .deleteButton:hover {
+  background-color: var(--color-red-500-alpha-10);
+}

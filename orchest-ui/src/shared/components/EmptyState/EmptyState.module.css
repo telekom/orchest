@@ -1,0 +1,50 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--color-gray-500);
+}
+
+:global(.dark) .container {
+  color: var(--color-gray-400);
+}
+
+.contentWrapper {
+  text-align: center;
+  padding: var(--spacing-6);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--glass-shadow);
+}
+
+.iconWrapper {
+  margin-bottom: var(--spacing-3);
+  display: flex;
+  justify-content: center;
+}
+
+.title {
+  font-size: var(--font-size-body-lg);
+  line-height: var(--line-height-body);
+  margin-bottom: var(--spacing-2);
+  margin-top: 0;
+}
+
+.description {
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  margin: 0;
+}
+
+/* Dark text variant - for diagram viewers with light backgrounds */
+.darkText {
+  color: var(--color-gray-900);
+}
+
+:global(.dark) .darkText {
+  color: var(--color-gray-100);
+}

@@ -1,0 +1,94 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border-radius: var(--border-radius-xl);
+  overflow: hidden;
+}
+
+.placeholder {
+  padding: var(--spacing-6, 1.5rem);
+  border: 2px dashed var(--glass-border);
+  border-radius: var(--border-radius-xl);
+  text-align: center;
+}
+
+.placeholderText {
+  font-size: var(--font-size-sm, 0.875rem);
+  color: hsl(var(--muted-foreground));
+  margin: var(--spacing-2, 0.5rem) 0;
+}
+
+.variablesPreview {
+  margin-top: var(--spacing-4, 1rem);
+  padding: var(--spacing-4, 1rem);
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-xl);
+  font-size: var(--font-size-xs, 0.75rem);
+  text-align: left;
+  overflow-x: auto;
+  max-height: 300px;
+}
+
+.footer {
+  padding: var(--spacing-6, 1.5rem);
+  border-top: 1px solid var(--glass-border-subtle);
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+}
+
+.loading,
+.error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-8, 2rem);
+  text-align: center;
+}
+
+.loading p,
+.error p {
+  font-size: var(--font-size-base, 1rem);
+  color: hsl(var(--muted-foreground));
+}
+
+.error p {
+  color: hsl(var(--destructive));
+}
+
+/* Form tab styles */
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.formTitle {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  margin: 0;
+}
+
+.formDescription {
+  font-size: 0.875rem;
+  color: hsl(var(--muted-foreground));
+  margin: 0;
+}
+
+.formFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--glass-border-subtle);
+  margin-top: 0.25rem;
+}

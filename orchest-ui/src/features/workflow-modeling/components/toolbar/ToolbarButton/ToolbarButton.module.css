@@ -1,0 +1,14 @@
+/* ToolbarButton.module.css */
+/* Uses shared toolbar button styles from @/shared/styles/toolbar-button.module.css */
+
+.button {
+  composes: toolbarButton odsSubtleWhite from '@/shared/styles/toolbar-button.module.css';
+}
+
+.loadingContainer {
+  padding-left: var(--spacing-1);
+}
+
+.loadingIcon {
+  color: var(--color-magenta);
+}

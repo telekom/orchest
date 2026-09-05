@@ -1,0 +1,62 @@
+/* All spacing now handled by AppLayout */
+
+.variablesContainer {
+  height: 100%;
+  overflow: auto;
+}
+
+.variablesGrid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: var(--spacing-2);
+  height: 100%;
+}
+
+@media (min-width: 768px) {
+  .variablesGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.noVariableData {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.variableSection {
+  display: flex;
+  flex-direction: column;
+  padding-top: var(--spacing-2);
+}
+
+.variableSectionHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--spacing-2);
+}
+
+.variableSectionIcon {
+  width: var(--icon-size-sm);
+  height: var(--icon-size-sm);
+  margin-right: var(--spacing-2);
+  color: hsl(var(--muted-foreground));
+}
+
+.variableSectionTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-h4);
+  line-height: var(--line-height-h4);
+  font-weight: var(--font-weight-semibold);
+  color: hsl(var(--foreground));
+}
+
+.variableSectionContent {
+  border-radius: var(--border-radius-xl);
+  border: var(--border-width-1) solid var(--glass-border);
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  overflow: hidden;
+}

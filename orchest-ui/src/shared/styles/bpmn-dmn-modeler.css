@@ -1,0 +1,531 @@
+/* ==========================================================================
+   BPMN & DMN Modeler Styles
+   ========================================================================== */
+
+/* Hide vendor branding */
+.bjs-powered-by,
+.bjs-powered-by-lightbox,
+.bjs-powered-by-logo,
+.dmn-js-powered-by,
+.dmn-js-logo,
+.powered-by {
+  /* Override bpmn-js/dmn-js default display property */
+  display: none !important;
+}
+
+/* ==========================================================================
+   Properties Panel — always light/white (modeler stays light in dark app theme)
+   ========================================================================== */
+
+.properties-panel {
+  width: 320px;
+  min-width: 320px;
+  background: #ffffff;
+  border-left: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  overflow-y: auto;
+  color: #333333;
+  transition: width var(--transition-base) var(--transition-ease),
+              min-width var(--transition-base) var(--transition-ease),
+              opacity var(--transition-base) var(--transition-ease);
+}
+
+.dark .properties-panel {
+  background: #12121a !important;
+  border-left-color: rgba(255, 255, 255, 0.08);
+  color: #e0e0e8 !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Properties panel chrome + text — dark theme */
+.dark .properties-panel,
+.dark .properties-panel .bio-properties-panel,
+.dark .properties-panel .bio-properties-panel-header,
+.dark .properties-panel .bio-properties-panel-group,
+.dark .properties-panel .bio-properties-panel-group-header,
+.dark .properties-panel .bio-properties-panel-entry,
+.dark .properties-panel .bio-properties-panel-label,
+.dark .properties-panel .bio-properties-panel-description,
+.dark .properties-panel .bio-properties-panel-header-title,
+.dark .properties-panel .bio-properties-panel-group-header-title,
+.dark .properties-panel .bio-properties-panel-dot {
+  background-color: #12121a !important;
+  color: #e0e0e8 !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.dark .properties-panel .bio-properties-panel-group-header,
+.dark .properties-panel .bio-properties-panel-header {
+  background: #0e0e18 !important;
+  color: #f1f5f9 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+.dark .properties-panel .bio-properties-panel-label,
+.dark .properties-panel label {
+  color: #cbd5e1 !important;
+}
+
+/* Properties Panel - Inputs — dark surfaces */
+.dark .bio-properties-panel-input,
+.dark .bio-properties-panel-textarea,
+.dark textarea.bio-properties-panel-input,
+.dark input.bio-properties-panel-input,
+.dark .properties-panel select,
+.dark .properties-panel .bio-properties-panel-select,
+.dark .properties-panel .bio-properties-panel-feel-editor,
+.dark .properties-panel .bio-properties-panel-feel-entry,
+.dark .properties-panel .cm-editor,
+.dark .properties-panel .cm-content {
+  background: #0a0a0f !important;
+  color: #e0e0e8 !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none !important;
+}
+
+.dark .bio-properties-panel-input:focus,
+.dark .bio-properties-panel-textarea:focus,
+.dark textarea.bio-properties-panel-input:focus,
+.dark input.bio-properties-panel-input:focus,
+.dark .properties-panel select:focus,
+.dark .properties-panel .bio-properties-panel-select:focus {
+  background: #0a0a0f !important;
+  color: #f1f5f9 !important;
+  border-color: var(--color-magenta) !important;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-magenta) 20%, transparent) !important;
+  outline: none;
+}
+
+.dark .properties-panel .bio-properties-panel-input::placeholder,
+.dark .properties-panel .bio-properties-panel-textarea::placeholder {
+  color: #64748b !important;
+}
+
+.dark .properties-panel .bio-properties-panel-toggle-switch__slider,
+.dark .properties-panel .bio-properties-panel-checkbox {
+  accent-color: var(--color-magenta);
+}
+
+.dark .properties-panel a,
+.dark .properties-panel .bio-properties-panel-link {
+  color: var(--color-magenta) !important;
+}
+
+/* ==========================================================================
+   Context Menus & Popups — light surfaces in dark app theme
+   ========================================================================== */
+
+.dark .djs-popup {
+  background: #1e1e2a !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #e0e0e8 !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+  border-radius: var(--border-radius-lg);
+}
+
+.dark .djs-popup-body,
+.dark .djs-popup-header {
+  background: transparent !important;
+  color: #e0e0e8 !important;
+}
+
+.dark .djs-popup .entry,
+.dark .djs-popup-entry-name,
+.dark .djs-popup-label {
+  color: #e0e0e8 !important;
+}
+
+.dark .djs-popup .entry:hover,
+.dark .djs-popup .entry.selected {
+  background: color-mix(in srgb, var(--color-magenta) 15%, #1e1e2a) !important;
+}
+
+.dark .djs-popup-search input {
+  background: #0a0a0f !important;
+  color: #f1f5f9 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark .djs-popup-search input:focus {
+  background: #0a0a0f !important;
+  border-color: var(--color-magenta) !important;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-magenta) 20%, transparent);
+}
+
+/* ==========================================================================
+   BPMN Canvas — dark mode internal layers (prevent white flash on drag)
+   ========================================================================== */
+
+.dark .djs-drag-group,
+.dark .djs-dragging,
+.dark .djs-overlay-container {
+  background: transparent !important;
+}
+
+/* ==========================================================================
+   BPMN Palette & Context Pad — glass surfaces
+   ========================================================================== */
+
+.djs-palette {
+  border-radius: var(--border-radius-lg);
+}
+
+.dark .djs-palette {
+  background: #1e1e2a !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  color: #e0e0e8;
+}
+
+.dark .djs-palette .entry {
+  color: #e0e0e8 !important;
+}
+
+.dark .djs-palette .entry:hover,
+.dark .djs-palette .highlighted-entry {
+  background: color-mix(in srgb, var(--color-magenta) 15%, #1e1e2a);
+}
+
+/* Context pad (node actions) */
+.dark .djs-context-pad .entry {
+  background-color: #1e1e2a !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #e0e0e8 !important;
+}
+
+.dark .djs-context-pad .entry:hover {
+  background: color-mix(in srgb, var(--color-magenta) 15%, #1e1e2a) !important;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.djs-context-pad .entry {
+  color: #000000 !important;
+}
+
+/* ==========================================================================
+   Diagram Search Pad — light in dark app theme
+   ========================================================================== */
+
+.dark .djs-search-container {
+  background: #1e1e2a;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  border-radius: var(--border-radius-lg);
+  color: #e0e0e8;
+}
+
+.dark .djs-search-input input {
+  background: #0a0a0f !important;
+  color: #f1f5f9 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark .djs-search-results {
+  background: #1e1e2a !important;
+  color: #e0e0e8 !important;
+}
+
+.dark .djs-search-result:hover,
+.dark .djs-search-result-selected {
+  background: color-mix(in srgb, var(--color-magenta) 15%, #1e1e2a) !important;
+}
+
+/* ==========================================================================
+   BPMN Tooltips
+   ========================================================================== */
+
+.djs-tooltip {
+  background: #ffffff !important;
+  color: #333333 !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  border-radius: var(--border-radius-md) !important;
+  padding: 4px 8px !important;
+  font-size: var(--font-size-body-sm) !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.dark .djs-tooltip {
+  background: #1e1e2a !important;
+  color: #e0e0e8 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* ==========================================================================
+   DMN Table Base Styles
+   ========================================================================== */
+
+.tjs-container {
+  width: 100%;
+}
+
+.tjs-table,
+.tjs-table table,
+.dmn-decision-table-container table {
+  /* Override dmn-js table default spacing for clean layout */
+  border-collapse: collapse !important;
+  border-spacing: 0 !important;
+}
+
+.tjs-table,
+.tjs-container,
+.tjs-table-container,
+.dmn-decision-table-container,
+.tjs-table table,
+.tjs-container > *,
+.dmn-viewer .tjs-table,
+.dmn-viewer .tjs-container {
+  /* Override dmn-js table default borders and shadows for clean appearance */
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.dmn-decision-table-container .view-drd {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  margin-bottom: 0;
+  z-index: 10;
+}
+
+.dark .dmn-decision-table-container .view-drd {
+  color: #e2e8f0;
+}
+
+/* ==========================================================================
+   DMN - Light mode (default)
+   ========================================================================== */
+
+.dmn-viewer,
+.dmn-decision-table-container {
+  --table-row-alternative-background-color: #f9fafb;
+  color: #333333 !important;
+  background: #ffffff !important;
+}
+
+.dmn-viewer .djs-container {
+  background:
+    radial-gradient(circle, color-mix(in srgb, var(--color-magenta) 12%, transparent) 1px, transparent 1px)
+    0 0 / 24px 24px
+    #ffffff !important;
+}
+
+.dmn-decision-table-container,
+.dmn-decision-table-container table,
+.dmn-decision-table-container tbody,
+.dmn-decision-table-container thead {
+  background: #ffffff !important;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.dmn-decision-table-container th,
+.dmn-decision-table-container td,
+.dmn-decision-table-container tr {
+  background: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  color: #333333 !important;
+}
+
+.dmn-decision-table-container thead th,
+.dmn-decision-table-container thead td {
+  background: #f9fafb !important;
+}
+
+.dmn-decision-table-container tbody tr:nth-child(2n+1):not(.dmn-highlighted-row) td {
+  background: #f9fafb !important;
+}
+
+.dmn-decision-table-container tbody tr:not(.dmn-highlighted-row) td:first-child,
+.tjs-table tbody tr:not(.dmn-highlighted-row) td:first-child {
+  background: #f3f4f6 !important;
+}
+
+/* ==========================================================================
+   DMN - Dark mode
+   ========================================================================== */
+
+.dark .dmn-viewer,
+.dark .dmn-decision-table-container {
+  --table-row-alternative-background-color: #1e293b;
+  color: #e2e8f0 !important;
+  background: #0a0a0f !important;
+}
+
+.dark .dmn-viewer .djs-container {
+  background:
+    radial-gradient(circle, color-mix(in srgb, var(--color-magenta) 10%, transparent) 1px, transparent 1px)
+    0 0 / 24px 24px
+    #0a0a0f !important;
+}
+
+.dark .dmn-viewer .djs-element .djs-visual text {
+  fill: #e2e8f0 !important;
+}
+
+.dark .dmn-viewer .djs-element .djs-visual rect,
+.dark .dmn-viewer .djs-element .djs-visual polygon {
+  stroke: rgba(255, 255, 255, 0.25) !important;
+  fill: #1e293b !important;
+}
+
+.dark .dmn-viewer .djs-connection .djs-visual path {
+  stroke: rgba(255, 255, 255, 0.35) !important;
+}
+
+.dark .dmn-viewer .djs-connection .djs-visual path[marker-end] {
+  stroke: rgba(255, 255, 255, 0.35) !important;
+}
+
+.dark .dmn-decision-table-container,
+.dark .dmn-decision-table-container table,
+.dark .dmn-decision-table-container tbody,
+.dark .dmn-decision-table-container thead {
+  background: #0f172a !important;
+}
+
+.dark .dmn-decision-table-container th,
+.dark .dmn-decision-table-container td,
+.dark .dmn-decision-table-container tr {
+  background: #0f172a !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  color: #e2e8f0 !important;
+}
+
+.dark .dmn-decision-table-container thead th,
+.dark .dmn-decision-table-container thead td {
+  background: #1e293b !important;
+  color: #94a3b8 !important;
+}
+
+.dark .dmn-decision-table-container tbody tr:nth-child(2n+1):not(.dmn-highlighted-row) td {
+  background: #1e293b !important;
+}
+
+.dark .dmn-decision-table-container tbody tr:not(.dmn-highlighted-row) td:first-child,
+.dark .tjs-table tbody tr:not(.dmn-highlighted-row) td:first-child {
+  background: #1e293b !important;
+}
+
+/* ==========================================================================
+   DMN Table - Highlighted Rows (matched rules) — animated glow outline
+   ========================================================================== */
+
+@keyframes dmn-row-glow {
+  0%, 100% { box-shadow: 0 0 4px 1px color-mix(in srgb, var(--color-magenta) 50%, transparent); }
+  50% { box-shadow: 0 0 10px 3px color-mix(in srgb, var(--color-magenta) 70%, transparent); }
+}
+
+@keyframes dmn-dash-march {
+  to { background-position: 8px 0, -8px 100%, 0 8px, 100% -8px; }
+}
+
+.tjs-table tr.dmn-highlighted-row,
+.dmn-decision-table-container tbody tr.dmn-highlighted-row {
+  position: relative;
+  outline: none;
+  border-radius: 2px;
+  animation: dmn-row-glow 2s ease-in-out infinite;
+}
+
+.tjs-table tr.dmn-highlighted-row::after,
+.dmn-decision-table-container tbody tr.dmn-highlighted-row::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 2px;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(90deg, var(--color-magenta) 0 4px, transparent 4px 8px) 0 0 / 8px 1.5px repeat-x,
+    repeating-linear-gradient(90deg, var(--color-magenta) 0 4px, transparent 4px 8px) 0 100% / 8px 1.5px repeat-x,
+    repeating-linear-gradient(0deg, var(--color-magenta) 0 4px, transparent 4px 8px) 0 0 / 1.5px 8px repeat-y,
+    repeating-linear-gradient(0deg, var(--color-magenta) 0 4px, transparent 4px 8px) 100% 0 / 1.5px 8px repeat-y;
+  animation: dmn-dash-march 0.6s linear infinite;
+}
+
+.tjs-table tr.dmn-highlighted-row td,
+.tjs-table td.dmn-highlighted-row {
+  background-color: color-mix(in srgb, var(--color-magenta) 6%, #ffffff) !important;
+  border-top: none !important;
+  border-bottom: none !important;
+}
+
+.dark .tjs-table tr.dmn-highlighted-row,
+.dark .dmn-decision-table-container tbody tr.dmn-highlighted-row {
+  outline-color: var(--color-magenta);
+  animation: dmn-row-glow 2s ease-in-out infinite;
+}
+
+.dark .tjs-table tr.dmn-highlighted-row td,
+.dark .tjs-table td.dmn-highlighted-row,
+.dark .dmn-decision-table-container tbody tr.dmn-highlighted-row td,
+.dark .dmn-decision-table-container tbody td.dmn-highlighted-row {
+  background-color: color-mix(in srgb, var(--color-magenta) 8%, #1e293b) !important;
+  border-top: none !important;
+  border-bottom: none !important;
+}
+
+/* ==========================================================================
+   DMN Definitions - Text Color
+   ========================================================================== */
+
+.dmn-definitions,
+.dmn-definitions-name,
+.dmn-definitions-id {
+  color: #333333 !important;
+}
+
+.dark .dmn-definitions,
+.dark .dmn-definitions-name,
+.dark .dmn-definitions-id {
+  color: #e2e8f0 !important;
+}
+
+.dark .djs-direct-editing-parent {
+  color: #e0e0e8;
+}
+
+.dark .djs-direct-editing-content {
+  background: #0a0a0f !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #f1f5f9 !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+
+
+/* ==========================================================================
+   Orchest BPMN theme (Phase 1) — soft futuristic shapes
+   ========================================================================== */
+
+.djs-element .orchest-bpmn-shape {
+  filter: drop-shadow(0 1px 2px rgba(15, 23, 42, 0.08));
+}
+
+.djs-element .orchest-bpmn-icon-badge {
+  filter: drop-shadow(0 1px 2px rgba(15, 23, 42, 0.18));
+}
+
+.djs-element.selected .orchest-bpmn-shape {
+  stroke: #ff0080 !important;
+}
+
+.djs-element .orchest-bpmn-gateway {
+  filter: drop-shadow(0 1px 2px rgba(15, 23, 42, 0.1));
+}
+
+/* Thinner sequence / message flow edges */
+.djs-connection .djs-visual > path {
+  stroke-width: 1.25px !important;
+}
+

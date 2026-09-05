@@ -1,0 +1,7898 @@
+{
+"openapi": "3.1.0",
+"info": {
+"title": "OrchesT",
+"description": "REST interface for interacting with Orchest Engine",
+"contact": {
+"name": "DOT Team Tyrell",
+"email": "teamtyrell@telekom-digital.com"
+},
+"license": {
+"name": "Proprietary license"
+},
+"version": "1.0.0",
+"x-api-category": "other"
+},
+"servers": [
+{
+"url": "http://localhost:6200/orchest/"
+},
+{
+"url": "https://api-orchest.oneapp.dev.hal.telekom.de/orchest/"
+},
+{
+"url": "https://api-orchest.oneapp.teststable.hal.telekom.de/orchest/"
+}
+],
+"tags": [
+{
+"name": "Sensitive Variables",
+"description": "Configure which process variables are treated as sensitive (masked in logs and UI)"
+},
+{
+"name": "User Tasks",
+"description": "Manage BPMN User Task lifecycle — list, claim, unclaim, complete, and reassign"
+},
+{
+"name": "Orchest Chat",
+"description": "AI-powered analysis of process incidents and execution data"
+},
+{
+"name": "Connectors",
+"description": "Manage reusable connector configurations for process activities"
+},
+{
+"name": "Variables",
+"description": "Read and modify process instance variables at runtime"
+},
+{
+"name": "Eventing",
+"description": "Publish BPMN message and signal events to correlate with waiting process instances"
+},
+{
+"name": "API Tokens",
+"description": "Create, list, and revoke personal API tokens for programmatic access"
+},
+{
+"name": "Decision Definitions",
+"description": "Deploy, query, evaluate, and delete DMN decision definitions"
+},
+{
+"name": "Process Definitions",
+"description": "Deploy, query, and delete BPMN process definitions"
+},
+{
+"name": "Decision Instances",
+"description": "Query historical decision evaluation instances"
+},
+{
+"name": "Kafka Inspection",
+"description": "Inspect Kafka topics, consumer groups, and process-level health for the orchestration cluster"
+},
+{
+"name": "Incident Management",
+"description": "Raise, query, and resolve process execution incidents"
+},
+{
+"name": "Statistics",
+"description": "Aggregated platform statistics — process instance counts, decision evaluations, incidents"
+},
+{
+"name": "Process Environment Variables",
+"description": "Manage environment variables injected into process instances at runtime"
+},
+{
+"name": "Alert Management",
+"description": "Lifecycle API for persistent telemetry alerts — list, acknowledge, silence, unmute, and resolve."
+},
+{
+"name": "Dynamic Process Instances",
+"description": "Create process instances from dynamically-composed BPMN definitions"
+},
+{
+"name": "Deployment Approvals",
+"description": "Multi-reviewer approval workflow for process/decision deployments"
+},
+{
+"name": "FEEL Playground",
+"description": "Evaluate and validate FEEL (Friendly Enough Expression Language) expressions interactively"
+},
+{
+"name": "Process Instances",
+"description": "Create, query, cancel, retry, compensate, and modify running process instances"
+}
+],
+"paths": {
+"/rateLimit": {
+"put": {
+"tags": [
+"rate-limit-api"
+],
+"operationId": "upsertRateLimit",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/RateLimit"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/RateLimit"
+}
+}
+}
+}
+}
+}
+},
+"/processStates": {
+"get": {
+"tags": [
+"process-state-api"
+],
+"operationId": "getProcessStates",
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/ProcessState"
+}
+}
+}
+}
+}
+}
+},
+"put": {
+"tags": [
+"process-state-api"
+],
+"operationId": "upsertProcessState",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ProcessState"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ProcessState"
+}
+}
+}
+}
+}
+},
+"post": {
+"tags": [
+"process-state-api"
+],
+"operationId": "addProcessState",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ProcessState"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ProcessState"
+}
+}
+}
+}
+}
+}
+},
+"/alerts/mailer-configs/{id}": {
+"get": {
+"tags": [
+"Alert Management"
+],
+"summary": "Get mailer config by ID",
+"operationId": "getMailerConfig",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "Config found",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/AlertingMailerConfig"
+}
+}
+}
+},
+"404": {
+"description": "Config not found",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/AlertingMailerConfig"
+}
+}
+}
+}
+}
+},
+"put": {
+"tags": [
+"Alert Management"
+],
+"summary": "Update a mailer config mapping",
+"operationId": "updateMailerConfig",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/MailerConfigRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "Config updated",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/AlertingMailerConfig"
+}
+}
+}
+},
+"404": {
+"description": "Config not found",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/AlertingMailerConfig"
+}
+}
+}
+}
+}
+},
+"delete": {
+"tags": [
+"Alert Management"
+],
+"summary": "Delete a mailer config mapping",
+"operationId": "deleteMailerConfig",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"204": {
+"description": "No Content"
+}
+}
+}
+},
+"/activityStates": {
+"get": {
+"tags": [
+"activity-state-api"
+],
+"operationId": "getAllActivityStates",
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/ActivityState"
+}
+}
+}
+}
+}
+}
+},
+"put": {
+"tags": [
+"activity-state-api"
+],
+"operationId": "upsertActivityState",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ActivityState"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ActivityState"
+}
+}
+}
+}
+}
+}
+},
+"/variables": {
+"post": {
+"tags": [
+"Variables"
+],
+"summary": "Modify variables",
+"description": "Sets or updates variables on a running process instance",
+"operationId": "modifyVariables",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/VariablesRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOVariablesResponse"
+}
+}
+}
+}
+}
+}
+},
+"/userTasks/{taskId}/unclaim": {
+"post": {
+"tags": [
+"User Tasks"
+],
+"summary": "Unclaim a user task",
+"description": "Releases the task back to the pool of unassigned tasks",
+"operationId": "unclaimTask",
+"parameters": [
+{
+"name": "taskId",
+"in": "path",
+"description": "Task ID",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOUserTaskDTO"
+}
+}
+}
+}
+}
+}
+},
+"/userTasks/{taskId}/complete": {
+"post": {
+"tags": [
+"User Tasks"
+],
+"summary": "Complete a user task",
+"description": "Completes the task with optional output variables",
+"operationId": "completeTask",
+"parameters": [
+{
+"name": "taskId",
+"in": "path",
+"description": "Task ID",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/CompleteUserTaskRequest"
+}
+}
+}
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOUserTaskDTO"
+}
+}
+}
+}
+}
+}
+},
+"/userTasks/{taskId}/claim": {
+"post": {
+"tags": [
+"User Tasks"
+],
+"summary": "Claim a user task",
+"description": "Assigns the task to the authenticated user",
+"operationId": "claimTask",
+"parameters": [
+{
+"name": "taskId",
+"in": "path",
+"description": "Task ID",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOUserTaskDTO"
+}
+}
+}
+}
+}
+}
+},
+"/processInstances/retry": {
+"post": {
+"tags": [
+"Process Instances"
+],
+"summary": "Retry a failed instance",
+"description": "Retries execution from the failed activity with the same or modified variables",
+"operationId": "retryInstance",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/RetryProcessEvent"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"type": "string"
+}
+}
+}
+}
+}
+}
+},
+"/processInstances/retryBatch": {
+"post": {
+"tags": [
+"Process Instances"
+],
+"summary": "Retry instances in batch",
+"operationId": "retryInstancesBatch",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/BatchInstanceRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"type": "string"
+}
+}
+}
+}
+}
+}
+},
+"/processInstances/resolveIncident": {
+"post": {
+"tags": [
+"Process Instances"
+],
+"summary": "Resolve incident on instance",
+"description": "Marks the incident as resolved and resumes execution",
+"operationId": "resolveIncident",
+"parameters": [
+{
+"name": "batchInstanceRequest",
+"in": "query",
+"required": true,
+"schema": {
+"$ref": "#/components/schemas/BatchInstanceRequest"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"type": "string"
+}
+}
+}
+}
+}
+}
+},
+"/processInstances/create": {
+"post": {
+"tags": [
+"Process Instances"
+],
+"summary": "Create a process instance",
+"description": "Starts a new instance of a deployed process definition with the provided variables",
+"operationId": "createProcessInstance",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ProcessInvocationRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOProcessInvocationResponse"
+}
+}
+}
+}
+}
+}
+},
+"/processInstances/compensate": {
+"post": {
+"tags": [
+"Process Instances"
+],
+"summary": "Compensate a process instance",
+"description": "Triggers the compensation boundary events for completed activities",
+"operationId": "compensate",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/CompensateInstanceRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/CompensateInstanceResponse"
+}
+}
+}
+}
+}
+}
+},
+"/processInstances/compensateBatch": {
+"post": {
+"tags": [
+"Process Instances"
+],
+"summary": "Compensate instances in batch",
+"operationId": "compensateBatch",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/BatchCompensateInstanceRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"type": "string"
+}
+}
+}
+}
+}
+}
+},
+"/processInstances/cancelBatch": {
+"post": {
+"tags": [
+"Process Instances"
+],
+"summary": "Cancel instances in batch",
+"description": "Terminates multiple process instances by their IDs",
+"operationId": "cancelInstancesBatch",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/BatchInstanceRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"type": "string"
+}
+}
+}
+}
+}
+}
+},
+"/processDefinitionsSensitiveVariables": {
+"get": {
+"tags": [
+"Sensitive Variables"
+],
+"summary": "List all sensitive variable configs (paginated)",
+"operationId": "getAll",
+"parameters": [
+{
+"name": "page",
+"in": "query",
+"description": "Zero-based page index",
+"required": false,
+"schema": {
+"type": "integer",
+"format": "int32",
+"default": 0
+}
+},
+{
+"name": "size",
+"in": "query",
+"description": "Page size",
+"required": false,
+"schema": {
+"type": "integer",
+"format": "int32",
+"default": 10
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/PageProcessSensitiveVariables"
+}
+}
+}
+}
+}
+},
+"post": {
+"tags": [
+"Sensitive Variables"
+],
+"summary": "Add sensitive variable config",
+"description": "Marks variable names as sensitive for a process definition",
+"operationId": "addProcessSensitiveVariables",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ProcessSensitiveVariables"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOProcessSensitiveVariables"
+}
+}
+}
+}
+}
+},
+"delete": {
+"tags": [
+"Sensitive Variables"
+],
+"summary": "Delete sensitive variable config",
+"operationId": "deleteProcessSensitiveVariables",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ProcessSensitiveVariables"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOString"
+}
+}
+}
+}
+}
+},
+"patch": {
+"tags": [
+"Sensitive Variables"
+],
+"summary": "Update sensitive variable config",
+"operationId": "updateProcessSensitiveVariables",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ProcessSensitiveVariables"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOProcessSensitiveVariables"
+}
+}
+}
+}
+}
+}
+},
+"/processDefinitionsEnvs": {
+"get": {
+"tags": [
+"Process Environment Variables"
+],
+"summary": "List all environment variable bindings (paginated)",
+"operationId": "getProcessDefinitions",
+"parameters": [
+{
+"name": "page",
+"in": "query",
+"description": "Zero-based page index",
+"required": false,
+"schema": {
+"type": "integer",
+"format": "int32",
+"default": 0
+}
+},
+{
+"name": "size",
+"in": "query",
+"description": "Page size",
+"required": false,
+"schema": {
+"type": "integer",
+"format": "int32",
+"default": 10
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/PageProcessEnvVariables"
+}
+}
+}
+}
+}
+},
+"post": {
+"tags": [
+"Process Environment Variables"
+],
+"summary": "Add an environment variable",
+"description": "Creates a new environment variable binding for a process definition",
+"operationId": "addProcessEnvVariable",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ProcessEnvVariables"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOProcessEnvVariables"
+}
+}
+}
+}
+}
+},
+"delete": {
+"tags": [
+"Process Environment Variables"
+],
+"summary": "Delete an environment variable",
+"operationId": "deleteProcessEnvVariable",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ProcessEnvVariables"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOProcessEnvVariables"
+}
+}
+}
+}
+}
+},
+"patch": {
+"tags": [
+"Process Environment Variables"
+],
+"summary": "Update an environment variable",
+"operationId": "updateProcessEnvVariable",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ProcessEnvVariables"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOProcessEnvVariables"
+}
+}
+}
+}
+}
+}
+},
+"/processDefinitions/upload": {
+"post": {
+"tags": [
+"Process Definitions"
+],
+"summary": "Deploy a process resource",
+"description": "Parses and stores a BPMN process definition, creating Kafka topics and consumer groups as needed",
+"operationId": "deployResource",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ResourceDeploymentRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOResourceDeploymentResponse"
+}
+}
+}
+}
+}
+}
+},
+"/incidents/resolve": {
+"post": {
+"tags": [
+"Incident Management"
+],
+"summary": "Resolve incidents in batch",
+"description": "Resolves multiple incidents by their process instance IDs",
+"operationId": "resolveIncidentsBatch",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/BatchInstanceRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"type": "string"
+}
+}
+}
+}
+}
+}
+},
+"/incidents/resolve/{processInstanceId}": {
+"post": {
+"tags": [
+"Incident Management"
+],
+"summary": "Resolve an incident",
+"description": "Marks a single incident as resolved and resumes the affected process instance",
+"operationId": "resolveIncident_1",
+"parameters": [
+{
+"name": "processInstanceId",
+"in": "path",
+"description": "Process instance ID",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"type": "string"
+}
+}
+}
+}
+}
+}
+},
+"/incidents/raise": {
+"post": {
+"tags": [
+"Incident Management"
+],
+"summary": "Raise an incident",
+"description": "Manually raises an incident for a process instance",
+"operationId": "raiseIncident",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/RaiseIncidentRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"type": "string"
+}
+}
+}
+}
+}
+}
+},
+"/incidents/raise/batch": {
+"post": {
+"tags": [
+"Incident Management"
+],
+"summary": "Raise incidents in batch",
+"description": "Raises incidents for multiple process instances in one call",
+"operationId": "raiseIncidentsBatch",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/BatchRaiseIncidentRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"type": "string"
+}
+}
+}
+}
+}
+}
+},
+"/feelPlayground/validate": {
+"post": {
+"tags": [
+"FEEL Playground"
+],
+"summary": "Validate a FEEL expression",
+"description": "Checks a FEEL expression for syntax errors without evaluating it",
+"operationId": "validate",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/FeelValidateRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOFeelValidationDTO"
+}
+}
+}
+}
+}
+}
+},
+"/feelPlayground/evaluate": {
+"post": {
+"tags": [
+"FEEL Playground"
+],
+"summary": "Evaluate a FEEL expression",
+"description": "Evaluates a FEEL expression against the provided context variables and returns the result",
+"operationId": "evaluate",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/FeelEvaluateRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOFeelEvaluationDTO"
+}
+}
+}
+}
+}
+}
+},
+"/eventing/sendSignal": {
+"post": {
+"tags": [
+"Eventing"
+],
+"summary": "Publish a signal event",
+"description": "Broadcasts a signal to all subscribed intermediate catch events and signal start events",
+"operationId": "publishSignal",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/SendSignalEventRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOSignalEventResponse"
+}
+}
+}
+}
+}
+}
+},
+"/eventing/sendMessage": {
+"post": {
+"tags": [
+"Eventing"
+],
+"summary": "Publish a message event",
+"description": "Correlates a message event with waiting intermediate catch events or start events by message name and correlation key",
+"operationId": "publishMessage",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/SendMessageEventRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOMessageEventResponse"
+}
+}
+}
+}
+}
+}
+},
+"/dyanmicProcessInstances/create": {
+"post": {
+"tags": [
+"Dynamic Process Instances"
+],
+"summary": "Create a dynamic process instance",
+"description": "Starts a new process instance from a dynamically-composed BPMN definition with the provided variables",
+"operationId": "createProcessInstance_1",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/DynamicProcessInvocationRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTODynamicProcessInvocationResponse"
+}
+}
+}
+}
+}
+}
+},
+"/deploymentApprovals/submitApproval": {
+"post": {
+"tags": [
+"Deployment Approvals"
+],
+"summary": "Submit approval decision",
+"description": "Approve or reject a pending deployment request",
+"operationId": "submitApproval",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/DeploymentActionRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTODeploymentApproval"
+}
+}
+}
+}
+}
+}
+},
+"/deploymentApprovals/requestApproval": {
+"post": {
+"tags": [
+"Deployment Approvals"
+],
+"summary": "Request deployment approval",
+"description": "Submits a new deployment for review by configured approvers",
+"operationId": "requestApproval",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/DeploymentApprovalRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTODeploymentApproval"
+}
+}
+}
+}
+}
+}
+},
+"/deploymentApprovals/addApprovers": {
+"post": {
+"tags": [
+"Deployment Approvals"
+],
+"summary": "Add an approver",
+"description": "Register a new approver for a process definition",
+"operationId": "addApprover",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/Approver"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOApprover"
+}
+}
+}
+}
+}
+}
+},
+"/decisionDefinitions/upload": {
+"post": {
+"tags": [
+"Decision Definitions"
+],
+"summary": "Deploy a decision resource",
+"description": "Parses and stores a DMN decision definition from the provided XML payload",
+"operationId": "deployResource_1",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ResourceDeploymentRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOResourceDeploymentResponse"
+}
+}
+}
+}
+}
+}
+},
+"/decisionDefinitions/evaluate": {
+"post": {
+"tags": [
+"Decision Definitions"
+],
+"summary": "Evaluate a decision",
+"description": "Evaluates a DMN decision table with the provided input variables and returns matched output entries",
+"operationId": "evaluateDecision",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/EvaluateDecisionRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTODecisionEvaluationResponseDTO"
+}
+}
+}
+}
+}
+}
+},
+"/connectors/upload": {
+"post": {
+"tags": [
+"Connectors"
+],
+"summary": "Upload connectors",
+"description": "Upload one or more connector configurations in bulk",
+"operationId": "uploadConnector",
+"parameters": [
+{
+"name": "connectorsData",
+"in": "query",
+"description": "List of connector data maps to upload",
+"required": true,
+"schema": {
+"type": "array",
+"items": {
+"type": "object",
+"additionalProperties": {}
+}
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOListConnector"
+}
+}
+}
+}
+}
+}
+},
+"/chats/analyse": {
+"post": {
+"tags": [
+"Orchest Chat"
+],
+"summary": "Analyse with AI (streaming)",
+"description": "Sends a natural-language question to the AI assistant and streams the response as SSE",
+"operationId": "analyse",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ChatRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"text/event-stream": {
+"schema": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/ServerSentEventString"
+}
+}
+}
+}
+}
+}
+}
+},
+"/apiTokens": {
+"get": {
+"tags": [
+"API Tokens"
+],
+"summary": "List all tokens for the current user",
+"description": "Returns metadata for all tokens (active and revoked). The full token value is never returned after creation.",
+"operationId": "listTokens",
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOListApiTokenResponse"
+}
+}
+}
+}
+}
+},
+"post": {
+"tags": [
+"API Tokens"
+],
+"summary": "Create a new API token",
+"description": "Generates a new token with an optional TTL. The full token value is returned only once — store it securely.",
+"operationId": "createToken",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/CreateApiTokenRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "Token created — includes the full token value (shown only once)",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOCreateApiTokenResponse"
+}
+}
+}
+}
+}
+},
+"delete": {
+"tags": [
+"API Tokens"
+],
+"summary": "Revoke all tokens",
+"description": "Permanently revokes all tokens for the current user",
+"operationId": "revokeAllTokens",
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOString"
+}
+}
+}
+}
+}
+}
+},
+"/alerts/{id}/unmute": {
+"post": {
+"tags": [
+"Alert Management"
+],
+"summary": "Unmute a silenced alert",
+"description": "Returns a SILENCED alert back to FIRING state, resuming notifications.",
+"operationId": "unmute",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"description": "Alert ID",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "Alert unmuted",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/AlertResponse"
+}
+}
+}
+},
+"404": {
+"description": "Alert not found",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/AlertResponse"
+}
+}
+}
+},
+"409": {
+"description": "Alert is not in SILENCED state",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/AlertResponse"
+}
+}
+}
+}
+}
+}
+},
+"/alerts/{id}/silence": {
+"post": {
+"tags": [
+"Alert Management"
+],
+"summary": "Silence an alert",
+"description": "Transitions alert to SILENCED state — suppresses notifications until unmuted.",
+"operationId": "silence",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"description": "Alert ID",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ActorRequest"
+}
+}
+}
+},
+"responses": {
+"200": {
+"description": "Alert silenced",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/AlertResponse"
+}
+}
+}
+},
+"404": {
+"description": "Alert not found",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/AlertResponse"
+}
+}
+}
+},
+"409": {
+"description": "Invalid state transition (alert is RESOLVED)",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/AlertResponse"
+}
+}
+}
+}
+}
+}
+},
+"/alerts/{id}/resolve": {
+"post": {
+"tags": [
+"Alert Management"
+],
+"summary": "Resolve an alert",
+"description": "Marks alert as RESOLVED — no further notifications will be sent.",
+"operationId": "resolve",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"description": "Alert ID",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "Alert resolved",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/AlertResponse"
+}
+}
+}
+},
+"404": {
+"description": "Alert not found",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/AlertResponse"
+}
+}
+}
+},
+"409": {
+"description": "Alert is already RESOLVED",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/AlertResponse"
+}
+}
+}
+}
+}
+}
+},
+"/alerts/{id}/acknowledge": {
+"post": {
+"tags": [
+"Alert Management"
+],
+"summary": "Acknowledge an alert",
+"description": "Transitions alert to ACKNOWLEDGED state. Idempotent if already acknowledged.",
+"operationId": "acknowledge",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"description": "Alert ID",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ActorRequest"
+}
+}
+}
+},
+"responses": {
+"200": {
+"description": "Alert acknowledged",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/AlertResponse"
+}
+}
+}
+},
+"404": {
+"description": "Alert not found",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/AlertResponse"
+}
+}
+}
+},
+"409": {
+"description": "Invalid state transition (alert is RESOLVED)",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/AlertResponse"
+}
+}
+}
+}
+}
+}
+},
+"/alerts/mailer-configs": {
+"get": {
+"tags": [
+"Alert Management"
+],
+"summary": "List mailer configs (paginated)",
+"operationId": "listMailerConfigs",
+"parameters": [
+{
+"name": "page",
+"in": "query",
+"description": "Zero-based page index",
+"required": false,
+"schema": {
+"type": "integer",
+"format": "int32",
+"default": 0
+}
+},
+{
+"name": "size",
+"in": "query",
+"description": "Page size",
+"required": false,
+"schema": {
+"type": "integer",
+"format": "int32",
+"default": 10
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/PagedMailerConfigResponse"
+}
+}
+}
+}
+}
+},
+"post": {
+"tags": [
+"Alert Management"
+],
+"summary": "Create a mailer config mapping",
+"operationId": "createMailerConfig",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/MailerConfigRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"201": {
+"description": "Created",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/AlertingMailerConfig"
+}
+}
+}
+}
+}
+}
+},
+"/userTasks/{taskId}/assign": {
+"patch": {
+"tags": [
+"User Tasks"
+],
+"summary": "Reassign a user task",
+"description": "Assigns the task to a different user",
+"operationId": "reassignTask",
+"parameters": [
+{
+"name": "taskId",
+"in": "path",
+"description": "Task ID",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/AssignUserTaskRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOUserTaskDTO"
+}
+}
+}
+}
+}
+}
+},
+"/processInstances/modifyInstance": {
+"patch": {
+"tags": [
+"Process Instances"
+],
+"summary": "Modify a process instance",
+"description": "Updates variables or moves the execution token to a different activity",
+"operationId": "modifyInstance",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/UpdateInstanceRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"type": "string"
+}
+}
+}
+}
+}
+}
+},
+"/processInstances/cancelInstances": {
+"patch": {
+"tags": [
+"Process Instances"
+],
+"summary": "Cancel a process instance",
+"description": "Terminates a running process instance immediately",
+"operationId": "cancelInstances",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/CancelInstanceRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"type": "string"
+}
+}
+}
+}
+}
+}
+},
+"/variables/{processInstanceId}": {
+"get": {
+"tags": [
+"Variables"
+],
+"summary": "Get variables for a process instance",
+"operationId": "getVariables",
+"parameters": [
+{
+"name": "processInstanceId",
+"in": "path",
+"description": "Process instance ID",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "Variables returned",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOVariablesResponse"
+}
+}
+}
+},
+"404": {
+"description": "Process instance not found",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOVariablesResponse"
+}
+}
+}
+}
+}
+}
+},
+"/userTasks": {
+"get": {
+"tags": [
+"User Tasks"
+],
+"summary": "List all user tasks (paginated)",
+"operationId": "getTasks",
+"parameters": [
+{
+"name": "page",
+"in": "query",
+"description": "Zero-based page index",
+"required": false,
+"schema": {
+"type": "integer",
+"format": "int32",
+"default": 0
+}
+},
+{
+"name": "size",
+"in": "query",
+"description": "Page size",
+"required": false,
+"schema": {
+"type": "integer",
+"format": "int32",
+"default": 10
+}
+},
+{
+"name": "sort",
+"in": "query",
+"description": "Sort field with direction prefix (+ASC / -DESC)",
+"required": false,
+"schema": {
+"type": "string",
+"default": "-createdAt"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/PageUserTaskDTO"
+}
+}
+}
+}
+}
+}
+},
+"/userTasks/{taskId}": {
+"get": {
+"tags": [
+"User Tasks"
+],
+"summary": "Get user task details",
+"operationId": "getTask",
+"parameters": [
+{
+"name": "taskId",
+"in": "path",
+"description": "Task ID",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "Task found",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOUserTaskDTO"
+}
+}
+}
+},
+"404": {
+"description": "Task not found",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOUserTaskDTO"
+}
+}
+}
+}
+}
+}
+},
+"/userTasks/process/{processInstanceId}": {
+"get": {
+"tags": [
+"User Tasks"
+],
+"summary": "List tasks for a process instance",
+"operationId": "getTasksForProcessInstance",
+"parameters": [
+{
+"name": "processInstanceId",
+"in": "path",
+"description": "Process instance ID",
+"required": true,
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "page",
+"in": "query",
+"description": "Zero-based page index",
+"required": false,
+"schema": {
+"type": "integer",
+"format": "int32",
+"default": 0
+}
+},
+{
+"name": "size",
+"in": "query",
+"description": "Page size",
+"required": false,
+"schema": {
+"type": "integer",
+"format": "int32",
+"default": 10
+}
+},
+{
+"name": "sort",
+"in": "query",
+"description": "Sort field with direction prefix (+ASC / -DESC)",
+"required": false,
+"schema": {
+"type": "string",
+"default": "-createdAt"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/PageUserTaskDTO"
+}
+}
+}
+}
+}
+}
+},
+"/stats": {
+"get": {
+"tags": [
+"Statistics"
+],
+"summary": "Get platform statistics",
+"description": "Returns aggregated counts of process instances, decision evaluations, and incidents within an optional time window. Results are cached unless hardReload is true.",
+"operationId": "stats",
+"parameters": [
+{
+"name": "hardReload",
+"in": "query",
+"description": "Force fresh computation, bypassing cache",
+"required": false,
+"schema": {
+"type": "boolean",
+"default": false
+}
+},
+{
+"name": "from",
+"in": "query",
+"description": "Inclusive lower bound on createdAt/executedAt (ISO-8601 instant)",
+"required": false,
+"schema": {
+"type": "string",
+"format": "date-time"
+}
+},
+{
+"name": "to",
+"in": "query",
+"description": "Exclusive upper bound on createdAt/executedAt (ISO-8601 instant)",
+"required": false,
+"schema": {
+"type": "string",
+"format": "date-time"
+}
+},
+{
+"name": "tz",
+"in": "query",
+"description": "IANA zone ID used to render lastUpdatedAt (defaults to UTC)",
+"required": false,
+"schema": {
+"type": "string"
+},
+"example": "Europe/Berlin"
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOStatsDTO"
+}
+}
+}
+}
+}
+}
+},
+"/rateLimits": {
+"get": {
+"tags": [
+"rate-limit-api"
+],
+"operationId": "getRateLimits",
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/RateLimit"
+}
+}
+}
+}
+}
+}
+}
+},
+"/rateLimit/{processDefinitionId}": {
+"get": {
+"tags": [
+"rate-limit-api"
+],
+"operationId": "getRateLimitForProcessId",
+"parameters": [
+{
+"name": "processDefinitionId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/RateLimit"
+}
+}
+}
+}
+}
+}
+},
+"/processStates/{processDefinitionId}": {
+"get": {
+"tags": [
+"process-state-api"
+],
+"operationId": "getProcessStateForProcessId",
+"parameters": [
+{
+"name": "processDefinitionId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ProcessState"
+}
+}
+}
+}
+}
+},
+"delete": {
+"tags": [
+"process-state-api"
+],
+"operationId": "removeProcessState",
+"parameters": [
+{
+"name": "processDefinitionId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ProcessState"
+}
+}
+}
+}
+}
+}
+},
+"/processInstances/scroll": {
+"get": {
+"tags": [
+"Process Instances"
+],
+"summary": "Scroll process instances",
+"description": "Offset-based scrolling for virtualised lists — returns a slice without total count overhead",
+"operationId": "scrollProcessInstances",
+"parameters": [
+{
+"name": "processDefinitionId",
+"in": "query",
+"description": "Filter by process definition ID",
+"required": false,
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "version",
+"in": "query",
+"description": "Filter by process version",
+"required": false,
+"schema": {
+"type": "integer",
+"format": "int32"
+}
+},
+{
+"name": "state",
+"in": "query",
+"description": "Filter by instance state",
+"required": false,
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "searchText",
+"in": "query",
+"description": "Free-text search",
+"required": false,
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "createdFrom",
+"in": "query",
+"description": "Inclusive lower bound on createdAt (ISO-8601 offset date-time)",
+"required": false,
+"schema": {
+"type": "string",
+"format": "date-time"
+}
+},
+{
+"name": "createdTo",
+"in": "query",
+"description": "Exclusive upper bound on createdAt (ISO-8601 offset date-time)",
+"required": false,
+"schema": {
+"type": "string",
+"format": "date-time"
+}
+},
+{
+"name": "from",
+"in": "query",
+"description": "Inclusive 0-based offset",
+"required": false,
+"schema": {
+"type": "integer",
+"format": "int32",
+"default": 0
+}
+},
+{
+"name": "to",
+"in": "query",
+"description": "Exclusive end offset",
+"required": true,
+"schema": {
+"type": "integer",
+"format": "int32"
+}
+},
+{
+"name": "sort",
+"in": "query",
+"description": "Sort field with direction prefix (+ASC / -DESC)",
+"required": false,
+"schema": {
+"type": "string",
+"default": "-createdAt"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ProcessInstanceScrollDTO"
+}
+}
+}
+}
+}
+}
+},
+"/processInstances/pageData": {
+"get": {
+"tags": [
+"Process Instances"
+],
+"summary": "List process instances (paginated)",
+"description": "Filterable by process definition, version, state, time range, and free-text search",
+"operationId": "getPageData",
+"parameters": [
+{
+"name": "processDefinitionId",
+"in": "query",
+"description": "Filter by process definition ID",
+"required": false,
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "version",
+"in": "query",
+"description": "Filter by process version",
+"required": false,
+"schema": {
+"type": "integer",
+"format": "int32"
+}
+},
+{
+"name": "state",
+"in": "query",
+"description": "Filter by instance state (e.g. ACTIVE, COMPLETED, INCIDENT)",
+"required": false,
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "searchText",
+"in": "query",
+"description": "Free-text search across instance data",
+"required": false,
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "createdFrom",
+"in": "query",
+"description": "Inclusive lower bound on createdAt (ISO-8601 offset date-time)",
+"required": false,
+"schema": {
+"type": "string",
+"format": "date-time"
+}
+},
+{
+"name": "createdTo",
+"in": "query",
+"description": "Exclusive upper bound on createdAt (ISO-8601 offset date-time)",
+"required": false,
+"schema": {
+"type": "string",
+"format": "date-time"
+}
+},
+{
+"name": "page",
+"in": "query",
+"description": "Zero-based page index",
+"required": false,
+"schema": {
+"type": "integer",
+"format": "int32",
+"default": 0
+}
+},
+{
+"name": "size",
+"in": "query",
+"description": "Page size",
+"required": false,
+"schema": {
+"type": "integer",
+"format": "int32",
+"default": 10
+}
+},
+{
+"name": "sort",
+"in": "query",
+"description": "Sort field with direction prefix (+ASC / -DESC)",
+"required": false,
+"schema": {
+"type": "string",
+"default": "-createdAt"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/PageProcessInstance"
+}
+}
+}
+}
+}
+}
+},
+"/processInstances/id/{processInstanceId}": {
+"get": {
+"tags": [
+"Process Instances"
+],
+"summary": "Get process instance by ID",
+"description": "Returns full instance details including current state, variables, and activity history",
+"operationId": "getProcessInstance",
+"parameters": [
+{
+"name": "processInstanceId",
+"in": "path",
+"description": "Process instance ID",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOProcessInstanceDTO"
+}
+}
+}
+}
+}
+}
+},
+"/processDefinitions": {
+"get": {
+"tags": [
+"Process Definitions"
+],
+"summary": "List process definitions (paginated)",
+"operationId": "getProcessDefinitions_1",
+"parameters": [
+{
+"name": "page",
+"in": "query",
+"description": "Zero-based page index",
+"required": false,
+"schema": {
+"type": "integer",
+"format": "int32",
+"default": 0
+}
+},
+{
+"name": "size",
+"in": "query",
+"description": "Page size",
+"required": false,
+"schema": {
+"type": "integer",
+"format": "int32",
+"default": 10
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/PageResourceDefinitionDTO"
+}
+}
+}
+}
+}
+}
+},
+"/processDefinitionsSensitiveVariables/{processDefinitionId}": {
+"get": {
+"tags": [
+"Sensitive Variables"
+],
+"summary": "Get sensitive variables for a process",
+"operationId": "getProcessSensitiveVariables",
+"parameters": [
+{
+"name": "processDefinitionId",
+"in": "path",
+"description": "Process definition ID",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOListProcessSensitiveVariables"
+}
+}
+}
+}
+}
+}
+},
+"/processDefinitionsEnvs/{processDefinitionId}": {
+"get": {
+"tags": [
+"Process Environment Variables"
+],
+"summary": "Get environment variables for a process",
+"operationId": "getProcessDefinition",
+"parameters": [
+{
+"name": "processDefinitionId",
+"in": "path",
+"description": "Process definition ID",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "Variables found",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOListProcessEnvVariables"
+}
+}
+}
+},
+"404": {
+"description": "Process definition not found",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOListProcessEnvVariables"
+}
+}
+}
+}
+}
+}
+},
+"/processDefinitions/{processDefinitionId}/{version}": {
+"get": {
+"tags": [
+"Process Definitions"
+],
+"summary": "Get process definition by ID and version",
+"operationId": "getProcessDefinition_1",
+"parameters": [
+{
+"name": "processDefinitionId",
+"in": "path",
+"description": "Process definition ID",
+"required": true,
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "version",
+"in": "path",
+"description": "Version number (null for latest)",
+"required": true,
+"schema": {
+"type": "integer",
+"format": "int32"
+}
+}
+],
+"responses": {
+"200": {
+"description": "Process definition found",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOResourceDefinitionDTO"
+}
+}
+}
+},
+"404": {
+"description": "Process definition not found",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOResourceDefinitionDTO"
+}
+}
+}
+}
+}
+},
+"delete": {
+"tags": [
+"Process Definitions"
+],
+"summary": "Delete a process definition version",
+"operationId": "deleteProcessDefinition",
+"parameters": [
+{
+"name": "processDefinitionId",
+"in": "path",
+"description": "Process definition ID",
+"required": true,
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "version",
+"in": "path",
+"description": "Version number to delete",
+"required": true,
+"schema": {
+"type": "integer",
+"format": "int32"
+}
+}
+],
+"responses": {
+"200": {
+"description": "Deleted successfully",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOVoid"
+}
+}
+}
+},
+"404": {
+"description": "Process definition not found",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOVoid"
+}
+}
+}
+}
+}
+}
+},
+"/processDefinitions/ids": {
+"get": {
+"tags": [
+"Process Definitions"
+],
+"summary": "List all process definition IDs",
+"description": "Returns the latest version of each distinct process definition",
+"operationId": "listProcessDefinitionsIds",
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOListResourceDefinitionDTO"
+}
+}
+}
+}
+}
+}
+},
+"/pageVisits": {
+"get": {
+"tags": [
+"page-visit-api"
+],
+"operationId": "getVisitsForDate",
+"parameters": [
+{
+"name": "date",
+"in": "query",
+"required": false,
+"schema": {
+"type": "string",
+"format": "date"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/PageVisitStats"
+}
+}
+}
+}
+}
+}
+}
+},
+"/pageVisits/url": {
+"get": {
+"tags": [
+"page-visit-api"
+],
+"operationId": "getVisitsForUrl",
+"parameters": [
+{
+"name": "url",
+"in": "query",
+"required": true,
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "from",
+"in": "query",
+"required": false,
+"schema": {
+"type": "string",
+"format": "date"
+}
+},
+{
+"name": "to",
+"in": "query",
+"required": false,
+"schema": {
+"type": "string",
+"format": "date"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/PageVisitStats"
+}
+}
+}
+}
+}
+}
+}
+},
+"/kafka/worker-info": {
+"get": {
+"tags": [
+"Kafka Inspection"
+],
+"summary": "Get worker info for a process",
+"description": "Returns computed topic/consumer-group names for a process definition and their live existence status on the cluster",
+"operationId": "getWorkerInfo",
+"parameters": [
+{
+"name": "processDefinitionId",
+"in": "query",
+"description": "Process definition ID to inspect",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOWorkerInfo"
+}
+}
+}
+}
+}
+}
+},
+"/kafka/process-health": {
+"get": {
+"tags": [
+"Kafka Inspection"
+],
+"summary": "Get process health overview",
+"description": "For every stored process definition (latest version per ID), returns required topics/groups and whether they exist on the cluster",
+"operationId": "getProcessHealth",
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOListProcessHealth"
+}
+}
+}
+}
+}
+}
+},
+"/kafka/cluster-info": {
+"get": {
+"tags": [
+"Kafka Inspection"
+],
+"summary": "Get cluster info",
+"description": "Lists all ORCHEST-prefixed topics and consumer groups currently registered on the Kafka cluster",
+"operationId": "getClusterInfo",
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOClusterInfo"
+}
+}
+}
+}
+}
+}
+},
+"/incidents": {
+"get": {
+"tags": [
+"Incident Management"
+],
+"summary": "List incidents (paginated)",
+"description": "Filterable by process definition, version, time range, and free-text search",
+"operationId": "getIncidents",
+"parameters": [
+{
+"name": "processDefinitionId",
+"in": "query",
+"description": "Filter by process definition ID",
+"required": false,
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "version",
+"in": "query",
+"description": "Filter by process version",
+"required": false,
+"schema": {
+"type": "integer",
+"format": "int32"
+}
+},
+{
+"name": "searchText",
+"in": "query",
+"description": "Free-text search across incident data",
+"required": false,
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "from",
+"in": "query",
+"description": "Inclusive lower bound on createdAt (ISO-8601)",
+"required": false,
+"schema": {
+"type": "string",
+"format": "date-time"
+}
+},
+{
+"name": "to",
+"in": "query",
+"description": "Inclusive upper bound on createdAt (ISO-8601)",
+"required": false,
+"schema": {
+"type": "string",
+"format": "date-time"
+}
+},
+{
+"name": "page",
+"in": "query",
+"description": "Zero-based page index",
+"required": false,
+"schema": {
+"type": "integer",
+"format": "int32",
+"default": 0
+}
+},
+{
+"name": "size",
+"in": "query",
+"description": "Page size",
+"required": false,
+"schema": {
+"type": "integer",
+"format": "int32",
+"default": 10
+}
+},
+{
+"name": "sort",
+"in": "query",
+"description": "Sort field with direction prefix (+ASC / -DESC)",
+"required": false,
+"schema": {
+"type": "string",
+"default": "-createdAt"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/PageIncidentDTO"
+}
+}
+}
+}
+}
+}
+},
+"/incidents/{processInstanceId}": {
+"get": {
+"tags": [
+"Incident Management"
+],
+"summary": "Get incident by process instance ID",
+"operationId": "getIncident",
+"parameters": [
+{
+"name": "processInstanceId",
+"in": "path",
+"description": "Process instance ID",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "Incident found",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOIncidentDTO"
+}
+}
+}
+},
+"404": {
+"description": "Incident not found",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOIncidentDTO"
+}
+}
+}
+}
+}
+}
+},
+"/deploymentApprovals": {
+"get": {
+"tags": [
+"Deployment Approvals"
+],
+"summary": "List approvals (paginated)",
+"description": "Filterable by approval state",
+"operationId": "getApprovals",
+"parameters": [
+{
+"name": "approvedState",
+"in": "query",
+"description": "Filter by approval state",
+"required": true,
+"schema": {
+"type": "string",
+"enum": [
+"REQUESTED",
+"ACCEPTED",
+"REJECTED"
+]
+}
+},
+{
+"name": "page",
+"in": "query",
+"description": "Zero-based page index",
+"required": false,
+"schema": {
+"type": "integer",
+"format": "int32",
+"default": 0
+}
+},
+{
+"name": "size",
+"in": "query",
+"description": "Page size",
+"required": false,
+"schema": {
+"type": "integer",
+"format": "int32",
+"default": 10
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/PageDeploymentApproval"
+}
+}
+}
+}
+}
+}
+},
+"/deploymentApprovals/reviews": {
+"get": {
+"tags": [
+"Deployment Approvals"
+],
+"summary": "Get approvals pending for current reviewer",
+"description": "Returns approvals assigned to the authenticated user, filterable by state",
+"operationId": "getApprovalsByReviewer",
+"parameters": [
+{
+"name": "stateCSV",
+"in": "query",
+"description": "Comma-separated approval states to include (e.g. REQUESTED,APPROVED)",
+"required": false,
+"schema": {
+"type": "string",
+"default": "REQUESTED"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOListDeploymentApproval"
+}
+}
+}
+}
+}
+}
+},
+"/deploymentApprovals/getDefinitions": {
+"get": {
+"tags": [
+"Deployment Approvals"
+],
+"summary": "Get definitions for current user",
+"description": "Returns all process definitions where the current user is a configured approver",
+"operationId": "getDefinitionsForUser",
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOListApprover"
+}
+}
+}
+}
+}
+}
+},
+"/deploymentApprovals/getApprovers": {
+"get": {
+"tags": [
+"Deployment Approvals"
+],
+"summary": "Get approver config for a process",
+"description": "Returns the configured approver for a given process definition",
+"operationId": "getApprover",
+"parameters": [
+{
+"name": "processId",
+"in": "query",
+"description": "Process definition ID",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOApprover"
+}
+}
+}
+}
+}
+}
+},
+"/decisionInstances/{decisionInstanceId}": {
+"get": {
+"tags": [
+"Decision Instances"
+],
+"summary": "Get decision instance by ID",
+"operationId": "getDecisionInstance",
+"parameters": [
+{
+"name": "decisionInstanceId",
+"in": "path",
+"description": "Decision instance ID",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "Instance found",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTODecisionInstanceDTO"
+}
+}
+}
+},
+"404": {
+"description": "Instance not found",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTODecisionInstanceDTO"
+}
+}
+}
+}
+}
+}
+},
+"/decisionInstances/scroll": {
+"get": {
+"tags": [
+"Decision Instances"
+],
+"summary": "Scroll decision instances",
+"description": "Offset-based scrolling for virtualised lists — returns a slice without total count overhead",
+"operationId": "scrollDecisionInstances",
+"parameters": [
+{
+"name": "decisionId",
+"in": "query",
+"description": "Filter by decision definition ID",
+"required": false,
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "version",
+"in": "query",
+"description": "Filter by decision version",
+"required": false,
+"schema": {
+"type": "integer",
+"format": "int32"
+}
+},
+{
+"name": "searchText",
+"in": "query",
+"description": "Free-text search",
+"required": false,
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "executedFrom",
+"in": "query",
+"description": "Inclusive lower bound on executedAt (ISO-8601)",
+"required": false,
+"schema": {
+"type": "string",
+"format": "date-time"
+}
+},
+{
+"name": "executedTo",
+"in": "query",
+"description": "Inclusive upper bound on executedAt (ISO-8601)",
+"required": false,
+"schema": {
+"type": "string",
+"format": "date-time"
+}
+},
+{
+"name": "from",
+"in": "query",
+"description": "Inclusive 0-based offset",
+"required": false,
+"schema": {
+"type": "integer",
+"format": "int32",
+"default": 0
+}
+},
+{
+"name": "to",
+"in": "query",
+"description": "Exclusive end offset",
+"required": true,
+"schema": {
+"type": "integer",
+"format": "int32"
+}
+},
+{
+"name": "sort",
+"in": "query",
+"description": "Sort field with direction prefix (+ASC / -DESC)",
+"required": false,
+"schema": {
+"type": "string",
+"default": "-executedAt"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/DecisionInstanceScrollDTO"
+}
+}
+}
+}
+}
+}
+},
+"/decisionInstances/pageData": {
+"get": {
+"tags": [
+"Decision Instances"
+],
+"summary": "List decision instances (paginated)",
+"description": "Filterable by decision ID, version, execution time range, and free-text search",
+"operationId": "getDecisionInstances",
+"parameters": [
+{
+"name": "decisionId",
+"in": "query",
+"description": "Filter by decision definition ID",
+"required": false,
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "from",
+"in": "query",
+"description": "Inclusive lower bound on executedAt (ISO-8601)",
+"required": false,
+"schema": {
+"type": "string",
+"format": "date-time"
+}
+},
+{
+"name": "to",
+"in": "query",
+"description": "Inclusive upper bound on executedAt (ISO-8601)",
+"required": false,
+"schema": {
+"type": "string",
+"format": "date-time"
+}
+},
+{
+"name": "version",
+"in": "query",
+"description": "Filter by decision version",
+"required": false,
+"schema": {
+"type": "integer",
+"format": "int32"
+}
+},
+{
+"name": "searchText",
+"in": "query",
+"description": "Free-text search across instance data",
+"required": false,
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "page",
+"in": "query",
+"description": "Zero-based page index",
+"required": false,
+"schema": {
+"type": "integer",
+"format": "int32",
+"default": 0
+}
+},
+{
+"name": "size",
+"in": "query",
+"description": "Page size",
+"required": false,
+"schema": {
+"type": "integer",
+"format": "int32",
+"default": 10
+}
+},
+{
+"name": "sort",
+"in": "query",
+"description": "Sort field with direction prefix (+ASC / -DESC). e.g. -executedAt",
+"required": false,
+"schema": {
+"type": "string",
+"default": "-executedAt"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/PageDecisionInstanceDTO"
+}
+}
+}
+}
+}
+}
+},
+"/decisionDefinitions": {
+"get": {
+"tags": [
+"Decision Definitions"
+],
+"summary": "List decision definitions (paginated)",
+"operationId": "getDecisionDefinitions",
+"parameters": [
+{
+"name": "page",
+"in": "query",
+"description": "Zero-based page index",
+"required": false,
+"schema": {
+"type": "integer",
+"format": "int32",
+"default": 0
+}
+},
+{
+"name": "size",
+"in": "query",
+"description": "Page size",
+"required": false,
+"schema": {
+"type": "integer",
+"format": "int32",
+"default": 10
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/PageResourceDefinitionDTO"
+}
+}
+}
+}
+}
+}
+},
+"/decisionDefinitions/{decisionDefinitionId}/{version}": {
+"get": {
+"tags": [
+"Decision Definitions"
+],
+"summary": "Get decision definition by ID and version",
+"operationId": "getDecisionDefinition",
+"parameters": [
+{
+"name": "decisionDefinitionId",
+"in": "path",
+"description": "Decision definition ID",
+"required": true,
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "version",
+"in": "path",
+"description": "Version number (null for latest)",
+"required": true,
+"schema": {
+"type": "integer",
+"format": "int32"
+}
+}
+],
+"responses": {
+"200": {
+"description": "Decision definition found",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOResourceDefinitionDTO"
+}
+}
+}
+},
+"404": {
+"description": "Decision definition not found",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOResourceDefinitionDTO"
+}
+}
+}
+}
+}
+},
+"delete": {
+"tags": [
+"Decision Definitions"
+],
+"summary": "Delete a decision definition version",
+"operationId": "deleteDecisionDefinition",
+"parameters": [
+{
+"name": "decisionDefinitionId",
+"in": "path",
+"description": "Decision definition ID",
+"required": true,
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "version",
+"in": "path",
+"description": "Version number to delete",
+"required": true,
+"schema": {
+"type": "integer",
+"format": "int32"
+}
+}
+],
+"responses": {
+"200": {
+"description": "Deleted successfully",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOVoid"
+}
+}
+}
+},
+"404": {
+"description": "Decision definition not found",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOVoid"
+}
+}
+}
+}
+}
+}
+},
+"/decisionDefinitions/ids": {
+"get": {
+"tags": [
+"Decision Definitions"
+],
+"summary": "List all decision definition IDs",
+"description": "Returns the latest version of each distinct decision definition",
+"operationId": "listDecisionDefinitions",
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOListResourceDefinitionDTO"
+}
+}
+}
+}
+}
+}
+},
+"/connectors": {
+"get": {
+"tags": [
+"Connectors"
+],
+"summary": "List connectors (paginated)",
+"operationId": "getConnectors",
+"parameters": [
+{
+"name": "page",
+"in": "query",
+"description": "Zero-based page index",
+"required": false,
+"schema": {
+"type": "integer",
+"format": "int32",
+"default": 0
+}
+},
+{
+"name": "size",
+"in": "query",
+"description": "Page size",
+"required": false,
+"schema": {
+"type": "integer",
+"format": "int32",
+"default": 10
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/PageConnector"
+}
+}
+}
+}
+}
+}
+},
+"/connectors/{name}": {
+"get": {
+"tags": [
+"Connectors"
+],
+"summary": "Get connector by name",
+"operationId": "getConnector",
+"parameters": [
+{
+"name": "name",
+"in": "path",
+"description": "Connector name",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "Connector found",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOConnector"
+}
+}
+}
+},
+"404": {
+"description": "Connector not found",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOConnector"
+}
+}
+}
+}
+}
+}
+},
+"/auditTrails/user": {
+"get": {
+"tags": [
+"audit-trail-api"
+],
+"operationId": "getByUser",
+"parameters": [
+{
+"name": "email",
+"in": "query",
+"required": true,
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "limit",
+"in": "query",
+"required": false,
+"schema": {
+"type": "integer",
+"format": "int32",
+"default": 50
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/AuditTrailEntry"
+}
+}
+}
+}
+}
+}
+}
+},
+"/auditTrails/time": {
+"get": {
+"tags": [
+"audit-trail-api"
+],
+"operationId": "getByTimeRange",
+"parameters": [
+{
+"name": "from",
+"in": "query",
+"required": true,
+"schema": {
+"type": "string",
+"format": "date-time"
+}
+},
+{
+"name": "to",
+"in": "query",
+"required": true,
+"schema": {
+"type": "string",
+"format": "date-time"
+}
+},
+{
+"name": "limit",
+"in": "query",
+"required": false,
+"schema": {
+"type": "integer",
+"format": "int32",
+"default": 100
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/AuditTrailEntry"
+}
+}
+}
+}
+}
+}
+}
+},
+"/auditTrails/path": {
+"get": {
+"tags": [
+"audit-trail-api"
+],
+"operationId": "getByPath",
+"parameters": [
+{
+"name": "path",
+"in": "query",
+"required": true,
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "from",
+"in": "query",
+"required": true,
+"schema": {
+"type": "string",
+"format": "date-time"
+}
+},
+{
+"name": "to",
+"in": "query",
+"required": true,
+"schema": {
+"type": "string",
+"format": "date-time"
+}
+},
+{
+"name": "limit",
+"in": "query",
+"required": false,
+"schema": {
+"type": "integer",
+"format": "int32",
+"default": 100
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/AuditTrailEntry"
+}
+}
+}
+}
+}
+}
+}
+},
+"/apiTokens/{tokenId}": {
+"get": {
+"tags": [
+"API Tokens"
+],
+"summary": "Get token details",
+"operationId": "getToken",
+"parameters": [
+{
+"name": "tokenId",
+"in": "path",
+"description": "Token ID",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "Token found",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOApiTokenResponse"
+}
+}
+}
+},
+"404": {
+"description": "Token not found",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOApiTokenResponse"
+}
+}
+}
+}
+}
+},
+"delete": {
+"tags": [
+"API Tokens"
+],
+"summary": "Revoke a token",
+"description": "Permanently revokes a token — it can no longer be used for authentication",
+"operationId": "revokeToken",
+"parameters": [
+{
+"name": "tokenId",
+"in": "path",
+"description": "Token ID to revoke",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOString"
+}
+}
+}
+}
+}
+}
+},
+"/alerts": {
+"get": {
+"tags": [
+"Alert Management"
+],
+"summary": "List alerts",
+"description": "Returns a paginated, filterable, sortable list of alerts. Supports filtering by state, processDefinitionId, and creation time range.",
+"operationId": "list",
+"parameters": [
+{
+"name": "state",
+"in": "query",
+"description": "Filter by alert lifecycle state",
+"required": false,
+"schema": {
+"type": "string",
+"enum": [
+"FIRING",
+"ACKNOWLEDGED",
+"SILENCED",
+"RESOLVED",
+"DISABLED"
+]
+}
+},
+{
+"name": "processDefinitionId",
+"in": "query",
+"description": "Filter by process definition ID (stored in alert metadata)",
+"required": false,
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "createdFrom",
+"in": "query",
+"description": "Inclusive lower bound for createdAt (ISO-8601 instant, e.g. 2024-01-01T00:00:00Z)",
+"required": false,
+"schema": {
+"type": "string",
+"format": "date-time"
+}
+},
+{
+"name": "createdTo",
+"in": "query",
+"description": "Inclusive upper bound for createdAt (ISO-8601 instant)",
+"required": false,
+"schema": {
+"type": "string",
+"format": "date-time"
+}
+},
+{
+"name": "page",
+"in": "query",
+"description": "Zero-based page index",
+"required": false,
+"schema": {
+"type": "integer",
+"format": "int32",
+"default": 0
+}
+},
+{
+"name": "size",
+"in": "query",
+"description": "Page size",
+"required": false,
+"schema": {
+"type": "integer",
+"format": "int32",
+"default": 10
+}
+},
+{
+"name": "sort",
+"in": "query",
+"description": "Sort field with direction prefix: +field (ASC) or -field (DESC). Allowed fields: count, createdAt, updatedAt, severity, state",
+"required": false,
+"schema": {
+"type": "string",
+"default": "-count"
+},
+"example": "-count"
+}
+],
+"responses": {
+"200": {
+"description": "Paginated alert list",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/PagedAlertResponse"
+}
+}
+}
+}
+}
+}
+},
+"/alerts/{id}": {
+"get": {
+"tags": [
+"Alert Management"
+],
+"summary": "Get alert by ID",
+"operationId": "get",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"description": "Alert ID",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "Alert found",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/AlertResponse"
+}
+}
+}
+},
+"404": {
+"description": "Alert not found",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ErrorResponse"
+}
+}
+}
+}
+}
+}
+},
+"/alerts/stats/firing": {
+"get": {
+"tags": [
+"Alert Management"
+],
+"summary": "Firing alert statistics",
+"description": "Returns aggregated stats of all FIRING alerts grouped by processDefinitionId and version. The totalCount is the sum of each alert's count within that group.",
+"operationId": "firingStats",
+"responses": {
+"200": {
+"description": "Aggregated firing stats",
+"content": {
+"*/*": {
+"schema": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/AlertStats"
+}
+}
+}
+}
+}
+}
+}
+},
+"/alerts/by-states": {
+"get": {
+"tags": [
+"Alert Management"
+],
+"summary": "Get alerts by states (paginated)",
+"description": "Returns a paginated list of alerts matching any of the provided states.",
+"operationId": "listByStates",
+"parameters": [
+{
+"name": "states",
+"in": "query",
+"description": "One or more alert states to filter by",
+"required": true,
+"schema": {
+"type": "array",
+"items": {
+"type": "string",
+"enum": [
+"FIRING",
+"ACKNOWLEDGED",
+"SILENCED",
+"RESOLVED",
+"DISABLED"
+]
+}
+}
+},
+{
+"name": "page",
+"in": "query",
+"description": "Zero-based page index",
+"required": false,
+"schema": {
+"type": "integer",
+"format": "int32",
+"default": 0
+}
+},
+{
+"name": "size",
+"in": "query",
+"description": "Page size",
+"required": false,
+"schema": {
+"type": "integer",
+"format": "int32",
+"default": 10
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/PagedAlertResponse"
+}
+}
+}
+}
+}
+}
+},
+"/activityStates/{processDefinitionId}": {
+"get": {
+"tags": [
+"activity-state-api"
+],
+"operationId": "getByProcessDefinitionId",
+"parameters": [
+{
+"name": "processDefinitionId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/ActivityState"
+}
+}
+}
+}
+}
+}
+}
+},
+"/activityStates/{processDefinitionId}/{version}": {
+"get": {
+"tags": [
+"activity-state-api"
+],
+"operationId": "getByProcessDefinitionIdAndVersion",
+"parameters": [
+{
+"name": "processDefinitionId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "version",
+"in": "path",
+"required": true,
+"schema": {
+"type": "integer",
+"format": "int32"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/ActivityState"
+}
+}
+}
+}
+}
+}
+}
+},
+"/deploymentApprovals/removeApprover": {
+"delete": {
+"tags": [
+"Deployment Approvals"
+],
+"summary": "Remove an approver",
+"operationId": "deleteApprover",
+"parameters": [
+{
+"name": "approverId",
+"in": "query",
+"description": "Approver ID",
+"required": true,
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "approverEmail",
+"in": "query",
+"description": "Approver email address",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ResponseDTOApprover"
+}
+}
+}
+}
+}
+}
+},
+"/activityStates/{processDefinitionId}/{version}/{activityId}": {
+"delete": {
+"tags": [
+"activity-state-api"
+],
+"operationId": "removeActivityState",
+"parameters": [
+{
+"name": "processDefinitionId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "version",
+"in": "path",
+"required": true,
+"schema": {
+"type": "integer",
+"format": "int32"
+}
+},
+{
+"name": "activityId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"*/*": {
+"schema": {
+"$ref": "#/components/schemas/ActivityState"
+}
+}
+}
+}
+}
+}
+}
+},
+"components": {
+"schemas": {
+"RateLimit": {
+"type": "object",
+"properties": {
+"id": {
+"type": "string"
+},
+"enabled": {
+"type": "boolean"
+},
+"processId": {
+"type": "string"
+},
+"windowDuration": {
+"type": "integer",
+"format": "int32"
+},
+"allowedSize": {
+"type": "integer",
+"format": "int32"
+},
+"switchToNewCamunda": {
+"type": "boolean"
+}
+}
+},
+"ProcessState": {
+"type": "object",
+"properties": {
+"id": {
+"type": "string"
+},
+"processId": {
+"type": "string"
+},
+"status": {
+"type": "boolean"
+}
+}
+},
+"AlertRecipients": {
+"type": "object",
+"properties": {
+"to": {
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"cc": {
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"bcc": {
+"type": "array",
+"items": {
+"type": "string"
+}
+}
+}
+},
+"MailerConfigRequest": {
+"type": "object",
+"properties": {
+"processId": {
+"type": "string"
+},
+"alertingRecipient": {
+"$ref": "#/components/schemas/AlertRecipients"
+}
+}
+},
+"AlertingMailerConfig": {
+"type": "object",
+"properties": {
+"id": {
+"type": "string"
+},
+"processId": {
+"type": "string"
+},
+"alertingRecipient": {
+"$ref": "#/components/schemas/AlertRecipients"
+},
+"createdAt": {
+"type": "string",
+"format": "date-time"
+},
+"lastModifiedAt": {
+"type": "string",
+"format": "date-time"
+}
+}
+},
+"ActivityState": {
+"type": "object",
+"properties": {
+"id": {
+"type": "string"
+},
+"processDefinitionId": {
+"type": "string"
+},
+"version": {
+"type": "integer",
+"format": "int32"
+},
+"activityId": {
+"type": "string"
+},
+"description": {
+"type": "string"
+},
+"enabled": {
+"type": "boolean"
+},
+"createdAt": {
+"type": "string",
+"format": "date-time"
+},
+"updatedAt": {
+"type": "string",
+"format": "date-time"
+}
+}
+},
+"VariablesRequest": {
+"type": "object",
+"properties": {
+"action": {
+"type": "string",
+"enum": [
+"ADD",
+"UPDATE",
+"DELETE"
+]
+},
+"processInstanceId": {
+"type": "string"
+},
+"variables": {
+"type": "object",
+"additionalProperties": {}
+}
+}
+},
+"Meta": {
+"type": "object",
+"properties": {
+"code": {
+"type": "integer",
+"format": "int32"
+},
+"message": {
+"type": "string"
+}
+}
+},
+"ResponseDTOVariablesResponse": {
+"type": "object",
+"properties": {
+"meta": {
+"$ref": "#/components/schemas/Meta"
+},
+"data": {
+"$ref": "#/components/schemas/VariablesResponse"
+}
+}
+},
+"VariablesResponse": {
+"type": "object",
+"properties": {
+"variables": {
+"type": "object",
+"additionalProperties": {}
+}
+}
+},
+"ResponseDTOUserTaskDTO": {
+"type": "object",
+"properties": {
+"meta": {
+"$ref": "#/components/schemas/Meta"
+},
+"data": {
+"$ref": "#/components/schemas/UserTaskDTO"
+}
+}
+},
+"UserTaskDTO": {
+"type": "object",
+"properties": {
+"taskId": {
+"type": "string"
+},
+"processInstanceId": {
+"type": "string"
+},
+"processDefinitionId": {
+"type": "string"
+},
+"activityId": {
+"type": "string"
+},
+"taskName": {
+"type": "string"
+},
+"state": {
+"type": "string"
+},
+"assignee": {
+"type": "string"
+},
+"candidateUsers": {
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"candidateGroups": {
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"claimedBy": {
+"type": "string"
+},
+"dueDate": {
+"type": "string"
+},
+"followUpDate": {
+"type": "string"
+},
+"formKey": {
+"type": "string"
+},
+"variables": {
+"type": "object",
+"additionalProperties": {}
+},
+"createdAt": {
+"type": "string"
+},
+"claimedAt": {
+"type": "string"
+},
+"completedAt": {
+"type": "string"
+}
+}
+},
+"CompleteUserTaskRequest": {
+"type": "object",
+"properties": {
+"variables": {
+"type": "object",
+"additionalProperties": {}
+}
+}
+},
+"RetryProcessEvent": {
+"type": "object",
+"properties": {
+"processInstanceId": {
+"type": "string"
+},
+"activityId": {
+"type": "string"
+},
+"previousActivityId": {
+"type": "string"
+}
+}
+},
+"BatchInstanceRequest": {
+"type": "object",
+"properties": {
+"processInstanceIds": {
+"type": "array",
+"items": {
+"type": "string"
+}
+}
+}
+},
+"ActivityNode": {
+"allOf": [
+{
+"$ref": "#/components/schemas/BaseNode"
+},
+{
+"type": "object",
+"properties": {
+"boundaryEventIds": {
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"multiInstanceLoopCharacteristics": {
+"$ref": "#/components/schemas/MultiInstanceLoopCharacteristics"
+}
+}
+}
+]
+},
+"BaseNode": {
+"type": "object",
+"discriminator": {
+"propertyName": "@class"
+},
+"properties": {
+"id": {
+"type": "string"
+},
+"name": {
+"type": "string"
+},
+"type": {
+"type": "string",
+"enum": [
+"START_EVENT",
+"END_EVENT",
+"TASK",
+"USER_TASK",
+"SERVICE_TASK",
+"RECEIVE_TASK",
+"SEND_TASK",
+"BUSINESS_RULE_TASK",
+"SCRIPT_TASK",
+"MANUAL_TASK",
+"SUB_PROCESS",
+"CALL_ACTIVITY",
+"EXCLUSIVE_GATEWAY",
+"PARALLEL_GATEWAY",
+"INCLUSIVE_GATEWAY",
+"EVENT_BASED_GATEWAY",
+"BOUNDARY_EVENT",
+"INTERMEDIATE_CATCH_EVENT",
+"INTERMEDIATE_THROW_EVENT"
+]
+},
+"scopeId": {
+"type": "string"
+},
+"scopeType": {
+"type": "string",
+"enum": [
+"PROCESS",
+"SUBPROCESS",
+"EVENT_SUBPROCESS"
+]
+},
+"outgoingSequenceFlowIds": {
+"type": "object",
+"additionalProperties": {
+"type": "string"
+}
+},
+"incomingSequenceFlowIds": {
+"type": "object",
+"additionalProperties": {
+"type": "string"
+}
+},
+"inputMappings": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/DataMapping"
+}
+},
+"outputMappings": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/DataMapping"
+}
+},
+"properties": {
+"type": "object",
+"additionalProperties": {}
+},
+"@class": {
+"type": "string"
+}
+},
+"required": [
+"@class"
+]
+},
+"BusinessRuleTaskNode": {
+"allOf": [
+{
+"$ref": "#/components/schemas/BaseNode"
+},
+{
+"type": "object",
+"properties": {
+"boundaryEventIds": {
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"multiInstanceLoopCharacteristics": {
+"$ref": "#/components/schemas/MultiInstanceLoopCharacteristics"
+},
+"decisionId": {
+"type": "string"
+},
+"resultVariable": {
+"type": "string"
+}
+}
+}
+]
+},
+"CallActivityNode": {
+"allOf": [
+{
+"$ref": "#/components/schemas/BaseNode"
+},
+{
+"type": "object",
+"properties": {
+"boundaryEventIds": {
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"multiInstanceLoopCharacteristics": {
+"$ref": "#/components/schemas/MultiInstanceLoopCharacteristics"
+},
+"calledProcessId": {
+"type": "string"
+},
+"propagateAllParentVariables": {
+"type": "boolean"
+},
+"propagateAllChildVariables": {
+"type": "boolean"
+}
+}
+}
+]
+},
+"DataMapping": {
+"type": "object",
+"properties": {
+"name": {
+"type": "string"
+},
+"value": {
+"type": "string"
+}
+}
+},
+"EventNode": {
+"allOf": [
+{
+"$ref": "#/components/schemas/BaseNode"
+},
+{
+"type": "object",
+"properties": {
+"eventType": {
+"type": "string",
+"enum": [
+"NONE",
+"TIMER",
+"MESSAGE",
+"SIGNAL",
+"ERROR",
+"ESCALATION",
+"CONDITIONAL",
+"COMPENSATION",
+"LINK",
+"TERMINATE",
+"MULTIPLE",
+"PARALLEL_MULTIPLE",
+"CANCEL"
+]
+},
+"attachedToId": {
+"type": "string"
+},
+"messageName": {
+"type": "string"
+},
+"messageCorrelationKey": {
+"type": "string"
+},
+"signalRef": {
+"type": "string"
+},
+"timerDuration": {
+"type": "string"
+},
+"timerDate": {
+"type": "string"
+},
+"timerCycle": {
+"type": "string"
+},
+"errorRef": {
+"type": "string"
+},
+"errorCode": {
+"type": "string"
+},
+"escalationRef": {
+"type": "string"
+},
+"escalationCode": {
+"type": "string"
+},
+"condition": {
+"type": "string"
+},
+"linkName": {
+"type": "string"
+},
+"zeebeCorrelationKey": {
+"type": "string"
+},
+"cancelActivity": {
+"type": "boolean"
+}
+}
+}
+]
+},
+"GatewayNode": {
+"allOf": [
+{
+"$ref": "#/components/schemas/BaseNode"
+},
+{
+"type": "object",
+"properties": {
+"conditionExpressions": {
+"type": "object",
+"additionalProperties": {
+"type": "string"
+}
+},
+"defaultNode": {
+"type": "string"
+},
+"conditions": {
+"type": "object",
+"additionalProperties": {
+"type": "string"
+}
+}
+}
+}
+]
+},
+"ManualTaskNode": {
+"allOf": [
+{
+"$ref": "#/components/schemas/BaseNode"
+},
+{
+"type": "object",
+"properties": {
+"boundaryEventIds": {
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"multiInstanceLoopCharacteristics": {
+"$ref": "#/components/schemas/MultiInstanceLoopCharacteristics"
+}
+}
+}
+]
+},
+"MultiInstanceLoopCharacteristics": {
+"type": "object",
+"properties": {
+"collection": {
+"type": "string"
+},
+"elementVariable": {
+"type": "string"
+},
+"completionCondition": {
+"type": "string"
+},
+"outputCollection": {
+"type": "string"
+},
+"outputElement": {
+"type": "string"
+},
+"sequential": {
+"type": "boolean"
+}
+}
+},
+"ProcessInvocationRequest": {
+"type": "object",
+"properties": {
+"processDefinitionId": {
+"type": "string"
+},
+"processInstanceId": {
+"type": "string"
+},
+"version": {
+"type": "integer",
+"format": "int32"
+},
+"variables": {
+"type": "object",
+"additionalProperties": {}
+},
+"parentProcessInstanceId": {
+"type": "string"
+},
+"nodeInformation": {
+"oneOf": [
+{
+"$ref": "#/components/schemas/ActivityNode"
+},
+{
+"$ref": "#/components/schemas/BusinessRuleTaskNode"
+},
+{
+"$ref": "#/components/schemas/CallActivityNode"
+},
+{
+"$ref": "#/components/schemas/EventNode"
+},
+{
+"$ref": "#/components/schemas/GatewayNode"
+},
+{
+"$ref": "#/components/schemas/ManualTaskNode"
+},
+{
+"$ref": "#/components/schemas/ReceiveTaskNode"
+},
+{
+"$ref": "#/components/schemas/ScriptTaskNode"
+},
+{
+"$ref": "#/components/schemas/SendTaskNode"
+},
+{
+"$ref": "#/components/schemas/ServiceTaskNode"
+},
+{
+"$ref": "#/components/schemas/SubProcessNode"
+},
+{
+"$ref": "#/components/schemas/TaskNode"
+},
+{
+"$ref": "#/components/schemas/UserTaskNode"
+}
+]
+}
+}
+},
+"ReceiveTaskNode": {
+"allOf": [
+{
+"$ref": "#/components/schemas/BaseNode"
+},
+{
+"type": "object",
+"properties": {
+"boundaryEventIds": {
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"multiInstanceLoopCharacteristics": {
+"$ref": "#/components/schemas/MultiInstanceLoopCharacteristics"
+},
+"messageRef": {
+"type": "string"
+}
+}
+}
+]
+},
+"ScriptTaskNode": {
+"allOf": [
+{
+"$ref": "#/components/schemas/BaseNode"
+},
+{
+"type": "object",
+"properties": {
+"boundaryEventIds": {
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"multiInstanceLoopCharacteristics": {
+"$ref": "#/components/schemas/MultiInstanceLoopCharacteristics"
+},
+"scriptFormat": {
+"type": "string"
+},
+"script": {
+"type": "string"
+},
+"resultVariable": {
+"type": "string"
+}
+}
+}
+]
+},
+"SendTaskNode": {
+"allOf": [
+{
+"$ref": "#/components/schemas/BaseNode"
+},
+{
+"type": "object",
+"properties": {
+"boundaryEventIds": {
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"multiInstanceLoopCharacteristics": {
+"$ref": "#/components/schemas/MultiInstanceLoopCharacteristics"
+},
+"messageRef": {
+"type": "string"
+}
+}
+}
+]
+},
+"ServiceTaskNode": {
+"allOf": [
+{
+"$ref": "#/components/schemas/BaseNode"
+},
+{
+"type": "object",
+"properties": {
+"boundaryEventIds": {
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"multiInstanceLoopCharacteristics": {
+"$ref": "#/components/schemas/MultiInstanceLoopCharacteristics"
+},
+"workerType": {
+"type": "string"
+},
+"retries": {
+"type": "integer",
+"format": "int32"
+}
+}
+}
+]
+},
+"SubProcessNode": {
+"allOf": [
+{
+"$ref": "#/components/schemas/BaseNode"
+},
+{
+"type": "object",
+"properties": {
+"boundaryEventIds": {
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"multiInstanceLoopCharacteristics": {
+"$ref": "#/components/schemas/MultiInstanceLoopCharacteristics"
+},
+"childNodeIds": {
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"startNodeId": {
+"type": "string"
+},
+"triggeredByEvent": {
+"type": "boolean"
+}
+}
+}
+]
+},
+"TaskNode": {
+"allOf": [
+{
+"$ref": "#/components/schemas/BaseNode"
+}
+]
+},
+"UserTaskNode": {
+"allOf": [
+{
+"$ref": "#/components/schemas/BaseNode"
+},
+{
+"type": "object",
+"properties": {
+"boundaryEventIds": {
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"multiInstanceLoopCharacteristics": {
+"$ref": "#/components/schemas/MultiInstanceLoopCharacteristics"
+},
+"assignee": {
+"type": "string"
+},
+"candidateUsers": {
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"candidateGroups": {
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"dueDate": {
+"type": "string"
+},
+"followUpDate": {
+"type": "string"
+},
+"formKey": {
+"type": "string"
+}
+}
+}
+]
+},
+"ProcessInvocationResponse": {
+"type": "object",
+"properties": {
+"processInstanceId": {
+"type": "string"
+},
+"processId": {
+"type": "string"
+},
+"version": {
+"type": "integer",
+"format": "int32"
+}
+}
+},
+"ResponseDTOProcessInvocationResponse": {
+"type": "object",
+"properties": {
+"meta": {
+"$ref": "#/components/schemas/Meta"
+},
+"data": {
+"$ref": "#/components/schemas/ProcessInvocationResponse"
+}
+}
+},
+"CompensateInstanceRequest": {
+"type": "object",
+"properties": {
+"processInstanceId": {
+"type": "string"
+},
+"processDefinitionId": {
+"type": "string"
+},
+"version": {
+"type": "integer",
+"format": "int32"
+},
+"variables": {
+"type": "object",
+"additionalProperties": {}
+}
+}
+},
+"CompensateInstanceResponse": {
+"type": "object",
+"properties": {
+"processInstanceId": {
+"type": "string"
+},
+"processDefinitionId": {
+"type": "string"
+},
+"version": {
+"type": "integer",
+"format": "int32"
+},
+"compensatedInstanceId": {
+"type": "string"
+}
+}
+},
+"BatchCompensateInstanceRequest": {
+"type": "object",
+"properties": {
+"processInstanceIds": {
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"processDefinitionId": {
+"type": "string"
+},
+"version": {
+"type": "integer",
+"format": "int32"
+}
+}
+},
+"ProcessSensitiveVariables": {
+"type": "object",
+"properties": {
+"id": {
+"type": "string"
+},
+"processDefinitionId": {
+"type": "string"
+},
+"variables": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/SensitiveVariables"
+}
+},
+"enabled": {
+"type": "boolean"
+},
+"createdAt": {
+"type": "string",
+"format": "date-time"
+},
+"updatedAt": {
+"type": "string",
+"format": "date-time"
+}
+}
+},
+"SensitiveVariables": {
+"type": "object",
+"properties": {
+"name": {
+"type": "string"
+},
+"value": {
+"type": "string"
+},
+"type": {
+"type": "string",
+"enum": [
+"HIDE",
+"SHOW"
+]
+}
+}
+},
+"ResponseDTOProcessSensitiveVariables": {
+"type": "object",
+"properties": {
+"meta": {
+"$ref": "#/components/schemas/Meta"
+},
+"data": {
+"$ref": "#/components/schemas/ProcessSensitiveVariables"
+}
+}
+},
+"ProcessEnvVariables": {
+"type": "object",
+"properties": {
+"id": {
+"type": "string"
+},
+"processDefinitionId": {
+"type": "string"
+},
+"name": {
+"type": "string"
+},
+"value": {
+"type": "string"
+},
+"type": {
+"type": "string",
+"enum": [
+"SECRET",
+"PLAIN_TEXT"
+]
+},
+"createdAt": {
+"type": "string",
+"format": "date-time"
+},
+"updatedAt": {
+"type": "string",
+"format": "date-time"
+}
+}
+},
+"ResponseDTOProcessEnvVariables": {
+"type": "object",
+"properties": {
+"meta": {
+"$ref": "#/components/schemas/Meta"
+},
+"data": {
+"$ref": "#/components/schemas/ProcessEnvVariables"
+}
+}
+},
+"ResourceDeploymentRequest": {
+"type": "object",
+"properties": {
+"partitionCount": {
+"type": "integer",
+"format": "int32"
+},
+"resourceUTF8XML": {
+"type": "string"
+},
+"bypassWorkerValidation": {
+"type": "boolean"
+},
+"approvers": {
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"compensateFlow": {
+"type": "boolean"
+}
+}
+},
+"ResourceDeploymentResponse": {
+"type": "object",
+"properties": {
+"processId": {
+"type": "string"
+},
+"version": {
+"type": "integer",
+"format": "int32"
+},
+"status": {
+"type": "string"
+}
+}
+},
+"ResponseDTOResourceDeploymentResponse": {
+"type": "object",
+"properties": {
+"meta": {
+"$ref": "#/components/schemas/Meta"
+},
+"data": {
+"$ref": "#/components/schemas/ResourceDeploymentResponse"
+}
+}
+},
+"RaiseIncidentRequest": {
+"type": "object",
+"properties": {
+"processInstanceId": {
+"type": "string"
+},
+"incidentMessage": {
+"type": "string"
+}
+}
+},
+"BatchRaiseIncidentRequest": {
+"type": "object",
+"properties": {
+"processInstanceIds": {
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"incidentMessage": {
+"type": "string"
+}
+}
+},
+"FeelValidateRequest": {
+"type": "object",
+"properties": {
+"expression": {
+"type": "string",
+"minLength": 1
+}
+},
+"required": [
+"expression"
+]
+},
+"FeelValidationDTO": {
+"type": "object",
+"properties": {
+"valid": {
+"type": "boolean"
+},
+"error": {
+"type": "string"
+}
+}
+},
+"ResponseDTOFeelValidationDTO": {
+"type": "object",
+"properties": {
+"meta": {
+"$ref": "#/components/schemas/Meta"
+},
+"data": {
+"$ref": "#/components/schemas/FeelValidationDTO"
+}
+}
+},
+"FeelEvaluateRequest": {
+"type": "object",
+"properties": {
+"expression": {
+"type": "string",
+"minLength": 1
+},
+"variables": {
+"type": "object",
+"additionalProperties": {}
+}
+},
+"required": [
+"expression"
+]
+},
+"FeelEvaluationDTO": {
+"type": "object",
+"properties": {
+"success": {
+"type": "boolean"
+},
+"result": {},
+"error": {
+"type": "string"
+}
+}
+},
+"ResponseDTOFeelEvaluationDTO": {
+"type": "object",
+"properties": {
+"meta": {
+"$ref": "#/components/schemas/Meta"
+},
+"data": {
+"$ref": "#/components/schemas/FeelEvaluationDTO"
+}
+}
+},
+"SendSignalEventRequest": {
+"type": "object",
+"properties": {
+"signalName": {
+"type": "string",
+"minLength": 1
+},
+"variables": {
+"type": "object",
+"additionalProperties": {}
+}
+},
+"required": [
+"signalName"
+]
+},
+"ResponseDTOSignalEventResponse": {
+"type": "object",
+"properties": {
+"meta": {
+"$ref": "#/components/schemas/Meta"
+},
+"data": {
+"$ref": "#/components/schemas/SignalEventResponse"
+}
+}
+},
+"SignalEventResponse": {
+"type": "object",
+"properties": {
+"id": {
+"type": "string"
+},
+"signalName": {
+"type": "string"
+}
+}
+},
+"SendMessageEventRequest": {
+"type": "object",
+"properties": {
+"messageName": {
+"type": "string",
+"minLength": 1
+},
+"correlationKey": {
+"type": "string"
+},
+"variables": {
+"type": "object",
+"additionalProperties": {}
+}
+},
+"required": [
+"messageName"
+]
+},
+"MessageEventResponse": {
+"type": "object",
+"properties": {
+"id": {
+"type": "string"
+},
+"messageName": {
+"type": "string"
+},
+"correlationKey": {
+"type": "string"
+}
+}
+},
+"ResponseDTOMessageEventResponse": {
+"type": "object",
+"properties": {
+"meta": {
+"$ref": "#/components/schemas/Meta"
+},
+"data": {
+"$ref": "#/components/schemas/MessageEventResponse"
+}
+}
+},
+"DynamicProcessInvocationRequest": {
+"type": "object",
+"properties": {
+"utf8BpmnXML": {
+"type": "string"
+},
+"processInstanceId": {
+"type": "string"
+},
+"variables": {
+"type": "object",
+"additionalProperties": {}
+}
+}
+},
+"DynamicProcessInvocationResponse": {
+"type": "object",
+"properties": {
+"processInstanceId": {
+"type": "string"
+}
+}
+},
+"ResponseDTODynamicProcessInvocationResponse": {
+"type": "object",
+"properties": {
+"meta": {
+"$ref": "#/components/schemas/Meta"
+},
+"data": {
+"$ref": "#/components/schemas/DynamicProcessInvocationResponse"
+}
+}
+},
+"DeploymentActionRequest": {
+"type": "object",
+"properties": {
+"deploymentRequestId": {
+"type": "string"
+},
+"approver": {
+"type": "string"
+},
+"state": {
+"type": "string",
+"enum": [
+"REQUESTED",
+"ACCEPTED",
+"REJECTED"
+]
+}
+}
+},
+"DeploymentApproval": {
+"type": "object",
+"properties": {
+"id": {
+"type": "string"
+},
+"reviewers": {
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"requestedBy": {
+"type": "string"
+},
+"state": {
+"type": "string",
+"enum": [
+"REQUESTED",
+"ACCEPTED",
+"REJECTED"
+]
+},
+"resourceType": {
+"type": "string"
+},
+"resourceDeploymentRequest": {
+"$ref": "#/components/schemas/ResourceDeploymentRequest"
+},
+"definitionId": {
+"type": "string"
+},
+"nextVersion": {
+"type": "string"
+},
+"auditLog": {
+"$ref": "#/components/schemas/DeploymentAuditLog"
+},
+"createdAt": {
+"type": "string",
+"format": "date-time"
+},
+"approvalTime": {
+"type": "string",
+"format": "date-time"
+}
+}
+},
+"DeploymentAuditLog": {
+"type": "object",
+"properties": {
+"approvalState": {
+"type": "string",
+"enum": [
+"REQUESTED",
+"ACCEPTED",
+"REJECTED"
+]
+},
+"approver": {
+"type": "string"
+},
+"createTime": {
+"type": "string",
+"format": "date-time"
+}
+}
+},
+"ResponseDTODeploymentApproval": {
+"type": "object",
+"properties": {
+"meta": {
+"$ref": "#/components/schemas/Meta"
+},
+"data": {
+"$ref": "#/components/schemas/DeploymentApproval"
+}
+}
+},
+"DeploymentApprovalRequest": {
+"type": "object",
+"properties": {
+"deploymentRequest": {
+"$ref": "#/components/schemas/ResourceDeploymentRequest"
+},
+"type": {
+"type": "string"
+},
+"requestedBy": {
+"type": "string"
+}
+}
+},
+"Approver": {
+"type": "object",
+"properties": {
+"id": {
+"type": "string"
+},
+"processId": {
+"type": "string"
+},
+"approvers": {
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"createdAt": {
+"type": "string",
+"format": "date-time"
+},
+"lastModifiedAt": {
+"type": "string",
+"format": "date-time"
+}
+}
+},
+"ResponseDTOApprover": {
+"type": "object",
+"properties": {
+"meta": {
+"$ref": "#/components/schemas/Meta"
+},
+"data": {
+"$ref": "#/components/schemas/Approver"
+}
+}
+},
+"EvaluateDecisionRequest": {
+"type": "object",
+"properties": {
+"decisionId": {
+"type": "string"
+},
+"version": {
+"type": "integer",
+"format": "int32"
+},
+"inputVariables": {
+"type": "object",
+"additionalProperties": {}
+}
+}
+},
+"DecisionEvaluationResponseDTO": {
+"type": "object",
+"properties": {
+"matchedRules": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/Rule"
+}
+},
+"inputVariables": {
+"type": "object",
+"additionalProperties": {}
+},
+"outputVariables": {
+"type": "object",
+"additionalProperties": {}
+}
+}
+},
+"ResponseDTODecisionEvaluationResponseDTO": {
+"type": "object",
+"properties": {
+"meta": {
+"$ref": "#/components/schemas/Meta"
+},
+"data": {
+"$ref": "#/components/schemas/DecisionEvaluationResponseDTO"
+}
+}
+},
+"Rule": {
+"type": "object",
+"properties": {
+"id": {
+"type": "string"
+},
+"inputEntries": {
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"outputEntries": {
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"description": {
+"type": "string"
+},
+"ruleNumber": {
+"type": "integer",
+"format": "int32"
+}
+}
+},
+"Connector": {
+"type": "object",
+"properties": {
+"id": {
+"type": "string"
+},
+"connectorName": {
+"type": "string"
+},
+"connectorData": {
+"type": "object",
+"additionalProperties": {}
+},
+"createdAt": {
+"type": "string",
+"format": "date-time"
+}
+}
+},
+"ResponseDTOListConnector": {
+"type": "object",
+"properties": {
+"meta": {
+"$ref": "#/components/schemas/Meta"
+},
+"data": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/Connector"
+}
+}
+}
+},
+"ChatRequest": {
+"type": "object",
+"properties": {
+"userMessage": {
+"type": "string"
+},
+"chatType": {
+"type": "string",
+"enum": [
+"DETAILED_ANALYSIS",
+"INCIDENT_ANALYSIS",
+"SUGGEST_FIX"
+]
+}
+}
+},
+"ServerSentEventString": {},
+"CreateApiTokenRequest": {
+"type": "object",
+"properties": {
+"name": {
+"type": "string",
+"maxLength": 100,
+"minLength": 0
+},
+"ttlInDays": {
+"type": "integer",
+"format": "int32"
+}
+},
+"required": [
+"name"
+]
+},
+"CreateApiTokenResponse": {
+"type": "object",
+"properties": {
+"tokenId": {
+"type": "string"
+},
+"name": {
+"type": "string"
+},
+"token": {
+"type": "string"
+},
+"roles": {
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"createdAt": {
+"type": "string"
+},
+"expiresAt": {
+"type": "string"
+}
+}
+},
+"ResponseDTOCreateApiTokenResponse": {
+"type": "object",
+"properties": {
+"meta": {
+"$ref": "#/components/schemas/Meta"
+},
+"data": {
+"$ref": "#/components/schemas/CreateApiTokenResponse"
+}
+}
+},
+"AlertResponse": {
+"type": "object",
+"description": "Representation of a persistent telemetry alert",
+"properties": {
+"id": {
+"type": "string",
+"description": "Unique alert identifier",
+"example": "665f1a2b3c4d5e6f7a8b9c0d"
+},
+"source": {
+"type": "string",
+"description": "System or service that raised the alert",
+"example": "orchest-engine"
+},
+"alertKey": {
+"type": "string",
+"description": "Deduplication key scoped to the source",
+"example": "incident:order-flow:task-abc"
+},
+"fingerprint": {
+"type": "string",
+"description": "Computed fingerprint (source::alertKey) used for deduplication"
+},
+"state": {
+"type": "string",
+"description": "Current lifecycle state of the alert",
+"enum": [
+"FIRING",
+"ACKNOWLEDGED",
+"SILENCED",
+"RESOLVED",
+"DISABLED"
+]
+},
+"count": {
+"type": "integer",
+"format": "int64",
+"description": "Number of times this alert has been raised (re-fired)",
+"example": 3
+},
+"severity": {
+"type": "string",
+"description": "Alert severity level",
+"example": "critical"
+},
+"metadata": {
+"type": "object",
+"additionalProperties": {
+"type": "string"
+},
+"description": "Arbitrary key-value metadata attached to the alert (e.g. processDefinitionId, processInstanceId)"
+},
+"subject": {
+"type": "string",
+"description": "Email/notification subject line"
+},
+"body": {
+"type": "string",
+"description": "Email/notification body content"
+},
+"recipients": {
+"$ref": "#/components/schemas/AlertRecipients",
+"description": "Notification recipients (to, cc, bcc)"
+},
+"resendIntervalMs": {
+"type": "integer",
+"format": "int64",
+"description": "Per-alert resend interval override in milliseconds",
+"example": 300000
+},
+"createdAt": {
+"type": "string",
+"format": "date-time",
+"description": "Timestamp when the alert was first created"
+},
+"updatedAt": {
+"type": "string",
+"format": "date-time",
+"description": "Timestamp of the most recent update to this alert"
+},
+"lastTriggeredAt": {
+"type": "string",
+"format": "date-time",
+"description": "Timestamp when a notification was last sent for this alert"
+},
+"resolvedAt": {
+"type": "string",
+"format": "date-time",
+"description": "Timestamp when the alert was resolved (null if not resolved)"
+},
+"acknowledgedAt": {
+"type": "string",
+"format": "date-time",
+"description": "Timestamp when the alert was acknowledged"
+},
+"acknowledgedBy": {
+"type": "string",
+"description": "Identity of the actor who acknowledged the alert"
+},
+"silencedAt": {
+"type": "string",
+"format": "date-time",
+"description": "Timestamp when the alert was silenced"
+},
+"silencedBy": {
+"type": "string",
+"description": "Identity of the actor who silenced the alert"
+}
+}
+},
+"ActorRequest": {
+"type": "object",
+"description": "Request body identifying the actor performing an action",
+"properties": {
+"actor": {
+"type": "string",
+"description": "Identity of the user or system performing the action",
+"example": "john.doe@example.com"
+}
+}
+},
+"AssignUserTaskRequest": {
+"type": "object",
+"properties": {
+"assignee": {
+"type": "string",
+"minLength": 1
+}
+},
+"required": [
+"assignee"
+]
+},
+"UpdateInstanceRequest": {
+"type": "object",
+"properties": {
+"processInstanceId": {
+"type": "string"
+},
+"fromNodeId": {
+"type": "string"
+},
+"toNodeId": {
+"type": "string"
+}
+}
+},
+"CancelInstanceRequest": {
+"type": "object",
+"properties": {
+"instances": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/Request"
+}
+}
+}
+},
+"Request": {
+"type": "object",
+"properties": {
+"instanceId": {
+"type": "string"
+},
+"processDefinitionId": {
+"type": "string"
+}
+}
+},
+"PageUserTaskDTO": {
+"type": "object",
+"properties": {
+"totalPages": {
+"type": "integer",
+"format": "int32"
+},
+"totalElements": {
+"type": "integer",
+"format": "int64"
+},
+"pageable": {
+"$ref": "#/components/schemas/PageableObject"
+},
+"first": {
+"type": "boolean"
+},
+"last": {
+"type": "boolean"
+},
+"numberOfElements": {
+"type": "integer",
+"format": "int32"
+},
+"size": {
+"type": "integer",
+"format": "int32"
+},
+"content": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/UserTaskDTO"
+}
+},
+"number": {
+"type": "integer",
+"format": "int32"
+},
+"sort": {
+"$ref": "#/components/schemas/SortObject"
+},
+"empty": {
+"type": "boolean"
+}
+}
+},
+"PageableObject": {
+"type": "object",
+"properties": {
+"paged": {
+"type": "boolean"
+},
+"pageNumber": {
+"type": "integer",
+"format": "int32"
+},
+"pageSize": {
+"type": "integer",
+"format": "int32"
+},
+"unpaged": {
+"type": "boolean"
+},
+"offset": {
+"type": "integer",
+"format": "int64"
+},
+"sort": {
+"$ref": "#/components/schemas/SortObject"
+}
+}
+},
+"SortObject": {
+"type": "object",
+"properties": {
+"sorted": {
+"type": "boolean"
+},
+"unsorted": {
+"type": "boolean"
+},
+"empty": {
+"type": "boolean"
+}
+}
+},
+"ResponseDTOStatsDTO": {
+"type": "object",
+"properties": {
+"meta": {
+"$ref": "#/components/schemas/Meta"
+},
+"data": {
+"$ref": "#/components/schemas/StatsDTO"
+}
+}
+},
+"Stats": {
+"type": "object",
+"properties": {
+"state": {
+"type": "string"
+},
+"count": {
+"type": "integer",
+"format": "int32"
+}
+}
+},
+"StatsDTO": {
+"type": "object",
+"properties": {
+"totalProcessStats": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/Stats"
+}
+},
+"totalDecisionStats": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/Stats"
+}
+},
+"processStats": {
+"type": "object",
+"additionalProperties": {
+"type": "object",
+"additionalProperties": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/Stats"
+}
+}
+}
+},
+"decisionStats": {
+"type": "object",
+"additionalProperties": {
+"type": "object",
+"additionalProperties": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/Stats"
+}
+}
+}
+},
+"lastUpdatedAt": {
+"type": "string",
+"format": "date-time"
+}
+}
+},
+"ExecutionLogEntry": {
+"type": "object",
+"properties": {
+"nodeId": {
+"type": "string"
+},
+"nodeName": {
+"type": "string"
+},
+"nodeType": {
+"type": "string",
+"enum": [
+"START_EVENT",
+"END_EVENT",
+"TASK",
+"USER_TASK",
+"SERVICE_TASK",
+"RECEIVE_TASK",
+"SEND_TASK",
+"BUSINESS_RULE_TASK",
+"SCRIPT_TASK",
+"MANUAL_TASK",
+"SUB_PROCESS",
+"CALL_ACTIVITY",
+"EXCLUSIVE_GATEWAY",
+"PARALLEL_GATEWAY",
+"INCLUSIVE_GATEWAY",
+"EVENT_BASED_GATEWAY",
+"BOUNDARY_EVENT",
+"INTERMEDIATE_CATCH_EVENT",
+"INTERMEDIATE_THROW_EVENT"
+]
+},
+"sourceNodeId": {
+"type": "string"
+},
+"sequenceFlowIds": {
+"type": "array",
+"items": {
+"type": "string"
+},
+"uniqueItems": true
+},
+"stateChanges": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/StateChange"
+}
+},
+"metaData": {
+"type": "object",
+"additionalProperties": {}
+},
+"state": {
+"type": "string",
+"enum": [
+"TRIGGERED",
+"REGISTERED",
+"STARTED",
+"PENDING",
+"INCIDENT",
+"FAILED",
+"COMPLETED",
+"CANCELLED",
+"SKIPPED"
+]
+}
+}
+},
+"ProcessInstanceDTO": {
+"type": "object",
+"properties": {
+"processDefinitionId": {
+"type": "string"
+},
+"processInstanceId": {
+"type": "string"
+},
+"parentProcessInstanceId": {
+"type": "string"
+},
+"variables": {
+"type": "object",
+"additionalProperties": {}
+},
+"bpmnXML": {
+"type": "string"
+},
+"version": {
+"type": "integer",
+"format": "int32"
+},
+"incidentMessage": {
+"type": "string"
+},
+"activeElements": {
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"state": {
+"type": "string"
+},
+"sequenceExecutions": {
+"type": "object",
+"additionalProperties": {
+"$ref": "#/components/schemas/ExecutionLogEntry"
+}
+},
+"createdAt": {
+"type": "string"
+},
+"completedAt": {
+"type": "string"
+},
+"lastActivityAt": {
+"type": "string"
+}
+}
+},
+"ProcessInstanceScrollDTO": {
+"type": "object",
+"properties": {
+"content": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/ProcessInstanceDTO"
+}
+},
+"from": {
+"type": "integer",
+"format": "int32"
+},
+"to": {
+"type": "integer",
+"format": "int32"
+},
+"hasNext": {
+"type": "boolean"
+}
+}
+},
+"StateChange": {
+"type": "object",
+"properties": {
+"state": {
+"type": "string",
+"enum": [
+"TRIGGERED",
+"REGISTERED",
+"STARTED",
+"PENDING",
+"INCIDENT",
+"FAILED",
+"COMPLETED",
+"CANCELLED",
+"SKIPPED"
+]
+},
+"timestamp": {
+"type": "string",
+"format": "date-time"
+}
+}
+},
+"PageProcessInstance": {
+"type": "object",
+"properties": {
+"totalPages": {
+"type": "integer",
+"format": "int32"
+},
+"totalElements": {
+"type": "integer",
+"format": "int64"
+},
+"pageable": {
+"$ref": "#/components/schemas/PageableObject"
+},
+"first": {
+"type": "boolean"
+},
+"last": {
+"type": "boolean"
+},
+"numberOfElements": {
+"type": "integer",
+"format": "int32"
+},
+"size": {
+"type": "integer",
+"format": "int32"
+},
+"content": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/ProcessInstance"
+}
+},
+"number": {
+"type": "integer",
+"format": "int32"
+},
+"sort": {
+"$ref": "#/components/schemas/SortObject"
+},
+"empty": {
+"type": "boolean"
+}
+}
+},
+"ParentProcessActivity": {
+"type": "object",
+"properties": {
+"processInstanceId": {
+"type": "string"
+},
+"linkedNode": {
+"oneOf": [
+{
+"$ref": "#/components/schemas/ActivityNode"
+},
+{
+"$ref": "#/components/schemas/BusinessRuleTaskNode"
+},
+{
+"$ref": "#/components/schemas/CallActivityNode"
+},
+{
+"$ref": "#/components/schemas/EventNode"
+},
+{
+"$ref": "#/components/schemas/GatewayNode"
+},
+{
+"$ref": "#/components/schemas/ManualTaskNode"
+},
+{
+"$ref": "#/components/schemas/ReceiveTaskNode"
+},
+{
+"$ref": "#/components/schemas/ScriptTaskNode"
+},
+{
+"$ref": "#/components/schemas/SendTaskNode"
+},
+{
+"$ref": "#/components/schemas/ServiceTaskNode"
+},
+{
+"$ref": "#/components/schemas/SubProcessNode"
+},
+{
+"$ref": "#/components/schemas/TaskNode"
+},
+{
+"$ref": "#/components/schemas/UserTaskNode"
+}
+]
+}
+}
+},
+"ProcessDefinition": {
+"type": "object",
+"properties": {
+"id": {
+"type": "string"
+},
+"definitionId": {
+"type": "string"
+},
+"version": {
+"type": "integer",
+"format": "int32"
+},
+"name": {
+"type": "string"
+},
+"nodes": {
+"type": "object",
+"additionalProperties": {
+"oneOf": [
+{
+"$ref": "#/components/schemas/ActivityNode"
+},
+{
+"$ref": "#/components/schemas/BusinessRuleTaskNode"
+},
+{
+"$ref": "#/components/schemas/CallActivityNode"
+},
+{
+"$ref": "#/components/schemas/EventNode"
+},
+{
+"$ref": "#/components/schemas/GatewayNode"
+},
+{
+"$ref": "#/components/schemas/ManualTaskNode"
+},
+{
+"$ref": "#/components/schemas/ReceiveTaskNode"
+},
+{
+"$ref": "#/components/schemas/ScriptTaskNode"
+},
+{
+"$ref": "#/components/schemas/SendTaskNode"
+},
+{
+"$ref": "#/components/schemas/ServiceTaskNode"
+},
+{
+"$ref": "#/components/schemas/SubProcessNode"
+},
+{
+"$ref": "#/components/schemas/TaskNode"
+},
+{
+"$ref": "#/components/schemas/UserTaskNode"
+}
+]
+}
+},
+"sequenceFlows": {
+"type": "object",
+"additionalProperties": {
+"$ref": "#/components/schemas/SequenceFlow"
+}
+},
+"definitionXML": {
+"type": "string"
+},
+"startNodeId": {
+"type": "string"
+},
+"isExecutable": {
+"type": "boolean"
+},
+"createdAt": {
+"type": "string",
+"format": "date-time"
+},
+"startNode": {
+"oneOf": [
+{
+"$ref": "#/components/schemas/ActivityNode"
+},
+{
+"$ref": "#/components/schemas/BusinessRuleTaskNode"
+},
+{
+"$ref": "#/components/schemas/CallActivityNode"
+},
+{
+"$ref": "#/components/schemas/EventNode"
+},
+{
+"$ref": "#/components/schemas/GatewayNode"
+},
+{
+"$ref": "#/components/schemas/ManualTaskNode"
+},
+{
+"$ref": "#/components/schemas/ReceiveTaskNode"
+},
+{
+"$ref": "#/components/schemas/ScriptTaskNode"
+},
+{
+"$ref": "#/components/schemas/SendTaskNode"
+},
+{
+"$ref": "#/components/schemas/ServiceTaskNode"
+},
+{
+"$ref": "#/components/schemas/SubProcessNode"
+},
+{
+"$ref": "#/components/schemas/TaskNode"
+},
+{
+"$ref": "#/components/schemas/UserTaskNode"
+}
+]
+},
+"compensationFlow": {
+"type": "boolean"
+},
+"executableOrLegacy": {
+"type": "boolean"
+}
+}
+},
+"ProcessInstance": {
+"type": "object",
+"properties": {
+"id": {
+"type": "string"
+},
+"processInstanceId": {
+"type": "string"
+},
+"processDefinitionId": {
+"type": "string"
+},
+"version": {
+"type": "integer",
+"format": "int32"
+},
+"variables": {
+"type": "object",
+"additionalProperties": {}
+},
+"activeNodeIds": {
+"type": "array",
+"items": {
+"type": "string"
+},
+"uniqueItems": true
+},
+"executionHistory": {
+"type": "object",
+"additionalProperties": {
+"$ref": "#/components/schemas/ExecutionLogEntry"
+}
+},
+"executionState": {
+"type": "object",
+"additionalProperties": {}
+},
+"hasIncident": {
+"type": "boolean"
+},
+"incidentMessage": {
+"type": "string"
+},
+"incidentSourceInstanceId": {
+"type": "string"
+},
+"completed": {
+"type": "boolean"
+},
+"state": {
+"type": "string",
+"enum": [
+"STARTED",
+"RUNNING",
+"HOLD",
+"INCIDENT",
+"COMPLETED",
+"TERMINATED",
+"CANCELLED",
+"FAILED"
+]
+},
+"correlationIds": {
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"parentProcesActivity": {
+"$ref": "#/components/schemas/ParentProcessActivity"
+},
+"dynamicFlow": {
+"type": "boolean"
+},
+"createdAt": {
+"type": "string",
+"format": "date-time"
+},
+"completedAt": {
+"type": "string",
+"format": "date-time"
+},
+"lastModifiedAt": {
+"type": "string",
+"format": "date-time"
+},
+"processDefinition": {
+"$ref": "#/components/schemas/ProcessDefinition"
+},
+"currentMiInstanceIndex": {
+"type": "integer",
+"format": "int32"
+},
+"currentMiSubProcessId": {
+"type": "string"
+}
+}
+},
+"SequenceFlow": {
+"type": "object",
+"properties": {
+"id": {
+"type": "string"
+},
+"sourceId": {
+"type": "string"
+},
+"targetId": {
+"type": "string"
+}
+}
+},
+"ResponseDTOProcessInstanceDTO": {
+"type": "object",
+"properties": {
+"meta": {
+"$ref": "#/components/schemas/Meta"
+},
+"data": {
+"$ref": "#/components/schemas/ProcessInstanceDTO"
+}
+}
+},
+"PageResourceDefinitionDTO": {
+"type": "object",
+"properties": {
+"totalPages": {
+"type": "integer",
+"format": "int32"
+},
+"totalElements": {
+"type": "integer",
+"format": "int64"
+},
+"pageable": {
+"$ref": "#/components/schemas/PageableObject"
+},
+"first": {
+"type": "boolean"
+},
+"last": {
+"type": "boolean"
+},
+"numberOfElements": {
+"type": "integer",
+"format": "int32"
+},
+"size": {
+"type": "integer",
+"format": "int32"
+},
+"content": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/ResourceDefinitionDTO"
+}
+},
+"number": {
+"type": "integer",
+"format": "int32"
+},
+"sort": {
+"$ref": "#/components/schemas/SortObject"
+},
+"empty": {
+"type": "boolean"
+}
+}
+},
+"ResourceDefinitionDTO": {
+"type": "object",
+"properties": {
+"definitionId": {
+"type": "string"
+},
+"resourceXML": {
+"type": "string"
+},
+"version": {
+"type": "integer",
+"format": "int32"
+},
+"createdAt": {
+"type": "string",
+"format": "date-time"
+},
+"resourceMetadata": {
+"type": "object",
+"additionalProperties": {}
+}
+}
+},
+"PageProcessSensitiveVariables": {
+"type": "object",
+"properties": {
+"totalPages": {
+"type": "integer",
+"format": "int32"
+},
+"totalElements": {
+"type": "integer",
+"format": "int64"
+},
+"pageable": {
+"$ref": "#/components/schemas/PageableObject"
+},
+"first": {
+"type": "boolean"
+},
+"last": {
+"type": "boolean"
+},
+"numberOfElements": {
+"type": "integer",
+"format": "int32"
+},
+"size": {
+"type": "integer",
+"format": "int32"
+},
+"content": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/ProcessSensitiveVariables"
+}
+},
+"number": {
+"type": "integer",
+"format": "int32"
+},
+"sort": {
+"$ref": "#/components/schemas/SortObject"
+},
+"empty": {
+"type": "boolean"
+}
+}
+},
+"ResponseDTOListProcessSensitiveVariables": {
+"type": "object",
+"properties": {
+"meta": {
+"$ref": "#/components/schemas/Meta"
+},
+"data": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/ProcessSensitiveVariables"
+}
+}
+}
+},
+"PageProcessEnvVariables": {
+"type": "object",
+"properties": {
+"totalPages": {
+"type": "integer",
+"format": "int32"
+},
+"totalElements": {
+"type": "integer",
+"format": "int64"
+},
+"pageable": {
+"$ref": "#/components/schemas/PageableObject"
+},
+"first": {
+"type": "boolean"
+},
+"last": {
+"type": "boolean"
+},
+"numberOfElements": {
+"type": "integer",
+"format": "int32"
+},
+"size": {
+"type": "integer",
+"format": "int32"
+},
+"content": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/ProcessEnvVariables"
+}
+},
+"number": {
+"type": "integer",
+"format": "int32"
+},
+"sort": {
+"$ref": "#/components/schemas/SortObject"
+},
+"empty": {
+"type": "boolean"
+}
+}
+},
+"ResponseDTOListProcessEnvVariables": {
+"type": "object",
+"properties": {
+"meta": {
+"$ref": "#/components/schemas/Meta"
+},
+"data": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/ProcessEnvVariables"
+}
+}
+}
+},
+"ResponseDTOResourceDefinitionDTO": {
+"type": "object",
+"properties": {
+"meta": {
+"$ref": "#/components/schemas/Meta"
+},
+"data": {
+"$ref": "#/components/schemas/ResourceDefinitionDTO"
+}
+}
+},
+"ResponseDTOListResourceDefinitionDTO": {
+"type": "object",
+"properties": {
+"meta": {
+"$ref": "#/components/schemas/Meta"
+},
+"data": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/ResourceDefinitionDTO"
+}
+}
+}
+},
+"PageVisitStats": {
+"type": "object",
+"properties": {
+"url": {
+"type": "string"
+},
+"date": {
+"type": "string",
+"format": "date"
+},
+"uniqueUsers": {
+"type": "integer",
+"format": "int64"
+}
+}
+},
+"ResponseDTOWorkerInfo": {
+"type": "object",
+"properties": {
+"meta": {
+"$ref": "#/components/schemas/Meta"
+},
+"data": {
+"$ref": "#/components/schemas/WorkerInfo"
+}
+}
+},
+"TopicInfo": {
+"type": "object",
+"properties": {
+"topic": {
+"type": "string"
+},
+"consumerGroup": {
+"type": "string"
+},
+"topicExists": {
+"type": "boolean"
+},
+"consumerGroupExists": {
+"type": "boolean"
+}
+}
+},
+"WorkerInfo": {
+"type": "object",
+"properties": {
+"processDefinitionId": {
+"type": "string"
+},
+"clientWorkerEvent": {
+"$ref": "#/components/schemas/TopicInfo"
+},
+"clientConsumerGroups": {
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"clientConsumerStatus": {
+"type": "string"
+},
+"serverWorkerEvent": {
+"$ref": "#/components/schemas/TopicInfo"
+}
+}
+},
+"ProcessHealth": {
+"type": "object",
+"properties": {
+"processDefinitionId": {
+"type": "string"
+},
+"clientWorkerEventTopic": {
+"$ref": "#/components/schemas/ResourceStatus"
+},
+"clientConsumerGroups": {
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"serverWorkerEventTopic": {
+"$ref": "#/components/schemas/ResourceStatus"
+},
+"serverWorkerEventConsumerGroup": {
+"$ref": "#/components/schemas/ResourceStatus"
+},
+"healthy": {
+"type": "boolean"
+}
+}
+},
+"ResourceStatus": {
+"type": "object",
+"properties": {
+"name": {
+"type": "string"
+},
+"exists": {
+"type": "boolean"
+}
+}
+},
+"ResponseDTOListProcessHealth": {
+"type": "object",
+"properties": {
+"meta": {
+"$ref": "#/components/schemas/Meta"
+},
+"data": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/ProcessHealth"
+}
+}
+}
+},
+"ClusterInfo": {
+"type": "object",
+"properties": {
+"topics": {
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"consumerGroups": {
+"type": "array",
+"items": {
+"type": "string"
+}
+}
+}
+},
+"ResponseDTOClusterInfo": {
+"type": "object",
+"properties": {
+"meta": {
+"$ref": "#/components/schemas/Meta"
+},
+"data": {
+"$ref": "#/components/schemas/ClusterInfo"
+}
+}
+},
+"IncidentDTO": {
+"type": "object",
+"properties": {
+"processInstanceId": {
+"type": "string"
+},
+"processDefinitionId": {
+"type": "string"
+},
+"incidentMessage": {
+"type": "string"
+},
+"incidentSourceInstanceId": {
+"type": "string"
+},
+"activeElements": {
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"state": {
+"type": "string"
+},
+"version": {
+"type": "integer",
+"format": "int32"
+},
+"createdAt": {
+"type": "string"
+},
+"completedAt": {
+"type": "string"
+}
+}
+},
+"PageIncidentDTO": {
+"type": "object",
+"properties": {
+"totalPages": {
+"type": "integer",
+"format": "int32"
+},
+"totalElements": {
+"type": "integer",
+"format": "int64"
+},
+"pageable": {
+"$ref": "#/components/schemas/PageableObject"
+},
+"first": {
+"type": "boolean"
+},
+"last": {
+"type": "boolean"
+},
+"numberOfElements": {
+"type": "integer",
+"format": "int32"
+},
+"size": {
+"type": "integer",
+"format": "int32"
+},
+"content": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/IncidentDTO"
+}
+},
+"number": {
+"type": "integer",
+"format": "int32"
+},
+"sort": {
+"$ref": "#/components/schemas/SortObject"
+},
+"empty": {
+"type": "boolean"
+}
+}
+},
+"ResponseDTOIncidentDTO": {
+"type": "object",
+"properties": {
+"meta": {
+"$ref": "#/components/schemas/Meta"
+},
+"data": {
+"$ref": "#/components/schemas/IncidentDTO"
+}
+}
+},
+"PageDeploymentApproval": {
+"type": "object",
+"properties": {
+"totalPages": {
+"type": "integer",
+"format": "int32"
+},
+"totalElements": {
+"type": "integer",
+"format": "int64"
+},
+"pageable": {
+"$ref": "#/components/schemas/PageableObject"
+},
+"first": {
+"type": "boolean"
+},
+"last": {
+"type": "boolean"
+},
+"numberOfElements": {
+"type": "integer",
+"format": "int32"
+},
+"size": {
+"type": "integer",
+"format": "int32"
+},
+"content": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/DeploymentApproval"
+}
+},
+"number": {
+"type": "integer",
+"format": "int32"
+},
+"sort": {
+"$ref": "#/components/schemas/SortObject"
+},
+"empty": {
+"type": "boolean"
+}
+}
+},
+"ResponseDTOListDeploymentApproval": {
+"type": "object",
+"properties": {
+"meta": {
+"$ref": "#/components/schemas/Meta"
+},
+"data": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/DeploymentApproval"
+}
+}
+}
+},
+"ResponseDTOListApprover": {
+"type": "object",
+"properties": {
+"meta": {
+"$ref": "#/components/schemas/Meta"
+},
+"data": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/Approver"
+}
+}
+}
+},
+"DecisionInstanceDTO": {
+"type": "object",
+"properties": {
+"decisionId": {
+"type": "string"
+},
+"decisionInstanceId": {
+"type": "string"
+},
+"processInstanceId": {
+"type": "string"
+},
+"inputVariables": {
+"type": "object",
+"additionalProperties": {}
+},
+"outputVariables": {
+"type": "object",
+"additionalProperties": {}
+},
+"resourceUTF8XML": {
+"type": "string"
+},
+"matchedRuleIds": {
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"version": {
+"type": "integer",
+"format": "int32"
+},
+"state": {
+"type": "string"
+},
+"executedRuleId": {
+"type": "string"
+},
+"executedAt": {
+"type": "string"
+}
+}
+},
+"ResponseDTODecisionInstanceDTO": {
+"type": "object",
+"properties": {
+"meta": {
+"$ref": "#/components/schemas/Meta"
+},
+"data": {
+"$ref": "#/components/schemas/DecisionInstanceDTO"
+}
+}
+},
+"DecisionInstanceScrollDTO": {
+"type": "object",
+"properties": {
+"content": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/DecisionInstanceDTO"
+}
+},
+"from": {
+"type": "integer",
+"format": "int32"
+},
+"to": {
+"type": "integer",
+"format": "int32"
+},
+"hasNext": {
+"type": "boolean"
+}
+}
+},
+"PageDecisionInstanceDTO": {
+"type": "object",
+"properties": {
+"totalPages": {
+"type": "integer",
+"format": "int32"
+},
+"totalElements": {
+"type": "integer",
+"format": "int64"
+},
+"pageable": {
+"$ref": "#/components/schemas/PageableObject"
+},
+"first": {
+"type": "boolean"
+},
+"last": {
+"type": "boolean"
+},
+"numberOfElements": {
+"type": "integer",
+"format": "int32"
+},
+"size": {
+"type": "integer",
+"format": "int32"
+},
+"content": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/DecisionInstanceDTO"
+}
+},
+"number": {
+"type": "integer",
+"format": "int32"
+},
+"sort": {
+"$ref": "#/components/schemas/SortObject"
+},
+"empty": {
+"type": "boolean"
+}
+}
+},
+"PageConnector": {
+"type": "object",
+"properties": {
+"totalPages": {
+"type": "integer",
+"format": "int32"
+},
+"totalElements": {
+"type": "integer",
+"format": "int64"
+},
+"pageable": {
+"$ref": "#/components/schemas/PageableObject"
+},
+"first": {
+"type": "boolean"
+},
+"last": {
+"type": "boolean"
+},
+"numberOfElements": {
+"type": "integer",
+"format": "int32"
+},
+"size": {
+"type": "integer",
+"format": "int32"
+},
+"content": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/Connector"
+}
+},
+"number": {
+"type": "integer",
+"format": "int32"
+},
+"sort": {
+"$ref": "#/components/schemas/SortObject"
+},
+"empty": {
+"type": "boolean"
+}
+}
+},
+"ResponseDTOConnector": {
+"type": "object",
+"properties": {
+"meta": {
+"$ref": "#/components/schemas/Meta"
+},
+"data": {
+"$ref": "#/components/schemas/Connector"
+}
+}
+},
+"AuditTrailEntry": {
+"type": "object",
+"properties": {
+"id": {
+"type": "string"
+},
+"userEmail": {
+"type": "string"
+},
+"roles": {
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"admin": {
+"type": "boolean"
+},
+"httpMethod": {
+"type": "string"
+},
+"path": {
+"type": "string"
+},
+"responseStatus": {
+"type": "integer",
+"format": "int32"
+},
+"correlationId": {
+"type": "string"
+},
+"createdAt": {
+"type": "string",
+"format": "date-time"
+}
+}
+},
+"ApiTokenResponse": {
+"type": "object",
+"properties": {
+"tokenId": {
+"type": "string"
+},
+"name": {
+"type": "string"
+},
+"tokenPrefix": {
+"type": "string"
+},
+"roles": {
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"createdAt": {
+"type": "string"
+},
+"expiresAt": {
+"type": "string"
+},
+"lastUsedAt": {
+"type": "string"
+},
+"revoked": {
+"type": "boolean"
+}
+}
+},
+"ResponseDTOListApiTokenResponse": {
+"type": "object",
+"properties": {
+"meta": {
+"$ref": "#/components/schemas/Meta"
+},
+"data": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/ApiTokenResponse"
+}
+}
+}
+},
+"ResponseDTOApiTokenResponse": {
+"type": "object",
+"properties": {
+"meta": {
+"$ref": "#/components/schemas/Meta"
+},
+"data": {
+"$ref": "#/components/schemas/ApiTokenResponse"
+}
+}
+},
+"PagedAlertResponse": {
+"type": "object",
+"description": "Paginated alert list response",
+"properties": {
+"content": {
+"type": "array",
+"description": "List of alerts for the current page",
+"items": {
+"$ref": "#/components/schemas/AlertResponse"
+}
+},
+"totalElements": {
+"type": "integer",
+"format": "int64",
+"description": "Total number of alerts matching the filter criteria",
+"example": 42
+},
+"totalPages": {
+"type": "integer",
+"format": "int32",
+"description": "Total number of pages available",
+"example": 5
+},
+"page": {
+"type": "integer",
+"format": "int32",
+"description": "Current zero-based page index",
+"example": 0
+},
+"size": {
+"type": "integer",
+"format": "int32",
+"description": "Requested page size",
+"example": 10
+}
+}
+},
+"ErrorResponse": {
+"type": "object",
+"description": "Error response body",
+"properties": {
+"error": {
+"type": "string",
+"description": "Error message"
+}
+}
+},
+"AlertStats": {
+"type": "object",
+"properties": {
+"processDefinitionId": {
+"type": "string"
+},
+"version": {
+"type": "string"
+},
+"totalCount": {
+"type": "integer",
+"format": "int64"
+}
+}
+},
+"PagedMailerConfigResponse": {
+"type": "object",
+"description": "Paginated mailer config response",
+"properties": {
+"content": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/AlertingMailerConfig"
+}
+},
+"totalElements": {
+"type": "integer",
+"format": "int64"
+},
+"totalPages": {
+"type": "integer",
+"format": "int32"
+},
+"page": {
+"type": "integer",
+"format": "int32"
+},
+"size": {
+"type": "integer",
+"format": "int32"
+}
+}
+},
+"ResponseDTOString": {
+"type": "object",
+"properties": {
+"meta": {
+"$ref": "#/components/schemas/Meta"
+},
+"data": {
+"type": "string"
+}
+}
+},
+"ResponseDTOVoid": {
+"type": "object",
+"properties": {
+"meta": {
+"$ref": "#/components/schemas/Meta"
+},
+"data": {}
+}
+}
+}
+}
+}

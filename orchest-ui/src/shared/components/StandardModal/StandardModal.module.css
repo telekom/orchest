@@ -1,0 +1,78 @@
+/* ============================================================================
+ * DARK MODE - Dialog glass background
+ * ========================================================================== */
+:global(.dark) :global([class*="ods-dialog"]) {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow-lg);
+}
+
+/* Light mode dialog glass treatment */
+:global([class*="ods-dialog"]) {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--glass-shadow-lg);
+}
+
+/* ============================================================================
+ * ODS DIALOG FLEX LAYOUT
+ * Establish proper flex container hierarchy for internal scrolling.
+ * Modal → Content → Body → Wrapper → Component → Editor
+ * Each level requires: flex: 1 + min-height: 0 to enable child scrolling
+ * ========================================================================== */
+
+/* Radix dialog content - flex column so modal body can scroll internally */
+:global([data-radix-dialog-content]),
+:global(.ods-dialog-content),
+:global([class*="ODSDialog"][class*="Content"]) {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ODS Dialog Body - scrollable container between header and footer */
+:global(.ods-dialog-body),
+:global([class*="ODSDialog"][class*="Body"]) {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* ============================================================================
+ * CONTENT WRAPPERS
+ * Shared base styles with mode-specific overrides
+ * ========================================================================== */
+
+/* Shared base styles for all content wrappers */
+.contentWrapper,
+.contentWrapperObjectEdit,
+.contentWrapperObjectView {
+  flex: 1;
+  min-height: 0;
+  padding: var(--spacing-4) var(--spacing-1);
+}
+
+/* Object edit mode - flex container for JSON editor (no scrolling) */
+.contentWrapperObjectEdit {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Default and object view modes - allow vertical scrolling */
+.contentWrapper,
+.contentWrapperObjectView {
+  overflow: auto;
+}
+
+/* Custom title slot when title is not a string */
+.customTitleSlot {
+  margin-bottom: var(--spacing-4);
+}

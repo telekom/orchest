@@ -1,0 +1,315 @@
+.panel {
+  --pulse: var(--color-magenta);
+  --ink: var(--color-gray-900);
+  --muted: var(--color-gray-500);
+  --surface: color-mix(in srgb, var(--color-gray-50) 80%, var(--color-white));
+  --rail: color-mix(in srgb, var(--color-gray-200) 65%, transparent);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  padding: var(--spacing-5);
+  border: 1px solid var(--glass-border-subtle);
+  border-radius: var(--border-radius-md);
+  background:
+    radial-gradient(
+      90% 70% at 0% 100%,
+      color-mix(in srgb, var(--color-magenta) 10%, transparent),
+      transparent 50%
+    ),
+    var(--color-white);
+  min-height: 320px;
+  overflow: hidden;
+}
+
+:global(.dark) .panel {
+  --ink: var(--color-gray-50);
+  --muted: var(--color-gray-400);
+  --surface: color-mix(in srgb, var(--color-gray-800) 70%, transparent);
+  --rail: color-mix(in srgb, var(--color-gray-700) 80%, transparent);
+  background:
+    radial-gradient(
+      90% 70% at 0% 100%,
+      color-mix(in srgb, var(--color-magenta) 16%, transparent),
+      transparent 50%
+    ),
+    var(--color-gray-900);
+}
+
+.panelHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-3);
+  flex-wrap: wrap;
+}
+
+.kicker {
+  margin: 0 0 var(--spacing-1);
+  font-size: 11px;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pulse);
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.subtitle {
+  margin: var(--spacing-1) 0 0;
+  max-width: 34ch;
+  font-size: var(--font-size-body-sm);
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.leaderChip {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  padding: var(--spacing-2) var(--spacing-3);
+  border-radius: var(--border-radius-md);
+  background: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--pulse) 25%, transparent);
+}
+
+.leaderLabel {
+  font-size: 10px;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.leaderValue {
+  font-family: var(--font-display);
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-bold);
+  color: var(--pulse);
+  line-height: 1;
+}
+
+.spectrum {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(52px, 1fr));
+  gap: var(--spacing-2);
+  align-items: end;
+  min-height: 240px;
+  padding-top: var(--spacing-2);
+}
+
+.col {
+  --h: 40%;
+  --delay: 0ms;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--spacing-2);
+  min-width: 0;
+  height: 240px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: center;
+  border-radius: var(--border-radius-sm);
+  animation: riseIn 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--delay);
+}
+
+.col:focus-visible {
+  outline: 2px solid var(--pulse);
+  outline-offset: 2px;
+}
+
+.value {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: var(--font-weight-bold);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  opacity: 0.85;
+  line-height: 1;
+  transition: opacity 140ms ease, color 140ms ease;
+}
+
+.col:hover .value,
+.colLeader .value {
+  opacity: 1;
+  color: var(--pulse);
+}
+
+.pillar {
+  position: relative;
+  width: 100%;
+  max-width: 44px;
+  height: var(--h);
+  border-radius: 999px 999px 8px 8px;
+  background: var(--rail);
+  overflow: hidden;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+  transform-origin: bottom center;
+  animation: pillarGrow 620ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--delay);
+}
+
+.col:hover .pillar {
+  transform: translateY(-4px) scaleY(1.02);
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--pulse) 28%, transparent);
+}
+
+.colLeader .pillar {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--pulse) 40%, transparent);
+}
+
+.pillarFill {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    var(--color-magenta-light) 0%,
+    var(--color-magenta) 55%,
+    var(--color-magenta-hover) 100%
+  );
+}
+
+.pillarSheen {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--color-white) 35%, transparent) 45%,
+    transparent 70%
+  );
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+:global(.dark) .pillarSheen {
+  opacity: 0.2;
+}
+
+.colMeta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  width: 100%;
+  min-width: 0;
+}
+
+.rank {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.colLeader .rank {
+  color: var(--pulse);
+}
+
+.colName {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 10px;
+  font-weight: var(--font-weight-medium);
+  color: var(--ink);
+  line-height: 1.2;
+}
+
+.colShare {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.empty {
+  margin: var(--spacing-8) 0;
+  text-align: center;
+  color: var(--muted);
+}
+
+.skeletonCol {
+  height: var(--h, 50%);
+  max-width: 44px;
+  width: 100%;
+  margin: 0 auto;
+  align-self: end;
+  border-radius: 999px 999px 8px 8px;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--pulse) 18%, var(--rail)),
+    var(--rail)
+  );
+  background-size: 100% 200%;
+  animation: shimmer 1.2s ease-in-out infinite;
+}
+
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pillarGrow {
+  from {
+    transform: scaleY(0.12);
+    opacity: 0.5;
+  }
+  to {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 0 100%;
+  }
+  100% {
+    background-position: 0 -100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .col,
+  .pillar,
+  .skeletonCol {
+    animation: none !important;
+  }
+
+  .col:hover .pillar {
+    transform: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .spectrum {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    overflow-x: auto;
+  }
+
+  .col {
+    min-width: 56px;
+  }
+}

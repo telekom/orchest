@@ -1,0 +1,324 @@
+.panel {
+  --pulse: var(--color-red-500);
+  --ink: var(--color-gray-900);
+  --muted: var(--color-gray-500);
+  --surface: color-mix(in srgb, var(--color-gray-50) 80%, var(--color-white));
+  --rail: color-mix(in srgb, var(--color-gray-200) 65%, transparent);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  min-width: 0;
+  min-height: 320px;
+  padding: var(--spacing-5);
+  overflow: hidden;
+  border: 1px solid var(--glass-border-subtle);
+  border-radius: var(--border-radius-md);
+  background:
+    radial-gradient(
+      90% 70% at 0% 100%,
+      color-mix(in srgb, var(--pulse) 9%, transparent),
+      transparent 50%
+    ),
+    var(--color-white);
+}
+
+:global(.dark) .panel {
+  --ink: var(--color-gray-50);
+  --muted: var(--color-gray-400);
+  --surface: color-mix(in srgb, var(--color-gray-800) 70%, transparent);
+  --rail: color-mix(in srgb, var(--color-gray-700) 80%, transparent);
+
+  background:
+    radial-gradient(
+      90% 70% at 0% 100%,
+      color-mix(in srgb, var(--pulse) 14%, transparent),
+      transparent 50%
+    ),
+    var(--color-gray-900);
+}
+
+.panelHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-3);
+}
+
+.kicker {
+  margin: 0 0 var(--spacing-1);
+  color: var(--pulse);
+  font-size: 11px;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  margin: var(--spacing-1) 0 0;
+  max-width: 42ch;
+  color: var(--muted);
+  font-size: var(--font-size-body-sm);
+  line-height: 1.4;
+}
+
+.leaderChip {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  padding: var(--spacing-2) var(--spacing-3);
+  border: 1px solid color-mix(in srgb, var(--pulse) 25%, transparent);
+  border-radius: var(--border-radius-md);
+  background: var(--surface);
+}
+
+.leaderLabel {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.leaderValue {
+  color: var(--pulse);
+  font-family: var(--font-display);
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+}
+
+.spectrum {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  min-width: 0;
+  padding-top: var(--spacing-1);
+}
+
+.row {
+  --w: 40%;
+  --delay: 0ms;
+
+  display: grid;
+  grid-template-columns: minmax(7rem, 11rem) minmax(0, 1fr);
+  align-items: center;
+  gap: var(--spacing-3);
+  width: 100%;
+  min-width: 0;
+  padding: var(--spacing-1) var(--spacing-2);
+  border: 0;
+  border-radius: var(--border-radius-sm);
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  animation: slideIn 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--delay);
+}
+
+.row:hover {
+  background: color-mix(in srgb, var(--pulse) 5%, transparent);
+}
+
+.row:focus-visible {
+  outline: 2px solid var(--pulse);
+  outline-offset: 2px;
+}
+
+.rowMeta {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  min-width: 0;
+}
+
+.rank {
+  flex-shrink: 0;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+.rowLeader .rank {
+  color: var(--pulse);
+}
+
+.rowName {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--ink);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.track {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--spacing-2);
+  min-width: 0;
+}
+
+.bar {
+  position: relative;
+  width: var(--w);
+  max-width: 100%;
+  height: 0.7rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--rail);
+  transform-origin: left center;
+  transition: width 160ms ease, box-shadow 160ms ease;
+  animation: barGrow 620ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--delay);
+}
+
+.row:hover .bar {
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--pulse) 28%, transparent);
+}
+
+.rowLeader .bar {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--pulse) 40%, transparent);
+}
+
+.barFill {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    var(--color-red-600) 0%,
+    var(--color-red-500) 55%,
+    var(--color-red-400) 100%
+  );
+}
+
+.barSheen {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-white) 40%, transparent) 0%,
+    transparent 70%
+  );
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+:global(.dark) .barSheen {
+  opacity: 0.2;
+}
+
+.rowStats {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--spacing-2);
+  flex-shrink: 0;
+}
+
+.value {
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: var(--font-size-body-sm);
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  opacity: 0.85;
+  transition: color 140ms ease, opacity 140ms ease;
+}
+
+.row:hover .value,
+.rowLeader .value {
+  color: var(--pulse);
+  opacity: 1;
+}
+
+.rowShare {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+.empty {
+  margin: var(--spacing-8) 0;
+  color: var(--muted);
+  text-align: center;
+}
+
+.skeletonRow {
+  width: 100%;
+  height: 0.7rem;
+  margin: var(--spacing-2) 0;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    var(--rail),
+    color-mix(in srgb, var(--pulse) 18%, var(--rail)),
+    var(--rail)
+  );
+  background-size: 200% 100%;
+  clip-path: inset(0 calc(100% - var(--w, 50%)) 0 0);
+  animation: shimmer 1.2s ease-in-out infinite;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes barGrow {
+  from {
+    opacity: 0.5;
+    transform: scaleX(0.12);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -100% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .row,
+  .bar,
+  .skeletonRow {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 40rem) {
+  .row {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-1);
+  }
+}

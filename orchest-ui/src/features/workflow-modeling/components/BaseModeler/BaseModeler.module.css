@@ -1,0 +1,32 @@
+/* BaseModeler.module.css */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: var(--spacing-2);
+  border-radius: var(--border-radius-xl);
+}
+
+.diagramView {
+  display: flex;
+  flex: 1;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--glass-border-subtle);
+  border-radius: var(--border-radius-xl);
+}
+
+.hidden {
+  display: none;
+}
+
+.codeView {
+  display: flex;
+  flex: 1;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: var(--border-radius-xl);
+  background: #ffffff;
+}

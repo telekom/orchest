@@ -1,0 +1,243 @@
+.container {
+  width: 100%;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-body);
+}
+
+.headerRow {
+  border-bottom: var(--border-width-1) solid var(--glass-border-subtle);
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  position: sticky;
+  top: 0;
+  z-index: var(--z-index-sticky);
+}
+
+.headerCell {
+  padding: var(--spacing-0-5) var(--spacing-1-5);
+  text-align: left;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-gray-800);
+  vertical-align: middle;
+  height: var(--spacing-6);
+}
+
+:global(.dark) .headerCell {
+  color: var(--color-gray-100);
+}
+
+.cell {
+  padding: var(--spacing-1) var(--spacing-1-5);
+  vertical-align: middle;
+  border-bottom: var(--border-width-1) solid var(--glass-border-subtle);
+  line-height: var(--line-height-compact);
+}
+
+.rowHover {
+  transition: background-color var(--transition-fast) var(--transition-ease);
+}
+
+.rowHover {
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.rowHover:hover {
+  background: var(--glass-bg-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.rowSelected {
+  background: color-mix(in srgb, var(--color-magenta) 8%, var(--glass-bg));
+  box-shadow: inset 2px 0 0 var(--color-magenta);
+}
+
+.rowClickable {
+  cursor: pointer;
+}
+
+.rowWithHref {
+  position: relative;
+}
+
+.cellWithHref {
+  position: relative;
+}
+
+.rowHref {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.cellContent {
+  position: relative;
+  z-index: 1;
+}
+
+/* Let clicks on plain text fall through to the stretched row Link */
+.cellContentPassthrough {
+  pointer-events: none;
+}
+
+.cellContentPassthrough :is(a, button, input, select, textarea, [role="button"], [role="checkbox"]) {
+  pointer-events: auto;
+}
+
+.rowInteractive {
+  position: relative;
+  z-index: 1;
+}
+
+.textCenter {
+  text-align: center;
+}
+
+.textRight {
+  text-align: right;
+}
+
+.textLeft {
+  text-align: left;
+}
+
+.emptyState {
+  padding: var(--spacing-8);
+  text-align: center;
+  color: var(--color-gray-500);
+}
+
+:global(.dark) .emptyState {
+  color: var(--color-gray-400);
+}
+
+.card {
+  border: var(--border-width-1) solid var(--glass-border);
+  border-radius: var(--border-radius-xl);
+  overflow: hidden;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  box-shadow: var(--glass-shadow);
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* Flex column layout when height is constrained (pagination, infinite scroll, or maxHeight). */
+.cardWithPagination {
+  flex: 1;
+  max-height: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.paginationContainer {
+  padding: var(--spacing-2);
+  border-top: var(--border-width-1) solid var(--glass-border-subtle);
+  background: var(--glass-bg-subtle);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.virtualRow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+/* Invisible sentinel used by IntersectionObserver to trigger infinite scroll. */
+.infiniteScrollSentinel {
+  width: 100%;
+  height: 1px;
+  pointer-events: none;
+}
+
+.virtualCell {
+  padding: 0;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.hiddenColumn {
+  display: none;
+}
+
+/* Actions column - minimal width */
+.actionsCell {
+  width: 1px;
+}
+
+/* Checkbox column - slim, centered, minimal padding */
+.checkboxCell {
+  width: 36px;
+  min-width: 36px;
+  max-width: 36px;
+  padding: var(--spacing-0-5);
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Table container with overflow */
+.tableContainer {
+  position: relative;
+  overflow: auto;
+  isolation: isolate;
+}
+
+/* Flex container for max height tables */
+.tableContainerFlex {
+  flex: 1;
+  min-height: 0;
+}
+
+/* Minimum height for empty tables */
+.tableContainerMinHeight {
+  min-height: 200px;
+}
+
+/* Ensure relative positioning for pagination overlay */
+.tableContainerRelative {
+  position: relative;
+}
+
+/* Loading overlay for table updates */
+.loadingOverlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+/* Table body styles */
+.tableBody {
+  background: var(--glass-bg);
+}
+
+.tableBody > tr {
+  border-bottom: var(--border-width-1) solid var(--glass-border-subtle);
+  transition: background-color var(--transition-fast) var(--transition-ease);
+}
+
+.tableBody > tr:nth-child(even) {
+  background: hsl(var(--muted) / 0.18);
+}
+
+:global(.dark) .tableBody > tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.tableBody > tr:hover {
+  background: var(--glass-bg-hover);
+}

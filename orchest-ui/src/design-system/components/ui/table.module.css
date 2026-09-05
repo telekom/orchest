@@ -1,0 +1,134 @@
+/* Table Wrapper */
+.tableWrapper {
+  position: relative;
+  width: 100%;
+  overflow: auto;
+}
+
+/* Table Base */
+.table {
+  width: 100%;
+  caption-side: bottom;
+  font-size: var(--font-size-body-sm);
+  border-collapse: collapse;
+  display: table;
+}
+
+/* Table Header */
+.tableHeader {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-index-sticky);
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+}
+
+.tableHeader :global(tr) {
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.tableHeader :global(tr:first-child > th:first-child) {
+  border-top-left-radius: var(--border-radius-lg);
+}
+
+.tableHeader :global(tr:first-child > th:last-child) {
+  border-top-right-radius: var(--border-radius-lg);
+}
+
+/* Table Body */
+.tableBody :global(tr:last-child) {
+  border-bottom: 0;
+}
+
+/* Table Footer */
+.tableFooter {
+  border-top: 1px solid var(--glass-border);
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  font-weight: 500;
+}
+
+.tableFooter :global(> tr:last-child) {
+  border-bottom: 0;
+}
+
+/* Table Row */
+.tableRow {
+  border-bottom: 1px solid var(--glass-border-subtle);
+  transition: background-color 200ms;
+}
+
+.tableRow:hover {
+  background-color: color-mix(in srgb, var(--color-magenta) 6%, transparent);
+}
+
+.tableRow[data-state="selected"] {
+  background-color: color-mix(in srgb, var(--color-magenta) 10%, transparent);
+}
+
+/* Table Head Cell */
+.tableHead {
+  padding: var(--spacing-2) 1rem;
+  text-align: left;
+  vertical-align: middle;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-compact);
+  color: hsl(var(--muted-foreground));
+  background-color: transparent;
+}
+
+.tableHead:has([role="checkbox"]) {
+  padding-right: 0;
+}
+
+/* Table Data Cell */
+.tableCell {
+  padding: 0.25rem 1rem;
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-compact);
+  vertical-align: middle;
+  color: hsl(var(--foreground));
+}
+
+.tableCell:has([role="checkbox"]) {
+  padding-right: 0;
+}
+
+/* Reset button/link styles in table cells */
+.tableCell button,
+.tableCell a {
+  text-decoration: none;
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.tableCell button:hover,
+.tableCell a:hover {
+  text-decoration: none;
+}
+
+.tableCell a {
+  color: inherit;
+}
+
+/* Table Caption */
+.tableCaption {
+  margin-top: 1rem;
+  font-size: var(--font-size-body-sm);
+  color: hsl(var(--muted-foreground));
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .tableHeader,
+  .tableFooter {
+    background: hsl(var(--card));
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}

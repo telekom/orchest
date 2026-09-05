@@ -1,0 +1,233 @@
+/* ItemSelect.module.css - ODS DropdownSelect wrapper */
+
+.selectContainer {
+  position: relative;
+  width: 120px;
+  height: var(--spacing-8);
+}
+
+.selectContainerWide {
+  width: 180px;
+  height: var(--spacing-8);
+}
+
+/* Searchable combobox: wider trigger so the list popover matches and labels are readable */
+.selectContainerSearchable {
+  width: min(100%, 320px);
+  min-width: 260px;
+}
+
+.selectLabel {
+  position: absolute;
+  left: var(--spacing-3);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: var(--font-size-body-l);
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-compact);
+  color: var(--color-gray-900);
+  pointer-events: none;
+  z-index: 1;
+  white-space: nowrap;
+}
+
+:global(.dark) .selectLabel {
+  color: var(--color-white);
+}
+
+.odsSelect,
+.odsCombobox {
+  width: 100%;
+}
+
+/* ODS dropdown component - light mode */
+.selectContainer :global(.ODSDropdownSelect) {
+  height: var(--spacing-8);
+  --colours-background-input: var(--glass-bg);
+  --colours-border-input: transparent;
+  --colours-border-input-focus: transparent;
+  --colours-basic-stroke: transparent;
+  --colours-interaction-states-hover-stroke-hover: transparent;
+  --colours-interaction-states-pressed-stroke-pressed: transparent;
+}
+
+:global(.dark) .selectContainer :global(.ODSDropdownSelect) {
+  --colours-background-input: var(--glass-bg-strong);
+  --colours-border-input: var(--color-gray-600);
+  --colours-border-input-focus: var(--color-gray-600);
+  --colours-basic-stroke: var(--color-gray-600);
+  --colours-interaction-states-hover-stroke-hover: var(--color-gray-500);
+  --colours-interaction-states-pressed-stroke-pressed: var(--color-gray-500);
+  --colours-basic-text: var(--color-white);
+  --colours-basic-text-recessive: var(--color-white);
+}
+
+/* Input field - light mode */
+.selectContainer :global(.ODSDropdownSelect-InputField) {
+  height: var(--spacing-8) !important;
+  min-height: var(--spacing-8) !important;
+  padding: 0 var(--spacing-3) !important;
+  font-size: var(--font-size-body-sm) !important;
+  font-family: var(--font-sans) !important;
+  font-weight: var(--font-weight-regular) !important;
+  line-height: var(--line-height-compact) !important;
+  color: var(--color-black) !important;
+  background: var(--glass-bg)!important;
+  border: none !important;
+  border-radius: 100vmax !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Input field - dark mode */
+:global(.dark) .selectContainer :global(.ODSDropdownSelect-InputField) {
+  color: var(--color-white) !important;
+  background: var(--glass-bg-strong)!important;
+
+}
+
+/* Input field pseudo-elements - remove borders */
+.selectContainer :global(.ODSDropdownSelect-InputField:before),
+.selectContainer :global(.ODSDropdownSelect-InputField:focus),
+.selectContainer :global(.ODSDropdownSelect-InputField:focus-visible),
+.selectContainer :global(.ODSDropdownSelect-InputField:focus-within),
+.selectContainer :global(.ODSDropdownSelect-InputField:active) {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+:global(.dark) .selectContainer :global(.ODSDropdownSelect-InputField:focus),
+:global(.dark) .selectContainer :global(.ODSDropdownSelect-InputField:focus-visible),
+:global(.dark) .selectContainer :global(.ODSDropdownSelect-InputField:focus-within),
+:global(.dark) .selectContainer :global(.ODSDropdownSelect-InputField:active) {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Input field hover state */
+.selectContainer :global(.ODSDropdownSelect-InputField:hover) {
+  background: var(--glass-bg-subtle)!important;
+}
+
+:global(.dark) .selectContainer :global(.ODSDropdownSelect-InputField:hover) {
+  background: var(--glass-bg-strong)!important;
+}
+
+/* Dropdown icon - light mode */
+.selectContainer :global(.ODSDropdownSelect-ExpandAndCollapseIcon) {
+  color: var(--color-gray-600) !important;
+}
+
+/* Dropdown icon and text - dark mode */
+:global(.dark) .selectContainer :global(.ODSDropdownSelect-ExpandAndCollapseIcon),
+:global(.dark) .selectContainer :global(.ODSDropdownSelect-Value),
+:global(.dark) .selectContainer :global(.ODSDropdownSelect-CollapseDown),
+:global(.dark) .selectContainer :global(.ODSDropdownSelect-CollapseUp) {
+  color: var(--color-white) !important;
+}
+
+/* ODS Combobox (searchable process/decision picker) — align with toolbar pill + dropdown styling */
+.selectContainer :global(.ODSCombobox) {
+  display: flex;
+  flex-direction: column;
+  height: var(--spacing-8);
+  --colours-background-input: var(--glass-bg);
+  --colours-border-input: transparent;
+  --colours-basic-stroke: transparent;
+  --colours-interaction-states-hover-stroke-hover: transparent;
+  --colours-interaction-states-pressed-stroke-pressed: transparent;
+}
+
+:global(.dark) .selectContainer :global(.ODSCombobox) {
+  --colours-background-input: var(--glass-bg-strong);
+  --colours-border-input: var(--color-gray-600);
+  --colours-basic-stroke: var(--color-gray-600);
+  --colours-interaction-states-hover-stroke-hover: var(--color-gray-500);
+  --colours-interaction-states-pressed-stroke-pressed: var(--color-gray-500);
+  --colours-basic-text: var(--color-white);
+  --colours-basic-text-recessive: var(--color-white);
+}
+
+.selectContainer :global(.ODSCombobox-InputField) {
+  display: flex !important;
+  align-items: center;
+  min-height: var(--spacing-8) !important;
+  height: var(--spacing-8) !important;
+  padding: 0 var(--spacing-3) !important;
+  border: none !important;
+  border-radius: 100vmax !important;
+  background: var(--glass-bg)!important;
+  box-shadow: none !important;
+}
+
+.selectContainer :global(.ODSCombobox-ActionsContainer) {
+  flex-shrink: 0;
+}
+
+:global(.dark) .selectContainer :global(.ODSCombobox-InputField) {
+  background: var(--glass-bg-strong)!important;
+}
+
+.selectContainer :global(.ODSCombobox-InputField:hover:not(:has(.ODSButton:hover))) {
+  background: var(--glass-bg-subtle)!important;
+}
+
+:global(.dark) .selectContainer :global(.ODSCombobox-InputField:hover:not(:has(.ODSButton:hover))) {
+  background: var(--glass-bg-strong)!important;
+}
+
+.selectContainer :global(.ODSCombobox-InputField-ContentContainer) {
+  flex: 1;
+  min-width: 0;
+  min-height: var(--spacing-8) !important;
+}
+
+.selectContainer :global(.ODSCombobox-Content) {
+  flex: 1;
+  min-width: 0;
+}
+
+.selectContainer :global(.ODSCombobox-TextIconsContainer) {
+  flex: 1;
+  min-width: 0;
+}
+
+.selectContainer :global(.ODSCombobox-InputValue--size-small) {
+  flex: 1;
+  min-width: 0;
+  min-height: var(--spacing-8) !important;
+  height: var(--spacing-8) !important;
+  padding: 0 var(--spacing-3) !important;
+  padding-top: 0 !important;
+  font-size: var(--font-size-body-sm) !important;
+  font-family: var(--font-sans) !important;
+  font-weight: var(--font-weight-regular) !important;
+  line-height: var(--line-height-compact) !important;
+  color: var(--color-black) !important;
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+:global(.dark) .selectContainer :global(.ODSCombobox-InputValue--size-small) {
+  color: var(--color-white) !important;
+}
+
+.selectContainer :global(.ODSCombobox-InputField:focus-within) {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.selectContainer :global(.ODSCombobox-CollapseDown),
+.selectContainer :global(.ODSCombobox-CollapseUp) {
+  color: var(--color-gray-600) !important;
+}
+
+:global(.dark) .selectContainer :global(.ODSCombobox-CollapseDown),
+:global(.dark) .selectContainer :global(.ODSCombobox-CollapseUp) {
+  color: var(--color-white) !important;
+}

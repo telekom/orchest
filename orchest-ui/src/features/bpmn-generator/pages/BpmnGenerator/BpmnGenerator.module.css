@@ -1,0 +1,191 @@
+/* BpmnGenerator Component Styles */
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Grid layout for chat and preview */
+.gridLayout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-2);
+  flex: 1;
+  min-height: 0;
+}
+
+@media (min-width: 768px) {
+  .gridLayout {
+    gap: var(--spacing-3);
+  }
+}
+
+@media (min-width: 1024px) {
+  .gridLayout {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.chatColumn {
+  height: 100%;
+}
+
+/* Preview panel */
+.previewPanel {
+  padding: var(--spacing-2);
+  border-radius: var(--border-radius-lg);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: var(--border-width-1) solid var(--glass-border-subtle);
+  box-shadow: var(--shadow-sm);
+}
+
+@media (min-width: 768px) {
+  .previewPanel {
+    padding: var(--spacing-3);
+  }
+}
+
+:global(.dark) .previewPanel {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  border-color: var(--glass-border-subtle);
+}
+
+/* Preview header */
+.previewHeader {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: var(--border-width-1) solid var(--border-color);
+  padding: var(--spacing-2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+@media (min-width: 768px) {
+  .previewHeader {
+    gap: var(--spacing-3);
+  }
+}
+
+:global(.dark) .previewHeader {
+  border-color: var(--glass-border-subtle);
+}
+
+/* Header title section */
+.headerTitle {
+  font-family: var(--font-display);
+
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  font-family: var(--font-display);
+
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-gray-900);
+}
+
+:global(.dark) .title {
+  color: var(--color-gray-100);
+}
+
+/* Header actions */
+.headerActions {
+  display: flex;
+  gap: var(--spacing-2);
+  min-width: fit-content;
+}
+
+@media (min-width: 768px) {
+  .headerActions {
+    gap: var(--spacing-3);
+  }
+}
+
+/* Modal overlay for expanded canvas */
+.modalOverlay {
+  position: relative;
+  z-index: 900;
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  transition: opacity var(--transition-base) var(--transition-ease);
+}
+
+:global(.dark) .backdrop {
+  background-color: var(--color-gray-900-alpha-80);
+}
+
+/* Canvas container states */
+.canvasWrapper {
+  flex: 1;
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.canvasWrapperExpanded {
+  width: 90%;
+  height: 90%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: var(--shadow-2xl);
+  border-radius: var(--border-radius-lg);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  z-index: 1000;
+}
+
+/* Close button for expanded mode */
+.closeButton {
+  position: absolute;
+  top: var(--spacing-2);
+  right: var(--spacing-2);
+  box-shadow: var(--shadow-md);
+  z-index: 1000;
+  transition: box-shadow var(--transition-base) var(--transition-ease);
+}
+
+.closeButton:hover {
+  box-shadow: var(--shadow-lg);
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+}
+
+/* Canvas container */
+.canvas {
+  border-radius: var(--border-radius-lg);
+  flex: 1;
+}
+
+.canvasExpanded {
+  margin: var(--spacing-2);
+}
+
+@media (min-width: 768px) {
+  .canvasExpanded {
+    margin: var(--spacing-3);
+  }
+}

@@ -1,0 +1,90 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  height: 1.25rem;
+  width: 2.25rem;
+  flex-shrink: 0;
+  cursor: pointer;
+  border-radius: var(--border-radius-full);
+  border: 1px solid var(--glass-border-subtle);
+  padding: 2px;
+  transition: background-color 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
+}
+
+.root:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-magenta) 30%, transparent);
+}
+
+.root:disabled {
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+.root:disabled[data-state="unchecked"] {
+  background: hsl(var(--muted));
+  border-color: var(--glass-border);
+}
+
+.root:disabled[data-state="checked"] {
+  background: color-mix(in srgb, var(--color-magenta) 40%, hsl(var(--muted)));
+  border-color: color-mix(in srgb, var(--color-magenta) 30%, var(--glass-border));
+  box-shadow: none;
+}
+
+.root:disabled .thumb {
+  background-color: hsl(var(--background));
+  box-shadow: 0 0 0 1px var(--glass-border-subtle);
+}
+
+:global(.dark) .root:disabled[data-state="unchecked"] {
+  background: hsl(var(--muted));
+  border-color: var(--glass-border);
+}
+
+:global(.dark) .root:disabled[data-state="checked"] {
+  background: color-mix(in srgb, var(--color-magenta) 35%, hsl(var(--muted)));
+  border-color: color-mix(in srgb, var(--color-magenta) 25%, transparent);
+  box-shadow: none;
+}
+
+:global(.dark) .root:disabled .thumb {
+  background-color: hsl(var(--muted-foreground));
+  box-shadow: none;
+}
+
+.root[data-state="checked"] {
+  background: var(--color-magenta);
+  border-color: color-mix(in srgb, var(--color-magenta) 60%, transparent);
+  box-shadow: var(--neon-glow-sm);
+}
+
+.root[data-state="unchecked"] {
+  background: hsl(var(--muted));
+  border-color: var(--glass-border);
+}
+
+:global(.dark) .root[data-state="unchecked"] {
+  background: var(--glass-border);
+  border-color: var(--glass-border);
+}
+
+.thumb {
+  pointer-events: none;
+  display: block;
+  height: 1rem;
+  width: 1rem;
+  border-radius: var(--border-radius-full);
+  background-color: hsl(var(--background));
+  box-shadow: var(--glass-shadow-sm);
+  transition: transform 150ms ease;
+}
+
+.thumb[data-state="checked"] {
+  transform: translateX(1rem);
+}
+
+.thumb[data-state="unchecked"] {
+  transform: translateX(0);
+}
+

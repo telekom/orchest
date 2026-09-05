@@ -1,0 +1,30 @@
+/* DmnEvaluateModal.module.css */
+
+/* ─── Input Phase ──────────────────────────────────────────────────────────── */
+
+.inputPhase {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 100;
+  gap: var(--spacing-2);
+}
+
+.inputPhase :global(.json-editor-wrapper) {
+  flex: 1;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+}
+
+.inputPhase :global(.json-editor-container) {
+  flex: 1;
+  min-height: 0;
+}
+
+.textareaLabel {
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}

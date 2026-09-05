@@ -1,0 +1,50 @@
+/* DevToolsPage.module.css */
+
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-4);
+}
+
+@media (min-width: 640px) {
+  .header {
+    flex-direction: row;
+    align-items: center;
+    gap: 0;
+  }
+}
+
+.title {
+  font-family: var(--font-display);
+
+  font-size: var(--font-size-h1);
+  color: var(--color-gray-900);
+}
+
+:global(.dark) .title {
+  color: var(--color-gray-100);
+}
+
+.cardsGrid {
+  border-radius: var(--border-radius-xl);
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: var(--spacing-4);
+  margin-bottom: var(--spacing-4);
+  grid-auto-rows: 1fr;
+}
+
+@media (min-width: 768px) {
+  .cardsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .cardsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

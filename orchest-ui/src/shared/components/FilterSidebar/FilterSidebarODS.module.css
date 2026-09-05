@@ -1,0 +1,112 @@
+/* Filter Sidebar Layout Classes */
+
+.odsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  width: 100%;
+  padding: 0 var(--spacing-2);
+}
+
+.filterInputWrapper {
+  width: 100%;
+}
+
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  width: 100%;
+}
+
+.dropdownWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.dropdown {
+  width: 100%;
+}
+
+.processCombobox {
+  width: 100%;
+}
+
+.datePickerWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.timezoneSelect {
+  width: 100%;
+  height: var(--input-height-sm);
+  padding: 0 var(--spacing-2);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-xl);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  color: hsl(var(--foreground));
+  font-size: var(--text-body-sm);
+  font-family: var(--font-sans);
+  outline: none;
+  cursor: pointer;
+  transition: border-color var(--transition-fast) var(--transition-ease),
+    box-shadow var(--transition-fast) var(--transition-ease);
+}
+
+.timezoneSelect:focus {
+  border-color: var(--glass-border-bright);
+  box-shadow: var(--neon-glow-sm);
+}
+
+.dateActions {
+  display: flex;
+  gap: var(--spacing-2);
+  width: 100%;
+}
+
+.applyDateButton {
+  flex: 1;
+  height: var(--input-height-sm);
+  border: 1px solid color-mix(in srgb, var(--color-magenta) 30%, transparent);
+  border-radius: var(--border-radius-xl);
+  background: color-mix(in srgb, var(--color-magenta) 12%, var(--glass-bg-strong));
+  color: var(--color-magenta);
+  font-size: var(--text-body-sm);
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: opacity var(--transition-fast) var(--transition-ease),
+    box-shadow var(--transition-fast) var(--transition-ease);
+}
+
+.applyDateButton:hover {
+  box-shadow: var(--neon-glow-sm);
+}
+
+.applyDateButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.clearDateButton {
+  height: var(--input-height-sm);
+  padding: 0 var(--spacing-3);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-xl);
+  background: var(--glass-bg-subtle);
+  color: hsl(var(--muted-foreground));
+  font-size: var(--text-body-sm);
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: all var(--transition-fast) var(--transition-ease);
+}
+
+.clearDateButton:hover {
+  color: hsl(var(--foreground));
+  border-color: var(--glass-border-bright);
+  background: var(--glass-bg-hover);
+}

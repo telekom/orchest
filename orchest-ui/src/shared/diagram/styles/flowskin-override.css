@@ -1,0 +1,21 @@
+/* Override FlowSkin dot/bg colors with Orchest magenta theme.
+   Loaded AFTER @flowskin-bpmn/styles to win in cascade order. */
+
+:root {
+  --dbr-bg: #0a0a0f;
+  --dbr-dot-color: color-mix(in srgb, var(--color-magenta) 10%, transparent);
+  --dbr-text: #1a1a2e;
+}
+
+[data-theme="light"] {
+  --dbr-bg: #ffffff;
+  --dbr-dot-color: color-mix(in srgb, var(--color-magenta) 12%, transparent);
+--dbr-text: #1a1a2e;
+}
+
+.djs-container {
+  background:
+    radial-gradient(circle, var(--dbr-dot-color) 1px, transparent 1px) !important;
+  background-size: 24px 24px !important;
+  background-color: var(--dbr-bg) !important;
+}

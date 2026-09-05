@@ -1,0 +1,66 @@
+/* ModelerToolbar.module.css */
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.leftSection,
+.itemSelectionGroup,
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+/* ODS Button Overrides - Use container context for specificity */
+.rightSection .historyButton {
+  --ODSButtonWrapper-height--size-small: 2rem;
+  --ODSButtonWrapper-width--buttonType-iconOnly--size-small: 2rem;
+  --ODSButton-minWidth--buttonType-iconOnly--size-small: 1.75rem;
+  --ODSButton-minHeight--size-small: 2rem;
+  --ODSButton-ButtonIcon-width--size-small: 1rem;
+  --ODSButton-ButtonIcon-height--size-small: 1rem;
+}
+
+.historyIcon {
+  width: var(--spacing-4);
+  height: var(--spacing-4);
+  color: var(--color-gray-700);
+}
+
+.subtleWhite {
+  color: var(--color-gray-700);
+  background-color: transparent;
+}
+
+.subtleWhite:hover {
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+}
+
+:global(.dark) .subtleWhite {
+  color: var(--color-gray-200);
+}
+
+.compensateFlowToggle {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin-right: var(--spacing-1);
+}
+
+.compensateFlowLabel {
+  font-size: var(--font-size-sm, 0.875rem);
+  color: var(--color-gray-700);
+  white-space: nowrap;
+  user-select: none;
+  cursor: pointer;
+}
+
+:global(.dark) .compensateFlowLabel {
+  color: var(--color-gray-200);
+}
+

@@ -1,0 +1,279 @@
+/* CSS Architecture - Orchest UI
+ * Order: Imports → Fonts → Base Styles
+ * Note: ALL @import statements MUST come BEFORE any other CSS rules
+ */
+
+/* Syne (display) + DM Sans (body) via @fontsource */
+@import '@fontsource/syne/600.css';
+@import '@fontsource/syne/700.css';
+@import '@fontsource/dm-sans/400.css';
+@import '@fontsource/dm-sans/500.css';
+@import '@fontsource/dm-sans/600.css';
+@import '@fontsource/dm-sans/700.css';
+
+/* Design tokens & typography */
+@import url('./shared/styles/design-tokens.css');
+@import url('./shared/styles/layers.css');
+@import url('./shared/styles/typography.css');
+@import url('./shared/styles/effects.css');
+@import url('./shared/styles/futuristic.css');
+
+/* Core components */
+@import url('./shared/styles/utilities.css');
+@import url('./shared/styles/diagram-theme.css');
+@import url('./shared/styles/navigation.css');
+@import url('./shared/styles/tooltips.css');
+@import url('./shared/styles/animations.css');
+
+/* Vendor libraries */
+@import url('vanilla-jsoneditor/themes/jse-theme-dark.css');
+@import url('./shared/styles/json-editor.css');
+
+/* BPMN.io libraries */
+@import url('@bpmn-io/properties-panel/assets/properties-panel.css');
+@import url('bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css');
+@import url('bpmn-js/dist/assets/bpmn-js.css');
+@import url('bpmn-js/dist/assets/diagram-js.css');
+
+/* DMN.js libraries */
+@import url('dmn-js/dist/assets/diagram-js.css');
+@import url('dmn-js/dist/assets/dmn-font/css/dmn.css');
+@import url('dmn-js/dist/assets/dmn-js-decision-table-controls.css');
+@import url('dmn-js/dist/assets/dmn-js-decision-table.css');
+@import url('dmn-js/dist/assets/dmn-js-drd.css');
+@import url('dmn-js/dist/assets/dmn-js-literal-expression.css');
+@import url('dmn-js/dist/assets/dmn-js-shared.css');
+@import url('dmn-js-properties-panel/dist/assets/properties-panel.css');
+
+/* Vendor library overrides */
+@import url('./shared/styles/bpmn-dmn-modeler.css');
+
+
+/* Base styles */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  /* CSS Variables */
+  :root {
+    --background: 220 14% 96%;
+    --foreground: 240 10% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 10%;
+    --primary: 330 100% 50%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 14% 92%;
+    --secondary-foreground: 240 10% 10%;
+    --muted: 220 14% 92%;
+    --muted-foreground: 240 5% 45%;
+    --accent: 220 14% 92%;
+    --accent-foreground: 240 10% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 220 13% 88%;
+    --input: 220 13% 88%;
+    --ring: 330 100% 50%;
+    --radius: 0.75rem;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 330 100% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 14% 94%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 88%;
+    --sidebar-ring: 330 100% 50%;
+    --primary-color: var(--color-magenta, #FF0080);
+    --secondary-color: #14b8a6;
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --danger-color: #ef4444;
+    --text-primary: #1f2937;
+    --text-secondary: #6b7280;
+    --bg-gradient: #e5e7eb;
+
+    /* Alpha variants for dark mode badge backgrounds */
+    --color-red-900-alpha-30: rgba(127, 29, 29, 0.3);
+    --color-red-900-alpha-20: rgba(127, 29, 29, 0.2);
+    --color-red-900-alpha-40: rgba(127, 29, 29, 0.4);
+    --color-red-800-alpha-80: rgba(153, 27, 27, 0.8);
+    --color-red-500-alpha-10: rgba(239, 68, 68, 0.1);
+    --color-green-900-alpha-30: rgba(20, 83, 45, 0.3);
+    --color-green-800-alpha-30: rgba(22, 101, 52, 0.3);
+    --color-green-800-alpha-40: rgba(22, 101, 52, 0.4);
+    --color-green-800-alpha-80: rgba(22, 101, 52, 0.8);
+    --color-blue-900-alpha-30: rgba(30, 58, 138, 0.3);
+    --color-blue-900-alpha-40: rgba(30, 58, 138, 0.4);
+    --color-blue-800-alpha-80: rgba(30, 64, 175, 0.8);
+    --color-blue-600-alpha-20: rgba(59, 130, 246, 0.2);
+    --color-blue-600-alpha-10: rgba(59, 130, 246, 0.1);
+    --color-orange-900-alpha-30: rgba(124, 45, 18, 0.3);
+    --color-orange-900-alpha-40: rgba(124, 45, 18, 0.4);
+    --color-orange-800-alpha-80: rgba(154, 52, 18, 0.8);
+    --color-yellow-900-alpha-30: rgba(113, 63, 18, 0.3);
+    --color-yellow-900-alpha-20: rgba(113, 63, 18, 0.2);
+    --color-yellow-800-alpha-80: rgba(133, 77, 14, 0.8);
+    --color-purple-900-alpha-30: rgba(88, 28, 135, 0.3);
+    --color-purple-700-alpha-80: rgba(107, 33, 168, 0.8);
+    --color-indigo-900-alpha-30: rgba(55, 48, 163, 0.3);
+    --color-indigo-700-alpha-80: rgba(67, 56, 202, 0.8);
+    --color-pink-900-alpha-30: rgba(131, 24, 67, 0.3);
+    --color-pink-700-alpha-80: rgba(190, 24, 93, 0.8);
+    --color-gray-800-alpha-50: rgba(31, 41, 55, 0.5);
+    --color-gray-800-alpha-70: rgba(31, 41, 55, 0.7);
+    --color-gray-700-alpha-50: rgba(55, 65, 81, 0.5);
+    --color-gray-100-alpha-50: rgba(243, 244, 246, 0.5);
+    --color-black-alpha-05: rgba(0, 0, 0, 0.05);
+    --color-black-alpha-10: rgba(0, 0, 0, 0.1);
+    --color-black-alpha-40: rgba(0, 0, 0, 0.4);
+
+    /* Purple palette (for OBJECT type badges) */
+    --color-purple-50: #faf5ff;
+    --color-purple-100: #f3e8ff;
+    --color-purple-200: #e9d5ff;
+    --color-purple-300: #d8b4fe;
+    --color-purple-600: #9333ea;
+    --color-purple-700: #6b21a8;
+    --color-purple-800: #6b21a8;
+    --color-purple-900: #581c87;
+
+    /* Indigo palette (for LOCAL scope badges) */
+    --color-indigo-50: #eef2ff;
+    --color-indigo-100: #e0e7ff;
+    --color-indigo-200: #c7d2fe;
+    --color-indigo-300: #a5b4fc;
+    --color-indigo-600: #4f46e5;
+    --color-indigo-700: #4338ca;
+    --color-indigo-800: #3730a3;
+
+    /* Pink palette (for GLOBAL scope badges) */
+    --color-pink-50: #fdf2f8;
+    --color-pink-100: #fce7f3;
+    --color-pink-200: #fbcfe8;
+    --color-pink-300: #f9a8d4;
+    --color-pink-700: #be185d;
+    --color-pink-800: #9d174d;
+  }
+
+  .dark {
+    --background: 240 10% 4%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 8%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 8%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 330 100% 50%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 6% 14%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 6% 14%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 6% 14%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 6% 18%;
+    --input: 240 6% 18%;
+    --ring: 330 100% 50%;
+    --sidebar-background: 240 10% 6%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 330 100% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 6% 14%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 240 6% 18%;
+    --sidebar-ring: 330 100% 50%;
+    --primary-color: #FF0080;
+    --secondary-color: #2dd4bf;
+    --success-color: #34d399;
+    --warning-color: #fbbf24;
+    --danger-color: #f87171;
+    --text-primary: #fafafa;
+    --text-secondary: #a1a1aa;
+    --bg-gradient: #09090b;
+  }
+
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background-color: transparent;
+    color: hsl(var(--foreground));
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: var(--text-body);
+    line-height: var(--text-body-lh);
+    letter-spacing: var(--text-body-ls);
+    contain: layout style;
+  }
+
+  #root {
+    isolation: isolate;
+  }
+
+  a {
+    color: var(--color-magenta);
+    text-decoration: none;
+    transition-property: color;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+  }
+
+  a:hover {
+    color: color-mix(in srgb, var(--color-magenta) 80%, transparent);
+  }
+
+  /* Scoped button transition */
+  button {
+    transition-property: all;
+    transition-duration: 300ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .sr-only:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: inherit;
+    margin: inherit;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+
+  @media (prefers-contrast: high) {
+    .status-badge, .button {
+      border: 2px solid currentColor;
+    }
+  }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    /* Override all animations and transitions for users who prefer reduced motion (accessibility) */
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

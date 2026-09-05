@@ -1,0 +1,156 @@
+.thead {
+  position: relative;
+  z-index: 1;
+  background: hsl(var(--muted) / 0.45);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+}
+
+:global(.dark) .thead {
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+}
+
+.theadSticky {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-index-sticky);
+}
+
+.row {
+  border-bottom: 2px solid color-mix(in srgb, var(--color-magenta) 18%, var(--glass-border));
+}
+
+:global(.dark) .row {
+  border-bottom: 2px solid color-mix(in srgb, var(--color-magenta) 30%, rgba(255, 255, 255, 0.08));
+}
+
+.headerCell {
+  padding: var(--spacing-1-5) var(--spacing-2);
+  height: 32px;
+  font-size: 0.65rem;
+  line-height: 1;
+  font-weight: 700;
+  color: var(--color-gray-700);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  vertical-align: middle;
+}
+
+:global(.dark) .headerCell {
+  color: var(--color-gray-200);
+}
+
+.alignLeft {
+  text-align: left;
+}
+
+.alignCenter {
+  text-align: center;
+}
+
+.alignRight {
+  text-align: right;
+}
+
+.actionsCell {
+  white-space: nowrap;
+  width: 1px;
+  height: 26px;
+  max-height: 26px;
+  padding-top: 0;
+  padding-bottom: 0;
+  overflow: hidden;
+}
+
+.actionsCellWithPadding {
+  padding-left: var(--spacing-2);
+  padding-right: var(--spacing-2);
+}
+
+.actionsCellNoPadding {
+  padding-left: var(--spacing-1);
+  padding-right: var(--spacing-1);
+}
+
+/* ── Sortable column styles ── */
+
+.sortableCell {
+  cursor: pointer;
+  user-select: none;
+  transition: color var(--transition-fast) var(--transition-ease);
+}
+
+.sortableCell:hover {
+  color: var(--color-magenta);
+}
+
+:global(.dark) .sortableCell:hover {
+  color: var(--color-magenta-light);
+}
+
+.sortableCell:focus-visible {
+  outline: 2px solid var(--color-magenta);
+  outline-offset: -2px;
+  border-radius: var(--border-radius-sm);
+  box-shadow: var(--neon-glow-sm);
+}
+
+.sortableContent {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-0-5);
+}
+
+.sortIconIdle {
+  opacity: 0.35;
+  flex-shrink: 0;
+  transition: opacity var(--transition-fast) var(--transition-ease);
+}
+
+.sortableCell:hover .sortIconIdle {
+  opacity: 0.7;
+  color: var(--color-magenta);
+}
+
+.sortIconActive {
+  opacity: 1;
+  flex-shrink: 0;
+  color: var(--color-magenta);
+  filter: drop-shadow(0 0 4px color-mix(in srgb, var(--color-magenta) 40%, transparent));
+}
+
+.sortIndicatorWrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  position: relative;
+}
+
+.sortOrder {
+  font-size: 0.6rem;
+  font-weight: var(--font-weight-semibold);
+  line-height: 1;
+  color: var(--color-magenta);
+  min-width: 0.65rem;
+  text-align: center;
+}
+
+/* Checkbox column header - slim, centered, minimal padding */
+.checkboxCell {
+  width: 36px;
+  min-width: 36px;
+  max-width: 36px;
+  padding: var(--spacing-0-5);
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Selection count in actions header */
+.selectionCount {
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-magenta);
+  text-shadow: 0 0 8px color-mix(in srgb, var(--color-magenta) 25%, transparent);
+}

@@ -1,0 +1,79 @@
+.logo {
+  flex-shrink: 0;
+  border-radius: 6px;
+  overflow: visible;
+  transition:
+    filter var(--transition-fast) var(--transition-ease),
+    transform var(--transition-fast) var(--transition-ease);
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--color-magenta) 40%, transparent));
+  transform: scale(1.03);
+}
+
+.bg {
+  fill: hsl(var(--background));
+  stroke: hsl(var(--border));
+  stroke-width: 2;
+  transition: stroke var(--transition-fast) var(--transition-ease);
+}
+
+.logo:hover .bg {
+  stroke: color-mix(in srgb, var(--color-magenta) 30%, hsl(var(--border)));
+}
+
+.flowPath {
+  fill: none;
+  stroke: hsl(var(--primary));
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 10;
+  animation: dash 2s linear infinite;
+  transition: stroke var(--transition-fast) var(--transition-ease);
+}
+
+.logo:hover .flowPath {
+  stroke: var(--color-magenta);
+}
+
+.node {
+  fill: hsl(var(--background));
+  stroke: hsl(var(--primary));
+  stroke-width: 2.5;
+  transition: stroke var(--transition-fast) var(--transition-ease);
+}
+
+.logo:hover .node {
+  stroke: var(--color-magenta);
+}
+
+.flowDot {
+  fill: hsl(var(--primary));
+  transition: fill var(--transition-fast) var(--transition-ease);
+}
+
+.logo:hover .flowDot {
+  fill: var(--color-magenta);
+}
+
+@keyframes dash {
+  from { stroke-dashoffset: 20; }
+  to { stroke-dashoffset: 0; }
+}
+
+:global(.dark) .bg {
+  fill: hsl(var(--foreground));
+  stroke: hsl(var(--border));
+}
+
+:global(.dark) .node {
+  fill: hsl(var(--foreground));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo:hover {
+    transform: none;
+  }
+}

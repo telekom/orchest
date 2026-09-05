@@ -1,0 +1,196 @@
+/* Base banner styles */
+.content {
+  flex: 1;
+}
+
+/* Warning Banner */
+.warningBox {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-3);
+  padding: var(--spacing-4);
+  background-color: rgba(254, 226, 226, 1);
+  border: var(--border-width-1) solid rgba(254, 202, 202, 1);
+  border-radius: var(--border-radius-lg);
+}
+
+:global(.dark) .warningBox {
+  background-color: var(--color-red-900-alpha-30);
+  border-color: rgba(153, 27, 27, 1);
+}
+
+.warningIcon {
+  height: var(--spacing-5);
+  width: var(--spacing-5);
+  color: var(--color-red-800);
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+:global(.dark) .warningIcon {
+  color: var(--color-red-300);
+}
+
+.warningTitle {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-red-900);
+  margin-bottom: var(--spacing-1);
+}
+
+:global(.dark) .warningTitle {
+  color: var(--color-red-100);
+}
+
+.warningText {
+  font-size: var(--font-size-body);
+  color: var(--color-red-700);
+}
+
+:global(.dark) .warningText {
+  color: var(--color-red-300);
+}
+
+/* Info Banner */
+.infoBox {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-3);
+  padding: var(--spacing-4);
+  background-color: rgba(219, 234, 254, 1);
+  border: var(--border-width-1) solid rgba(191, 219, 254, 1);
+  border-radius: var(--border-radius-lg);
+}
+
+:global(.dark) .infoBox {
+  background-color: var(--color-blue-900-alpha-30);
+  border-color: rgba(30, 58, 138, 1);
+}
+
+.infoIcon {
+  height: var(--spacing-5);
+  width: var(--spacing-5);
+  color: var(--color-blue-700);
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+:global(.dark) .infoIcon {
+  color: var(--color-blue-300);
+}
+
+.infoTitle {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-blue-900);
+  margin-bottom: var(--spacing-1);
+}
+
+:global(.dark) .infoTitle {
+  color: var(--color-blue-100);
+}
+
+.infoText {
+  font-size: var(--font-size-body);
+  color: var(--color-blue-700);
+}
+
+:global(.dark) .infoText {
+  color: var(--color-blue-300);
+}
+
+/* Error Banner */
+.errorBox {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-3);
+  padding: var(--spacing-4);
+  background-color: rgba(254, 226, 226, 1);
+  border: var(--border-width-1) solid rgba(254, 202, 202, 1);
+  border-radius: var(--border-radius-lg);
+}
+
+:global(.dark) .errorBox {
+  background-color: var(--color-red-900-alpha-30);
+  border-color: rgba(153, 27, 27, 1);
+}
+
+.errorIcon {
+  height: var(--spacing-5);
+  width: var(--spacing-5);
+  color: var(--color-red-800);
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+:global(.dark) .errorIcon {
+  color: var(--color-red-300);
+}
+
+.errorTitle {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-red-900);
+  margin-bottom: var(--spacing-1);
+}
+
+:global(.dark) .errorTitle {
+  color: var(--color-red-100);
+}
+
+.errorText {
+  font-size: var(--font-size-body);
+  color: var(--color-red-700);
+}
+
+:global(.dark) .errorText {
+  color: var(--color-red-300);
+}
+
+/* Success Banner */
+.successBox {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-3);
+  padding: var(--spacing-4);
+  background-color: rgba(220, 252, 231, 1);
+  border: var(--border-width-1) solid rgba(187, 247, 208, 1);
+  border-radius: var(--border-radius-lg);
+}
+
+:global(.dark) .successBox {
+  background-color: var(--color-green-900-alpha-30);
+  border-color: rgba(20, 83, 45, 1);
+}
+
+.successIcon {
+  height: var(--spacing-5);
+  width: var(--spacing-5);
+  color: var(--color-green-700);
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+:global(.dark) .successIcon {
+  color: var(--color-green-300);
+}
+
+.successTitle {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-green-900);
+  margin-bottom: var(--spacing-1);
+}
+
+:global(.dark) .successTitle {
+  color: var(--color-green-100);
+}
+
+.successText {
+  font-size: var(--font-size-body);
+  color: var(--color-green-700);
+}
+
+:global(.dark) .successText {
+  color: var(--color-green-300);
+}

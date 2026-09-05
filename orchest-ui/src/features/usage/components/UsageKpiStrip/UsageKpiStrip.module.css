@@ -1,0 +1,66 @@
+.strip {
+  display: grid;
+  grid-template-columns: minmax(180px, 280px);
+  gap: var(--spacing-3);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-1);
+  padding: var(--spacing-3) var(--spacing-4);
+  border: 1px solid var(--glass-border-subtle);
+  border-radius: var(--border-radius-md);
+  background: var(--color-white);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  border-left: 3px solid var(--kpi-accent, var(--color-magenta));
+}
+
+.card:hover:not(:disabled) {
+  border-color: color-mix(in srgb, var(--kpi-accent, var(--color-magenta)) 40%, transparent);
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--kpi-accent, var(--color-magenta)) 12%, transparent);
+}
+
+.card:disabled {
+  cursor: default;
+  opacity: 0.7;
+}
+
+.card:focus-visible {
+  outline: 2px solid var(--color-magenta);
+  outline-offset: 2px;
+}
+
+.total {
+  --kpi-accent: var(--color-magenta);
+}
+
+:global(.dark) .card {
+  background: var(--color-gray-900);
+}
+
+.label {
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-gray-500);
+  letter-spacing: 0.02em;
+}
+
+:global(.dark) .label {
+  color: var(--color-gray-400);
+}
+
+.value {
+  font-family: var(--font-display);
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-gray-900);
+  line-height: 1.1;
+}
+
+:global(.dark) .value {
+  color: var(--color-gray-50);
+}

@@ -1,0 +1,12 @@
+<svg viewBox="0 0 130 90" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+<rect x="5" y="5" rx="0" ry="0" fill="#fff" fill-opacity="0.95" stroke="#333" stroke-width="2" width="120" height="80" />
+<path fill="none" stroke="#333" stroke-width="2" d="M30 5v80" />
+<text x="15" y="45" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" transform="rotate(-90 14.984 45)">
+<tspan dy="4">Pool</tspan>
+</text>
+<rect x="30" y="45" fill="#fff" fill-opacity="0.35" stroke="#000" stroke-width="2" rx="0" ry="0" width="95" height="40" />
+<rect x="30" y="5" fill="#fff" fill-opacity="0.35" stroke="#333" stroke-width="2" rx="0" ry="0" width="95" height="40" />
+<text x="35" y="68" fill="#333" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" transform="rotate(-90 14.992 45)">
+<tspan dy="4">Lane</tspan>
+</text>
+</svg>

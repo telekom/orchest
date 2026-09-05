@@ -1,0 +1,25 @@
+.text {
+  display: inline-block;
+  transition: color var(--transition-fast) var(--transition-ease);
+}
+
+.textTruncated {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.textWithTooltip {
+  color: inherit;
+  cursor: inherit;
+}
+
+.textWithTooltip:hover {
+  color: inherit;
+}
+
+.tooltipContent {
+  white-space: normal;
+  word-break: break-words;
+  max-width: 22.5rem;
+}

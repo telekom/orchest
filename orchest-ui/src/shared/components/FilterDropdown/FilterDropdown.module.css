@@ -1,0 +1,26 @@
+/* FilterDropdown - ODS DropdownSelect wrapper */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  max-width: 13.125rem;
+  padding: var(--spacing-2);
+  background: var(--glass-bg-subtle);
+  border: 1px solid var(--glass-border-subtle);
+  border-radius: var(--border-radius-xl);
+}
+
+.label {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-foreground);
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.odsSelect {
+  width: 100%;
+}

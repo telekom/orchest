@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OrchesT</title>
+    <meta name="description" content="A modern Business Process Model and Notation dashboard application" />
+    <meta name="author" content="BPMN Dashboard" />
+
+    <!-- SECURITY: CSP and X-Frame-Options headers must be set via HTTP headers by the server, not meta tags -->
+    <!-- Configure these in your web server (nginx, apache, IIS) or CDN (CloudFront, Cloudflare) -->
+    <!--
+         Recommended HTTP headers:
+         Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; ...
+         X-Frame-Options: DENY
+    -->
+
+    <!-- SECURITY: Prevent MIME type sniffing -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+
+    <!-- SECURITY: Enable browser XSS protection -->
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+
+    <!-- SECURITY: Referrer policy -->
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+    <meta property="og:title" content="BPMN Dashboard" />
+    <meta property="og:description" content="A modern Business Process Model and Notation dashboard application" />
+    <meta property="og:type" content="website" />
+
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script src="/runtime-config.js"></script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

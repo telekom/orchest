@@ -1,0 +1,199 @@
+/* Animations, transitions, keyframes & loading states */
+::view-transition {
+  pointer-events: none;
+}
+
+::view-transition-old(root), ::view-transition-new(root) {
+  animation-fill-mode: both;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  contain: layout style paint;
+}
+
+::view-transition-old(root) {
+  animation: fade-out-ultra-fast 120ms cubic-bezier(0.4, 0, 1, 1);
+  will-change: opacity;
+}
+
+::view-transition-new(root) {
+  animation: fade-in-ultra-fast 150ms cubic-bezier(0, 0, 0.2, 1) 30ms;
+  will-change: opacity;
+}
+
+::view-transition-image-pair(root) {
+  isolation: isolate;
+}
+
+::view-transition-old(root), ::view-transition-new(root) {
+  mix-blend-mode: normal;
+}
+
+[data-transition="forward"]::view-transition-old(root) {
+  animation: slide-fade-out-left 120ms;
+  will-change: opacity, transform;
+}
+
+[data-transition="forward"]::view-transition-new(root) {
+  animation: slide-fade-in-right 150ms 30ms;
+  will-change: opacity, transform;
+}
+
+[data-transition="back"]::view-transition-old(root) {
+  animation: slide-fade-out-right 120ms;
+  will-change: opacity, transform;
+}
+
+[data-transition="back"]::view-transition-new(root) {
+  animation: slide-fade-in-left 150ms 30ms;
+  will-change: opacity, transform;
+}
+
+[data-transition="detail"]::view-transition-old(root),
+[data-transition="list"]::view-transition-old(root) {
+  animation: fade-out-ultra-fast 120ms;
+  will-change: opacity;
+}
+
+[data-transition="detail"]::view-transition-new(root),
+[data-transition="list"]::view-transition-new(root) {
+  animation: fade-in-ultra-fast 150ms 30ms;
+  will-change: opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root), ::view-transition-new(root) {
+    /* Override view transitions for users who prefer reduced motion (accessibility) */
+    animation: none !important;
+    animation-duration: 0ms !important;
+  }
+}
+
+/* Keyframes */
+@keyframes fade-out-ultra-fast {
+  to { opacity: 0; }
+}
+
+@keyframes fade-in-ultra-fast {
+  from { opacity: 0; }
+}
+
+@keyframes slide-fade-out-left {
+  to { opacity: 0; transform: translateX(-2%) translateZ(0); }
+}
+
+@keyframes slide-fade-in-right {
+  from { opacity: 0; transform: translateX(2%) translateZ(0); }
+}
+
+@keyframes slide-fade-out-right {
+  to { opacity: 0; transform: translateX(2%) translateZ(0); }
+}
+
+@keyframes slide-fade-in-left {
+  from { opacity: 0; transform: translateX(-2%) translateZ(0); }
+}
+
+@keyframes shimmer {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+
+@keyframes indeterminate {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(400%); }
+}
+
+@keyframes fade-in-overlay {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fade-out-overlay {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes slide-down-bar {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-up-bar {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-4px); }
+}
+
+@keyframes pulse-ring {
+  0%, 100% { transform: scale(1); opacity: 0.75; }
+  50% { transform: scale(1.1); opacity: 0.5; }
+}
+
+@keyframes spin-loader {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes skeleton-shimmer {
+  from { background-position: -200% 0; }
+  to { background-position: 200% 0; }
+}
+
+@keyframes content-appear {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Animation utility classes */
+.animate-shimmer { animation: shimmer 2s infinite; }
+.animate-indeterminate { animation: indeterminate 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+.animate-fade-in { animation: fade-in-overlay 200ms cubic-bezier(0, 0, 0.2, 1) forwards; }
+.animate-fade-out { animation: fade-out-overlay 200ms cubic-bezier(0.4, 0, 1, 1) forwards; }
+.animate-slide-down { animation: slide-down-bar 250ms cubic-bezier(0, 0, 0.2, 1) forwards; }
+.animate-slide-up { animation: slide-up-bar 250ms cubic-bezier(0.4, 0, 1, 1) forwards; }
+.animate-pulse-ring { animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+.animate-spin-slow { animation: spin-loader 1.5s linear infinite; }
+.content-loaded { animation: content-appear 300ms cubic-bezier(0, 0, 0.2, 1) forwards; }
+.skeleton-pulse { animation: skeleton-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+.page-transition-enter { animation: fade-in-fast 200ms cubic-bezier(0, 0, 0.2, 1); }
+.page-transition-exit { animation: fade-out-fast 150ms cubic-bezier(0.4, 0, 1, 1); }
+
+.skeleton-shimmer {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 20%, rgba(255, 255, 255, 0.5) 60%, rgba(255, 255, 255, 0));
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 2s ease-in-out infinite;
+}
+
+.dark .skeleton-shimmer {
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 20%, rgba(0, 0, 0, 0.5) 60%, rgba(0, 0, 0, 0));
+}
+
+/* Loading & skeleton states */
+.loading-container {
+  min-height: 200px;
+  position: relative;
+  isolation: isolate;
+}
+
+.navigation-loading {
+  pointer-events: none;
+  user-select: none;
+}
+
+.skeleton-to-content {
+  transition: opacity 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-shimmer, .animate-indeterminate, .animate-pulse-ring, .animate-spin-slow, .skeleton-shimmer, .skeleton-pulse {
+    animation: none !important;
+  }
+  .animate-fade-in, .animate-fade-out, .animate-slide-down, .animate-slide-up, .content-loaded {
+    animation-duration: 0.01ms !important;
+  }
+}

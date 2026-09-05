@@ -1,0 +1,92 @@
+/* Resizable Panel Group */
+.panelGroup {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.panelGroup[data-panel-group-direction="vertical"] {
+  flex-direction: column;
+}
+
+/* Resizable Handle */
+.handle {
+  position: relative;
+  display: flex;
+  width: 1px;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--glass-border-subtle);
+  transition: background-color 200ms;
+  cursor: col-resize;
+}
+
+.handle:hover {
+  background-color: color-mix(in srgb, var(--color-magenta) 40%, var(--glass-border));
+}
+
+.handle:active {
+  background-color: var(--color-magenta);
+}
+
+/* Horizontal handle (default) */
+.handle::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto;
+  left: 50%;
+  width: 0.25rem;
+  transform: translateX(-50%);
+}
+
+/* Vertical handle adjustments */
+.handle[data-panel-group-direction="vertical"] {
+  height: 1px;
+  width: 100%;
+  cursor: row-resize;
+}
+
+.handle[data-panel-group-direction="vertical"]::after {
+  left: 0;
+  top: 50%;
+  height: 0.25rem;
+  width: 100%;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* Handle icon rotation for vertical direction */
+.handle[data-panel-group-direction="vertical"] > div {
+  transform: rotate(90deg);
+}
+
+/* Handle Grip Icon */
+.handleGrip {
+  z-index: 10;
+  display: flex;
+  height: 1rem;
+  width: 0.75rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius-sm);
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  box-shadow: var(--glass-shadow-sm);
+}
+
+.handleGripIcon {
+  color: color-mix(in srgb, var(--color-magenta) 50%, var(--color-gray-600));
+}
+
+:global(.dark) .handleGripIcon {
+  color: color-mix(in srgb, var(--color-magenta) 50%, var(--color-gray-300));
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .handleGrip {
+    background: hsl(var(--card));
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}

@@ -1,0 +1,412 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  height: 100%;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.titleRow {
+  font-family: var(--font-display);
+
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.titleIconWrap {
+  font-family: var(--font-display);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 6px;
+  background: hsl(45 96% 53% / 0.1);
+  border: 1px solid hsl(45 96% 53% / 0.25);
+}
+
+.titleIcon {
+  font-family: var(--font-display);
+
+  width: 1.25rem;
+  height: 1.25rem;
+  color: hsl(45 96% 53%);
+}
+
+.title {
+  font-family: var(--font-display);
+
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: hsl(var(--foreground));
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  font-size: 0.775rem;
+  color: hsl(var(--muted-foreground));
+  margin: 0.125rem 0 0 0;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  letter-spacing: 0.01em;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.actionButton {
+  gap: 0.375rem;
+}
+
+.createButton {
+  gap: 0.375rem;
+}
+
+/* Stats Row */
+.statsRow {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.statCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.625rem 1.25rem;
+  border-radius: 6px;
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  border: 1px solid hsl(var(--border));
+  min-width: 5rem;
+}
+
+.statValue {
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  color: hsl(var(--foreground));
+  line-height: 1.2;
+}
+
+.statLabel {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: hsl(var(--muted-foreground));
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 0.125rem;
+}
+
+/* Table */
+.tableWrap {
+  flex: 1;
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+.nameCell {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tokenIcon {
+  color: hsl(45 96% 53% / 0.7);
+  flex-shrink: 0;
+}
+
+.tokenName {
+  font-weight: 600;
+  font-size: 0.8125rem;
+  color: hsl(var(--foreground));
+}
+
+.tokenPrefix {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.75rem;
+  color: hsl(var(--muted-foreground));
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  padding: 0.125rem 0.5rem;
+  border-radius: 3px;
+  border: 1px solid hsl(var(--border));
+  letter-spacing: 0.02em;
+}
+
+.rolesCell {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.roleBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.0625rem 0.4rem;
+  font-size: 0.625rem;
+  font-weight: 600;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: hsl(var(--primary) / 0.08);
+  color: hsl(var(--primary));
+  border: 1px solid hsl(var(--primary) / 0.2);
+  border-radius: 3px;
+}
+
+.dateCell {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.75rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.expiredDate {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.75rem;
+  color: hsl(0 72% 51%);
+  font-weight: 600;
+}
+
+.neverBadge {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: hsl(var(--muted-foreground));
+  font-style: italic;
+}
+
+.actionsCell {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.revokeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: hsl(var(--muted-foreground));
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.revokeButton:hover {
+  background: hsl(0 72% 51% / 0.1);
+  color: hsl(0 72% 51%);
+}
+
+.revokeButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.revokedBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.625rem;
+  font-weight: 600;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: hsl(0 72% 51% / 0.08);
+  color: hsl(0 60% 45%);
+  border: 1px solid hsl(0 72% 51% / 0.15);
+  border-radius: 3px;
+}
+
+/* Token Reveal Card */
+.revealCard {
+  border-radius: 6px;
+  border: 1px solid hsl(45 96% 53% / 0.3);
+  background: hsl(45 96% 53% / 0.04);
+  overflow: hidden;
+  animation: slideDown 200ms ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.revealHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.625rem 0.875rem;
+  background: hsl(45 96% 53% / 0.08);
+  border-bottom: 1px solid hsl(45 96% 53% / 0.15);
+}
+
+.revealWarning {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: hsl(45 80% 35%);
+}
+
+.revealWarning svg {
+  color: hsl(45 96% 45%);
+}
+
+.revealDismiss {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: none;
+  border-radius: 3px;
+  background: transparent;
+  color: hsl(var(--muted-foreground));
+  cursor: pointer;
+  transition: background 150ms ease;
+}
+
+.revealDismiss:hover {
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+}
+
+.revealBody {
+  padding: 0.875rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.revealMeta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.revealName {
+  font-weight: 600;
+  font-size: 0.8125rem;
+  color: hsl(var(--foreground));
+}
+
+.revealExpiry {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.6875rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.revealTokenRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.revealToken {
+  flex: 1;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  border: 1px solid hsl(var(--border));
+  border-radius: 4px;
+  color: hsl(var(--foreground));
+  word-break: break-all;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+}
+
+.copyButton {
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+
+/* Dialog Styles */
+.dialogContent {
+  max-width: 28rem;
+}
+
+.dialogTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dialogTitleIcon {
+  color: hsl(45 96% 53%);
+}
+
+.dialogDescription {
+  font-size: 0.8rem;
+}
+
+.dialogFooter {
+  padding-top: 0.75rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 0.5rem;
+}
+
+.formField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.formLabel {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.formInput {
+  font-size: 0.8125rem;
+}
+
+.formHint {
+  font-size: 0.6875rem;
+  color: hsl(var(--muted-foreground));
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+}
+
+/* Animations */
+.spinning {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

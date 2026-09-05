@@ -1,0 +1,47 @@
+.editor {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  font-family: var(--font-family-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
+  font-size: 13px;
+}
+
+.editor :global(.cm-editor) {
+  height: 100%;
+  background: transparent;
+}
+
+.editor :global(.cm-editor.cm-focused) {
+  outline: none;
+}
+
+.editor :global(.cm-scroller) {
+  font-family: inherit;
+  line-height: 1.55;
+}
+
+.editor :global(.cm-gutters) {
+  background: transparent;
+  border-right: 1px solid var(--glass-border-subtle);
+  color: var(--color-gray-400);
+}
+
+:global(.dark) .editor :global(.cm-gutters) {
+  border-right-color: var(--glass-border-subtle);
+  color: var(--color-gray-500);
+}
+
+:global(.dark) .editor :global(.cm-content) {
+  caret-color: var(--color-gray-100);
+  color: var(--color-gray-100);
+}
+
+.editor :global(.cm-activeLine),
+.editor :global(.cm-activeLineGutter) {
+  background: color-mix(in srgb, var(--color-magenta) 6%, transparent);
+}
+
+:global(.dark) .editor :global(.cm-activeLine),
+:global(.dark) .editor :global(.cm-activeLineGutter) {
+  background: color-mix(in srgb, var(--color-magenta) 14%, transparent);
+}

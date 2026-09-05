@@ -1,0 +1,25 @@
+/* Control button for BPMN toolbar - inherits sizing from odsActionButton (1.25rem) */
+.controlButton {
+  padding: 0;
+  color: var(--color-gray-700);
+}
+
+.controlButton:hover {
+  background-color: var(--color-gray-200);
+}
+
+:global(.dark) .controlButton {
+  color: var(--color-gray-300);
+}
+
+:global(.dark) .controlButton:hover {
+  background-color: var(--color-gray-600);
+}
+
+.modifyActive {
+  background-color: var(--color-gray-400);
+}
+
+:global(.dark) .modifyActive {
+  background-color: var(--color-gray-900);
+}

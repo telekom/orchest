@@ -1,0 +1,80 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  flex-wrap: wrap;
+  padding: var(--spacing-3) var(--spacing-4);
+  border: 1px solid var(--glass-border-subtle);
+  border-radius: var(--border-radius-md);
+  background: color-mix(in srgb, var(--color-white) 88%, var(--glass-bg));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  box-shadow: var(--glass-shadow-sm);
+  flex-shrink: 0;
+}
+
+:global(.dark) .wrapper {
+  border-color: var(--glass-border);
+  background: color-mix(in srgb, var(--color-gray-900) 78%, transparent);
+  box-shadow: 0 1px 0 var(--glass-shadow-sm), var(--glass-shadow-sm);
+}
+
+.filterItem {
+  flex: 0 0 auto;
+  min-width: 132px;
+}
+
+.filterItemDate {
+  flex: 0 1 auto;
+  min-width: 200px;
+}
+
+.spacer {
+  flex: 1;
+  min-width: var(--spacing-2);
+}
+
+.clearAllButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  height: var(--input-height-sm);
+  padding: 0 var(--spacing-3);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-lg);
+  background: var(--glass-bg-subtle);
+  color: var(--color-gray-700);
+  font-size: var(--text-body-sm);
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-fast) var(--transition-ease);
+}
+
+.clearAllButton:hover {
+  color: var(--color-gray-900);
+  border-color: var(--color-magenta);
+  background: color-mix(in srgb, var(--color-magenta) 8%, var(--color-white));
+}
+
+:global(.dark) .clearAllButton {
+  background: color-mix(in srgb, var(--color-gray-800) 90%, transparent);
+  border-color: var(--glass-border);
+  color: var(--color-gray-200);
+}
+
+:global(.dark) .clearAllButton:hover {
+  color: var(--color-white);
+  border-color: var(--color-magenta);
+  background: color-mix(in srgb, var(--color-magenta) 16%, transparent);
+}
+
+@media (max-width: 720px) {
+  .wrapper {
+    align-items: stretch;
+  }
+
+  .filterItemDate {
+    width: 100%;
+  }
+}

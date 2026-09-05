@@ -1,0 +1,59 @@
+/* Always above modals, popovers, and other overlays */
+:global([data-sonner-toaster]) {
+  z-index: var(--z-index-toast) !important;
+}
+
+/* Toast glass panel with neon left accent */
+:global([data-sonner-toast]) {
+  background: var(--glass-bg-strong) !important;
+  backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate)) !important;
+  -webkit-backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate)) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-left: 3px solid var(--color-magenta) !important;
+  box-shadow: var(--glass-shadow-lg), var(--neon-glow-sm) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+/* Dark mode toast styles */
+.darkModeToast {
+  --toast-background: var(--glass-bg-strong) !important;
+  --toast-border: var(--glass-border) !important;
+  --toast-text: hsl(var(--foreground)) !important;
+}
+
+.darkModeToast.success {
+  --toast-background: color-mix(in srgb, var(--color-green-500) 15%, var(--glass-bg-strong)) !important;
+  --toast-border: color-mix(in srgb, var(--color-green-500) 30%, var(--glass-border)) !important;
+  --toast-text: var(--color-green-300) !important;
+}
+
+.darkModeToast.error {
+  --toast-background: color-mix(in srgb, var(--color-red-500) 15%, var(--glass-bg-strong)) !important;
+  --toast-border: color-mix(in srgb, var(--color-red-500) 30%, var(--glass-border)) !important;
+  --toast-text: var(--color-red-300) !important;
+}
+
+.darkModeToast.warning {
+  --toast-background: color-mix(in srgb, var(--color-yellow-500) 15%, var(--glass-bg-strong)) !important;
+  --toast-border: color-mix(in srgb, var(--color-yellow-500) 30%, var(--glass-border)) !important;
+  --toast-text: var(--color-yellow-300) !important;
+}
+
+.darkModeToast.info {
+  --toast-background: color-mix(in srgb, var(--color-blue-500) 15%, var(--glass-bg-strong)) !important;
+  --toast-border: color-mix(in srgb, var(--color-blue-500) 30%, var(--glass-border)) !important;
+  --toast-text: var(--color-blue-300) !important;
+}
+
+/* Toaster positioning */
+:global([data-sonner-toaster][data-x-position="right"]) {
+  right: 1rem !important;
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  :global([data-sonner-toast]) {
+    background: hsl(var(--card)) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}

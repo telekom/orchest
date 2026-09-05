@@ -1,0 +1,28 @@
+.variableName {
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-body-sm);
+  color: hsl(var(--foreground));
+}
+
+.valueContainer {
+  max-width: 20rem;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.processLink {
+  font-size: var(--font-size-body);
+  line-height: 1rem;
+  color: var(--color-magenta);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.processLink:hover {
+  color: color-mix(in srgb, var(--color-magenta) 80%, hsl(var(--foreground)));
+}

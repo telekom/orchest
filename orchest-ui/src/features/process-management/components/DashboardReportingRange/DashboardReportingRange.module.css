@@ -1,0 +1,266 @@
+.wrapper {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-3);
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  color: var(--color-gray-800);
+  border-radius: var(--border-radius-full);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: all 160ms var(--transition-ease);
+  max-width: 100%;
+}
+
+:global(.dark) .trigger {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  border-color: var(--glass-border-subtle);
+  color: var(--color-gray-100);
+}
+
+.trigger:hover:not(:disabled) {
+  border-color: var(--color-magenta);
+  color: var(--color-magenta);
+}
+
+.trigger:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.triggerLabel {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 360px;
+}
+
+.triggerClear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: var(--border-radius-full);
+  color: var(--color-gray-500);
+  cursor: pointer;
+  transition: all 140ms var(--transition-ease);
+}
+
+.triggerClear:hover {
+  background: color-mix(in srgb, var(--color-magenta) 14%, transparent);
+  color: var(--color-magenta);
+}
+
+.chevron,
+.chevronOpen {
+  transition: transform 200ms var(--transition-ease);
+  color: var(--color-gray-500);
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+  color: var(--color-magenta);
+}
+
+.popover {
+  position: absolute;
+  top: calc(100% + var(--spacing-2));
+  right: 0;
+  z-index: 30;
+  width: 360px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-xl);
+  box-shadow:
+    0 24px 48px -16px rgba(0, 0, 0, 0.18),
+    0 4px 12px -4px rgba(0, 0, 0, 0.08);
+  padding: var(--spacing-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  animation: rangePopIn 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:global(.dark) .popover {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  border-color: var(--glass-border-subtle);
+  box-shadow:
+    0 24px 48px -16px rgba(0, 0, 0, 0.6),
+    0 4px 12px -4px rgba(0, 0, 0, 0.4);
+}
+
+@keyframes rangePopIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.popHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.popTitle {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-gray-900);
+}
+
+:global(.dark) .popTitle {
+  color: var(--color-gray-50);
+}
+
+.popHint {
+  font-size: var(--font-size-body-sm);
+  color: var(--color-gray-500);
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.fieldLabel {
+  font-size: var(--font-size-body-xs, 11px);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-gray-500);
+}
+
+.tzNative,
+.dateInput {
+  height: 40px;
+  padding: 0 var(--spacing-3);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-md);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  color: var(--color-gray-900);
+  font-size: var(--font-size-body-sm);
+  font-family: inherit;
+  cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+:global(.dark) .tzNative,
+:global(.dark) .dateInput {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  border-color: var(--glass-border-subtle);
+  color: var(--color-gray-50);
+  color-scheme: dark;
+}
+
+.tzNative:focus-visible,
+.dateInput:focus-visible {
+  outline: 2px solid var(--color-magenta);
+  outline-offset: 1px;
+}
+
+.dateInput::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.dateInput::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+:global(.dark) .dateInput::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-2);
+  padding-top: var(--spacing-2);
+  border-top: 1px solid var(--glass-border-subtle);
+}
+
+:global(.dark) .actions {
+  border-top-color: var(--glass-border-subtle);
+}
+
+.actionsRight {
+  display: inline-flex;
+  gap: var(--spacing-2);
+}
+
+.btnGhost,
+.btnSolid {
+  border: 1px solid transparent;
+  border-radius: var(--border-radius-full);
+  padding: var(--spacing-1-5) var(--spacing-4);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: all 160ms var(--transition-ease);
+}
+
+.btnGhost {
+  background: transparent;
+  color: var(--color-gray-700);
+}
+
+:global(.dark) .btnGhost {
+  color: var(--color-gray-200);
+}
+
+.btnGhost:hover:not(:disabled) {
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+}
+
+.btnGhost:disabled,
+.btnSolid:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btnSolid {
+  background: var(--color-magenta);
+  color: var(--color-white);
+}
+
+.btnSolid:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--color-magenta) 85%, black);
+}

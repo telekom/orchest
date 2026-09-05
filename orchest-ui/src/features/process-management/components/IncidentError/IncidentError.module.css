@@ -1,0 +1,157 @@
+/* IncidentError Component Styles */
+
+.container {
+  padding: var(--spacing-1) var(--spacing-3);
+  margin-bottom: var(--spacing-1);
+  background-color: var(--color-red-100);
+  border: var(--border-width-1) solid var(--color-red-300);
+  border-radius: var(--border-radius-lg);
+  width: 100%;
+  max-width: 100%;
+  word-wrap: break-word;
+}
+
+:global(.dark) .container {
+  background-color: rgb(127 29 29 / 0.3);
+  border-color: var(--color-red-800);
+}
+
+.collapsible {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  width: 100%;
+  gap: var(--spacing-2);
+  max-width: 100%;
+}
+
+.triggerContent {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex: 1;
+  min-width: 0;
+}
+
+.errorLabel {
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-body-sm);
+  color: var(--color-red-800);
+}
+
+:global(.dark) .errorLabel {
+  color: var(--color-red-300);
+}
+
+.errorMessage {
+  color: var(--color-red-800);
+  font-size: var(--font-size-body-sm);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.errorMessageExpanded {
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  overflow: visible;
+  text-overflow: unset;
+}
+
+:global(.dark) .errorMessage {
+  color: var(--color-red-300);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+.iconButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--color-red-800);
+  border-radius: var(--border-radius-sm);
+  transition: opacity var(--transition-fast);
+}
+
+.iconButton:hover {
+  opacity: 0.7;
+}
+
+:global(.dark) .iconButton {
+  color: var(--color-red-300);
+}
+
+.chevronWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--color-red-800);
+}
+
+:global(.dark) .chevronWrapper {
+  color: var(--color-red-300);
+}
+
+.icon {
+  height: var(--spacing-3-5);
+  width: var(--spacing-3-5);
+  color: currentColor;
+}
+
+.chevronIcon {
+  height: var(--spacing-4);
+  width: var(--spacing-4);
+  color: currentColor;
+}
+
+.content {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.errorDetail {
+  margin-top: var(--spacing-2);
+  white-space: pre-wrap;
+  font-size: var(--font-size-body-sm);
+  color: var(--color-red-800);
+  overflow: auto;
+  max-height: 15rem;
+  width: 100%;
+  max-width: 100%;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+:global(.dark) .errorDetail {
+  color: var(--color-red-300);
+}
+
+.fallbackMessage {
+  color: var(--color-red-800);
+  font-size: var(--font-size-body-sm);
+}
+
+:global(.dark) .fallbackMessage {
+  color: var(--color-red-300);
+}

@@ -1,0 +1,97 @@
+/* Accordion Header */
+.header {
+  display: flex;
+}
+
+/* Accordion Trigger */
+.trigger {
+  display: flex;
+  flex: 1 1 0%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  margin: 0 -1rem;
+  border-radius: var(--border-radius-lg);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-body);
+  font-weight: 500;
+  transition: all 200ms;
+}
+
+.trigger:hover {
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  text-decoration: none;
+}
+
+.trigger[data-state="open"] {
+  color: var(--color-magenta);
+}
+
+.trigger[data-state="open"] > svg {
+  transform: rotate(180deg);
+}
+
+.triggerIcon {
+  height: 1rem;
+  width: 1rem;
+  flex-shrink: 0;
+  transition: transform 200ms;
+  color: currentColor;
+}
+
+/* Accordion Content */
+.content {
+  overflow: hidden;
+  font-size: var(--font-size-body);
+  transition: all 200ms;
+}
+
+.content[data-state="open"] {
+  overflow: visible;
+}
+
+.content[data-state="closed"] {
+  animation: accordionUp 200ms ease-out;
+}
+
+.content[data-state="open"] {
+  animation: accordionDown 200ms ease-out;
+}
+
+.contentInner {
+  padding-bottom: 1rem;
+  padding-top: 0;
+}
+
+/* Accordion Animations */
+@keyframes accordionDown {
+  from {
+    height: 0;
+    opacity: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+    opacity: 1;
+  }
+}
+
+@keyframes accordionUp {
+  from {
+    height: var(--radix-accordion-content-height);
+    opacity: 1;
+  }
+  to {
+    height: 0;
+    opacity: 0;
+  }
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .trigger:hover {
+    background: hsl(var(--card));
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}

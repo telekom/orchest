@@ -1,0 +1,80 @@
+/* Container */
+.container {
+  position: absolute;
+  bottom: var(--spacing-1);
+  right: var(--spacing-1);
+  background-color: var(--color-gray-50);
+  padding: var(--spacing-0-5) var(--spacing-1);
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--color-gray-100);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  z-index: 10;
+}
+
+:global(.dark) .container {
+  background-color: var(--color-gray-900);
+  border-color: var(--color-gray-600);
+}
+
+/* Control Button - inherits sizing from odsActionButton (1.25rem) */
+.controlButton {
+  padding: 0;
+  color: var(--color-gray-700);
+  --colours-basic-text: var(--color-gray-700);
+  transition: background-color var(--transition-fast) var(--transition-ease);
+}
+
+.controlButton:hover {
+  background-color: var(--color-gray-200);
+}
+
+.zoomButton:hover .zoomIcon {
+  transform: scale(1.12);
+  color: var(--color-blue-600);
+}
+
+.zoomIcon {
+  transition:
+    transform var(--transition-fast) var(--transition-ease),
+    color var(--transition-fast) var(--transition-ease);
+}
+
+:global(.dark) .controlButton {
+  color: var(--color-gray-300);
+  --colours-basic-text: var(--color-gray-300);
+}
+
+:global(.dark) .controlButton:hover {
+  background-color: var(--color-gray-600);
+}
+
+:global(.dark) .zoomButton:hover .zoomIcon {
+  color: var(--color-blue-400);
+}
+
+/* Icon Wrapper */
+.iconWrapper {
+  display: inline-flex;
+}
+
+/* Tooltip */
+.tooltipContent {
+  max-width: 24rem;
+  word-wrap: break-word;
+  z-index: var(--z-index-tooltip);
+}
+
+/* Dropdown Menu */
+.dropdownContent {
+  background-color: var(--color-white);
+  border-color: var(--color-gray-100);
+  color: var(--color-gray-900);
+}
+
+:global(.dark) .dropdownContent {
+  background-color: var(--color-gray-800);
+  border-color: var(--color-gray-600);
+  color: var(--color-gray-50);
+}

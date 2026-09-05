@@ -1,0 +1,485 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-3);
+  padding: var(--spacing-2) var(--spacing-3);
+  border-bottom: 1px solid var(--color-gray-200);
+  flex-shrink: 0;
+}
+
+:global(.dark) .header {
+  border-bottom-color: var(--color-gray-700);
+}
+
+.title {
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-heading);
+  color: var(--color-gray-900);
+}
+
+:global(.dark) .title {
+  color: var(--color-gray-100);
+}
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggleLabel {
+  font-size: var(--font-size-body-sm, var(--font-size-body));
+  color: var(--color-gray-600);
+}
+
+:global(.dark) .toggleLabel {
+  color: var(--color-gray-300);
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  flex-shrink: 0;
+}
+
+.expandActions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+.expandButton {
+  gap: var(--spacing-1);
+  font-size: var(--font-size-body-sm, var(--font-size-body));
+  color: var(--color-gray-600);
+  padding-inline: var(--spacing-2);
+}
+
+:global(.dark) .expandButton {
+  color: var(--color-gray-300);
+}
+
+.expandButtonIcon {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+.scrollArea {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+}
+
+.tree {
+  display: flex;
+  flex-direction: column;
+  padding-block: var(--spacing-1);
+}
+
+/* Rows */
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  min-height: 2rem;
+  padding-block: var(--spacing-1);
+  padding-right: var(--spacing-3);
+  border-bottom: 1px solid var(--color-gray-100);
+}
+
+:global(.dark) .row {
+  border-bottom-color: var(--color-gray-800);
+}
+
+.row:hover {
+  background-color: var(--color-gray-50);
+}
+
+:global(.dark) .row:hover {
+  background-color: var(--color-gray-800);
+}
+
+.rowMain {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.rowMain:focus-visible {
+  outline: 2px solid var(--color-blue-500);
+  outline-offset: -2px;
+}
+
+.rowSelected,
+.rowSelected:hover {
+  background-color: var(--color-blue-50);
+}
+
+:global(.dark) .rowSelected,
+:global(.dark) .rowSelected:hover {
+  background-color: color-mix(in srgb, var(--color-blue-500) 22%, transparent);
+}
+
+/* State transitions detail (shown for the selected row) */
+.transitions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+  padding-block: var(--spacing-2);
+  padding-right: var(--spacing-3);
+  background-color: var(--color-gray-50);
+  border-bottom: 1px solid var(--color-gray-100);
+}
+
+:global(.dark) .transitions {
+  background-color: var(--color-gray-800);
+  border-bottom-color: var(--color-gray-800);
+}
+
+.transitionRow {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+/* Compact edgy state chips in the transitions detail */
+.stateChip {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 5px;
+  font-size: 0.625rem;
+  line-height: 1.35;
+  font-weight: var(--font-weight-semibold, 600);
+  border-radius: 2px;
+  border: 1px solid transparent;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+.stateChip_running {
+  color: var(--color-green-700);
+  background-color: color-mix(in srgb, var(--color-green-500) 14%, transparent);
+  border-color: color-mix(in srgb, var(--color-green-500) 35%, transparent);
+}
+
+.stateChip_completed,
+.stateChip_neutral {
+  color: var(--color-gray-600);
+  background-color: var(--color-gray-100);
+  border-color: var(--color-gray-300);
+}
+
+.stateChip_incident {
+  color: var(--color-orange-800);
+  background-color: color-mix(in srgb, var(--color-orange-500) 14%, transparent);
+  border-color: color-mix(in srgb, var(--color-orange-500) 35%, transparent);
+}
+
+.stateChip_hold {
+  color: var(--color-amber-800, var(--color-yellow-800));
+  background-color: color-mix(in srgb, var(--color-amber-500, var(--color-yellow-500)) 14%, transparent);
+  border-color: color-mix(in srgb, var(--color-amber-500, var(--color-yellow-500)) 35%, transparent);
+}
+
+:global(.dark) .stateChip_running {
+  color: var(--color-green-300);
+  background-color: color-mix(in srgb, var(--color-green-500) 22%, transparent);
+  border-color: color-mix(in srgb, var(--color-green-500) 40%, transparent);
+}
+
+:global(.dark) .stateChip_completed,
+:global(.dark) .stateChip_neutral {
+  color: var(--color-gray-300);
+  background-color: var(--color-gray-700);
+  border-color: var(--color-gray-600);
+}
+
+:global(.dark) .stateChip_incident {
+  color: var(--color-orange-300);
+  background-color: color-mix(in srgb, var(--color-orange-500) 22%, transparent);
+  border-color: color-mix(in srgb, var(--color-orange-500) 40%, transparent);
+}
+
+:global(.dark) .stateChip_hold {
+  color: var(--color-amber-300, var(--color-yellow-300));
+  background-color: color-mix(in srgb, var(--color-amber-500, var(--color-yellow-500)) 22%, transparent);
+  border-color: color-mix(in srgb, var(--color-amber-500, var(--color-yellow-500)) 40%, transparent);
+}
+
+.transitionTime {
+  font-size: var(--font-size-body-sm, var(--font-size-body));
+  color: var(--color-gray-500);
+}
+
+:global(.dark) .transitionTime {
+  color: var(--color-gray-400);
+}
+
+.transitionEmpty {
+  font-size: var(--font-size-body-sm, var(--font-size-body));
+  color: var(--color-gray-500);
+}
+
+.chevronButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--color-gray-500);
+  flex-shrink: 0;
+}
+
+.chevronButton:hover {
+  color: var(--color-gray-800);
+}
+
+:global(.dark) .chevronButton:hover {
+  color: var(--color-gray-200);
+}
+
+.chevron {
+  width: 1rem;
+  height: 1rem;
+}
+
+.chevronSpacer {
+  display: inline-block;
+  width: 1.25rem;
+  flex-shrink: 0;
+}
+
+/* Status icons — left circle/tick indicator (not BPMN logos) */
+.statusIcon {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+  filter: none !important;
+  stroke: currentColor;
+}
+
+.row:hover .statusIcon {
+  filter: none !important;
+}
+
+.status_running {
+  color: var(--color-green-500);
+  stroke: var(--color-green-500);
+  fill: var(--color-green-500);
+}
+
+.status_completed,
+.status_neutral {
+  color: var(--color-gray-400);
+  stroke: var(--color-gray-400);
+  fill: none;
+}
+
+.status_incident {
+  color: var(--color-orange-500);
+  stroke: var(--color-orange-500);
+  fill: none;
+}
+
+.status_hold {
+  color: var(--color-amber-500, var(--color-yellow-500));
+  stroke: var(--color-amber-500, var(--color-yellow-500));
+  fill: var(--color-amber-500, var(--color-yellow-500));
+}
+
+.statusBlink {
+  animation: statusBlink 1.4s ease-in-out infinite;
+}
+
+@keyframes statusBlink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+:global(.dark) .status_running {
+  color: var(--color-green-400);
+  stroke: var(--color-green-400);
+  fill: var(--color-green-400);
+}
+
+:global(.dark) .status_completed,
+:global(.dark) .status_neutral {
+  color: var(--color-gray-500);
+  stroke: var(--color-gray-500);
+}
+
+:global(.dark) .status_incident {
+  color: var(--color-orange-400);
+  stroke: var(--color-orange-400);
+}
+
+:global(.dark) .status_hold {
+  color: var(--color-amber-400, var(--color-yellow-400));
+  stroke: var(--color-amber-400, var(--color-yellow-400));
+  fill: var(--color-amber-400, var(--color-yellow-400));
+}
+
+/* Node-type icons stay neutral grey — only the status circle/tick uses state color */
+.nodeIcon {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex-shrink: 0;
+  color: var(--color-gray-700);
+  filter: none !important;
+}
+
+:global(.dark) .nodeIcon {
+  color: var(--color-gray-300);
+}
+
+.row:hover .nodeIcon,
+.rowMain[aria-pressed="true"] .nodeIcon {
+  color: var(--color-gray-700);
+  filter: none !important;
+}
+
+:global(.dark) .row:hover .nodeIcon,
+:global(.dark) .rowMain[aria-pressed="true"] .nodeIcon {
+  color: var(--color-gray-300);
+}
+
+.nodeName {
+  flex: 1;
+  min-width: 0;
+  font-size: var(--font-size-body);
+  color: var(--color-gray-800);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+:global(.dark) .nodeName {
+  color: var(--color-gray-200);
+}
+
+/* Dates */
+.dates {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1-5);
+  flex-shrink: 0;
+  font-size: var(--font-size-body-sm, var(--font-size-body));
+  color: var(--color-gray-500);
+}
+
+:global(.dark) .dates {
+  color: var(--color-gray-400);
+}
+
+.dateSeparator {
+  color: var(--color-gray-400);
+}
+
+.dateMuted {
+  color: var(--color-gray-400);
+}
+
+/* Child instance subtree messages */
+.subtreeMessage {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  min-height: 2rem;
+  padding-block: var(--spacing-1);
+  padding-right: var(--spacing-3);
+  font-size: var(--font-size-body-sm, var(--font-size-body));
+  color: var(--color-gray-500);
+}
+
+.subtreeError {
+  color: var(--color-red-500);
+}
+
+.spinner {
+  width: 1rem;
+  height: 1rem;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Loading + empty */
+.loading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  padding: var(--spacing-3);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.loadingRow {
+  height: 1.25rem;
+  width: 60%;
+  background-color: var(--color-gray-200);
+  border-radius: var(--border-radius-sm);
+}
+
+:global(.dark) .loadingRow {
+  background-color: var(--color-gray-700);
+}
+
+.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-4);
+}
+
+.emptyText {
+  font-size: var(--font-size-body);
+  color: var(--color-gray-500);
+}
+
+:global(.dark) .emptyText {
+  color: var(--color-gray-400);
+}

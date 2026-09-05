@@ -1,0 +1,65 @@
+.navList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  width: 100%;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 0.75rem;
+  border-radius: 4px;
+  border: none;
+  background: transparent;
+  color: hsl(var(--muted-foreground));
+  font-size: var(--text-body);
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  width: 100%;
+  text-align: left;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+
+.navItem:hover {
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  color: hsl(var(--foreground));
+}
+
+.navItem:active {
+  background: var(--glass-bg-hover);
+  color: hsl(var(--foreground));
+}
+
+.navItemActive {
+  background: color-mix(in srgb, var(--color-magenta) 10%, var(--glass-bg));
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  border: 1px solid color-mix(in srgb, var(--color-magenta) 25%, var(--glass-border));
+  color: var(--color-magenta);
+  font-weight: var(--font-weight-semibold);
+  box-shadow: var(--neon-glow-sm);
+}
+
+.navItemActive:hover {
+  background: color-mix(in srgb, var(--color-magenta) 14%, var(--glass-bg-hover));
+}
+
+.navIcon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.navLabel {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

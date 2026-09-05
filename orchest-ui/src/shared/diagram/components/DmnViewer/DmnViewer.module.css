@@ -1,0 +1,28 @@
+/* DmnViewer Component Styles */
+
+.container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--glass-border-subtle);
+  overflow: hidden;
+  background:
+    radial-gradient(circle, color-mix(in srgb, var(--color-magenta) 12%, transparent) 1px, transparent 1px)
+    0 0 / 24px 24px
+    #ffffff;
+}
+
+:global(.dark) .container {
+  background:
+    radial-gradient(circle, color-mix(in srgb, var(--color-magenta) 10%, transparent) 1px, transparent 1px)
+    0 0 / 24px 24px
+    #0a0a0f;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.viewerContainer {
+  height: 100%;
+  width: 100%;
+  background: transparent;
+}

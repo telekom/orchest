@@ -1,0 +1,8 @@
+<svg viewBox="0 0 110 90" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+<rect x="5" y="5" fill="#fff" stroke="#333" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" rx="5" ry="5" width="100" height="80" />
+<path fill="#fff" stroke="#333" stroke-width="2" d="M53 71v10m3-10v10m3-10v10" data-marker="parallel" />
+<text x="55" y="45" fill="#333" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle">
+<tspan dy="-3.195">Multi-Instance</tspan>
+<tspan x="55" dy="14.4">Parallel</tspan>
+</text>
+</svg>

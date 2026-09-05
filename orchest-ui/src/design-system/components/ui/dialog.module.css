@@ -1,0 +1,111 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-index-modal-backdrop);
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  animation: fadeIn var(--transition-fast) var(--transition-ease);
+}
+
+.content {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  z-index: var(--z-index-modal);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 28rem;
+  max-height: 85vh;
+  overflow: hidden;
+  transform: translate(-50%, -50%);
+  gap: var(--spacing-4);
+  border: 1px solid var(--glass-border-bright);
+  border-radius: var(--border-radius-xl);
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  padding: var(--spacing-6);
+  box-shadow: var(--glass-shadow-lg);
+  animation: contentShow var(--transition-fast) var(--transition-ease);
+}
+
+.closeButton {
+  position: absolute;
+  right: var(--spacing-4);
+  top: var(--spacing-4);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 2px;
+  border: none;
+  background: transparent;
+  color: hsl(var(--muted-foreground));
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity var(--transition-fast) var(--transition-ease);
+}
+
+.closeButton:hover {
+  opacity: 1;
+}
+
+.header {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  gap: var(--spacing-1-5);
+  text-align: left;
+}
+
+.footer {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: var(--spacing-2);
+  padding-top: var(--spacing-4);
+}
+
+.title {
+  font-size: var(--text-h4);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-heading);
+  letter-spacing: var(--letter-spacing-tighter);
+  color: hsl(var(--foreground));
+  margin: 0;
+}
+
+.description {
+  font-size: var(--text-body);
+  color: hsl(var(--muted-foreground));
+  margin: 0;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes contentShow {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -48%) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .overlay,
+  .content {
+    background: hsl(var(--card));
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}

@@ -1,0 +1,279 @@
+/* BPMN Overlay Info Card — theme-aware tokens */
+.infoCard {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-md, 5px);
+  padding: 10px;
+  min-width: 220px;
+  max-width: 280px;
+  width: max-content;
+  font-family: var(--font-sans, Inter, ui-sans-serif, system-ui, sans-serif);
+  font-size: var(--font-size-body-sm, 12px);
+  color: hsl(var(--foreground));
+  box-shadow: var(--glass-shadow-lg, 0 2px 8px rgba(0, 0, 0, 0.15));
+  position: relative;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.infoCardExpanded {
+  max-width: 380px;
+  min-width: 300px;
+}
+
+.topRow {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.contentContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.fieldLabel {
+  color: hsl(var(--muted-foreground));
+  font-weight: bold;
+}
+
+.fieldRow {
+  word-break: break-word;
+  color: hsl(var(--foreground));
+}
+
+.actionsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+}
+
+.actionButton {
+  width: 28px;
+  height: 28px;
+  background: var(--glass-bg-subtle);
+  border: 1px solid var(--glass-border);
+  color: hsl(var(--muted-foreground));
+  cursor: pointer;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+
+.actionButton:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border-bright);
+  color: hsl(var(--foreground));
+  transform: scale(1.05);
+}
+
+.actionButtonActive {
+  background: color-mix(in srgb, var(--color-magenta) 18%, var(--glass-bg));
+  border-color: color-mix(in srgb, var(--color-magenta) 40%, var(--glass-border));
+  color: var(--color-magenta);
+}
+
+.actionButtonActive:hover {
+  background: color-mix(in srgb, var(--color-magenta) 24%, var(--glass-bg-hover));
+  border-color: color-mix(in srgb, var(--color-magenta) 50%, var(--glass-border-bright));
+  color: var(--color-magenta);
+}
+
+.detailsPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 2px;
+  padding-top: 6px;
+  border-top: 1px solid var(--glass-border-subtle);
+  max-height: 320px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.detailsPanel[hidden] {
+  display: none;
+}
+
+.detailsSectionTitle {
+  font-size: 10px;
+  font-weight: 600;
+  color: hsl(var(--muted-foreground));
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-top: 4px;
+}
+
+.detailsSectionTitle:first-child {
+  margin-top: 0;
+}
+
+.mappingTable {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 4px;
+  border: 1px solid var(--glass-border-subtle);
+  border-radius: 4px;
+  overflow: visible;
+  background: var(--glass-bg-subtle);
+}
+
+.mappingTableHeader,
+.mappingTableRow {
+  display: grid;
+  grid-template-columns: minmax(72px, 0.9fr) 16px minmax(96px, 1.4fr);
+  gap: 6px;
+  align-items: start;
+  padding: 5px 8px;
+}
+
+.mappingTableRowWrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.mappingTableRowWrap + .mappingTableRowWrap {
+  border-top: 1px solid var(--glass-border-subtle);
+}
+
+.mappingTableHeader {
+  background: var(--glass-bg);
+  border-bottom: 1px solid var(--glass-border-subtle);
+  font-size: 10px;
+  font-weight: 600;
+  color: hsl(var(--muted-foreground));
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.mappingTableRow + .mappingTableRow {
+  border-top: 1px solid var(--glass-border-subtle);
+}
+
+.mappingTarget {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  word-break: break-word;
+}
+
+.mappingArrow {
+  color: hsl(var(--muted-foreground));
+  font-size: 11px;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.mappingSource {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  color: var(--color-blue-600);
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+:global(.dark) .mappingSource {
+  color: var(--color-blue-300);
+}
+
+.mappingSourceClickable {
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 2px;
+}
+
+.mappingSourceClickable:hover {
+  color: var(--color-blue-700);
+}
+
+:global(.dark) .mappingSourceClickable:hover {
+  color: var(--color-blue-200);
+}
+
+.mappingEvalResult {
+  margin: 0 8px 6px;
+  padding: 6px 8px;
+  border-radius: 4px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border-subtle);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  color: var(--color-green-700);
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 140px;
+  overflow-x: auto;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+:global(.dark) .mappingEvalResult {
+  color: var(--color-green-300);
+}
+
+.mappingEvalResult[hidden] {
+  display: none;
+}
+
+.mappingEvalError {
+  color: var(--color-red-600);
+  border-color: color-mix(in srgb, var(--color-red-500) 40%, var(--glass-border));
+}
+
+:global(.dark) .mappingEvalError {
+  color: var(--color-red-300);
+}
+
+.invokedLinksBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 2px;
+  padding-top: 6px;
+  border-top: 1px solid var(--glass-border-subtle);
+}
+
+.invokedLinksHeading {
+  font-size: 11px;
+  font-weight: 600;
+  color: hsl(var(--muted-foreground));
+  letter-spacing: 0.02em;
+}
+
+.invokedLinkRow {
+  word-break: break-word;
+}
+
+.invokedLink {
+  color: var(--color-blue-600);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.invokedLink:hover {
+  text-decoration: underline;
+  color: var(--color-blue-700);
+}
+
+:global(.dark) .invokedLink {
+  color: var(--color-blue-400);
+}
+
+:global(.dark) .invokedLink:hover {
+  color: var(--color-blue-300);
+}

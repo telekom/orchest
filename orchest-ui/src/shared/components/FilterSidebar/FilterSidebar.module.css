@@ -1,0 +1,333 @@
+/* Sidebar Container */
+.sidebar {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border-right: var(--border-width-1) solid var(--glass-border);
+  box-shadow: var(--glass-shadow-sm);
+  transition: width var(--transition-base) var(--transition-ease),
+              background-color var(--transition-base) var(--transition-ease),
+              border-color var(--transition-base) var(--transition-ease);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: var(--header-height);
+  bottom: 0;
+  z-index: var(--z-index-sticky);
+  overflow: hidden;
+}
+
+:global(.dark) .sidebar {
+  color: var(--color-gray-100);
+}
+
+.sidebarExpanded {
+  width: var(--sidebar-width);
+}
+
+.sidebarCollapsed {
+  width: var(--sidebar-collapsed-width);
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--spacing-4);
+  height: 2.5rem;
+  min-height: 2.5rem;
+  border-bottom: var(--border-width-1) solid var(--glass-border-subtle);
+  background: var(--glass-bg-strong);
+  opacity: 1;
+  transition: opacity 0.15s ease-in-out;
+}
+
+.headerTitle {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2, 0.5rem);
+}
+
+/* Header icon button - same size as collapsed trigger, subtle gray color */
+.headerIconButton {
+  --ODSButtonWrapper-height--size-small: 2.5rem !important;
+  --ODSButtonWrapper-width--buttonType-iconOnly--size-small: 2.5rem !important;
+  --ODSButton-minWidth--buttonType-iconOnly--size-small: 2.5rem !important;
+  --ODSButton-minHeight--size-small: 2.5rem !important;
+  --ODSButton-ButtonIcon-width--size-small: 1.25rem !important;
+  --ODSButton-ButtonIcon-height--size-small: 1.25rem !important;
+  --colours-basic-text: var(--color-gray-500) !important;
+  --colours-basic-background: transparent !important;
+  --colours-interaction-states-hover-background-hover: transparent !important;
+  --colours-interaction-states-hover-text-hover: var(--color-gray-500) !important;
+  pointer-events: none;
+  opacity: 1 !important;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+:global(.dark) .headerIconButton {
+  --colours-basic-text: var(--color-gray-400) !important;
+  --colours-interaction-states-hover-text-hover: var(--color-gray-400) !important;
+}
+
+.headerText {
+  font-size: var(--font-size-body-lg, 0.875rem);
+  line-height: 1.25rem;
+  font-weight: 600;
+  color: var(--color-gray-900);
+  white-space: nowrap;
+}
+
+:global(.dark) .headerText {
+  color: var(--color-gray-100);
+}
+
+.toggleButton {
+  --ODSButtonWrapper-height--size-small: 2rem !important;
+  --ODSButtonWrapper-width--buttonType-iconOnly--size-small: 2rem !important;
+  --ODSButton-minWidth--buttonType-iconOnly--size-small: 2rem !important;
+  --ODSButton-minHeight--size-small: 2rem !important;
+  --ODSButton-ButtonIcon-width--size-small: 1rem !important;
+  --ODSButton-ButtonIcon-height--size-small: 1rem !important;
+  flex-shrink: 0;
+  --colours-basic-text: var(--color-gray-700);
+}
+
+:global(.dark) .toggleButton {
+  --colours-basic-text: var(--color-gray-300);
+}
+
+/* Content */
+.content {
+  flex: 1;
+  overflow-y: auto;
+  background: var(--glass-bg-subtle);
+  opacity: 1;
+  transition: opacity 0.15s ease-in-out;
+}
+
+.contentInner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem 0.5rem;
+}
+
+/* Search */
+.searchContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.searchLabel {
+  font-size: var(--font-size-body-lg);
+  line-height: 1.5rem;
+  font-weight: 500;
+  color: var(--color-gray-700);
+}
+
+:global(.dark) .searchLabel {
+  color: var(--color-gray-300);
+}
+
+.searchInputWrapper {
+  position: relative;
+}
+
+/* Reduce search input height with container context for specificity */
+.searchContainer .searchInputWrapper .searchInput {
+  width: 100%;
+  height: var(--spacing-8);
+  background: var(--glass-bg);
+  color: var(--color-gray-800);
+  border: var(--border-width-1) solid var(--glass-border);
+  border-radius: var(--border-radius-xl);
+  padding-left: 0.75rem;
+  padding-right: 2.5rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  transition: border-color var(--transition-fast) var(--transition-ease),
+    box-shadow var(--transition-fast) var(--transition-ease);
+}
+
+.searchContainer .searchInputWrapper .searchInput:focus {
+  border-color: var(--glass-border-bright);
+  box-shadow: var(--neon-glow-sm);
+  outline: none;
+}
+
+.searchContainer .searchInputWrapper .searchInput::placeholder {
+  color: var(--color-gray-500);
+}
+
+:global(.dark) .searchContainer .searchInputWrapper .searchInput {
+  color: var(--color-gray-100);
+}
+
+:global(.dark) .searchContainer .searchInputWrapper .searchInput::placeholder {
+  color: var(--color-gray-400);
+}
+
+.searchInputWrapper .searchIcon {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 1rem;
+  width: 1rem;
+  color: var(--color-gray-400);
+}
+
+/* Action Slot */
+.actionSlot {
+  padding: var(--spacing-1) var(--spacing-4);
+  border-top: var(--border-width-1) solid var(--glass-border-subtle);
+  opacity: 1;
+  transition: opacity 0.15s ease-in-out;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 0 var(--spacing-4);
+  border-top: var(--border-width-1) solid var(--glass-border-subtle);
+  background: var(--glass-bg-strong);
+  opacity: 1;
+  transition: opacity 0.15s ease-in-out;
+}
+
+.actionsWithSlot {
+  justify-content: space-between;
+}
+
+.actionsLeftSlot {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 0;
+}
+
+/* Export and Clear buttons - icon only, same sizing */
+.exportButton,
+.clearButton {
+  --ODSButtonWrapper-height--size-small: 2.5rem !important;
+  --ODSButtonWrapper-width--buttonType-iconOnly--size-small: 2.5rem !important;
+  --ODSButton-minWidth--buttonType-iconOnly--size-small: 2.5rem !important;
+  --ODSButton-minHeight--size-small: 2.5rem !important;
+  --ODSButton-ButtonIcon-width--size-small: 1.25rem !important;
+  --ODSButton-ButtonIcon-height--size-small: 1.25rem !important;
+}
+
+/* Export button - magenta icon color */
+.exportButton:not(:disabled) {
+  --colours-basic-text: var(--color-magenta);
+  --colours-interaction-states-hover-background-hover: color-mix(in srgb, var(--color-magenta) 10%, transparent);
+}
+
+:global(.dark) .exportButton:not(:disabled) {
+  --colours-basic-text: var(--color-magenta);
+  --colours-interaction-states-hover-background-hover: color-mix(in srgb, var(--color-magenta) 15%, transparent);
+}
+
+/* Red color when active filters exist */
+.clearButton:not(:disabled) {
+  --colours-basic-text: var(--color-red-600);
+  --colours-interaction-states-hover-background-hover: var(--color-red-50);
+}
+
+:global(.dark) .clearButton:not(:disabled) {
+  --colours-basic-text: #DC2626;
+  --colours-interaction-states-hover-background-hover: rgba(220, 38, 38, 0.15);
+}
+
+/* Disabled state - gray */
+.clearButton:disabled {
+  --colours-basic-text: var(--color-gray-400);
+  opacity: 0.5;
+}
+
+:global(.dark) .clearButton:disabled {
+  --colours-basic-text: var(--color-gray-500);
+}
+
+/* Collapsed State */
+.collapsedContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-3, 0.75rem);
+  padding: var(--spacing-2, 0.5rem) 0;
+  height: 100%;
+}
+
+/* ODS button styling override for 40px square sizing */
+.collapsedTrigger,
+.collapsedExport,
+.collapsedActions {
+  --ODSButtonWrapper-height--size-small: 2.5rem !important;
+  --ODSButtonWrapper-width--buttonType-iconOnly--size-small: 2.5rem !important;
+  --ODSButton-minWidth--buttonType-iconOnly--size-small: 2.5rem !important;
+  --ODSButton-minHeight--size-small: 2.5rem !important;
+  --ODSButton-ButtonIcon-width--size-small: 1.25rem !important;
+  --ODSButton-ButtonIcon-height--size-small: 1.25rem !important;
+}
+
+/* Container for export and delete buttons at bottom */
+.collapsedActionsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-1, 0.25rem);
+  padding: 0;
+  border-top: var(--border-width-1) solid var(--glass-border-subtle);
+  background: var(--glass-bg-strong);
+  margin-top: auto;
+}
+
+/* Export button - magenta color */
+.collapsedExport {
+  --colours-basic-text: var(--color-magenta);
+  --colours-interaction-states-hover-background-hover: color-mix(in srgb, var(--color-magenta) 10%, transparent);
+}
+
+:global(.dark) .collapsedExport {
+  --colours-basic-text: var(--color-magenta);
+  --colours-interaction-states-hover-background-hover: color-mix(in srgb, var(--color-magenta) 15%, transparent);
+}
+
+/* Red color for delete button */
+.collapsedActions {
+  --colours-basic-text: var(--color-red-600);
+  --colours-interaction-states-hover-background-hover: var(--color-red-50);
+}
+
+:global(.dark) .collapsedActions {
+  --colours-basic-text: #DC2626;
+  --colours-interaction-states-hover-background-hover: rgba(220, 38, 38, 0.15);
+}
+
+/* ==========================================================================
+ * ACCESSIBILITY - REDUCE MOTION
+ * Respect user preferences for reduced motion
+ * ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .sidebar,
+  .header,
+  .content,
+  .actionSlot,
+  .actions,
+  .collapsedTrigger,
+  .collapsedActions {
+    transition: none;
+    animation: none;
+  }
+}

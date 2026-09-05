@@ -1,0 +1,71 @@
+/* Scroll Area Root */
+.root {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Scroll Area Viewport */
+.viewport {
+  height: 100%;
+  width: 100%;
+  border-radius: inherit;
+}
+
+/* Scroll Bar Base */
+.scrollbar {
+  display: flex;
+  touch-action: none;
+  user-select: none;
+  transition: background-color 200ms;
+  opacity: 1;
+}
+
+.scrollbar[data-state="visible"] {
+  opacity: 1;
+}
+
+/* Vertical Scrollbar */
+.scrollbarVertical {
+  height: 100%;
+  width: 0.625rem;
+  border-left: 1px solid transparent;
+  padding: 1px;
+}
+
+/* Horizontal Scrollbar */
+.scrollbarHorizontal {
+  height: 0.625rem;
+  flex-direction: column;
+  border-top: 1px solid transparent;
+  padding: 1px;
+}
+
+/* Scroll Thumb */
+.thumb {
+  position: relative;
+  flex: 1 1 0%;
+  border-radius: var(--border-radius-full);
+  background: color-mix(in srgb, var(--color-magenta) 25%, var(--glass-border));
+  backdrop-filter: blur(var(--glass-blur-sm));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm));
+}
+
+:global(.dark) .thumb {
+  background: color-mix(in srgb, var(--color-magenta) 30%, var(--glass-border));
+}
+
+.thumb:hover {
+  background: color-mix(in srgb, var(--color-magenta) 40%, var(--glass-border));
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .thumb {
+    background: var(--color-gray-400);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  :global(.dark) .thumb {
+    background: var(--color-gray-600);
+  }
+}

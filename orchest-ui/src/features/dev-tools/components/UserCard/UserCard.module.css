@@ -1,0 +1,179 @@
+/* UserCard Component Styles */
+
+.card {
+  box-shadow: 0 1px 2px 0 var(--color-black-alpha-05);
+  border: var(--border-width-1) solid var(--glass-border-subtle);
+  overflow: hidden;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  height: 100%;
+}
+
+:global(.dark) .card {
+  border-color: var(--glass-border-subtle);
+  background-color: var(--color-gray-950);
+}
+
+.container {
+  padding: var(--spacing-3);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.title {
+  font-family: var(--font-display);
+
+  font-size: var(--text-h4);
+  line-height: var(--line-height-heading);
+  margin-bottom: var(--spacing-2);
+  color: var(--color-gray-900);
+  border-bottom: var(--border-width-1) solid var(--color-gray-100);
+  padding-bottom: var(--spacing-1);
+}
+
+:global(.dark) .title {
+  color: var(--color-gray-100);
+  border-color: var(--glass-border-subtle);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: var(--spacing-2);
+}
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-3);
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  padding: var(--spacing-2);
+  border-radius: var(--border-radius-md);
+}
+
+.infoLabel {
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-body);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-gray-500);
+  margin-bottom: var(--spacing-1);
+}
+
+:global(.dark) .infoLabel {
+  color: var(--color-gray-400);
+}
+
+.infoValue {
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-body);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-gray-800);
+}
+
+:global(.dark) .infoValue {
+  color: var(--color-gray-200);
+}
+
+.rolesSection {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+  gap: var(--spacing-2);
+}
+
+.rolesBox {
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  padding: var(--spacing-2);
+  border-radius: var(--border-radius-md);
+  flex: 1;
+}
+
+.rolesTitle {
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-body);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-gray-600);
+  margin-bottom: var(--spacing-1-5);
+}
+
+:global(.dark) .rolesTitle {
+  color: var(--color-gray-300);
+}
+
+.rolesList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-1);
+}
+
+.roleBadge {
+  padding: var(--spacing-0-5) var(--spacing-1-5);
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-body);
+}
+
+.roleBadgeDefault {
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  color: var(--color-gray-700);
+  border-color: var(--glass-border-subtle);
+}
+
+:global(.dark) .roleBadgeDefault {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  color: var(--color-gray-300);
+  border-color: var(--glass-border-subtle);
+}
+
+.roleBadgeActive {
+  background-color: var(--color-gray-200);
+  color: var(--color-gray-800);
+  border-color: var(--glass-border);
+}
+
+:global(.dark) .roleBadgeActive {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  color: var(--color-gray-200);
+  border-color: var(--glass-border-subtle);
+}
+
+.roleBadgeInactive {
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  color: var(--color-gray-500);
+  border-color: var(--glass-border-subtle);
+
+  box-shadow: var(--neon-glow-sm);
+}
+
+:global(.dark) .roleBadgeInactive {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  color: var(--color-gray-400);
+  border-color: var(--glass-border-subtle);
+}
+
+.noRoles {
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-body);
+  color: var(--color-gray-500);
+}
+
+:global(.dark) .noRoles {
+  color: var(--color-gray-400);
+}

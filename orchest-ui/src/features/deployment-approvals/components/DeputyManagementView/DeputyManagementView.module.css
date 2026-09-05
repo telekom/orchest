@@ -1,0 +1,75 @@
+/* Loading State */
+.loadingContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-height: 12rem;
+  padding: var(--spacing-8);
+}
+
+/* Empty State Container */
+.emptyStateContainer {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-8);
+}
+
+.emptyStateIcon {
+  width: 3rem;
+  height: 3rem;
+  color: var(--color-gray-400);
+}
+
+:global(.dark) .emptyStateIcon {
+  color: var(--color-gray-600);
+}
+
+/* Main Container */
+.container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.panelHeader {
+  flex-shrink: 0;
+  padding: var(--spacing-4) var(--spacing-5);
+  border-bottom: 1px solid var(--glass-border-subtle);
+}
+
+.panelTitle {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-bold);
+  color: hsl(var(--foreground));
+  letter-spacing: -0.02em;
+}
+
+.panelSubtitle {
+  margin: var(--spacing-1) 0 0;
+  font-size: var(--font-size-body-sm);
+  color: hsl(var(--muted-foreground));
+  line-height: 1.45;
+  max-width: 52ch;
+}
+
+.listScroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: var(--spacing-4) var(--spacing-5);
+}
+
+/* Accordion Container */
+.accordionWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}

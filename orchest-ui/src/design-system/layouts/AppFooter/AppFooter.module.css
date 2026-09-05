@@ -1,0 +1,69 @@
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: var(--spacing-3);
+  flex-shrink: 0;
+}
+
+.row {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: var(--font-size-body-sm);
+  line-height: 1.25;
+  color: hsl(var(--muted-foreground));
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  flex-shrink: 0;
+}
+
+.statusOnline .dot {
+  background-color: hsl(142 65% 42%);
+}
+
+:global(.dark) .statusOnline .dot {
+  background-color: hsl(142 65% 55%);
+}
+
+.statusOffline .dot {
+  background-color: hsl(0 72% 52%);
+}
+
+:global(.dark) .statusOffline .dot {
+  background-color: hsl(0 72% 62%);
+}
+
+.separator {
+  opacity: 0.55;
+  user-select: none;
+}
+
+.version {
+  font-variant-numeric: tabular-nums;
+}
+
+.docsLink {
+  color: hsl(var(--muted-foreground));
+  text-decoration: none;
+}
+
+.docsLink:hover {
+  color: hsl(var(--foreground));
+  text-decoration: underline;
+}
+
+.docsLink:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+  border-radius: var(--border-radius-sm);
+}

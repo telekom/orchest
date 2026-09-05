@@ -1,0 +1,204 @@
+/* ============================================================================
+ * FUTURISTIC DESIGN LAYER
+ * Global icon treatment, typography, neon accents, and surface defaults
+ * ========================================================================== */
+
+svg.lucide {
+  stroke-width: 1.65;
+  transition:
+    color var(--transition-fast) var(--transition-ease),
+    filter var(--transition-fast) var(--transition-ease),
+    transform var(--transition-fast) var(--transition-ease);
+}
+
+button:hover svg.lucide,
+a:hover svg.lucide,
+[role="button"]:hover svg.lucide,
+.glass-interactive:hover svg.lucide {
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--color-magenta) 35%, transparent));
+}
+
+button:active svg.lucide,
+[role="button"]:active svg.lucide {
+  transform: scale(0.92);
+}
+
+[data-state="active"] svg.lucide,
+[aria-current="page"] svg.lucide {
+  color: var(--color-magenta);
+  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--color-magenta) 45%, transparent));
+}
+
+h1, h2, h3, .futuristic-title {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+.neon-text {
+  color: var(--color-magenta);
+  text-shadow: 0 0 20px color-mix(in srgb, var(--color-magenta) 30%, transparent);
+}
+
+.neon-border {
+  border-color: color-mix(in srgb, var(--color-magenta) 35%, var(--glass-border)) !important;
+  box-shadow:
+    var(--glass-shadow),
+    0 0 0 1px color-mix(in srgb, var(--color-magenta) 8%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--color-magenta) 6%, transparent);
+}
+
+.neon-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--border-radius-full);
+  background: var(--color-magenta);
+  box-shadow: 0 0 8px var(--color-magenta);
+}
+
+.futuristic-page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+  padding-bottom: var(--spacing-4);
+  margin-bottom: var(--spacing-4);
+  border-bottom: 1px solid var(--glass-border-subtle);
+}
+
+.futuristic-page-title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin: 0;
+  background: linear-gradient(
+    135deg,
+    hsl(var(--foreground)) 0%,
+    color-mix(in srgb, var(--color-magenta) 60%, hsl(var(--foreground))) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.futuristic-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-magenta);
+}
+
+.futuristic-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--glass-shadow);
+  contain: layout style;
+}
+
+.futuristic-panel-strong {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border-bright);
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--glass-shadow-lg);
+}
+
+.futuristic-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1-5);
+  padding: 2px 10px;
+  border-radius: var(--border-radius-full);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-medium);
+  background: var(--glass-bg-subtle);
+  border: 1px solid var(--glass-border-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm));
+}
+
+.futuristic-lift {
+  transition:
+    transform var(--transition-fast) var(--transition-ease),
+    box-shadow var(--transition-fast) var(--transition-ease),
+    border-color var(--transition-fast) var(--transition-ease);
+}
+
+.futuristic-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--glass-shadow-hover);
+  border-color: var(--glass-border-bright);
+}
+
+.futuristic-grid-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.futuristic-grid-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--color-magenta) 4%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--color-magenta) 4%, transparent) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+  opacity: 0.5;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 75%);
+}
+
+@keyframes scan-line {
+  0% { transform: translateY(-100%); opacity: 0; }
+  10% { opacity: 0.03; }
+  90% { opacity: 0.03; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+.futuristic-scanline::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    transparent 0%,
+    color-mix(in srgb, var(--color-magenta) 8%, transparent) 50%,
+    transparent 100%
+  );
+  height: 120px;
+  pointer-events: none;
+  z-index: var(--layer-grain);
+  animation: scan-line 12s linear infinite;
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .futuristic-scanline::after {
+    animation: none;
+  }
+
+  .futuristic-lift:hover {
+    transform: none;
+  }
+
+  button:hover svg.lucide,
+  a:hover svg.lucide {
+    filter: none;
+  }
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .futuristic-panel,
+  .futuristic-panel-strong {
+    background: hsl(var(--card));
+    backdrop-filter: none;
+  }
+}

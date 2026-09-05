@@ -1,0 +1,12 @@
+/* BPMN connections - alle Pfeile schwarz im ProcessDiagramViewer */
+.process-diagram-viewer-wrapper .djs-connection .djs-visual > path {
+  /* Override bpmn-js default marker stroke for visibility */
+  stroke: black !important;
+  stroke-width: 1.25px !important;
+}
+
+/* BPMN arrow markers (Pfeilköpfe) - alle schwarz */
+.process-diagram-viewer-wrapper marker path {
+  fill: black !important;
+  stroke: black !important;
+}

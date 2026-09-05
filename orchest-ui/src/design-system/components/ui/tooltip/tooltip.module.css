@@ -1,0 +1,121 @@
+.content {
+  z-index: 99999;
+  overflow: hidden;
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  color: hsl(var(--foreground));
+  padding: var(--spacing-1-5) var(--spacing-3);
+  font-size: var(--font-size-body);
+  box-shadow: var(--glass-shadow-lg);
+  max-width: 24rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.content[data-state='delayed-open'],
+.content[data-state='instant-open'] {
+  animation: fadeIn 200ms ease-out, zoomIn 200ms ease-out;
+}
+
+.content[data-state='closed'] {
+  animation: fadeOut 200ms ease-out, zoomOut 200ms ease-out;
+}
+
+.content[data-side='bottom'] {
+  animation: fadeIn 200ms ease-out, zoomIn 200ms ease-out, slideInFromTop 200ms ease-out;
+}
+
+.content[data-side='left'] {
+  animation: fadeIn 200ms ease-out, zoomIn 200ms ease-out, slideInFromRight 200ms ease-out;
+}
+
+.content[data-side='right'] {
+  animation: fadeIn 200ms ease-out, zoomIn 200ms ease-out, slideInFromLeft 200ms ease-out;
+}
+
+.content[data-side='top'] {
+  animation: fadeIn 200ms ease-out, zoomIn 200ms ease-out, slideInFromBottom 200ms ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.95);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes zoomOut {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0.95);
+  }
+}
+
+@keyframes slideInFromTop {
+  from {
+    transform: translateY(-0.5rem);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(0.5rem);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-0.5rem);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromBottom {
+  from {
+    transform: translateY(0.5rem);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .content {
+    background: hsl(var(--card));
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}

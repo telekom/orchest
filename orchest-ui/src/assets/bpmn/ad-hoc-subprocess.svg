@@ -1,0 +1,10 @@
+<svg viewBox="0 0 110 90" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+<rect x="5" y="5" fill="#fff" stroke="#333" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" rx="5" ry="5" width="100" height="80" />
+<rect x="49" y="73" fill="#fff" stroke="#333" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" rx="0" ry="0" />
+<path fill="none" stroke="#333" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M50 71v6m-3-3h6" transform="translate(5 5)"/>
+<path fill="#333" stroke="#333" stroke-linecap="round" stroke-linejoin="round" d="M65.845 77.644c1.055-1.238 2.643-2.079 4.296-1.98 2.052.08 3.856 1.158 5.761 1.791 1.064.342 2.245.144 3.188-.437.617-.337 1.277-.641 1.754-1.176v1.681c-.987.963-2.298 1.624-3.692 1.662-1.245.093-2.467-.25-3.595-.748-1.358-.56-2.751-1.335-4.27-1.181-1.378.146-2.419 1.136-3.443 1.967z" />
+<text x="55" y="45" fill="#333" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle">
+<tspan dy="-3.195">Ad-Hoc</tspan>
+<tspan x="55" dy="14.4">Subprocess</tspan>
+</text>
+</svg>

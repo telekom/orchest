@@ -1,0 +1,126 @@
+.sidebarTabs {
+  display: flex;
+  gap: var(--spacing-2, 0.5rem);
+  padding: var(--spacing-3, 0.75rem) 0;
+  border-bottom: 1px solid var(--glass-border-subtle);
+}
+
+.tabButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-xl);
+  background-color: transparent;
+  color: hsl(var(--muted-foreground));
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tabButton:hover {
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  border-color: var(--glass-border-bright);
+  color: hsl(var(--foreground));
+}
+
+.tabButtonActive {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  border-color: var(--color-magenta);
+  color: var(--color-magenta);
+  box-shadow: var(--neon-glow-sm);
+}
+
+.tabButtonActive:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--color-magenta);
+  box-shadow: var(--neon-glow-sm);
+}
+
+/* Collapsible notification section */
+.notificationSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.notificationHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-2, 0.5rem) 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.2s ease;
+}
+
+.notificationHeader:hover {
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+}
+
+.notificationTitle {
+  font-size: var(--font-size-xs, 0.75rem);
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.notificationArrow {
+  color: hsl(var(--muted-foreground));
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+  transform: rotate(90deg);
+}
+
+.notificationArrowExpanded {
+  transform: rotate(270deg);
+}
+
+.notificationContent {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: var(--spacing-2, 0.5rem) 0;
+}
+
+.taskCount {
+  font-size: 0.6875rem;
+  font-weight: 400;
+  color: hsl(var(--muted-foreground));
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: var(--spacing-8, 2rem);
+  text-align: center;
+}
+
+.emptyTitle {
+  font-family: var(--font-display);
+  font-size: var(--font-size-xl, 1.25rem);
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  margin: 0 0 var(--spacing-3, 0.75rem) 0;
+}
+
+.emptyDescription {
+  font-size: var(--font-size-base, 1rem);
+  color: hsl(var(--muted-foreground));
+  margin: 0;
+}

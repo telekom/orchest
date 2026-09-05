@@ -1,0 +1,145 @@
+/* BpmnGeneratorChat Component Styles */
+
+.container {
+  padding: var(--spacing-2);
+  border-radius: var(--border-radius-xl);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: var(--border-width-1) solid var(--glass-border-subtle);
+  box-shadow: var(--shadow-sm);
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: var(--spacing-3);
+  }
+}
+
+:global(.dark) .container {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  border-color: var(--glass-border-subtle);
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: var(--border-width-1) solid var(--color-gray-100);
+  padding: var(--spacing-2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+@media (min-width: 768px) {
+  .header {
+    padding: var(--spacing-3);
+    gap: var(--spacing-3);
+  }
+}
+
+:global(.dark) .header {
+  border-color: var(--glass-border-subtle);
+}
+
+.headerTitle {
+  font-family: var(--font-display);
+
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  font-family: var(--font-display);
+
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-gray-900);
+}
+
+:global(.dark) .title {
+  color: var(--color-gray-100);
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+/* Send button - magenta accent color */
+.sendButtonWrapper .sendButton {
+  --colours-basic-text: var(--color-magenta);
+  --colours-interaction-states-hover-background-hover: rgba(226, 0, 116, 0.1);
+}
+
+.messageArea {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--spacing-2);
+  padding-bottom: var(--spacing-4);
+}
+
+@media (min-width: 768px) {
+  .messageArea {
+    padding: var(--spacing-3);
+    padding-bottom: var(--spacing-6);
+  }
+}
+
+.inputArea {
+  padding: var(--spacing-2);
+  border-top: var(--border-width-1) solid var(--color-gray-100);
+}
+
+@media (min-width: 768px) {
+  .inputArea {
+    padding: var(--spacing-3);
+  }
+}
+
+:global(.dark) .inputArea {
+  border-color: var(--glass-border-subtle);
+}
+
+.inputWrapper {
+  position: relative;
+}
+
+.textarea {
+  flex-grow: 1;
+  resize: none;
+  min-height: var(--spacing-20);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border-color: var(--glass-border-subtle);
+  color: var(--color-gray-900);
+  padding-right: var(--spacing-10);
+}
+
+:global(.dark) .textarea {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  border-color: var(--glass-border-subtle);
+  color: var(--color-gray-100);
+}
+
+:global(.dark) .textarea::placeholder {
+  color: var(--color-gray-400);
+}
+
+.sendButtonWrapper {
+  position: absolute;
+  right: var(--spacing-2);
+  top: 50%;
+  transform: translateY(-50%);
+}

@@ -1,0 +1,11 @@
+<svg viewBox="0 0 110 90" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+<rect x="5" y="5" fill="#fff" stroke="#333" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" rx="5" ry="5" width="100" height="80" />
+<text x="55" y="45" fill="#333" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle">
+<tspan dy="4">User Task</tspan>
+</text>
+<path fill="#f4f6f7" stroke="#333" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.7" d="M6.01 22.517h16.858v-5.483s-1.633-2.742-4.958-3.617h-6.475c-3.092.933-5.484 4.025-5.484 4.025z" transform="translate(5 5)"/>
+<path fill="none" stroke="#333" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.7" d="M9.8 19.6v2.8" transform="translate(5 5)"/>
+<path fill="#333" stroke="#333" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.7" d="M19.6 19.6v2.8" transform="translate(5 5)"/>
+<circle cx="19.5" cy="13.5" r="5" fill="#333" stroke="#333" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" transform="matrix(.75 0 0 .75 4.875 3.375)"/>
+<path fill="#f0eff0" stroke="#333" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.7" d="M11.23 10.558s1.97-1.698 3.763-1.265c1.794.433 3.237-.485 3.237-.485.175 1.182.03 2.625-1.02 3.909 0 0 .758.525.758 1.05s.087 1.312-.7 2.1c-.788.787-3.85.875-4.725 0s-.875-1.283-.875-1.867.408-.875.875-1.342c-.759-.408-1.75-1.662-1.313-2.1" transform="translate(5 5)"/>
+</svg>

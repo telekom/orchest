@@ -1,0 +1,7 @@
+/* ExportDropdown.module.css */
+/* Uses shared toolbar button styles from @/shared/styles/toolbar-button.module.css */
+
+.button {
+  composes: toolbarButton odsSubtleWhite from '@/shared/styles/toolbar-button.module.css';
+}
+

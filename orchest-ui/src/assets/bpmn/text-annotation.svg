@@ -1,0 +1,7 @@
+<svg viewBox="0 0 110 90" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+<path fill="none" stroke="#333" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5H5v60h10" />
+<text x="10" y="35" fill="#333" font-family="Arial, Helvetica, sans-serif" font-size="12">
+<tspan dy="-3.195">Text</tspan>
+<tspan x="10" dy="14.4">Annotation</tspan>
+</text>
+</svg>

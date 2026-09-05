@@ -1,0 +1,116 @@
+/* UploadDialog.module.css */
+
+.button {
+  height: var(--spacing-8);
+}
+
+.buttonIcon {
+  width: var(--spacing-4);
+  height: var(--spacing-4);
+  margin-right: var(--spacing-2);
+}
+
+.content {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: var(--border-width-1);
+  box-shadow: var(--shadow-lg);
+}
+
+:global(.dark) .content {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate));
+  border-color: var(--glass-border-subtle);
+}
+
+.title {
+  font-family: var(--font-display);
+
+  color: var(--color-gray-900);
+}
+
+:global(.dark) .title {
+  color: var(--color-gray-100);
+}
+
+.description {
+  color: var(--color-gray-600);
+}
+
+:global(.dark) .description {
+  color: var(--color-gray-400);
+}
+
+.uploadArea {
+  padding-top: var(--spacing-4);
+  padding-bottom: var(--spacing-4);
+}
+
+.dropZone {
+  border: var(--border-width-2) dashed var(--color-gray-300);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-8);
+  text-align: center;
+  transition-property: border-color;
+  transition-duration: var(--transition-fast);
+}
+
+.dropZone:hover {
+  border-color: hsl(var(--primary));
+}
+
+:global(.dark) .dropZone {
+  border-color: var(--glass-border-subtle);
+}
+
+:global(.dark) .dropZone:hover {
+  border-color: hsl(var(--primary));
+}
+
+.uploadIcon {
+  width: var(--spacing-12);
+  height: var(--spacing-12);
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--color-gray-400);
+}
+
+:global(.dark) .uploadIcon {
+  color: var(--color-gray-500);
+}
+
+.uploadText {
+  margin-top: var(--spacing-4);
+  margin-bottom: var(--spacing-2);
+  font-size: var(--font-size-body);
+  color: var(--color-gray-600);
+}
+
+:global(.dark) .uploadText {
+  color: var(--color-gray-300);
+}
+
+.separatorText {
+  font-size: var(--font-size-body-sm);
+  color: var(--color-gray-500);
+  margin-bottom: var(--spacing-4);
+}
+
+:global(.dark) .separatorText {
+  color: var(--color-gray-400);
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.fileLabel {
+  cursor: pointer;
+}
+
+.fileInput {
+  display: none;
+}

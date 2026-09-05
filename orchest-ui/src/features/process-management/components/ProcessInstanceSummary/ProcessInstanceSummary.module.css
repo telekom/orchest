@@ -1,0 +1,63 @@
+.parentLink {
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-body-sm);
+  color: var(--color-blue-700);
+}
+
+.parentLink:hover {
+  color: var(--color-blue-800);
+  text-decoration: underline;
+}
+
+:global(.dark) .parentLink {
+  color: var(--color-blue-300);
+}
+
+:global(.dark) .parentLink:hover {
+  color: var(--color-blue-200);
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.analyseBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-semibold);
+  color: #fff;
+  background: var(--color-magenta);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  white-space: nowrap;
+  animation: glowPulse 2s ease-in-out infinite;
+  box-shadow: 0 0 8px color-mix(in srgb, var(--color-magenta) 50%, transparent), 0 0 20px color-mix(in srgb, var(--color-magenta) 30%, transparent);
+}
+
+.analyseBtn:hover {
+  background: var(--color-magenta-hover);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--color-magenta) 70%, transparent), 0 0 30px color-mix(in srgb, var(--color-magenta) 40%, transparent);
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 8px color-mix(in srgb, var(--color-magenta) 50%, transparent), 0 0 20px color-mix(in srgb, var(--color-magenta) 30%, transparent); }
+  50% { box-shadow: 0 0 14px color-mix(in srgb, var(--color-magenta) 80%, transparent), 0 0 30px color-mix(in srgb, var(--color-magenta) 50%, transparent); }
+}
+
+.betaTag {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 1px 5px;
+  border-radius: 3px;
+  letter-spacing: 0.5px;
+}

@@ -1,0 +1,43 @@
+/* Avatar Component Styles */
+
+/* Avatar root container */
+.root {
+  position: relative;
+  display: flex;
+  height: 2.5rem;
+  width: 2.5rem;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: var(--border-radius-full);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow-sm);
+}
+
+/* Avatar image */
+.image {
+  aspect-ratio: 1 / 1;
+  height: 100%;
+  width: 100%;
+}
+
+/* Avatar fallback (when image fails to load) */
+.fallback {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius-full);
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate));
+  color: var(--color-magenta);
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .fallback {
+    background: hsl(var(--muted));
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
