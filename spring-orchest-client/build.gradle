@@ -33,7 +33,7 @@ dependencies {
     implementation 'org.springframework.kafka:spring-kafka'
     implementation 'net.logstash.logback:logstash-logback-encoder:8.1'
 
-    api "de.telekom.solutions:kms-client:1.0.1"
+    api project(':encryption')
 }
 
 tasks.named('compileJava') {

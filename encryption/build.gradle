@@ -1,0 +1,19 @@
+apply plugin: 'java-library'
+apply plugin: 'io.spring.dependency-management'
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
+    }
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+
+    implementation 'com.amazonaws:aws-encryption-sdk-java:2.4.1'
+    api 'software.amazon.awssdk:kms:2.24.0'
+    implementation 'software.amazon.awssdk:sts:2.24.0'
+
+    implementation 'com.fasterxml.jackson.core:jackson-core'
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+}

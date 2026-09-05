@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"io.telekom.orchest.ai.config"},{"l":"io.telekom.orchest.ai.model"},{"l":"io.telekom.orchest.ai.prompts"},{"l":"io.telekom.orchest.ai.service"}];updateSearchResults();

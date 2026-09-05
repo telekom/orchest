@@ -27,7 +27,7 @@ dependencies {
     implementation 'software.amazon.awssdk:sts:2.26.9'
 
     // for both Kafka and Mongo Encryption and will be injected into engine and orchest client
-    api "de.telekom.solutions:kms-client:1.0.0-RC"
+    api project(':encryption')
 }
 
 // Spring Boot BOM manages junit-platform-engine to 6.0.1 but the root build.gradle pins

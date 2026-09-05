@@ -1,1 +1,0 @@
-typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"io.telekom.orchest.connectors","l":"BpmnConnectorParser"},{"p":"io.telekom.orchest.connectors","l":"ConnectorParser"},{"p":"io.telekom.orchest.connectors.parser","l":"MSTeamConnectorParser"},{"p":"io.telekom.orchest.connectors.parser","l":"RESTConnectorParser"}];updateSearchResults();

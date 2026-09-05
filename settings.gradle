@@ -1,9 +1,6 @@
 pluginManagement {
     repositories {
         gradlePluginPortal()
-        if (System.getenv("ARTIFACTORY_URL")) {
-            maven { url = uri(System.getenv("ARTIFACTORY_URL") + "/gradle-plugins/") }
-        }
     }
 }
 
@@ -12,6 +9,7 @@ rootProject.name = 'orchest'
 // Core Modules
 include 'core'
 include 'engine-core'
+include 'encryption'
 include 'telemetry'
 include 'connectors'
 include 'logging-template'

@@ -1,16 +1,4 @@
 repositories {
     mavenCentral()
     maven { url 'https://repo.spring.io/milestone' }
-
-    // Internal artifact repository (CI only)
-    if (System.getenv("ARTIFACTORY_URL")) {
-        def artifactoryRepoUrl = System.getenv("ARTIFACTORY_URL") + "/oneapp-gradle-local/"
-        maven {
-            url artifactoryRepoUrl
-            credentials {
-                username = System.getenv("ARTIFACTORY_USERNAME") ?: ''
-                password = System.getenv("ARTIFACTORY_PASSWORD") ?: ''
-            }
-        }
-    }
 }
