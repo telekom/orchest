@@ -371,4 +371,4 @@ Default ports: Engine=6000, Sentinel=6100, REST=6200, Connector=6300. Override w
 
 ## License
 
-Apache License, Version 2.0 - see [LICENSE](LICENSE) for details.
+Apache License, Version 2.0 - see [LICENSE](LICENSE.txt) for details.
